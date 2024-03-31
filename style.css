@@ -3,11 +3,11 @@
   padding: 0;
 }
 
-html{
+html {
   height: 100%;
 }
 
-body{
+body {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -16,7 +16,7 @@ body{
   background-image: url('./Sprites/Backgrounds/Background_MainMenu.jpg');
   background-size: 100% 100%;
   -ms-overflow-style: none;
-  scrollbar-width: 0; 
+  scrollbar-width: 0;
   width: 100vw;
   height: 100%;
 }
@@ -25,14 +25,14 @@ body::-webkit-scrollbar {
   width: 0;
 }
 
-.header-navigation-list{
+.header-navigation-list {
   display: flex;
   justify-content: space-between;
   list-style: none;
   width: 100vw;
 }
 
-.header-navigation-btn{
+.header-navigation-btn {
   width: 6vw;
   height: 6vw;
   margin: 2vw;
@@ -42,26 +42,26 @@ body::-webkit-scrollbar {
   border: none;
 }
 
-.header-navigation-list-icon{
+.header-navigation-list-icon {
   width: 4vw;
 }
 
-.main-content{
+.main-content {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: space-between;
 }
 
-.logo{
+.logo {
   width: 15vw;
 }
 
-.logo-icon{
+.logo-icon {
   width: 100%;
 }
 
-.btn-panel{
+.btn-panel {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   grid-template-rows: repeat(3, 1fr);
@@ -69,22 +69,42 @@ body::-webkit-scrollbar {
   grid-row-gap: 0px;
 }
 
-.main-panel-btn-1 { grid-area: 1 / 1 / 2 / 2; }
-.main-panel-btn-2 { grid-area: 1 / 2 / 2 / 3; }
-.main-panel-btn-3 { grid-area: 1 / 3 / 2 / 4; }
-.backrgound-title { grid-area: 2 / 2 / 3 / 3; }
-.main-panel-btn-4 { grid-area: 3 / 1 / 4 / 2; }
-.main-panel-btn-5 { grid-area: 3 / 2 / 4 / 3; }
-.main-panel-btn-6 { grid-area: 3 / 3 / 4 / 4; } 
+.main-panel-btn-container-1 {
+  grid-area: 1 / 1 / 2 / 2;
+  margin: auto;
+}
+.main-panel-btn-container-2 {
+  grid-area: 1 / 2 / 2 / 3;
+  margin: auto;
+}
+.main-panel-btn-container-3 {
+  grid-area: 1 / 3 / 2 / 4;
+  margin: auto;
+}
+.background-title-container {
+  grid-area: 2 / 2 / 3 / 3;
+  margin: auto;
+}
+.main-panel-btn-container-4 {
+  grid-area: 3 / 1 / 4 / 2;
+  margin: auto;
+}
+.main-panel-btn-container-5 {
+  grid-area: 3 / 2 / 4 / 3;
+  margin: auto;
+}
+.main-panel-btn-container-6 {
+  grid-area: 3 / 3 / 4 / 4;
+  margin: auto;
+}
 
-.backrgound-title{
+.background-title {
   text-align: center;
   color: #ffffff;
   font-size: 2vw;
-  /* margin-top: 3vw; */
 }
 
-.main-panel-btn{
+.main-panel-btn {
   border-radius: 30px;
   width: 15vw;
   height: 5vw;
@@ -99,25 +119,25 @@ body::-webkit-scrollbar {
   z-index: 10;
 }
 
-.main-panel-btn-title{
+.main-panel-btn-title {
   color: #007804;
   font-weight: bold;
   font-size: 1.5vw;
 }
 
-.main-panel-btn-level{
+.main-panel-btn-level {
   color: #007804;
   font-size: 1.5vw;
 }
 
-footer{
+footer {
   min-height: 30vh;
 }
 
-.footer-container{
+.footer-container {
   width: 45vw;
 }
-.absolute-footer{
+.absolute-footer {
   width: 45vw;
   position: absolute;
   bottom: 0;
@@ -125,13 +145,13 @@ footer{
   background-size: 100% 100%;
 }
 
-.absolute-footer>ul{
+.absolute-footer > ul {
   display: flex;
   justify-content: space-evenly;
   align-items: center;
 }
 
-.absolute-footer>ul>li{
+.absolute-footer > ul > li {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -139,7 +159,7 @@ footer{
   margin: 1vw;
 }
 
-.control-btn{
+.control-btn {
   width: 6vw;
   height: 6vw;
   background: url('./Sprites/Buttons/Used_Button_01.png');
@@ -148,11 +168,11 @@ footer{
   border: none;
 }
 
-.control-button-list-icon{
+.control-button-list-icon {
   width: 4vw;
 }
 
-.control-button-title{
+.control-button-title {
   color: #ffffff;
   font-weight: bold;
   font-size: 1.5vw;
