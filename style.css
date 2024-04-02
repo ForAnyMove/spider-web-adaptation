@@ -95,7 +95,6 @@ body::-webkit-scrollbar {
   grid-template-columns: repeat(3, 1fr);
   grid-template-rows: repeat(2, 1fr);
   grid-column-gap: 0px;
-  grid-row-gap: 1.5vw;
 }
 
 .main-panel-btn-container-1 {
