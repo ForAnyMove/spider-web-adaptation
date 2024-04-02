@@ -78,11 +78,16 @@ body::-webkit-scrollbar {
 }
 
 .logo {
-  width: 15vw;
+  position: absolute;
+  left: 0;
+  width: 100vw;
+  display: flex;
+  justify-content: center;
 }
 
 .logo-icon {
-  width: 100%;
+  margin: 0 auto;
+  width: 35vh;
 }
 
 .btn-panel {
@@ -161,7 +166,7 @@ body::-webkit-scrollbar {
 }
 
 .absolute-footer {
-  width: 45vw;
+  width: inherit;
   position: absolute;
   bottom: 0;
   background-image: url('./Sprites/Frames/Used_Frame_01.png');
@@ -211,52 +216,60 @@ body::-webkit-scrollbar {
     width: 10vw;
   }
   .logo {
-    width: 45vw;
+    width: 100%;
   }
   .background-title {
     font-size: 4vw;
-  }
-  .btn-panel {
-    grid-template-columns: repeat(2, 1fr);
-    grid-template-rows: repeat(4, 1fr);
   }
   .main-panel-btn {
     border-radius: 30px;
     width: 30vw;
     height: 12vw;
-    margin: 0.5vh 0.5vw;
   }
-  .main-panel-btn-container-1 { grid-area: 2 / 1 / 3 / 2; }
-  .main-panel-btn-container-2 { grid-area: 2 / 2 / 3 / 3; }
-  .main-panel-btn-container-3 { grid-area: 3 / 1 / 4 / 2; }
-  /* .background-title-container { grid-area: 1 / 1 / 2 / 3; } */
-  .main-panel-btn-container-4 { grid-area: 3 / 2 / 4 / 3; }
-  .main-panel-btn-container-5 { grid-area: 4 / 1 / 5 / 2; }
-  .main-panel-btn-container-6 { grid-area: 4 / 2 / 5 / 3; }
   .main-panel-btn-title {
-    color: #007804;
-    font-weight: bold;
     font-size: 2.5vw;
   }
   .main-panel-btn-level {
-    color: #007804;
     font-size: 2.5vw;
   }
   .footer-container {
-    width: 100vw;
+    width: 90vw;
   }
   .absolute-footer {
-    width: 100vw;
+    width: 90vw;
   }
   .control-btn {
-    width: 15vw;
-    height: 15vw;
+    width: 13vw;
+    height: 13vw;
   }
   .control-button-list-icon {
-    width: 10vw;
+    width: 9vw;
   }
   .control-button-title {
     font-size: 2.5vw;
+  }
+}
+
+
+/* Custom full width rules */
+
+@media (min-aspect-ratio: 10/5) {
+  .footer-container {
+    width: 60vh;
+    max-height: 30vh;
+  }
+  .absolute-footer {
+    width: inherit;
+  }
+  .control-btn {
+    width: 8vh;
+    height: 8vh;
+  }
+  .control-button-list-icon {
+    width: 5vh;
+  }
+  .control-button-title {
+    font-size: 1.5vh;
   }
 }
 
