@@ -1,0 +1,160 @@
+*{
+  margin: 0;
+  padding: 0;
+}
+html, body{
+  height: 100%;
+}
+.hidden{
+  visibility: hidden;
+}
+body{
+  background-image: url('../../Sprites/Backgrounds/Release/Background_04.png');
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: 100%;
+  -ms-overflow-style: none;
+  scrollbar-width: 0;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+body::-webkit-scrollbar {
+  width: 0;
+}
+header{
+  width: 100%;
+}
+.header-interface-list{
+  display: flex;
+  justify-content: space-between;
+  background-color: #00000088;
+  list-style-type: none;
+}
+.header-ui-container{
+  display: flex;
+  flex-direction: column;
+}
+.header-navigation-btn {
+  width: 2.5vw;
+  height: 2.5vw;
+  margin: .2vw;
+  background: url('../../Sprites/Buttons/Used_Button_01.png');
+  background-size: cover;
+  border-radius: 50%;
+  border: none;
+  display: flex;
+  justify-content: center;
+  align-items: start;
+}
+.header-navigation-list-icon {
+  width: 1.5vw;
+  margin-top: 15%;
+}
+.counter-text{
+  color: #ffffff;
+  font-size: 1.8vw;
+}
+.step-icon{
+  width: 2vw;
+  margin-bottom: -10%;
+}
+main{
+  flex: 1 1 auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  width: 70vw;
+  height: 70vw;
+  margin: 1vw;
+}
+.active-cards-zone, .bottom-cards-zone{
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+.active-cards-container{
+  background-color: #00000088;
+}
+.active-cards-container, .cards-container, .extra-cards-container{
+  width: 6vw;
+  height: 8vw;
+}
+.extra-cards-container{
+  display: flex;
+  flex-direction: row-reverse;
+}
+.cards-container{
+  display: flex;
+  background-color: #00000088;
+}
+.active-cards-container>.card-element:not(:first-child){
+  margin-top: -7.5vw;
+}
+/* different space between opened and closed cards */
+
+/* .active-cards-container>.closed:not(:first-child){
+  margin-top: -7vw; (needed 7.5)
+} */
+.extra-cards-container>.card-element:not(:last-child){
+  margin-left: -6.02vw;
+}
+.cards-container>.card-element:not(:first-child){
+  margin-left: -6.02vw;
+}
+.card-element{
+  width: 6vw;
+  height: 8vw;
+  min-width: 6vw;
+}
+.closed{
+  background-image: url('../../Sprites/Card Backs/Card_Back_TV.png');
+  background-size: cover;
+}
+.test-card{
+  background-image: url('../../Sprites/Card Skins/Release/Skin_01.png');
+  background-color: #ff000088;
+  background-position: -3vw -2vw;
+  background-size: 101vw 38vw;
+  width: 6vw;
+  height: 8vw;
+}
+footer{
+  margin: auto 0;
+}
+.footer-control-panel{
+  display: flex;
+  justify-content: center;
+  list-style-type: none;
+}
+.control-btn {
+  width: 4vw;
+  height: 4vw;
+  margin: 1vw;
+  background: url('../../Sprites/Buttons/Used_Button_01.png');
+  background-size: cover;
+  border-radius: 50%;
+  border: none;
+  display: flex;
+  justify-content: center;
+  align-items: start;
+}
+.control-button-list-icon {
+  width: 2.5vw;
+  margin-top: 15%;
+}
+
+
+/* @media only screen and  (orientation: portrait) {
+  main{
+
+  }
+}
+@media only screen and (orientation: landscape ) {
+  main{
+    
+  }
+} */

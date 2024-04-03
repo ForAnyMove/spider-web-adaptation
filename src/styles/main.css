@@ -13,7 +13,7 @@ body {
   align-items: center;
   justify-content: space-between;
   background-color: #009e00;
-  background-image: url('./Sprites/Backgrounds/Background_MainMenu.jpg');
+  background-image: url('../../Sprites/Backgrounds/Background_MainMenu.jpg');
   background-size: cover;
   background-position: center;
   -ms-overflow-style: none;
@@ -21,6 +21,10 @@ body {
   width: 100vw;
   height: 100%;
   font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+body::-webkit-scrollbar {
+  width: 0;
 }
 
 .mask{
@@ -40,10 +44,6 @@ body {
   opacity: 0;
 }
 
-body::-webkit-scrollbar {
-  width: 0;
-}
-
 .header-navigation-list {
   display: flex;
   justify-content: space-between;
@@ -60,7 +60,7 @@ body::-webkit-scrollbar {
   width: 6vw;
   height: 6vw;
   margin: 1vw;
-  background: url('./Sprites/Buttons/Used_Button_01.png');
+  background: url('../../Sprites/Buttons/Used_Button_01.png');
   background-size: cover;
   border-radius: 50%;
   border: none;
@@ -68,6 +68,7 @@ body::-webkit-scrollbar {
 
 .header-navigation-list-icon {
   width: 3.5vw;
+  margin-top: -10%;
 }
 
 .main-content {
@@ -138,7 +139,7 @@ body::-webkit-scrollbar {
   height: 5vw;
   margin: 0.5vh 0.5vw;
   border: none;
-  background: url('./Sprites/Buttons/Used_Button_03.png') no-repeat;
+  background: url('../../Sprites/Buttons/Used_Button_03.png') no-repeat;
   background-size: 100% 100%;
   display: flex;
   flex-direction: column;
@@ -162,14 +163,15 @@ body::-webkit-scrollbar {
 
 .footer-container {
   width: 45vw;
-}
+} 
 
 .absolute-footer {
   width: inherit;
   position: absolute;
   bottom: 0;
-  background-image: url('./Sprites/Frames/Used_Frame_01.png');
+  background-image: url('../../Sprites/Frames/Used_Frame_01.png');
   background-size: 100% 100%;
+  border-radius: 4vh 4vh 0 0;
 }
 
 .absolute-footer > ul {
@@ -189,7 +191,7 @@ body::-webkit-scrollbar {
 .control-btn {
   width: 6vw;
   height: 6vw;
-  background: url('./Sprites/Buttons/Used_Button_01.png');
+  background: url('../../Sprites/Buttons/Used_Button_01.png');
   background-size: cover;
   border-radius: 50%;
   border: none;
@@ -197,6 +199,7 @@ body::-webkit-scrollbar {
 
 .control-button-list-icon {
   width: 3.5vw;
+  margin-top: -10%;
 }
 
 .control-button-title {
@@ -242,7 +245,7 @@ body::-webkit-scrollbar {
     height: 13vw;
   }
   .control-button-list-icon {
-    width: 9vw;
+    width: 8vw;
   }
   .control-button-title {
     font-size: 2.5vw;
