@@ -63,13 +63,14 @@ header{
 }
 main{
   flex: 1 1 auto;
+}
+.main-container{
+  width: 100%;
+  height: 100%;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
-  width: 70vw;
-  height: 70vw;
-  margin: 1vw;
 }
 .active-cards-zone, .bottom-cards-zone{
   width: 100%;
@@ -79,7 +80,7 @@ main{
 .active-cards-container{
   background-color: #00000088;
 }
-.active-cards-container, .cards-container, .extra-cards-container{
+.active-cards-container, .cards-container, .extra-cards-container, .card-element{
   width: 6vw;
   height: 8vw;
 }
@@ -106,8 +107,6 @@ main{
   margin-left: -6.02vw;
 }
 .card-element{
-  width: 6vw;
-  height: 8vw;
   min-width: 6vw;
 }
 .closed{
@@ -116,7 +115,6 @@ main{
 }
 .test-card{
   background-image: url('../../Sprites/Card Skins/Release/Skin_01.png');
-  background-color: #ff000088;
   background-position: -3vw -2vw;
   background-size: 101vw 38vw;
   width: 6vw;
@@ -148,13 +146,70 @@ footer{
 }
 
 
-/* @media only screen and  (orientation: portrait) {
-  main{
+@media only screen and  (orientation: portrait) {
+  /* Cards sizes */
 
+  .active-cards-container, .cards-container, .extra-cards-container, .card-element, .test-card{
+    width: 7.2vw;
+    height: 10.4vw;
+  }
+  .test-card{
+    background-position: -3.8vw -2.5vw;
+    background-size: 124vw 49vw;
+  }
+
+  .header-navigation-btn {
+    width: 7vw;
+    height: 7vw;
+    margin: .5vw;
+  }
+  .header-navigation-list-icon {
+    width: 5vw;
+    margin-top: 10%;
+  }.active-cards-container>.card-element:not(:first-child) {
+    margin-top: -9.9vw;
+  }
+  .counter-text{
+    font-size: 5vw;
+  }
+  .step-icon{
+    width: 6vw;
+  }
+  main{
+    margin-top: 2vw;
+  }
+  .main-container{
+    max-height: 125vw;
+    width: 95vw;
+  }
+  .extra-cards-container>.card-element:not(:last-child){
+    margin-left: -7.22vw;
+  }
+  .cards-container>.card-element:not(:first-child){
+    margin-left: -7.22vw;
+  }
+  .control-btn {
+    width: 12vw;
+    height: 12vw;
+    margin: 1vw;
+  }
+  .control-button-list-icon {
+    width: 9vw;
+    margin-top: 5%;
   }
 }
 @media only screen and (orientation: landscape ) {
+  /* Cards sizes */
+  
+.active-cards-container, .cards-container, .extra-cards-container, .card-element{
+  width: 6vw;
+  height: 8vw;
+}
+
   main{
-    
+    margin: 1vw;
   }
-} */
+  .main-container{
+    width: 70vw;
+  }
+}
