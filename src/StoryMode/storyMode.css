@@ -2,6 +2,9 @@
   margin: 0;
   padding: 0;
 }
+@viewport {
+  user-zoom: fixed;
+}
 html, body{
   height: 100%;
 }
@@ -25,6 +28,7 @@ body::-webkit-scrollbar {
 header{
   width: 100%;
   position: absolute;
+  z-index: 100;
 }
 .header-interface-list{
   display: flex;
@@ -50,6 +54,26 @@ header{
 .header-navigation-list-icon {
   width: 3vw;
   margin-top: 15%;
+}
+.energy-counter{
+  display: flex;
+  justify-content: center;
+  background-image: url('../../Sprites/Frames/Used_Frame_12.png');
+  background-size: 100% 100%;
+  position: relative;
+  margin: 1.5vw;
+  width: 3vw;
+}
+.energy-text{
+  color: #FFF6C6;
+  font-weight: bold;
+  font-size: 1.5vw;
+  padding-right: 1vw;
+}
+.energy-counter>img{
+  width: 2.5vw;
+  position: absolute;
+  right: -1vw;
 }
 main{
   height: 100%;
@@ -245,10 +269,14 @@ main{
 
 .popup {
   /* display: none; */
-  position: fixed;
-  top: 50%;
-  /* background-color: rgba(0, 0, 0, 0.5); */
+  position: absolute;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.5);
   z-index: 1000;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
 }
 
 .popup-content {
@@ -258,6 +286,7 @@ main{
   background-position: center;
   width: 27vw;
   border-radius: 20px;
+  margin-right: 1vw;
 }
 
 .close {
@@ -453,14 +482,24 @@ main{
 }
 
 @media screen and (orientation: landscape ) {
-  .popup {
-    right: 0;
-    transform: translate(0, -50%);
+  .story-map-container{
+    scale: calc(1 - 0.1 + 1 / 10);
   }
 }
 @media screen and (orientation: portrait ) {
-  .popup {
-    left: 50%;
-    transform: translate(-50%, -50%);
+  .story-map-container{
+    scale: calc(1 - 0.1 + 31 / 10);
+  }
+  .popup-content{
+    /* border-radius: 2vw; */
+    scale: calc(1 - 0.1 + 12 / 10);
+    transform: translate(-20%, 0);
+    margin-right: 5vw;
+  }
+}
+
+@media (max-width: 767px) {
+  body {
+       position:fixed;
   }
 }
