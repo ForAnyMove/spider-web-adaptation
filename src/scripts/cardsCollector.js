@@ -27,37 +27,41 @@ class CardCollector {
         const cardColumnsCount = this.cardColumns.length;
         const collectedCount = this.collectedCardColumns + 1;
 
-        function collect(cards) {
-            disableInteractions();
-            let time = 0;
+        column.translateCardsToColumnWithDelay(cards, () => {
+            fromColumn.checkIfLastCardClosedAndOpen();
 
+            event.invoke({ columnCount: cardColumnsCount, collectedCount: collectedCount });
+        }, { opened: 0.02, closed: 0 }, { opened: 0, closed: 0 }, { affectInteraction: false, addCards: true, openOnFinish: false, closeOnFinish: false, delay: 0.03 });
 
+        // function collect(cards) {
+        //     disableInteractions();
+        //     let time = 0;
 
-            function update(dt) {
-                time += dt * 60 / 1000;
-                if (time >= 0.03) {
-                    if (cards.length == 0) {
-                        fromColumn.checkIfLastCardClosedAndOpen();
-                        animator.removeRequest(update);
-                        enableInteractions();
+        //     function update(dt) {
+        //         time += dt * 60 / 1000;
+        //         if (time >= 0.03) {
+        //             if (cards.length == 0) {
+        //                 fromColumn.checkIfLastCardClosedAndOpen();
+        //                 animator.removeRequest(update);
+        //                 enableInteractions();
 
-                        event.invoke({ columnCount: cardColumnsCount, collectedCount: collectedCount });
-                        return;
-                    }
+        //                 event.invoke({ columnCount: cardColumnsCount, collectedCount: collectedCount });
+        //                 return;
+        //             }
 
-                    const card = cards[cards.length - 1];
-                    column.translateCardsToColumnWithOffset([card], () => {
-                    }, { opened: 0.02, closed: 0 }, { opened: 0, closed: 0 });
-                    cards.splice(cards.length - 1, 1);
+        //             const card = cards[cards.length - 1];
+        //             column.translateCardsToColumnWithOffset([card], () => {
+        //             }, { opened: 0.02, closed: 0 }, { opened: 0, closed: 0 }, { affectInteraction: false, addCards: true, openOnFinish: false, closeOnFinish: false });
+        //             cards.splice(cards.length - 1, 1);
 
-                    time = 0;
-                }
-            }
+        //             time = 0;
+        //         }
+        //     }
 
-            animator.addRequest(update)
-        }
+        //     animator.addRequest(update)
+        // }
 
-        collect(cards);
+        // collect(cards);
 
         this.collectedCardColumns++;
     }

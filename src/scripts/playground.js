@@ -1,5 +1,5 @@
 import { animator } from "./animator.js";
-import { useHintBooster, useMageBooster } from "./boosters.js";
+import { useHintBooster, useMageBooster, useUndoBooster } from "./boosters.js";
 import { cardCollector } from "./cardsCollector.js";
 import { createTweener } from "./dotween/dotween.js";
 import { disableInteractions } from "./globalEvents.js";
@@ -8,13 +8,15 @@ import { createLevel } from "./levelCreator.js";
 import { fourSuitSpider, fourSuitSpiderLady, oneSuitSpider, oneSuitSpiderLady } from "./rules/gameRules.js";
 import { Pattern } from "./statics/enums.js";
 import { Items } from "./statics/staticValues.js";
+import { stepRecorder } from "./stepRecorder.js";
 import { user } from "./userData.js"
 
 const screenParameters = { rules: oneSuitSpider };
 
-user.addItem(Items.BoosterHint, 10);
-user.addItem(Items.BoosterMage, 10);
-user.addItem(Items.BoosterTime, 10);
+user.addItem(Items.BoosterUndo, 20);
+user.addItem(Items.BoosterHint, 20);
+user.addItem(Items.BoosterMage, 20);
+user.addItem(Items.BoosterTime, 20);
 
 createTweener();
 
@@ -49,7 +51,6 @@ function startTimer(seconds) {
 }
 
 startTimer(600);
-
 
 if (screenParameters.rules.pattern == Pattern.SpiderLady) {
   const playableCardColumns = document.getElementsByClassName('playable-card-column');
@@ -114,6 +115,14 @@ document.getElementById('time-button').onclick = function () {
   }
 }
 
+document.getElementById('undo-button').onclick = function () {
+  if (user.hasItems(Items.BoosterUndo)) {
+    if (useUndoBooster()) {
+      user.removeItem(Items.BoosterUndo, 1);
+    }
+  }
+}
+
 function checkIfLevelWon(options) {
   console.log(`${options.columnCount}, ${options.collectedCount}`);
 
@@ -158,4 +167,11 @@ el.style.left = '4vw';
 el.style.top = '0.8vw';
 document.getElementsByTagName('main')[0].appendChild(el);
 
+function updateStepText(stepCount) {
+  document.getElementById('step-counter').innerText = stepCount;
+}
+
+updateStepText(0);
+
 cardCollector.onCollected.addListener(checkIfLevelWon);
+stepRecorder.stepRecordedEvent.addListener(updateStepText)

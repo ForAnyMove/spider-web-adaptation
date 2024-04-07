@@ -2,6 +2,7 @@ import { DelayedCall } from "./dotween/dotween.js";
 import { CanInteract, disableInteractions } from "./globalEvents.js";
 import { isSameSuitAtAllStuck, isSuitableRankStuck } from "./rules/gameRules.js";
 import { CardSide } from "./statics/enums.js";
+import { stepRecorder } from "./stepRecorder.js";
 
 function useHintBooster(playableColumns, gameRule) {
     if (!CanInteract) return false;
@@ -93,7 +94,8 @@ function useTimerBooster() {
 }
 
 function useUndoBooster() {
-    // create steps recording
+    if (!CanInteract) return false;
+    return stepRecorder.undo()
 }
 
 function useMageBooster(mainColumn, playableColumns, gameRule) {
@@ -141,12 +143,25 @@ function useMageBooster(mainColumn, playableColumns, gameRule) {
     const len = Math.min(2, suitablePairs.length);
     if (len == 0) return { isTrue: false };
 
+    const finalCards = [];
+
     for (let i = 0; i < Math.min(2, suitablePairs.length); i++) {
         const pair = suitablePairs[i];
+        finalCards.push(pair.card);
         pair.column.translateCardsToColumn([pair.card], null, { affectInteraction: true, addCards: true, openOnFinish: true });
     }
+
+    stepRecorder.record(() => {
+        disableInteractions();
+
+        mainColumn.translateCardsToColumnWithDelay(finalCards,
+            null,
+            { opened: 0.02, closed: 0 },
+            { opened: 0, closed: 0 },
+            { affectInteraction: false, addCards: true, openOnFinish: false, closeOnFinish: true, delay: 0.03 });
+    });
 
     return { isTrue: true };
 }
 
-export { useHintBooster, useMageBooster }
+export { useHintBooster, useMageBooster, useUndoBooster }

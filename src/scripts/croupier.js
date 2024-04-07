@@ -1,6 +1,7 @@
 import { animator } from "./animator.js";
 import { DelayedCall } from "./dotween/dotween.js";
 import { CanInteract, disableInteractions, enableInteractions } from "./globalEvents.js";
+import { stepRecorder } from "./stepRecorder.js";
 
 class Croupier {
     constructor(options = { mainCardColumn, playableCardColumns }) {
@@ -17,6 +18,49 @@ class Croupier {
 
     ingameDistribution = function () {
         this.distribute([].concat(this.defaultDistribution));
+        stepRecorder.record(() => {
+            const cards = [];
+
+            for (let i = 0; i < this.playableCardColumns.length; i++) {
+                const column = this.playableCardColumns[i];
+
+                cards.push(column.getLastCard());
+            }
+
+            const mainColumn = this.mainCardColumn;
+            mainColumn.translateCardsToColumnWithDelay(cards,
+                null,
+                { opened: 0.02, closed: 0 },
+                { opened: 0, closed: 0 },
+                { affectInteraction: false, addCards: true, openOnFinish: false, closeOnFinish: true, delay: 0.03 });
+
+            // function getBack(cards) {
+            //     disableInteractions();
+            //     let time = 0;
+
+            //     function update(dt) {
+            //         time += dt * 60 / 1000;
+            //         if (time >= 0.03) {
+            //             if (cards.length == 0) {
+            //                 animator.removeRequest(update);
+            //                 enableInteractions();
+            //                 return;
+            //             }
+
+            //             const card = cards[cards.length - 1];
+            //             mainColumn.translateCardsToColumnWithOffset([card], () => {
+            //             }, { opened: 0.02, closed: 0 }, { opened: 0, closed: 0 }, { affectInteraction: false, addCards: true, openOnFinish: false, closeOnFinish: true });
+            //             cards.splice(cards.length - 1, 1);
+
+            //             time = 0;
+            //         }
+            //     }
+
+            //     animator.addRequest(update)
+            // }
+
+            // getBack(cards);
+        });
     }
 
     distribute = function (distributions) {

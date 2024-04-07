@@ -1,9 +1,11 @@
+import { animator } from "./animator.js";
 import { boundsChecker } from "./cardBoundsChecker.js";
 import { cardCollector } from "./cardsCollector.js";
 import { DOChangeValue, DOChangeXY, Ease } from "./dotween/dotween.js";
 import { Action, CanInteract, disableInteractions, enableInteractions } from "./globalEvents.js";
 import { selectedRules } from "./rules/gameRules.js";
 import { CardSide } from "./statics/enums.js";
+import { stepRecorder } from "./stepRecorder.js";
 
 const backImage = `url('../../Sprites/Card Backs/Card_Back_TV.png')`
 
@@ -55,6 +57,19 @@ export default class Card {
             this.domElement.style.scale = `${value} 1`;
         }, 0, 0.03, Ease.SineInOut).onComplete(() => {
             this.setOpened();
+            DOChangeValue(() => 0, (value) => {
+                this.domElement.style.scale = `${value} 1`;
+            }, 1, 0.03, Ease.SineInOut)
+        });
+    }
+
+    close = function () {
+        if (this.side == CardSide.Back) return;
+
+        DOChangeValue(() => 1, (value) => {
+            this.domElement.style.scale = `${value} 1`;
+        }, 0, 0.03, Ease.SineInOut).onComplete(() => {
+            this.setClosed();
             DOChangeValue(() => 0, (value) => {
                 this.domElement.style.scale = `${value} 1`;
             }, 1, 0.03, Ease.SineInOut)
@@ -114,6 +129,13 @@ export default class Card {
             const cardColumn = columns[i];
             if (selectedRules.isCanPlace([this], cardColumn.cards)) {
                 cardColumn.translateCardsToColumn(cards, () => previousColumn.checkIfLastCardClosedAndOpen());
+
+                stepRecorder.record(() => {
+                    previousColumn.translateCardsToColumn(cards);
+                    if (previousColumn.cards.length > 0) {
+                        previousColumn.getLastCard().close();
+                    }
+                })
                 return;
             }
         }
@@ -228,7 +250,7 @@ class CardColumn {
         return cards;
     }
 
-    translateCardsToColumnWithOffset = function (cards, finishCallback, horzontalOffset, verticalOffset, options = { affectInteraction: true, addCards: true, openOnFinish: false }) {
+    translateCardsToColumnWithOffset = function (cards, finishCallback, horzontalOffset, verticalOffset, options = { affectInteraction: true, addCards: true, openOnFinish: false, closeOnFinish: false }) {
         if (cards == null || cards.length == 0) return;
 
         for (let i = 0; i < cards.length; i++) {
@@ -276,6 +298,10 @@ class CardColumn {
                     card.open();
                 }
 
+                if (options?.closeOnFinish) {
+                    card.close();
+                }
+
                 finishCallback?.();
 
                 if (options.affectInteraction) {
@@ -285,8 +311,39 @@ class CardColumn {
         });
     }
 
-    translateCardsToColumn = function (cards, finishCallback, options = { affectInteraction: true, addCards: true, openOnFinish: false }) {
+    translateCardsToColumn = function (cards, finishCallback, options = { affectInteraction: true, addCards: true, openOnFinish: false, closeOnFinish: false }) {
         this.translateCardsToColumnWithOffset(cards, finishCallback, { opened: 0, closed: 0 }, { opened: openedCardOffset, closed: closedCardOffset }, options);
+    }
+
+    translateCardsToColumnWithDelay = function (cards, finishCallback, horzontalOffset, verticalOffset, options = { affectInteraction: true, addCards: true, openOnFinish: false, closeOnFinish: false, delay: 0.03 }) {
+        const column = this;
+
+        function translate() {
+            disableInteractions();
+            let time = 0;
+            function update(dt) {
+                time += dt * 60 / 1000;
+                if (time >= options.delay) {
+                    if (cards.length == 0) {
+                        animator.removeRequest(update);
+                        enableInteractions();
+
+                        finishCallback?.();
+                        return;
+                    }
+
+                    const card = cards[cards.length - 1];
+                    column.translateCardsToColumnWithOffset([card], null, horzontalOffset, verticalOffset, options);
+                    cards.splice(cards.length - 1, 1);
+
+                    time = 0;
+                }
+            }
+
+            animator.addRequest(update)
+        }
+
+        translate();
     }
 
     addCard = function (card) {
