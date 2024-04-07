@@ -1,181 +1,115 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="../styles/playground.css" />
-    <title>Spider</title>
-  </head>
-  <body>
-    <header>
-      <ul class="header-interface-list">
-        <li class="header-ui-container">
-          <button class="header-navigation-btn">
-            <img
-              src="../../Sprites/Icons/Icon_Home.png"
-              alt="Profile"
-              class="header-navigation-list-icon"
-            />
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="../styles/playground.css" />
+  <title>Spider</title>
+</head>
+
+<body>
+  <header>
+    <ul class="header-interface-list">
+      <li class="header-ui-container">
+        <button class="header-navigation-btn">
+          <img src="../../Sprites/Icons/Icon_Home.png" alt="Profile" class="header-navigation-list-icon" />
+        </button>
+      </li>
+      <li class="header-ui-container">
+        <div class="steps-counter-container" style="margin-top: 1%;">
+          <div class="header-timer hidden timer">
+            <img src="../../Sprites/Icons/Icon_Stopwatch.png" alt="step" class="step-icon" style="margin-bottom: -3%" />
+          </div>
+          <div class="steps-counter">
+            <span class="counter-text">1</span>
+            <img src="../../Sprites/Icons/Icon_Step.png" alt="step" class="step-icon" />
+          </div>
+        </div>
+      </li>
+      <li class="header-ui-container">
+        <button class="header-navigation-btn">
+          <img src="../../Sprites/Icons/Icon_Settings.png" alt="Profile" class="header-navigation-list-icon" />
+        </button>
+      </li>
+    </ul>
+  </header>
+  <main id="main">
+    <div class="active-cards-zone">
+      <div class="active-cards-container playable-card-column">
+      </div>
+      <div class="active-cards-container playable-card-column">
+      </div>
+      <div class="active-cards-container playable-card-column">
+      </div>
+      <div class="active-cards-container playable-card-column">
+      </div>
+      <div class="active-cards-container playable-card-column">
+      </div>
+      <div class="active-cards-container playable-card-column">
+      </div>
+      <div class="active-cards-container playable-card-column">
+      </div>
+      <div class="active-cards-container playable-card-column">
+      </div>
+      <div class="active-cards-container playable-card-column">
+      </div>
+      <div class="active-cards-container playable-card-column">
+      </div>
+    </div>
+    <div class="bottom-cards-zone">
+      <div class="cards-container">
+      </div>
+      <div class="cards-container">
+      </div>
+      <div class="cards-container">
+      </div>
+      <div class="cards-container">
+      </div>
+      <div class="cards-container">
+      </div>
+      <div class="cards-container">
+      </div>
+      <div class="cards-container">
+      </div>
+      <div class="cards-container">
+      </div>
+      <div class="cards-container hidden"></div>
+      <div class="extra-cards-container" id="extra-cards-container">
+      </div>
+    </div>
+  </main>
+  <footer>
+    <nav>
+      <ul class="footer-control-panel">
+        <li>
+          <button class="control-btn">
+            <img src="../../Sprites/Icons/Icon_Restart.png" alt="Icon_Skins" class="control-button-list-icon" />
           </button>
         </li>
-        <li class="header-ui-container">
-          <div class="steps-counter-container">
-            <div class="steps-counter">
-              <span class="counter-text">1</span>
-              <img
-                src="../../Sprites/Icons/Icon_Step.png"
-                alt="step"
-                class="step-icon"
-              />
-            </div>
-            <div class="header-timer hidden"></div>
-          </div>
+        <li>
+          <button class="control-btn">
+            <img src="../../Sprites/Icons/Icon_Hint.png" alt="Icon_Skins" class="control-button-list-icon"
+              id="hint-button" />
+          </button>
         </li>
-        <li class="header-ui-container">
-          <button class="header-navigation-btn">
-            <img
-              src="../../Sprites/Icons/Icon_Settings.png"
-              alt="Profile"
-              class="header-navigation-list-icon"
-            />
+        <li>
+          <button class="control-btn">
+            <img src="../../Sprites/Icons/Icon_Mage.png" alt="Icon_Skins" class="control-button-list-icon"
+              id="mage-button" />
+          </button>
+        </li>
+        <li>
+          <button class="control-btn">
+            <img src="../../Sprites/Icons/Icon_Time.png" alt="Icon_Skins" class="control-button-list-icon"
+              id="time-button" />
           </button>
         </li>
       </ul>
-    </header>
-    <main>
-      <div class="active-cards-zone">
-        <div class="active-cards-container">
-          <div class="card-element closed"></div>
-          <div class="card-element closed"></div>
-          <div class="card-element">
-            <div class="opened-card test-card"></div>
-          </div>
-        </div>
-        <div class="active-cards-container">
-          <div class="card-element closed"></div>
-          <div class="card-element closed"></div>
-          <div class="card-element">
-            <div class="opened-card test-card"></div>
-          </div>
-        </div>
-        <div class="active-cards-container">
-          <div class="card-element closed"></div>
-          <div class="card-element closed"></div>
-          <div class="card-element">
-            <div class="opened-card test-card"></div>
-          </div>
-        </div>
-        <div class="active-cards-container">
-          <div class="card-element closed"></div>
-          <div class="card-element closed"></div>
-          <div class="card-element">
-            <div class="opened-card test-card"></div>
-          </div>
-        </div>
-        <div class="active-cards-container">
-          <div class="card-element closed"></div>
-          <div class="card-element closed"></div>
-          <div class="card-element">
-            <div class="opened-card test-card"></div>
-          </div>
-        </div>
-        <div class="active-cards-container">
-          <div class="card-element closed"></div>
-          <div class="card-element closed"></div>
-          <div class="card-element">
-            <div class="opened-card test-card"></div>
-          </div>
-        </div>
-        <div class="active-cards-container">
-          <div class="card-element closed"></div>
-          <div class="card-element closed"></div>
-          <div class="card-element">
-            <div class="opened-card test-card"></div>
-          </div>
-        </div>
-        <div class="active-cards-container">
-          <div class="card-element closed"></div>
-          <div class="card-element closed"></div>
-          <div class="card-element">
-            <div class="opened-card test-card"></div>
-          </div>
-        </div>
-        <div class="active-cards-container">
-          <div class="card-element closed"></div>
-          <div class="card-element closed"></div>
-          <div class="card-element">
-            <div class="opened-card test-card"></div>
-          </div>
-        </div>
-        <div class="active-cards-container">
-          <div class="card-element closed"></div>
-          <div class="card-element closed"></div>
-          <div class="card-element">
-            <div class="opened-card test-card"></div>
-          </div>
-        </div>
-      </div>
-      <div class="bottom-cards-zone">
-        <div class="cards-container">
-          <div class="card-element closed"></div>
-          <div class="card-element closed"></div>
-          <div class="card-element closed"></div>
-          <div class="card-element closed"></div>
-          <div class="card-element closed"></div>
-          <div class="card-element closed"></div>
-          <div class="card-element closed"></div>
-          <div class="card-element closed"></div>
-          <div class="card-element closed"></div>
-          <div class="card-element closed"></div>
-          <div class="card-element closed"></div>
-          <div class="card-element closed"></div>
-          <div class="card-element">
-            <div class="opened-card test-card"></div>
-          </div>
-        </div>
-        <div class="cards-container">
-        </div>
-        <div class="cards-container">
-        </div>
-        <div class="cards-container">
-        </div>
-        <div class="cards-container">
-        </div>
-        <div class="cards-container">
-        </div>
-        <div class="cards-container">
-        </div>
-        <div class="cards-container">
-        </div>
-        <div class="active-cards-container hidden"></div>
-        <div class="extra-cards-container" id="extra-cards-container">
-        </div>
-      </div>
-    </main>
-    <footer>
-      <nav>
-        <ul class="footer-control-panel">
-          <li>
-            <button class="control-btn">
-              <img
-                src="../../Sprites/Icons/Icon_Restart.png"
-                alt="Icon_Skins"
-                class="control-button-list-icon"
-              />
-            </button>
-          </li>
-          <li>
-            <button class="control-btn">
-              <img
-                src="../../Sprites/Icons/Icon_Hint.png"
-                alt="Icon_Skins"
-                class="control-button-list-icon"
-              />
-            </button>
-          </li>
-        </ul>
-      </nav>
-    </footer>
-    <script src="../scripts/playground.js"></script>
-  </body>
+    </nav>
+  </footer>
+  <script type="module" src="../scripts/animator.js"></script>
+  <script type="module" src="../scripts/playground.js"></script>
+</body>
+
 </html>

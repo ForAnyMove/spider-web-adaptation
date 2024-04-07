@@ -41,4 +41,14 @@ function generateLevelResult({ result: res, levelType: lt }) {
     return { result: res, levelType: lt }
 }
 
-export { Action, levelWinEvent, generateLevelResult }
+let CanInteract = true;
+
+function disableInteractions() {
+    CanInteract = false;
+}
+
+function enableInteractions() {
+    CanInteract = true;
+}
+
+export { Action, levelWinEvent, generateLevelResult, CanInteract, disableInteractions, enableInteractions }

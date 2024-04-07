@@ -267,13 +267,26 @@ class User {
         }
     }
 
+    hasItems = function (itemType, count = 1) {
+        if (this.items == null || itemType == null) return false;
+
+        for (let i = 0; i < this.items.length; i++) {
+            const element = this.items[i];
+            if (element.type == itemType) {
+                return element.count >= count;
+            }
+        }
+
+        return false;
+    }
+
     removeItem = function (type, count) {
         for (let i = 0; i < this.items.length; i++) {
             if (this.items[i].type == type) {
                 this.items[i].count -= count;
 
                 if (this.items[i].count <= 0) {
-                    this.items.pop(this.items[i]);
+                    this.items.splice(this.items.indexOf(this.items[i]), 1);
                 }
 
                 this.itemListUpdateEvent.invoke(this.items);

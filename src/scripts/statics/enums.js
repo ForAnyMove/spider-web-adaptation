@@ -21,6 +21,9 @@ const Rank = {
     King: 13
 }
 
+const RanksStringList = ['ace', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine', 'ten', 'jack', 'queen', 'king'];
+const SuitsStringList = ['spades', 'diamonds', 'clubs', 'hearts'];
+
 const CardSide = {
     Back: 0,
     Face: 1
@@ -97,4 +100,4 @@ const LevelType = {
 }
 
 
-export { Statefull, LevelResult, LevelType, LevelState, Suit, Pattern, SuitMode, Rule, ContentType, Rank, CardSide }
+export { Statefull, LevelResult, LevelType, LevelState, Suit, Pattern, SuitMode, Rule, ContentType, Rank, CardSide, RanksStringList, SuitsStringList }

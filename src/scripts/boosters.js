@@ -1,71 +1,152 @@
-import { isSuitableRankStuck } from "./rules/gameRules.js";
+import { DelayedCall } from "./dotween/dotween.js";
+import { CanInteract, disableInteractions } from "./globalEvents.js";
+import { isSameSuitAtAllStuck, isSuitableRankStuck } from "./rules/gameRules.js";
 import { CardSide } from "./statics/enums.js";
 
 function useHintBooster(playableColumns, gameRule) {
-    // if (!_lockerPool.IsAvailable) return false;
+    if (!CanInteract) return false;
 
     const pairs = [];
 
     for (let i = 0; i < playableColumns.length; i++) {
         const column = playableColumns[i];
+        const columnCards = column.getOpenedCards();
 
-        let columnCards = [];
+        const suitableIteration = isSuitableRankStuck([].concat(columnCards).reverse()).count;
 
-        if (column.cards.length == 1) {
-            columnCards.push(column.cards[0]);
-        }
-        else if (column.cards.length > 1) {
-            const suitableList = [];
+        if (columnCards == null) continue;
 
-            for (let j = column.cards.length - 1; j >= 0; j--) {
-                const current = column.cards[j];
+        for (let j = 0; j < playableColumns.length; j++) {
+            if (i == j) continue;
 
-                const checkList = [].concat(suitableList);
-                // const checkList = suitableList.concat([current]);
-                checkList.push(current);
-                // checkList.reverse();
+            const secondColumn = playableColumns[j];
+            const secondColumnLastCard = secondColumn.getLastCard();
 
-                // console.log(checkList);
+            if (secondColumnLastCard == null) continue;
 
-                if (current.side == CardSide.Back ||
-                    (!isSuitableRankStuck(checkList).isTrue &&
-                        suitableList.length > 0))
+            const columnCardsCopy = [].concat(columnCards);
+
+            let pair = { columnOne: null, columnTwo: null, cards: null };
+
+            while (columnCardsCopy.length > 0 && columnCardsCopy.length > suitableIteration) {
+                const cardList = [secondColumnLastCard].concat(columnCardsCopy).reverse();
+
+                if (isSameSuitAtAllStuck(cardList) && isSuitableRankStuck(cardList).isTrue) {
+                    pair.columnOne = column;
+                    pair.columnTwo = secondColumn;
+                    pair.cards = columnCardsCopy;
+
                     break;
+                }
 
-                suitableList.push(current);
+                columnCardsCopy.splice(0, 1);
             }
 
-            suitableList.reverse();
-            columnCards = suitableList.length == 0
-                ? []
-                : suitableList;
-        }
+            if (pair.columnOne == null || pair.columnTwo == null || pair.cards == null) continue;
 
-        let pair =
-        {
-            column: column,
-            cards: columnCards
-        };
-
-        pairs.push(pair);
-    }
-
-
-    for (let i = 0; i < pairs.length; i++) {
-        for (let j = 0; j < pairs.length; j++) {
-            if (i == j || !pairs[j].column.canPlace) continue;
-
-            const cardOne = pairs[i].cards;
-            if (cardOne.length == 0 || pairs[j].cards.length == 0) continue;
-
-            if (pairs[j].column.canPlace && gameRule.isCanPlace(cardOne, pairs[j].column.cards)) {
-                // Activate(playableColumns, pairs[i], pairs[j]);
-                return { isTrue: true, result: [pairs[i], pairs[j]] };
-            }
+            pairs.push(pair);
         }
     }
 
-    return false;
+    if (pairs.length == 0) {
+        return { isTrue: false };
+    } else {
+
+        pairs.sort((a, b) => b.cards.length - a.cards.length);
+
+        for (let i = 0; i < pairs.length; i++) {
+            const pair = pairs[i];
+            if (pair.columnTwo.canPlace && gameRule.isCanPlace(pair.cards, pair.columnTwo.cards)) {
+                function animate() {
+                    disableInteractions();
+
+                    const fromColumn = pair.columnOne;
+                    const toColumn = pair.columnTwo;
+                    for (let i = 0; i < pair.cards.length; i++) {
+                        const card = pair.cards[i];
+                        card.domElement.classList.add('highlighted');
+                    }
+
+                    toColumn.translateCardsToColumn(pair.cards, null, { affectInteraction: false, addCards: false });
+                    DelayedCall(0.25, () => {
+                        fromColumn.translateCardsToColumn(pair.cards, null, { affectInteraction: true, addCards: true });
+
+                        for (let i = 0; i < pair.cards.length; i++) {
+                            const card = pair.cards[i];
+                            card.domElement.classList.remove('highlighted');
+                        }
+                    })
+                }
+
+                animate();
+
+                return { isTrue: true, result: pair };
+            }
+        }
+
+        return { isTrue: false };
+    }
 }
 
-export { useHintBooster }
+function useTimerBooster() {
+    // ?
+}
+
+function useUndoBooster() {
+    // create steps recording
+}
+
+function useMageBooster(mainColumn, playableColumns, gameRule) {
+    if (!CanInteract || mainColumn.length == 0) {
+        return { isTrue: false }
+    }
+
+    const lastColumnCards = [];
+
+    for (let i = 0; i < playableColumns.length; i++) {
+        const column = playableColumns[i];
+
+        const lastCard = column.getLastCard();
+
+        if (lastCard == null) continue;
+
+        lastColumnCards.push({ column: column, card: lastCard });
+
+    }
+
+    if (lastColumnCards.length == 0) return { isTrue: false };
+
+    const suitablePairs = [];
+    const usedMainCardsList = [];
+
+    for (let i = 0; i < mainColumn.cards.length; i++) {
+        const card = mainColumn.cards[i];
+        if (usedMainCardsList.includes(card)) continue;
+
+        for (let j = 0; j < lastColumnCards.length; j++) {
+            const element = lastColumnCards[j];
+
+            const column = element.column;
+            const lastColumnCard = element.card;
+
+            if (card.suit == lastColumnCard.suit && card.rank == lastColumnCard.rank - 1) {
+                suitablePairs.push({ column: column, card: card });
+                lastColumnCards.splice(j, 1);
+                usedMainCardsList.push(card);
+                break;
+            }
+        }
+    }
+
+    const len = Math.min(2, suitablePairs.length);
+    if (len == 0) return { isTrue: false };
+
+    for (let i = 0; i < Math.min(2, suitablePairs.length); i++) {
+        const pair = suitablePairs[i];
+        pair.column.translateCardsToColumn([pair.card], null, { affectInteraction: true, addCards: true, openOnFinish: true });
+    }
+
+    return { isTrue: true };
+}
+
+export { useHintBooster, useMageBooster }

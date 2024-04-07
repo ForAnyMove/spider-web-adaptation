@@ -41,4 +41,29 @@ function createLevelCompleteRequirement(type, order) {
     return { type, order }
 }
 
-export { createItem, createDeckTrial, createTrialLevel, createStoryLevel, createLevelCompleteRequirement }
+function shuffle(array) {
+    let currentIndex = array.length;
+
+    while (currentIndex != 0) {
+
+        let randomIndex = Math.floor(Math.random() * currentIndex);
+        currentIndex--;
+
+        [array[currentIndex], array[randomIndex]] = [
+            array[randomIndex], array[currentIndex]];
+    }
+}
+
+function secondsToTime(seconds) {
+    const minutes = Math.floor((seconds % 3600) / 60);
+    const remainingSeconds = Math.floor(seconds % 60);
+
+    let timeString = '';
+
+    timeString += minutes.toString().padStart(2, '0') + ':';
+    timeString += remainingSeconds.toString().padStart(2, '0');
+
+    return timeString;
+}
+
+export { shuffle, createItem, createDeckTrial, createTrialLevel, createStoryLevel, createLevelCompleteRequirement, secondsToTime }

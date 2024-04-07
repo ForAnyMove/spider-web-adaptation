@@ -65,7 +65,6 @@ class Achievement {
             }
         }
     }
-
 }
 
 class InGameDayCount extends Achievement {

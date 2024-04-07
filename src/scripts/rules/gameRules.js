@@ -39,10 +39,11 @@ function isSuitableRankStuck(cards, maxCount) {
 }
 
 class GameRule {
-    constructor(suits, suitMode, pattern) {
+    constructor(suits, suitMode, pattern, deckCount) {
         this.suits = suits;
         this.suitMode = suitMode;
         this.pattern = pattern;
+        this.deckCount = deckCount;
     }
 }
 
@@ -57,7 +58,7 @@ class OneSuitGameRule extends GameRule {
 
             if (!sameSuit) return false;
 
-            const suitableRank = isSuitableRankStuck(selectedCards);
+            const suitableRank = isSuitableRankStuck([].concat(selectedCards).reverse());
 
             if (!suitableRank.isTrue) return false;
         }
@@ -75,7 +76,7 @@ class OneSuitGameRule extends GameRule {
 
         if (lastStackCard.side == CardSide.Back) return false;
 
-        if (!isSuitableRank(lastStackCard, firstPlaceCard) || !isSameSuitAtAllStuck([columnCards[columnCards.length - 1]].concat(selectedCards))) return false;
+        if (!isSuitableRank(lastStackCard, firstPlaceCard) /*|| !isSameSuitAtAllStuck([columnCards[columnCards.length - 1]].concat(selectedCards))*/) return false;
 
         return true;
     }
@@ -115,12 +116,18 @@ class OneSuitGameRule extends GameRule {
     }
 }
 
-const oneSuitSpider = new OneSuitGameRule([Suit.Spades], SuitMode.OneSuit, Pattern.Spider);
-const twoSuitSpider = new GameRule([Suit.Spades, Suit.Diamonds], SuitMode.twoSuitSpider, Pattern.Spider);
-const fourSuitSpider = new GameRule([Suit.Spades, Suit.Diamonds, Suit.Clubs, Suit.Hearts], SuitMode.FourSuits, Pattern.Spider);
+const oneSuitSpider = new OneSuitGameRule([Suit.Spades, Suit.Spades, Suit.Spades, Suit.Spades], SuitMode.OneSuit, Pattern.Spider, 2);
+const twoSuitSpider = new OneSuitGameRule([Suit.Spades, Suit.Diamonds, Suit.Spades, Suit.Diamonds], SuitMode.TwoSuits, Pattern.Spider, 2);
+const fourSuitSpider = new OneSuitGameRule([Suit.Spades, Suit.Diamonds, Suit.Clubs, Suit.Hearts], SuitMode.FourSuits, Pattern.Spider, 2);
 
-const oneSuitSpiderLady = new OneSuitGameRule([Suit.Spades], SuitMode.OneSuit, Pattern.SpiderLady);
-const twoSuitSpiderLady = new GameRule([Suit.Spades, Suit.Diamonds], SuitMode.twoSuitSpider, Pattern.SpiderLady);
-const fourSuitSpiderLady = new GameRule([Suit.Spades, Suit.Diamonds, Suit.Clubs, Suit.Hearts], SuitMode.FourSuits, Pattern.SpiderLady);
+const oneSuitSpiderLady = new OneSuitGameRule([Suit.Spades, Suit.Spades, Suit.Spades, Suit.Spades], SuitMode.OneSuit, Pattern.SpiderLady, 1);
+const twoSuitSpiderLady = new OneSuitGameRule([Suit.Spades, Suit.Diamonds, Suit.Spades, Suit.Diamonds], SuitMode.TwoSuits, Pattern.SpiderLady, 1);
+const fourSuitSpiderLady = new OneSuitGameRule([Suit.Spades, Suit.Diamonds, Suit.Clubs, Suit.Hearts], SuitMode.FourSuits, Pattern.SpiderLady, 1);
 
-export { oneSuitSpider, twoSuitSpider, fourSuitSpider, oneSuitSpiderLady, twoSuitSpiderLady, fourSuitSpiderLady, isSameSuitAtAllStuck, isSuitableRank, isSuitableRankReversed, isSuitableRankStuck }
+let selectedRules = oneSuitSpider;
+
+function changeRules(rule) {
+    selectedRules = rule;
+}
+
+export { selectedRules, changeRules, oneSuitSpider, twoSuitSpider, fourSuitSpider, oneSuitSpiderLady, twoSuitSpiderLady, fourSuitSpiderLady, isSameSuitAtAllStuck, isSuitableRank, isSuitableRankReversed, isSuitableRankStuck }
