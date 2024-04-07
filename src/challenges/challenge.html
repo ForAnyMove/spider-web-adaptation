@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="challenge.css" />
+    <meta name=”viewport” content=”user-scalable=no” />
+    <title>Challenges</title>
+  </head>
+  <body>
+    <header>
+      <ul class="header-interface-list">
+        <li class="header-ui-container">
+          <button class="header-navigation-btn">
+            <img
+              src="../../Sprites/Icons/Icon_Arrow_Back.png"
+              alt="Profile"
+              class="header-navigation-list-icon"
+            />
+          </button>
+        </li>
+        <li class="header-ui-container">
+          <div class="energy-counter">
+            <span class="energy-text">8</span>
+            <img src="../../Sprites/Icons/Icon_Energy.png" alt="Energy">
+          </div>
+        </li>
+      </ul>
+    </header>
+    <div class="challenges">
+      <div class="challenge-card completed-card">
+        <img src="../../Sprites/Icons/Icon_Check.png" alt="check-icon" class="check-icon">
+        <h3 class="check-info">Уровень завершен</h3>
+      </div>
+      <div class="challenge-card">
+        <div class="challenge-header">
+          <h3>Текущее испытание</h3>
+          <p>Соберите 3 колоды, чтобы завершить испытание</p>
+        </div>
+        <div class="rules-container">
+          <span>Правила</span>
+          <div class="rules-cards-container">
+            <div class="rules-card">
+              <span>Масть</span>
+              <img src="../../Sprites/Icons/Icon_Clubs.png" alt="" class="rules-icon">
+              <span>Одна масть</span>
+            </div>
+            <div class="rules-card">
+              <span>Режим</span>
+              <img src="../../Sprites/Icons/Icon_Spider.png" alt="" class="rules-icon">
+              <span>Масть</span>
+            </div>
+          </div>
+          <div class="level-info">
+            <h3 class="level-info-header">Бустеры на уровне</h3>
+            <div class="boosters-container">
+              <div class="booster-container">
+                <div class="booster">
+                  <img src="../../Sprites/Buttons/Used_plus.png" alt="plus" class="add-booster-icon">
+                  <img src="../../Sprites/Icons/Icon_Undo.png" alt="arrow" class="booster-icon">
+                  <span class="booster-counter">0</span>
+                </div>
+                <span class="booster-title">Отмена хода</span>
+              </div>
+              <div class="booster-container">
+                <div class="booster">
+                  <img src="../../Sprites/Buttons/Used_plus.png" alt="plus" class="add-booster-icon">
+                  <img src="../../Sprites/Icons/Icon_Hint.png" alt="hint" class="booster-icon">
+                  <span class="booster-counter">0</span>
+                </div>
+                <span class="booster-title">Подсказка</span>
+              </div>
+              <div class="booster-container">
+                <div class="booster">
+                  <img src="../../Sprites/Buttons/Used_plus.png" alt="plus" class="add-booster-icon">
+                  <img src="../../Sprites/Icons/Icon_Mage.png" alt="mage" class="booster-icon">
+                  <span class="booster-counter">0</span>
+                </div>
+                <span class="booster-title">Маг</span>
+              </div>
+            </div>
+            <h3 class="rewards-title">Награда</h3>
+            <div class="rewards-container">
+              <div class="rewards">
+                <img src="../../Sprites/Icons/Icon_Trophy.png" alt="rewards" class="rewards-icon">
+                <span class="rewards-title">15</span>
+              </div>
+            </div>
+            <div class="start-btn-container">
+              <button class="start-level-btn" id="play-btn">
+                <span class="start-level-btn-title">Играть</span>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="challenge-card closed-card">
+        <img src="../../Sprites/Icons/Icon_Lock.png" alt="lock-icon" class="lock-icon">
+        <h3 class="lock-screen-info">Завершите предыдущее испытание</h3>
+      </div>
+      <div class="challenge-card closed-card">
+        <img src="../../Sprites/Icons/Icon_Lock.png" alt="lock-icon" class="lock-icon">
+        <h3 class="lock-screen-info">Завершите предыдущее испытание</h3>
+      </div>
+      <div class="challenge-card closed-card">
+        <img src="../../Sprites/Icons/Icon_Lock.png" alt="lock-icon" class="lock-icon">
+        <h3 class="lock-screen-info">Завершите предыдущее испытание</h3>
+      </div>
+      <div class="challenge-card closed-card">
+        <img src="../../Sprites/Icons/Icon_Lock.png" alt="lock-icon" class="lock-icon">
+        <h3 class="lock-screen-info">Завершите предыдущее испытание</h3>
+      </div>
+      <div class="challenge-card closed-card">
+        <img src="../../Sprites/Icons/Icon_Lock.png" alt="lock-icon" class="lock-icon">
+        <h3 class="lock-screen-info">Завершите предыдущее испытание</h3>
+      </div>
+      <div class="challenge-card closed-card">
+        <img src="../../Sprites/Icons/Icon_Lock.png" alt="lock-icon" class="lock-icon">
+        <h3 class="lock-screen-info">Завершите предыдущее испытание</h3>
+      </div>
+      <div class="challenge-card closed-card">
+        <img src="../../Sprites/Icons/Icon_Lock.png" alt="lock-icon" class="lock-icon">
+        <h3 class="lock-screen-info">Завершите предыдущее испытание</h3>
+      </div>
+      <div class="challenge-card closed-card">
+        <img src="../../Sprites/Icons/Icon_Lock.png" alt="lock-icon" class="lock-icon">
+        <h3 class="lock-screen-info">Завершите предыдущее испытание</h3>
+      </div>
+      <div class="challenge-card closed-card">
+        <img src="../../Sprites/Icons/Icon_Lock.png" alt="lock-icon" class="lock-icon">
+        <h3 class="lock-screen-info">Завершите предыдущее испытание</h3>
+      </div>
+      <div class="challenge-card closed-card">
+        <img src="../../Sprites/Icons/Icon_Lock.png" alt="lock-icon" class="lock-icon">
+        <h3 class="lock-screen-info">Завершите предыдущее испытание</h3>
+      </div>
+      <div class="challenge-card closed-card">
+        <img src="../../Sprites/Icons/Icon_Lock.png" alt="lock-icon" class="lock-icon">
+        <h3 class="lock-screen-info">Завершите предыдущее испытание</h3>
+      </div>
+      <div class="challenge-card closed-card">
+        <img src="../../Sprites/Icons/Icon_Lock.png" alt="lock-icon" class="lock-icon">
+        <h3 class="lock-screen-info">Завершите предыдущее испытание</h3>
+      </div>
+      <div class="challenge-card closed-card">
+        <img src="../../Sprites/Icons/Icon_Lock.png" alt="lock-icon" class="lock-icon">
+        <h3 class="lock-screen-info">Завершите предыдущее испытание</h3>
+      </div>
+    </div>
+    <script src="challenge.js"></script>
+  </body>
+</html>
