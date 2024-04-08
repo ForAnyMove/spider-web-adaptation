@@ -1,15 +1,15 @@
-import { animator } from "./animator.js";
-import { useHintBooster, useMageBooster, useUndoBooster } from "./boosters.js";
-import { cardCollector } from "./cardsCollector.js";
-import { createTweener } from "./dotween/dotween.js";
-import { CanInteract, disableInteractions } from "./globalEvents.js";
-import { secondsToTime } from "./helpers.js";
-import { createLevel } from "./levelCreator.js";
-import { fourSuitSpider, fourSuitSpiderLady, oneSuitSpider, oneSuitSpiderLady } from "./rules/gameRules.js";
-import { Pattern } from "./statics/enums.js";
-import { Items } from "./statics/staticValues.js";
-import { stepRecorder } from "./stepRecorder.js";
-import { user } from "./userData.js"
+import { animator } from "../scripts/animator.js";
+import { useHintBooster, useMageBooster, useUndoBooster } from "../scripts/boosters.js";
+import { cardCollector } from "../scripts/cardsCollector.js";
+import { createTweener } from "../scripts/dotween/dotween.js";
+import { CanInteract, disableInteractions } from "../scripts/globalEvents.js";
+import { secondsToTime } from "../scripts/helpers.js";
+import { createLevel } from "../scripts/levelCreator.js";
+import { fourSuitSpider, fourSuitSpiderLady, oneSuitSpider, oneSuitSpiderLady } from "../scripts/rules/gameRules.js";
+import { Pattern } from "../scripts/statics/enums.js";
+import { Items } from "../scripts/statics/staticValues.js";
+import { stepRecorder } from "../scripts/stepRecorder.js";
+import { user } from "../scripts/userData.js"
 
 const screenParameters = { rules: oneSuitSpider };
 
