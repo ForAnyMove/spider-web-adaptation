@@ -89,6 +89,7 @@ header{
   overflow-x: scroll;
   scrollbar-width: none;
   -ms-overflow-style: none;
+  margin-bottom: 10vh;
 }
 
 .challenge-card {
