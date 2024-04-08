@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="./src/styles/main.css" />
+    <link rel="stylesheet" href="main.css" />
     <title>Spider Web</title>
   </head>
   <body>
@@ -58,21 +58,17 @@
       </nav>
     </header>
     <section class="logo">
-      <img
-        src="./Sprites/Logos/Logo_RU.png"
-        alt="Logo"
-        class="logo-icon"
-      />
+      <img src="./Sprites/Logos/Logo_RU.png" alt="Logo" class="logo-icon" />
     </section>
     <main class="main-content">
       <section class="btn-panel">
         <div class="main-panel-btn-container-1">
           <a href="./src/playground/playground.html">
-          <button class="main-panel-btn main-panel-btn-1">
-            <span class="main-panel-btn-title">Одна масть</span>
-            <span class="main-panel-btn-level">Паук</span>
-          </button>
-        </a>
+            <button class="main-panel-btn main-panel-btn-1">
+              <span class="main-panel-btn-title">Одна масть</span>
+              <span class="main-panel-btn-level">Паук</span>
+            </button>
+          </a>
         </div>
         <div class="main-panel-btn-container-2">
           <button class="main-panel-btn main-panel-btn-2">
@@ -111,30 +107,35 @@
         <div class="absolute-footer">
           <ul>
             <li>
-              <button class="control-btn">
-                <div class="header-navigation-icon-container">
-                  <img
-                    src="./Sprites/Icons/Icon_Story.png"
-                    alt="StoryMode"
-                    class="control-button-list-icon"
-                  />
-                </div>
-              </button>
+              <a href="./src/StoryMode/storyMode.html">
+                <button class="control-btn">
+                  <div class="header-navigation-icon-container">
+                    <img
+                      src="./Sprites/Icons/Icon_Story.png"
+                      alt="StoryMode"
+                      class="control-button-list-icon"
+                    />
+                  </div>
+                </button>
+              </a>
               <span class="control-button-title">Режим История</span>
             </li>
             <li>
-              <button class="control-btn">
-                <div class="header-navigation-icon-container">
-                  <img
-                    src="./Sprites/Icons/Icon_Trial.png"
-                    alt="Icon_Trial"
-                    class="control-button-list-icon"
-                  />
-                </div>
-              </button>
+              <a href="./src/challenges/challenge.html">
+                <button class="control-btn">
+                  <div class="header-navigation-icon-container">
+                    <img
+                      src="./Sprites/Icons/Icon_Trial.png"
+                      alt="Icon_Trial"
+                      class="control-button-list-icon"
+                    />
+                  </div>
+                </button>
+              </a>
               <span class="control-button-title">Испытания</span>
             </li>
             <li>
+              <a href="./src/Collection/collection.html">
               <button class="control-btn">
                 <div class="header-navigation-icon-container">
                   <img
@@ -144,6 +145,7 @@
                   />
                 </div>
               </button>
+              </a>
               <span class="control-button-title">Коллекция</span>
             </li>
             <li>
@@ -162,6 +164,6 @@
         </div>
       </section>
     </footer>
-    <script src="./src/scripts/index.js"></script>
+    <script src="index.js"></script>
   </body>
 </html>
