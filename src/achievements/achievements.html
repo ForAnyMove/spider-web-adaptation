@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="achievements.css" />
+    <meta name="”viewport”" content="”user-scalable" ="no”" />
+    <title>Achievements</title>
+  </head>
+  <body>
+    <header>
+      <ul class="header-interface-list">
+        <li class="header-ui-container">
+          <button class="header-navigation-btn">
+            <img
+              src="../../Sprites/Icons/Icon_Arrow_Back.png"
+              alt="Profile"
+              class="header-navigation-list-icon"
+            />
+          </button>
+        </li>
+        <li class="header-ui-container">
+          <div class="energy-counter">
+            <span class="energy-text">8</span>
+            <img src="../../Sprites/Icons/Icon_Energy.png" alt="Energy" />
+          </div>
+        </li>
+      </ul>
+    </header>
+    <main>
+      <nav class="collection-navigation">
+        <ul class="collection-nav-list">
+          <li class="categories-btn-container">
+            <button class="categories-btn active-btn">Достижения</button>
+          </li>
+          <li class="categories-btn-container">
+            <button class="categories-btn">Статистика</button>
+          </li>
+        </ul>
+      </nav>
+      <div class="achievements hidden">
+        <div class="achievement">
+          <div class="achievement-lable">
+            <img
+              src="../../Sprites/Icons/Icon_Calendar.png"
+              alt="Calendar"
+              class="achievement-icon"
+            />
+            <span class="achievement-title">Дней в игре</span>
+          </div>
+          <div class="achievement-status">
+            <button class="energy-btn">
+              <img
+                src="../../Sprites/Icons/Icon_Energy.png"
+                alt="Energy"
+                class="energy-icon"
+              />
+              <span class="energy-btn-title">1</span>
+            </button>
+            <button class="get-btn">
+              <span class="get-btn-title">Получить</span>
+            </button>
+          </div>
+        </div>
+        <div class="achievement">
+          <div class="achievement-lable">
+            <img
+              src="../../Sprites/Icons/Icon_Trophy.png"
+              alt="Trophy"
+              class="achievement-icon"
+            />
+            <span class="achievement-title">Количество побед</span>
+          </div>
+          <div class="achievement-status">
+            <div class="status-panel">
+              <div class="status-slider"></div>
+              <span class="status-info">1/3</span>
+            </div>
+            <button class="energy-btn">
+              <img
+                src="../../Sprites/Icons/Icon_Hint.png"
+                alt="Hint"
+                class="energy-icon"
+              />
+              <span class="energy-btn-title">1</span>
+            </button>
+          </div>
+        </div>
+        <div class="achievement">
+          <div class="achievement-lable">
+            <img
+              src="../../Sprites/Icons/Icon_Trophy.png"
+              alt="Trophy"
+              class="achievement-icon"
+            />
+            <span class="achievement-title">Побед подряд</span>
+          </div>
+          <div class="achievement-status">
+            <div class="status-panel">
+              <div class="status-slider"></div>
+              <span class="status-info">0/3</span>
+            </div>
+            <button class="energy-btn">
+              <img
+                src="../../Sprites/Icons/Icon_Energy.png"
+                alt="Energy"
+                class="energy-icon"
+              />
+              <span class="energy-btn-title">2</span>
+            </button>
+          </div>
+        </div>
+        <div class="achievement">
+          <div class="achievement-lable">
+            <img
+              src="../../Sprites/Icons/Icon_Step.png"
+              alt="Step"
+              class="achievement-icon"
+            />
+            <span class="achievement-title"
+              >Выиграть с заданным количеством шагов</span
+            >
+          </div>
+          <div class="achievement-status">
+            <div class="status-panel">
+              <div class="status-slider"></div>
+              <span class="status-info">-/300</span>
+            </div>
+            <button class="energy-btn">
+              <img
+                src="../../Sprites/Icons/Icon_Energy.png"
+                alt="Energy"
+                class="energy-icon"
+              />
+              <span class="energy-btn-title">1</span>
+            </button>
+          </div>
+        </div>
+        <div class="achievement">
+          <div class="achievement-lable">
+            <img
+              src="../../Sprites/Icons/Icon_Booster.png"
+              alt="Booster"
+              class="achievement-icon"
+            />
+            <span class="achievement-title">Использовано бустеров</span>
+          </div>
+          <div class="achievement-status">
+            <div class="status-panel">
+              <div class="status-slider"></div>
+              <span class="status-info">0/10</span>
+            </div>
+            <button class="energy-btn">
+              <img
+                src="../../Sprites/Icons/Icon_Energy.png"
+                alt="Energy"
+                class="energy-icon"
+              />
+              <span class="energy-btn-title">1</span>
+            </button>
+          </div>
+        </div>
+        <div class="achievement">
+          <div class="achievement-lable">
+            <img
+              src="../../Sprites/Icons/Icon_Trial.png"
+              alt="Trial"
+              class="achievement-icon"
+            />
+            <span class="achievement-title"
+              >Количество пройденных испытаний</span
+            >
+          </div>
+          <div class="achievement-status">
+            <div class="status-panel">
+              <div class="status-slider"></div>
+              <span class="status-info">1/2</span>
+            </div>
+            <button class="energy-btn">
+              <img
+                src="../../Sprites/Icons/Icon_Energy.png"
+                alt="Energy"
+                class="energy-icon"
+              />
+              <span class="energy-btn-title">1</span>
+            </button>
+          </div>
+        </div>
+        <div class="achievement">
+          <div class="achievement-lable">
+            <img
+              src="../../Sprites/Icons/Icon_Story.png"
+              alt="Story"
+              class="achievement-icon"
+            />
+            <span class="achievement-title">Количество игр в Испытании</span>
+          </div>
+          <div class="achievement-status">
+            <div class="status-panel">
+              <div class="status-slider"></div>
+              <span class="status-info">0/5</span>
+            </div>
+            <button class="energy-btn">
+              <img
+                src="../../Sprites/Icons/Icon_Energy.png"
+                alt="Energy"
+                class="energy-icon"
+              />
+              <span class="energy-btn-title">3</span>
+            </button>
+          </div>
+        </div>
+        <div class="achievement">
+          <div class="achievement-lable">
+            <img
+              src="../../Sprites/Icons/Icon_Time.png"
+              alt="Time"
+              class="achievement-icon"
+            />
+            <span class="achievement-title">Выиграть за время</span>
+          </div>
+          <div class="achievement-status">
+            <div class="status-panel">
+              <div class="status-slider"></div>
+              <span class="status-info">-/15:00</span>
+            </div>
+            <button class="energy-btn">
+              <img
+                src="../../Sprites/Icons/Icon_Energy.png"
+                alt="Energy"
+                class="energy-icon"
+              />
+              <span class="energy-btn-title">2</span>
+            </button>
+          </div>
+        </div>
+        <div class="achievement">
+          <div class="achievement-lable">
+            <img
+              src="../../Sprites/Icons/Icon_WS1.png"
+              alt="Calendar"
+              class="achievement-icon"
+            />
+            <span class="achievement-title">Победы в Пауке одна масть</span>
+          </div>
+          <div class="achievement-status">
+            <div class="status-panel">
+              <div class="status-slider"></div>
+              <span class="status-info">1/3</span>
+            </div>
+            <button class="energy-btn">
+              <img
+                src="../../Sprites/Icons/Icon_Energy.png"
+                alt="Energy"
+                class="energy-icon"
+              />
+              <span class="energy-btn-title">2</span>
+            </button>
+          </div>
+        </div>
+        <div class="achievement">
+          <div class="achievement-lable">
+            <img
+              src="../../Sprites/Icons/Icon_WS2.png"
+              alt="Calendar"
+              class="achievement-icon"
+            />
+            <span class="achievement-title">Победы в Пауке две масти</span>
+          </div>
+          <div class="achievement-status">
+            <div class="status-panel">
+              <div class="status-slider"></div>
+              <span class="status-info">1/3</span>
+            </div>
+            <button class="energy-btn">
+              <img
+                src="../../Sprites/Icons/Icon_Energy.png"
+                alt="Energy"
+                class="energy-icon"
+              />
+              <span class="energy-btn-title">2</span>
+            </button>
+          </div>
+        </div>
+        <div class="achievement">
+          <div class="achievement-lable">
+            <img
+              src="../../Sprites/Icons/Icon_WS4.png"
+              alt="Calendar"
+              class="achievement-icon"
+            />
+            <span class="achievement-title">Победы в Пауке четыре масти</span>
+          </div>
+          <div class="achievement-status">
+            <div class="status-panel">
+              <div class="status-slider"></div>
+              <span class="status-info">1/3</span>
+            </div>
+            <button class="energy-btn">
+              <img
+                src="../../Sprites/Icons/Icon_Energy.png"
+                alt="Energy"
+                class="energy-icon"
+              />
+              <span class="energy-btn-title">2</span>
+            </button>
+          </div>
+        </div>
+        <div class="achievement">
+          <div class="achievement-lable">
+            <img
+              src="../../Sprites/Icons/Icon_WSL1.png"
+              alt="Calendar"
+              class="achievement-icon"
+            />
+            <span class="achievement-title">Победы в Паучихе одна масть</span>
+          </div>
+          <div class="achievement-status">
+            <div class="status-panel">
+              <div class="status-slider"></div>
+              <span class="status-info">1/3</span>
+            </div>
+            <button class="energy-btn">
+              <img
+                src="../../Sprites/Icons/Icon_Energy.png"
+                alt="Energy"
+                class="energy-icon"
+              />
+              <span class="energy-btn-title">2</span>
+            </button>
+          </div>
+        </div>
+        <div class="achievement">
+          <div class="achievement-lable">
+            <img
+              src="../../Sprites/Icons/Icon_WSL2.png"
+              alt="Calendar"
+              class="achievement-icon"
+            />
+            <span class="achievement-title">Победы в Паучихе две масти</span>
+          </div>
+          <div class="achievement-status">
+            <div class="status-panel">
+              <div class="status-slider"></div>
+              <span class="status-info">1/3</span>
+            </div>
+            <button class="energy-btn">
+              <img
+                src="../../Sprites/Icons/Icon_Energy.png"
+                alt="Energy"
+                class="energy-icon"
+              />
+              <span class="energy-btn-title">2</span>
+            </button>
+          </div>
+        </div>
+        <div class="achievement">
+          <div class="achievement-lable">
+            <img
+              src="../../Sprites/Icons/Icon_WSL4.png"
+              alt="Calendar"
+              class="achievement-icon"
+            />
+            <span class="achievement-title">Победы в Паучихе четыре масти</span>
+          </div>
+          <div class="achievement-status">
+            <div class="status-panel">
+              <div class="status-slider"></div>
+              <span class="status-info">1/3</span>
+            </div>
+            <button class="energy-btn">
+              <img
+                src="../../Sprites/Icons/Icon_Energy.png"
+                alt="Energy"
+                class="energy-icon"
+              />
+              <span class="energy-btn-title">2</span>
+            </button>
+          </div>
+        </div>
+      </div>
+      <div class="achievements">
+        <div class="achievement">
+          <div class="achievement-lable">
+            <img
+              src="../../Sprites/Icons/Icon_Trophy.png"
+              alt="Trophy"
+              class="achievement-icon"
+            />
+            <span class="achievement-title">Количество игр</span>
+          </div>
+          <span class="statistic-counter">1</span>
+        </div>
+        <div class="achievement">
+          <div class="achievement-lable">
+            <img
+              src="../../Sprites/Icons/Icon_Trophy.png"
+              alt="Trophy"
+              class="achievement-icon"
+            />
+            <span class="achievement-title">Количество побед</span>
+          </div>
+          <span class="statistic-counter">1</span>
+        </div>
+        <div class="achievement">
+          <div class="achievement-lable">
+            <img
+              src="../../Sprites/Icons/Icon_Trophy.png"
+              alt="Trophy"
+              class="achievement-icon"
+            />
+            <span class="achievement-title">Процент побед</span>
+          </div>
+          <span class="statistic-counter">100%</span>
+        </div>
+        <div class="achievement">
+          <div class="achievement-lable">
+            <img
+              src="../../Sprites/Icons/Icon_Time.png"
+              alt="Time"
+              class="achievement-icon"
+            />
+            <span class="achievement-title">Самая быстрая победа</span>
+          </div>
+          <span class="statistic-counter">8</span>
+        </div>
+        <div class="achievement">
+          <div class="achievement-lable">
+            <img
+              src="../../Sprites/Icons/Icon_Step.png"
+              alt="Step"
+              class="achievement-icon"
+            />
+            <span class="achievement-title">Меньше всего шагов для победы</span>
+          </div>
+          <span class="statistic-counter">8</span>
+        </div>
+        <div class="achievement">
+          <div class="achievement-lable">
+            <img
+              src="../../Sprites/Icons/Icon_Trial.png"
+              alt="Triaд"
+              class="achievement-icon"
+            />
+            <span class="achievement-title">Завершенных Испытаний</span>
+          </div>
+          <span class="statistic-counter">1</span>
+        </div>
+        <div class="achievement">
+          <div class="achievement-lable">
+            <img
+              src="../../Sprites/Icons/Icon_Trial.png"
+              alt="Trial"
+              class="achievement-icon"
+            />
+            <span class="achievement-title">Сыгранных Испытаний</span>
+          </div>
+          <span class="statistic-counter">1</span>
+        </div>
+      </div>
+    </main>
+    <script src="achievements.js"></script>
+  </body>
+</html>
