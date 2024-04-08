@@ -17,6 +17,12 @@ class Animator {
         });
     }
 
+    reset = function () {
+        this.requests = [];
+        this.lastTimeStamp = -1;
+        this.paused = false;
+    }
+
     addRequest = function (callback) {
         if (this.requests.includes(callback)) return;
 

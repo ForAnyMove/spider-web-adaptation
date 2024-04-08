@@ -92,13 +92,14 @@ function createLevel(options = { rules }) {
     const result = generateCards();
 
     croupier = selectedRules.pattern == Pattern.Spider ? new SpiderCroupier({ mainCardColumn: result.mainCardColumn, playableCardColumns: result.playableCardColumns }) : new SpiderLadyCroupier({ mainCardColumn: result.mainCardColumn, playableCardColumns: result.playableCardColumns });
-    setTimeout(() => croupier.initialDistribution(), 500);
+    // setTimeout(() => croupier.initialDistribution(), 500);
     // setTimeout(() => {
     //     for (let i = 0; i < result.playableCardColumns.length; i++) {
     //         const element = result.playableCardColumns[i];
     //         element.lock();
     //     }
     // }, 3000);
+    croupier.initialDistribution();
 
     return { croupier: croupier, playableCardColumns: result.playableCardColumns, mainCardColumn: result.mainCardColumn }
 }

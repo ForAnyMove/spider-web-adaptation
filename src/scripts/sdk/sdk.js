@@ -113,4 +113,4 @@ async function initilize() {
 
 await initilize();
 
-export { saveUserData, loadUserData }
+export { saveUserData, loadUserData, getPlatforms }

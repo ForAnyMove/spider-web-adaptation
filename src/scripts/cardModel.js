@@ -1,9 +1,11 @@
 import { animator } from "./animator.js";
 import { boundsChecker } from "./cardBoundsChecker.js";
+import { cardSelector } from "./cardSelector.js";
 import { cardCollector } from "./cardsCollector.js";
 import { DOChangeValue, DOChangeXY, Ease } from "./dotween/dotween.js";
 import { Action, CanInteract, disableInteractions, enableInteractions } from "./globalEvents.js";
 import { selectedRules } from "./rules/gameRules.js";
+import { getPlatforms } from "./sdk/sdk.js";
 import { CardSide } from "./statics/enums.js";
 import { stepRecorder } from "./stepRecorder.js";
 
@@ -78,6 +80,16 @@ export default class Card {
 
     subscribeDragAndDrop = () => {
         const domElement = this.domElement;
+
+        let isTv = getPlatforms().tv;
+
+        if (isTv) {
+            domElement.onmousedown = (e) => {
+                cardSelector.select(this.cardColumn, this.cardColumn.getCardsFrom(this));
+            }
+            return;
+        }
+
 
         domElement.onmousedown = (e) => {
             if (!CanInteract || this.side == CardSide.Back) return;
@@ -250,8 +262,10 @@ class CardColumn {
         return cards;
     }
 
-    translateCardsToColumnWithOffset = function (cards, finishCallback, horzontalOffset, verticalOffset, options = { affectInteraction: true, addCards: true, openOnFinish: false, closeOnFinish: false }) {
+    translateCardsToColumnWithOffset = function (cards, finishCallback, horzontalOffset, verticalOffset, options = { affectInteraction: true, addCards: true, openOnFinish: false, closeOnFinish: false, callCallbackOnce: true }) {
         if (cards == null || cards.length == 0) return;
+
+        let callbackInvoked = false;
 
         for (let i = 0; i < cards.length; i++) {
             const element = cards[i];
@@ -301,9 +315,11 @@ class CardColumn {
                 if (options?.closeOnFinish) {
                     card.close();
                 }
+                if (options.callCallbackOnce == null && !callbackInvoked || options.callCallbackOnce == false || options.callCallbackOnce == true && !callbackInvoked) {
+                    callbackInvoked = true;
 
-                finishCallback?.();
-
+                    finishCallback?.();
+                }
                 if (options.affectInteraction) {
                     enableInteractions();
                 }
@@ -311,11 +327,11 @@ class CardColumn {
         });
     }
 
-    translateCardsToColumn = function (cards, finishCallback, options = { affectInteraction: true, addCards: true, openOnFinish: false, closeOnFinish: false }) {
+    translateCardsToColumn = function (cards, finishCallback, options = { affectInteraction: true, addCards: true, openOnFinish: false, closeOnFinish: false, callCallbackOnce: true }) {
         this.translateCardsToColumnWithOffset(cards, finishCallback, { opened: 0, closed: 0 }, { opened: openedCardOffset, closed: closedCardOffset }, options);
     }
 
-    translateCardsToColumnWithDelay = function (cards, finishCallback, horzontalOffset, verticalOffset, options = { affectInteraction: true, addCards: true, openOnFinish: false, closeOnFinish: false, delay: 0.03 }) {
+    translateCardsToColumnWithDelay = function (cards, finishCallback, horzontalOffset, verticalOffset, options = { affectInteraction: true, addCards: true, openOnFinish: false, closeOnFinish: false, delay: 0.03, callCallbackOnce: true }) {
         const column = this;
 
         function translate() {
@@ -356,6 +372,13 @@ class CardColumn {
         this.domElement.appendChild(card.domElement);
         this.recalculateFirstOpened();
         this.checkIfColumnHasCollectedCardsSet();
+    }
+
+    addCards = function (cards) {
+        for (let i = 0; i < cards.length; i++) {
+            const element = cards[i];
+            this.addCard(element)
+        }
     }
 
     removeCard = function (card) {

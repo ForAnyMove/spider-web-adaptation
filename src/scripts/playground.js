@@ -2,7 +2,7 @@ import { animator } from "./animator.js";
 import { useHintBooster, useMageBooster, useUndoBooster } from "./boosters.js";
 import { cardCollector } from "./cardsCollector.js";
 import { createTweener } from "./dotween/dotween.js";
-import { disableInteractions } from "./globalEvents.js";
+import { CanInteract, disableInteractions } from "./globalEvents.js";
 import { secondsToTime } from "./helpers.js";
 import { createLevel } from "./levelCreator.js";
 import { fourSuitSpider, fourSuitSpiderLady, oneSuitSpider, oneSuitSpiderLady } from "./rules/gameRules.js";
@@ -13,19 +13,24 @@ import { user } from "./userData.js"
 
 const screenParameters = { rules: oneSuitSpider };
 
-user.addItem(Items.BoosterUndo, 20);
-user.addItem(Items.BoosterHint, 20);
-user.addItem(Items.BoosterMage, 20);
-user.addItem(Items.BoosterTime, 20);
+user.addItem(Items.BoosterUndo, 999);
+user.addItem(Items.BoosterHint, 999);
+user.addItem(Items.BoosterMage, 999);
+user.addItem(Items.BoosterTime, 999);
 
 createTweener();
 
 let timer = 0;
 
 function startTimer(seconds) {
-  const container = document.getElementsByClassName('header-timer hidden')[0];
-  container.classList.remove('hidden');
-  const textAttribute = document.createElement('span');
+  let container = document.getElementsByClassName('header-timer hidden')[0];
+  if (container != null) {
+    container.classList.remove('hidden');
+  } else {
+    container = document.getElementsByClassName('header-timer')[0];
+  }
+
+  const textAttribute = container.getElementsByTagName('span')[0] ?? document.createElement('span');
   textAttribute.classList.add('counter-text');
   container.appendChild(textAttribute);
 
@@ -79,7 +84,7 @@ if (screenParameters.rules.pattern == Pattern.SpiderLady) {
   }
 }
 
-const result = createLevel({ rules: screenParameters.rules });
+let result = createLevel({ rules: screenParameters.rules });
 
 function distributeDefault() {
   if (result.croupier != null) {
@@ -121,6 +126,26 @@ document.getElementById('undo-button').onclick = function () {
       user.removeItem(Items.BoosterUndo, 1);
     }
   }
+}
+
+document.getElementById('restart-button').onclick = function () {
+  if (!CanInteract) return;
+
+  const cards = document.getElementsByClassName('card-element');
+
+  for (let i = cards.length - 1; i >= 0; i--) {
+    const element = cards[i];
+    element.remove();
+  }
+
+  createTweener();
+  animator.reset();
+  stepRecorder.reset();
+  result = createLevel({ rules: screenParameters.rules });
+  startTimer(600);
+
+  stepRecorder.stepRecordedEvent.addListener(updateStepText);
+  updateStepText(0);
 }
 
 function checkIfLevelWon(options) {
