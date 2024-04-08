@@ -54,6 +54,27 @@ header{
   width: 3vw;
   margin-top: 15%;
 }
+.energy-counter{
+  display: flex;
+  justify-content: center;
+  background-image: url('../../Sprites/Frames/Used_Frame_12.png');
+  background-size: 100% 100%;
+  position: relative;
+  margin: 1.5vw;
+  width: 3vw;
+}
+.energy-text{
+  color: #FFF6C6;
+  font-weight: bold;
+  font-size: 1.5vw;
+  padding-right: 1vw;
+}
+.energy-counter>img{
+  width: 2.5vw;
+  position: absolute;
+  right: -1vw;
+}
+
 
 /* cards container */
 
@@ -80,7 +101,7 @@ main{
   justify-content: center;
 }
 .categories-btn{
-  width: 90%;
+  width: 97%;
   color: #FFF6C6;
   background: none;
   border: none;
@@ -98,7 +119,7 @@ main{
   border-radius: 2vh;
 }
 .active-btn::after{
-  content: '___';
+  content: '_____';
   position: absolute;
   bottom: -1vh;
   left: 50%;
@@ -106,138 +127,116 @@ main{
   transform: translate(-50%);
   color: #FFF6C6;
 }
-.collection-pick-area {
-  background-color: #ffffff49;
-  border-radius: 2vh;
-  border: 1px solid #ffffff49;
-  min-height: 20vh;
+.achievements{
   display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  margin-bottom: 10vh;
-  -webkit-box-shadow: 5px 5px 5px -5px #000000; 
-  box-shadow: 5px 5px 5px -5px #000000;
+  flex-direction: column;
+  scroll-snap-type: y proximity;
   overflow-y: scroll;
   scrollbar-width: none;
   -ms-overflow-style: none;
-  width: 80%;
+  width: 100%;
   height: 100%;
-  padding: 0 10%;
 }
-.lock-mask{
-  position: absolute;
-  width: calc(100% + 2px);
-  height: calc(100% + 2px);
-  background-color: #0000007b;
+
+.achievement {
+  background-color: #ffffff49;
+  border-radius: 2vh;
+  border: 1px solid #ffffff49;
+  min-height: 10vh;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1vh;
+  -webkit-box-shadow: 5px 5px 5px -5px #000000; 
+  box-shadow: 5px 5px 5px -5px #000000;
+  scroll-snap-align: center;
+}
+.achievement-lable, .achievement-status{
   display: flex;
   align-items: center;
-  flex-direction: column;
-  justify-content: center;
-  border-radius: 2vh;
+  margin: 0 1vw;
+  gap: 1vw;
 }
-.mask-title{
-  color: #FFF6C6;
-  font-size: 1.6vh;
-  font-weight: bold;
-  text-align: center;
+.achievement-icon{
+  width: 8vh;
 }
-.card-skin{
-  width: 22vh;
+.achievement-title{
+  color: #fff;
+  font-size: 2.3vh;
+  text-wrap: nowrap;
+  margin-right: 4vw;
 }
-.trophy-skin{
-  width: 15vh;
+.achievement-status{
+  justify-content: flex-end;
+  width: 100%;
 }
-.skin-card, .skin-card-back, .background-card, .trophy-card {
-  background-color: #ffffff48;
-  background-image: url('../../Sprites/Frames/Used_Frame_04.png');
-  background-size: 150%;
-  background-position: center;
-  width: 18vh;
-  border-radius: 2vh;
-  border: 0.1vh solid #18ed00;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  -webkit-box-shadow: 5px 5px 15px -5px #000000; 
-  box-shadow: 5px 5px 15px -5px #000000;
-  margin: 2vh;
+.status-panel{
   position: relative;
+  width: 100%;
+  height: 4vh;
+  border-radius: 2vh;
+  background: #006400;
+  background: -moz-linear-gradient(top, #006400 0%, #008E00 50%, #00A200 100%);
+  background: -webkit-linear-gradient(top, #006400 0%, #008E00 50%, #00A200 100%);
+  background: linear-gradient(to bottom, #006400 0%, #008E00 50%, #00A200 100%);
 }
-.skin-card-back {
-  height: 25vh;
-  justify-content: flex-end;
-  background-image: url('../../Sprites/Card Backs/Card_Backs.png');
+.status-slider{
+  height: 4vh;
+  width: 30%;
+  border-radius: 2vh;
+  background: #ffdd42;
+  background: -moz-linear-gradient(top, #ffdd42 0%, #feaa18 50%, #f77105 100%);
+  background: -webkit-linear-gradient(top, #ffdd42 0%, #feaa18 50%, #f77105 100%);
+  background: linear-gradient(to bottom, #ffdd42 0%, #feaa18 50%, #f77105 100%);
 }
-.background-card {
-  height: 20vh;
-  width: 36vh;
-  justify-content: flex-end;
-  background-image: url('../../Sprites/Card Backs/Card_Backs.png');
+.status-info{
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  color: #fff;
+  font-size: 2.2vh;
 }
-.trophy-card {
-  height: 25vh;
+.energy-btn{
+  background-color: #00000043;
+  border-radius: 2vh;
+  width: 8vh;
+  height: 8vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border: none;
+  -webkit-box-shadow: 5px 5px 5px -5px #0000008c; 
+  box-shadow: 0px 2px 2px 0 #00000074;
 }
-#cart-background-1{
-  background-image: url('../../Sprites/Backgrounds/Release/Background_01.png');
+.energy-icon{
+  width: 70%;
 }
-#cart-background-2{
-  background-image: url('../../Sprites/Backgrounds/Release/Background_02.png');
+.energy-btn-title{
+  color: #fff;
+  font-size: 2.5vh;
 }
-#cart-background-3{
-  background-image: url('../../Sprites/Backgrounds/Release/Background_03.png');
+.statistic-counter{
+  color: #fff;
+  font-size: 3.5vh;
+  margin-right: 2vw;
 }
-#cart-background-4{
-  background-image: url('../../Sprites/Backgrounds/Release/Background_04.png');
-}
-#cart-background-5{
-  background-image: url('../../Sprites/Backgrounds/Release/Background_05.png');
-}
-#cart-background-6{
-  background-image: url('../../Sprites/Backgrounds/Release/Background_06.png');
-}
-#cart-background-7{
-  background-image: url('../../Sprites/Backgrounds/Release/Background_07.png');
-}
-#cart-background-8{
-  background-image: url('../../Sprites/Backgrounds/Release/Background_08.png');
-}
-#cart-background-9{
-  background-image: url('../../Sprites/Backgrounds/Release/Background_09.png');
-}
-.check-icon, .lock-icon{
-  width: 7vh;
-  z-index: 10;
-}
-.tonned{
-  filter: brightness(70%); 
-}
-.start-level-btn{
+.get-btn{
+  background: url('../../Sprites/Buttons/Used_Button_03.png');
+  font-size: 1.8vh;
   border-radius: 1vh;
   border: none;
-  background: no-repeat;
+  background-repeat: no-repeat;
   background-size: 100% 100%;
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 0 1.5vh 1.1vh 3vh;
+  padding: 0 2.5vh 1.1vh;
 }
-#pick-area-2>.start-level-btn{
-  width: 100%;
-}
-.start-level-btn-title{
+.get-btn-title{
   font-weight: bold;
   color: #00000049;
   padding: 1.6vh 0;
-}
-#play-btn{
-  background-image: url('../../Sprites/Buttons/Used_Button_03.png');
-  font-size: 1.8vh;
-}
-.interactive-btn-info{
-  display: flex;
-  align-items: center;
-  justify-content: center;
 }
 
 @media screen and (orientation: landscape ) {
