@@ -1,4 +1,5 @@
 import { error } from "../logger.js";
+import { Platform } from "../statics/staticValues.js";
 
 let ysdk;
 let player;
@@ -55,20 +56,37 @@ function processExit() {
     ysdk.dispatchEvent(ysdk.EVENTS.EXIT);
 }
 
-function getPlatforms() {
+// TODO: optimize method usage
+function getPlatform() {
+    let finalPlatformResult = Platform.Desktop;
+
     if (ysdk == null || isLocalHost()) {
         error("SKD is undefined or script launched on localhost", "sdk");
-        return { desktop: true, mobile: false, tablet: false, tv: false };
+        const isTv = /SMART-TV|Tizen|Web0S|NetCast|HbbTV|Opera TV|CE-HTML|TV|Television/i.test(navigator.userAgent);
+        const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+
+        if (isTv) {
+            finalPlatformResult = Platform.TV;
+        } else if (isMobile) {
+            finalPlatformResult = Platform.Mobile
+        }
+
+        return finalPlatformResult;
     }
 
-    const desktop = YaGames.deviceInfo.isDesktop();
     const mobile = YaGames.deviceInfo.isMobile();
     const tablet = YaGames.deviceInfo.isTablet();
     const tv = /SMART-TV|Tizen|Web0S|NetCast|HbbTV|Opera TV|CE-HTML|TV|Television/i.test(navigator.userAgent) || YaGames.deviceInfo.isTV();
 
-    const object = { desktop: desktop, mobile: mobile, tablet: tablet, tv: tv };
+    if (mobile) {
+        finalPlatformResult = Platform.Mobile;
+    } else if (tablet) {
+        finalPlatformResult = Platform.Tablet
+    } else if (tv) {
+        finalPlatformResult = Platform.TV
+    }
 
-    return object;
+    return finalPlatformResult;
 }
 
 function saveUserData(data) {
@@ -113,4 +131,4 @@ async function initilize() {
 
 await initilize();
 
-export { saveUserData, loadUserData, getPlatforms }
+export { saveUserData, loadUserData, getPlatform }
