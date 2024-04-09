@@ -5,12 +5,12 @@ import { createTweener } from "../scripts/dotween/dotween.js";
 import { CanInteract, disableInteractions } from "../scripts/globalEvents.js";
 import { secondsToTime } from "../scripts/helpers.js";
 import { createLevel } from "../scripts/levelCreator.js";
-import { fourSuitSpider, fourSuitSpiderLady, oneSuitSpider, oneSuitSpiderLady } from "../scripts/rules/gameRules.js";
 import { Pattern } from "../scripts/statics/enums.js";
 import { Items } from "../scripts/statics/staticValues.js";
 import { stepRecorder } from "../scripts/stepRecorder.js";
 import { user } from "../scripts/userData.js"
 
+import { fourSuitSpider, fourSuitSpiderLady, oneSuitSpider, oneSuitSpiderLady } from "../scripts/rules/gameRules.js";
 const screenParameters = { rules: oneSuitSpider };
 
 user.addItem(Items.BoosterUndo, 999);
@@ -181,16 +181,6 @@ function levelLostFlow() {
 
   disableInteractions();
 }
-
-const el = document.createElement('span');
-el.innerHTML = "Task: collect 2 decks";
-
-el.style.fontSize = '24px'
-el.style.color = '#fff'
-el.style.position = 'absolute';
-el.style.left = '4vw';
-el.style.top = '0.8vw';
-document.getElementsByTagName('main')[0].appendChild(el);
 
 function updateStepText(stepCount) {
   document.getElementById('step-counter').innerText = stepCount;

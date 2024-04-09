@@ -1,8 +1,18 @@
-import { createDeckTrial, createItem, createLevelCompleteRequirement, createStoryLevel, createTrialLevel } from "../src/helpers.js";
-import { load, save } from "../src/save_system/SaveSystem.js";
-import { LevelState, LevelType, Rule } from "../src/statics/enums.js";
-import { Items } from "../src/statics/staticValues.js";
+import { createDeckTrial, createItem, createLevelCompleteRequirement, createStoryLevel, createTrialLevel } from "../helpers.js";
+import { load, save } from "../save_system/SaveSystem.js";
+import { LevelState, LevelType, Rule } from "../statics/enums.js";
+import { Items } from "../statics/staticValues.js";
 import { backSkinDatabase, backgroundDatabase, skinDatabase } from "./card_skin_database.js";
+
+const levelParameters = {
+    order: 1, // 2, 3...
+    type: LevelType.Story, // LevelType.Trial, LevelType.Default
+    rules: Rule.OneSuitSpider, // Rule.OneSuitSpiderLady, Rule.TwoSuitSpider...
+    rewards: { items: [{ type: Items.Energy, count: 1 }], content: [{ type: skinDatabase.skinList[2].id, count: 1 }] }, // createItem(Items.Energy, 1), createItem(skinDatabase.skinList[2].id, 1)
+    requirements: { type: LevelType.Trial, order: 1 /*2, 3...*/ }, // createLevelCompleteRequirement(LevelType.Trial, 1)
+    trials: { levelTrial: { decksToComplete: 1 /*2, 3...*/ } }, // createDeckTrial(1),s
+    time: -1, // 600s, 1200s...
+}
 
 const storyLevelDatabase = {
     id: "story_level_database_01",

@@ -38,7 +38,7 @@ function createStoryLevel(order, type, state, rule, rewards, pass, lvReq) {
 }
 
 function createLevelCompleteRequirement(type, order) {
-    return { type, order }
+    return { type: type, order: order }
 }
 
 function shuffle(array) {

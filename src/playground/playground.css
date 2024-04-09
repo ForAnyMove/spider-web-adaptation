@@ -126,6 +126,12 @@ main {
   background-color: #0000003d;
 }
 
+:root {
+  --closed-card-offset: -7.5vw;
+  --opened-card-offset: -6.5vw;
+  --card-height: 8vw;
+}
+
 .active-cards-container>.card-element.closed:not(:first-child, .locked) {
   margin-top: -7.5vw;
   transition: margin-top 0.25s ease, width 0.25s ease, height 0.25s ease, margin-left 0.25s ease;
@@ -270,6 +276,12 @@ footer {
   .header-navigation-list-icon {
     width: 5vw;
     margin-top: 10%;
+  }
+
+  :root {
+    --closed-card-offset: -11.5vw;
+    --opened-card-offset: -10vw;
+    --card-height: 13vw;
   }
 
   .active-cards-container>.card-element.closed:not(:first-child, .locked) {

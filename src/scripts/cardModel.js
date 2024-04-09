@@ -144,7 +144,11 @@ export default class Card {
         const domElement = this.domElement;
 
         const handleDragStart = (e) => {
+            if (this.side == CardSide.Back) return;
+
             const columnTemp = this.cardColumn;
+            if (columnTemp == null) return;
+
             const touch = e.targetTouches[0];
 
             const x = touch.clientX;
@@ -167,13 +171,12 @@ export default class Card {
 
             columnTemp.removeCards(cards);
 
+
             const handleDragMove = (e) => {
                 const touch = e.targetTouches[0];
 
                 const x = touch.clientX;
                 const y = touch.clientY;
-
-                console.log(x);
 
                 for (let i = 0; i < cards.length; i++) {
                     const card = cards[i];
@@ -183,6 +186,9 @@ export default class Card {
 
                 e.preventDefault();
             }
+
+            handleDragMove(e);
+
             const handleDrop = (e) => {
                 this.tryDrop(columnTemp, cards);
 
@@ -221,10 +227,13 @@ export default class Card {
             const cardColumn = columns[i];
             if (selectedRules.isCanPlace([this], cardColumn.cards)) {
                 cardColumn.translateCardsToColumn(cards, () => previousColumn.checkIfLastCardClosedAndOpen());
+                const lastCardSide = previousColumn.getLastCard()?.side;
 
                 stepRecorder.record(() => {
-                    previousColumn.translateCardsToColumn(cards);
-                    if (previousColumn.cards.length > 0) {
+                    previousColumn.translateCardsToColumn(cards, () => {
+                        cardColumn.checkIfLastCardClosedAndOpen();
+                    });
+                    if (previousColumn.cards.length > 0 && lastCardSide == CardSide.Back) {
                         previousColumn.getLastCard().close();
                     }
                 })
@@ -359,14 +368,23 @@ class CardColumn {
         const targetPosition = { x: this.domElement.getBoundingClientRect().left, y: this.domElement.getBoundingClientRect().top };
         const vwOffset = window.innerWidth / 100;
 
+        const rootStyles = getComputedStyle(document.documentElement);
+        const openedCardOffset = parseFloat(rootStyles.getPropertyValue('--opened-card-offset')) * vwOffset;
+        const closedCardOffset = parseFloat(rootStyles.getPropertyValue('--closed-card-offset')) * vwOffset;
+        const height = parseFloat(rootStyles.getPropertyValue('--card-height')) * vwOffset;
 
         for (let i = 0; i < this.cards.length; i++) {
             const element = this.cards[i];
+
             if (element.domElement.classList.contains('opened')) {
-                targetPosition.y += vwOffset * verticalOffset.opened;
+                const offsetV = verticalOffset.closed != null ? (vwOffset * verticalOffset.opened) : (height + openedCardOffset);
+
+                targetPosition.y += offsetV;
                 targetPosition.x += vwOffset * horzontalOffset.opened;
             } else if (!element.domElement.classList.contains('locked')) {
-                targetPosition.y += vwOffset * verticalOffset.closed;
+                const offsetV = verticalOffset.closed != null ? (vwOffset * verticalOffset.closed) : (height + closedCardOffset);
+
+                targetPosition.y += offsetV;
                 targetPosition.x += vwOffset * horzontalOffset.closed;
             }
         }
@@ -379,7 +397,7 @@ class CardColumn {
             for (let i = 0; i < cards.length; i++) {
                 const card = cards[i];
                 card.domElement.style.left = `${value.x + (i * vwOffset * horzontalOffset.opened)}px`;
-                card.domElement.style.top = `${value.y + (i * vwOffset * verticalOffset.opened)}px`;
+                card.domElement.style.top = `${value.y + (i * (height + openedCardOffset))}px`;
             }
         }, targetPosition, 0.08, Ease.SineOut).onComplete(() => {
             for (let i = 0; i < cards.length; i++) {
@@ -408,7 +426,7 @@ class CardColumn {
     }
 
     translateCardsToColumn = function (cards, finishCallback, options = { affectInteraction: true, addCards: true, openOnFinish: false, closeOnFinish: false, callCallbackOnce: true }) {
-        this.translateCardsToColumnWithOffset(cards, finishCallback, { opened: 0, closed: 0 }, { opened: openedCardOffset, closed: closedCardOffset }, options);
+        this.translateCardsToColumnWithOffset(cards, finishCallback, { opened: 0, closed: 0 }, { opened: null, closed: null }, options);
     }
 
     translateCardsToColumnWithDelay = function (cards, finishCallback, horzontalOffset, verticalOffset, options = { affectInteraction: true, addCards: true, openOnFinish: false, closeOnFinish: false, delay: 0.03, callCallbackOnce: true }) {
