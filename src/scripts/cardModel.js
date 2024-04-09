@@ -5,8 +5,9 @@ import { cardCollector } from "./cardsCollector.js";
 import { DOChangeValue, DOChangeXY, Ease } from "./dotween/dotween.js";
 import { Action, CanInteract, disableInteractions, enableInteractions } from "./globalEvents.js";
 import { selectedRules } from "./rules/gameRules.js";
-import { getPlatforms } from "./sdk/sdk.js";
+import { getPlatform } from "./sdk/sdk.js";
 import { CardSide } from "./statics/enums.js";
+import { Platform } from "./statics/staticValues.js";
 import { stepRecorder } from "./stepRecorder.js";
 
 const backImage = `url('../../Sprites/Card Backs/Card_Back_TV.png')`
@@ -78,18 +79,16 @@ export default class Card {
         });
     }
 
-    subscribeDragAndDrop = () => {
+    applyTVInput = function () {
         const domElement = this.domElement;
 
-        let isTv = getPlatforms().tv;
-
-        if (isTv) {
-            domElement.onmousedown = (e) => {
-                cardSelector.select(this.cardColumn, this.cardColumn.getCardsFrom(this));
-            }
-            return;
+        domElement.onmousedown = (e) => {
+            cardSelector.select(this.cardColumn, this.cardColumn.getCardsFrom(this));
         }
+    }
 
+    applyDesktopInput = function () {
+        const domElement = this.domElement;
 
         domElement.onmousedown = (e) => {
             if (!CanInteract || this.side == CardSide.Back) return;
@@ -99,13 +98,16 @@ export default class Card {
             const canRemove = this.cardColumn.canRemove && selectedRules.isCanRemove(cards);
             if (!canRemove) return;
 
+            const x = e.pageX;
+            const y = e.pageY;
+
             const columnTemp = this.cardColumn;
             const offsets = [];
 
             for (let i = 0; i < cards.length; i++) {
                 const card = cards[i];
-                const offsetX = e.pageX - card.domElement.getBoundingClientRect().left;
-                const offsetY = e.pageY - card.domElement.getBoundingClientRect().top;
+                const offsetX = x - card.domElement.getBoundingClientRect().left;
+                const offsetY = y - card.domElement.getBoundingClientRect().top;
 
                 offsets.push({ x: offsetX, y: offsetY });
             }
@@ -115,10 +117,13 @@ export default class Card {
             moveAt(e);
 
             function moveAt(e) {
+                const x = e.pageX;
+                const y = e.pageY;
+
                 for (let i = 0; i < cards.length; i++) {
                     const card = cards[i];
-                    card.domElement.style.left = e.pageX - offsets[i].x + 'px';
-                    card.domElement.style.top = e.pageY - offsets[i].y + 'px';
+                    card.domElement.style.left = x - offsets[i].x + 'px';
+                    card.domElement.style.top = y - offsets[i].y + 'px';
                 }
             }
 
@@ -132,6 +137,81 @@ export default class Card {
 
                 this.tryDrop(columnTemp, cards);
             }
+        }
+    }
+
+    applyMobileInput = function () {
+        const domElement = this.domElement;
+
+        const handleDragStart = (e) => {
+            const columnTemp = this.cardColumn;
+            const touch = e.targetTouches[0];
+
+            const x = touch.clientX;
+            const y = touch.clientY;
+
+            const cards = columnTemp.getCardsFrom(this);
+
+            const canRemove = columnTemp.canRemove && selectedRules.isCanRemove(cards);
+            if (!canRemove) return;
+
+            const offsets = [];
+
+            for (let i = 0; i < cards.length; i++) {
+                const card = cards[i];
+                const offsetX = x - card.domElement.getBoundingClientRect().left;
+                const offsetY = y - card.domElement.getBoundingClientRect().top;
+
+                offsets.push({ x: offsetX, y: offsetY });
+            }
+
+            columnTemp.removeCards(cards);
+
+            const handleDragMove = (e) => {
+                const touch = e.targetTouches[0];
+
+                const x = touch.clientX;
+                const y = touch.clientY;
+
+                console.log(x);
+
+                for (let i = 0; i < cards.length; i++) {
+                    const card = cards[i];
+                    card.domElement.style.left = x - offsets[i].x + 'px';
+                    card.domElement.style.top = y - offsets[i].y + 'px';
+                }
+
+                e.preventDefault();
+            }
+            const handleDrop = (e) => {
+                this.tryDrop(columnTemp, cards);
+
+                domElement.removeEventListener('touchmove', handleDragMove);
+                domElement.removeEventListener('touchend', handleDrop);
+            }
+
+            domElement.addEventListener('touchmove', handleDragMove);
+            domElement.addEventListener('touchend', handleDrop);
+        }
+
+        domElement.addEventListener('touchstart', handleDragStart);
+    }
+
+    subscribeDragAndDrop = () => {
+        const platform = getPlatform();
+        // const platform = Platform.Mobile;
+
+        switch (platform) {
+            case Platform.Desktop:
+                this.applyDesktopInput();
+                break
+            case Platform.TV:
+                this.applyTVInput();
+                break
+            case Platform.Tablet:
+            case Platform.Mobile:
+                this.applyMobileInput();
+                break
         }
     }
 

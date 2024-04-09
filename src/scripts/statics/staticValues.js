@@ -1,5 +1,12 @@
 import { ContentType } from "./enums.js"
 
+const Platform = {
+    Desktop: "desktop",
+    Mobile: "mobile",
+    Tablet: "tablet",
+    TV: "tv",
+}
+
 const AccessibilityFlags = {
     CanPlace: 1,
     CanRemove: 2
@@ -50,4 +57,4 @@ const Content = {
     Background09: { type: ContentType.Background, id: "background_09" },
 }
 
-export { Items, Content }
+export { Items, Content, Platform }
