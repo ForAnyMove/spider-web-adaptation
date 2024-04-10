@@ -56,7 +56,7 @@ function createBackgroundInstance(data) {
     state = Statefull.Equipped;
   }
   const plane = createElement('div', ['background-card'], {
-    backgroundImage: `url(${data.previewPath})`
+    backgroundImage: `url(${data.itemPreviewPath})`
   });
 
   if (state == Statefull.Locked) {
