@@ -1,155 +1,80 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="storyMode.css" />
-    <meta name=”viewport” content=”user-scalable=no” />
-    <title>Story Mode</title>
-  </head>
-  <body>
-    <header>
-      <ul class="header-interface-list">
-        <li class="header-ui-container">
-          <button class="header-navigation-btn">
-            <img
-              src="../../Sprites/Icons/Icon_Arrow_Back.png"
-              alt="Profile"
-              class="header-navigation-list-icon"
-            />
-          </button>
-        </li>
-        <li class="header-ui-container">
-          <div class="energy-counter">
-            <span class="energy-text">8</span>
-            <img src="../../Sprites/Icons/Icon_Energy.png" alt="Energy">
-          </div>
-        </li>
-      </ul>
-    </header>
-    <div class="popup" id="popup">
-      <div class="popup-content">
-        <div class="popup-header">
-          <h3>УРОВЕНЬ 1</h3>
-          <img src="../../Sprites/Icons/Icon_Close.png" alt="close" id="close-popup">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="storyMode.css" />
+  <meta name=”viewport” content=”user-scalable=no” />
+  <title>Story Mode</title>
+</head>
+
+<body>
+  <header>
+    <ul class="header-interface-list">
+      <li class="header-ui-container">
+        <button class="header-navigation-btn">
+          <img src="../../Sprites/Icons/Icon_Arrow_Back.png" alt="Profile" class="header-navigation-list-icon" />
+        </button>
+      </li>
+      <li class="header-ui-container">
+        <div class="energy-counter">
+          <span class="energy-text" id="energy-text">8</span>
+          <img src="../../Sprites/Icons/Icon_Energy.png" alt="Energy">
         </div>
-        <div class="rules-container">
-          <span>Правила</span>
-          <div class="rules-cards-container">
-            <div class="rules-card">
-              <span>Масть</span>
-              <img src="../../Sprites/Icons/Icon_Clubs.png" alt="" class="rules-icon">
-              <span>Одна масть</span>
-            </div>
-            <div class="rules-card">
-              <span>Режим</span>
-              <img src="../../Sprites/Icons/Icon_Spider.png" alt="" class="rules-icon">
-              <span>Масть</span>
-            </div>
-          </div>
-          <div class="level-info">
-            <h3 class="level-info-header">Бустеры на уровне</h3>
-            <div class="boosters-container">
-              <div class="booster-container">
-                <div class="booster">
-                  <img src="../../Sprites/Buttons/Used_plus.png" alt="plus" class="add-booster-icon">
-                  <img src="../../Sprites/Icons/Icon_Undo.png" alt="arrow" class="booster-icon">
-                  <span class="booster-counter">0</span>
-                </div>
-                <span class="booster-title">Отмена хода</span>
-              </div>
-              <div class="booster-container">
-                <div class="booster">
-                  <img src="../../Sprites/Buttons/Used_plus.png" alt="plus" class="add-booster-icon">
-                  <img src="../../Sprites/Icons/Icon_Hint.png" alt="hint" class="booster-icon">
-                  <span class="booster-counter">0</span>
-                </div>
-                <span class="booster-title">Подсказка</span>
-              </div>
-              <div class="booster-container">
-                <div class="booster">
-                  <img src="../../Sprites/Buttons/Used_plus.png" alt="plus" class="add-booster-icon">
-                  <img src="../../Sprites/Icons/Icon_Mage.png" alt="mage" class="booster-icon">
-                  <span class="booster-counter">0</span>
-                </div>
-                <span class="booster-title">Маг</span>
-              </div>
-            </div>
-            <h3 class="rewards-title">Награда</h3>
-            <div class="rewards-container">
-              <div class="rewards">
-                <img src="../../Sprites/Icons/Icon_Trophy.png" alt="rewards" class="rewards-icon">
-                <span class="rewards-title">15</span>
-              </div>
-            </div>
-            <div class="start-btn-container">
-              <button class="start-level-btn" id="ads-btn">
-                <img src="../../Sprites/Icons/Icon_Ads.png" alt="Ads" class="watch-add-icon">
-                <span class="start-level-btn-title">Бесплатно</span>
-                <div class="interactive-btn-info">
-                  <span class="btn-info-value">5</span>
-                  <img src="../../Sprites/Icons/Icon_Energy.png" alt="" class="btn-info-icon">
-                </div>
-              </button>
-              <button class="start-level-btn" id="play-btn">
-                <span class="start-level-btn-title">Играть</span>
-                <div class="interactive-btn-info">
-                  <span class="btn-info-value">1</span>
-                  <img src="../../Sprites/Icons/Icon_Energy.png" alt="" class="btn-info-icon">
-                </div>
-              </button>
-            </div>
-          </div>
-        </div>
+      </li>
+    </ul>
+  </header>
+  <div class="popup hidden-popup" id="popup">
+  </div>
+  <main>
+    <div class="story-map-container">
+      <div class="levels-axis first-axis">
+        <button class="level-btn closed" id="level-btn-29"></button>
+        <button class="level-btn closed" id="level-btn-21"></button>
+        <button class="level-btn closed" id="level-btn-13"></button>
+        <button class="level-btn closed" id="level-btn-5"></button>
+        <button class="level-btn" id="level-btn-1">1</button>
+        <button class="level-btn closed" id="level-btn-9"></button>
+        <button class="level-btn closed" id="level-btn-17"></button>
+        <button class="level-btn closed" id="level-btn-25"></button>
+        <button class="level-btn closed" id="level-btn-33"></button>
+      </div>
+      <div class="levels-axis second-axis">
+        <button class="level-btn closed" id="level-btn-30"></button>
+        <button class="level-btn closed" id="level-btn-22"></button>
+        <button class="level-btn closed" id="level-btn-14"></button>
+        <button class="level-btn closed" id="level-btn-6"></button>
+        <button class="level-btn closed" id="level-btn-2"></button>
+        <button class="level-btn closed" id="level-btn-10"></button>
+        <button class="level-btn closed" id="level-btn-18"></button>
+        <button class="level-btn closed" id="level-btn-26"></button>
+        <button class="level-btn closed" id="level-btn-34"></button>
+      </div>
+      <div class="levels-axis third-axis">
+        <button class="level-btn closed" id="level-btn-31"></button>
+        <button class="level-btn closed" id="level-btn-23"></button>
+        <button class="level-btn closed" id="level-btn-15"></button>
+        <button class="level-btn closed" id="level-btn-7"></button>
+        <button class="level-btn closed" id="level-btn-3"></button>
+        <button class="level-btn closed" id="level-btn-11"></button>
+        <button class="level-btn closed" id="level-btn-19"></button>
+        <button class="level-btn closed" id="level-btn-27"></button>
+        <button class="level-btn closed" id="level-btn-35"></button>
+      </div>
+      <div class="levels-axis fourth-axis">
+        <button class="level-btn closed" id="level-btn-32"></button>
+        <button class="level-btn closed" id="level-btn-24"></button>
+        <button class="level-btn closed" id="level-btn-16"></button>
+        <button class="level-btn closed" id="level-btn-8"></button>
+        <button class="level-btn closed" id="level-btn-4"></button>
+        <button class="level-btn closed" id="level-btn-12"></button>
+        <button class="level-btn closed" id="level-btn-20"></button>
+        <button class="level-btn closed" id="level-btn-28"></button>
       </div>
     </div>
-    <main>
-      <div class="story-map-container">
-        <div class="levels-axis first-axis">
-          <button class="level-btn closed" id="level-btn-29"></button>
-          <button class="level-btn closed" id="level-btn-21"></button>
-          <button class="level-btn closed" id="level-btn-13"></button>
-          <button class="level-btn closed" id="level-btn-5"></button>
-          <button class="level-btn" id="level-btn-1">1</button>
-          <button class="level-btn closed" id="level-btn-9"></button>
-          <button class="level-btn closed" id="level-btn-17"></button>
-          <button class="level-btn closed" id="level-btn-25"></button>
-          <button class="level-btn closed" id="level-btn-33"></button>
-        </div>
-        <div class="levels-axis second-axis">
-          <button class="level-btn closed" id="level-btn-30"></button>
-          <button class="level-btn closed" id="level-btn-22"></button>
-          <button class="level-btn closed" id="level-btn-14"></button>
-          <button class="level-btn closed" id="level-btn-6"></button>
-          <button class="level-btn closed" id="level-btn-2"></button>
-          <button class="level-btn closed" id="level-btn-10"></button>
-          <button class="level-btn closed" id="level-btn-18"></button>
-          <button class="level-btn closed" id="level-btn-26"></button>
-          <button class="level-btn closed" id="level-btn-34"></button>
-        </div>
-        <div class="levels-axis third-axis">
-          <button class="level-btn closed" id="level-btn-31"></button>
-          <button class="level-btn closed" id="level-btn-23"></button>
-          <button class="level-btn closed" id="level-btn-15"></button>
-          <button class="level-btn closed" id="level-btn-7"></button>
-          <button class="level-btn closed" id="level-btn-3"></button>
-          <button class="level-btn closed" id="level-btn-11"></button>
-          <button class="level-btn closed" id="level-btn-19"></button>
-          <button class="level-btn closed" id="level-btn-27"></button>
-          <button class="level-btn closed" id="level-btn-35"></button>
-        </div>
-        <div class="levels-axis fourth-axis">
-          <button class="level-btn closed" id="level-btn-32"></button>
-          <button class="level-btn closed" id="level-btn-24"></button>
-          <button class="level-btn closed" id="level-btn-16"></button>
-          <button class="level-btn closed" id="level-btn-8"></button>
-          <button class="level-btn closed" id="level-btn-4"></button>
-          <button class="level-btn closed" id="level-btn-12"></button>
-          <button class="level-btn closed" id="level-btn-20"></button>
-          <button class="level-btn closed" id="level-btn-28"></button>
-        </div>
-      </div>
-    </main>
-    <script src="storyMode.js"></script>
-  </body>
+  </main>
+  <script type="module" src="storyMode.js"></script>
+</body>
+
 </html>

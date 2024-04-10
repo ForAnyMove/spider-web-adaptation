@@ -1,6 +1,6 @@
 import { trialLevelDatabase } from "../scripts/data/level_databases.js";
 import { createButton, createElement, createHSpace, createImage, createTextH3, createTextP, createTextSpan, createVSpace, getIconByContent, getIconByItem, getIconByPattern, getIconBySuit, getPatternName, getSuitName } from "../scripts/helpers.js";
-import { IconsByItem, Items } from "../scripts/statics/staticValues.js";
+import { Items } from "../scripts/statics/staticValues.js";
 import { user } from "../scripts/userData.js";
 
 user.addItem(Items.BoosterHint, 10);
@@ -18,11 +18,9 @@ function createBooster(itemType, title, user, parent) {
         const div = createElement('div', ['booster'], null, plane);
         {
             createButton(['add-booster-icon'], {
-                border: 'none',
                 background: 'no-repeat',
                 backgroundImage: 'url(../../Sprites/Buttons/Used_plus.png)',
                 backgroundSize: '100% 100%',
-                height: '3vh'
             }, div, () => {
                 user.addItem(itemType);
             });
@@ -134,6 +132,7 @@ function createUnlockedLevelInstance(data) {
             {
                 const startButton = createButton(['start-level-btn'], null, levelStartContainer, () => {
 
+                    // TODO: level scene starting with ID parameter
                 });
                 startButton.id = 'play-btn';
                 {

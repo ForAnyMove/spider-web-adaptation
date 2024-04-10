@@ -259,10 +259,12 @@ header {
 }
 
 .add-booster-icon {
+  border: none;
   position: absolute;
   top: -20%;
   right: -20%;
   width: 3vh;
+  height: 3vh;
 }
 
 .booster-counter {

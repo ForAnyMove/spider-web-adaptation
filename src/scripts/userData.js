@@ -327,12 +327,12 @@ class User {
 
     removeItem = function (type, count) {
         for (let i = 0; i < this.items.length; i++) {
-            if (this.items[i].type == type) {
+            if (this.items[i].type == type && this.items[i].count > 0) {
                 this.items[i].count -= count;
 
-                if (this.items[i].count <= 0) {
-                    this.items.splice(this.items.indexOf(this.items[i]), 1);
-                }
+                // if (this.items[i].count <= 0) {
+                //     this.items.splice(this.items.indexOf(this.items[i]), 1);
+                // }
 
                 this.itemListUpdateEvent.invoke(this.items);
                 return;
