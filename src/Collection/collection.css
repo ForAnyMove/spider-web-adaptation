@@ -13,7 +13,7 @@ body {
 }
 
 body {
-  background-image: url('../../Sprites/Story Mode/Used_Frame 5.png');
+  background-image: url('../../Sprites/Backgrounds/Background_MainMenu.jpg');
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
@@ -24,11 +24,17 @@ body {
   min-width: 100%;
   -ms-overflow-style: none;
   scrollbar-width: 0;
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
+    Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 }
 
 body::-webkit-scrollbar {
   width: 0;
+}
+
+.back-to{
+  display: block;
+  width: min-content;
 }
 
 header {
@@ -49,9 +55,9 @@ header {
 
 .header-navigation-btn,
 .level-btn {
-  width: 5vw;
-  height: 5vw;
-  margin: .5vw;
+  width: 4.5vw;
+  height: 4.5vw;
+  margin: 0.5vw;
   background: url('../../Sprites/Buttons/Used_Button_01.png');
   background-size: cover;
   border-radius: 50%;
@@ -62,8 +68,8 @@ header {
 }
 
 .header-navigation-list-icon {
-  width: 3vw;
-  margin-top: 15%;
+  width: 2.5vw;
+  margin-top: 20%;
 }
 
 /* cards container */
@@ -74,14 +80,19 @@ main {
 }
 
 .collection-navigation {
-  background: #E1569E;
-  background: -moz-linear-gradient(top, #E1569E 0%, #CA39A1 50%, #A420A2 100%);
-  background: -webkit-linear-gradient(top, #E1569E 0%, #CA39A1 50%, #A420A2 100%);
-  background: linear-gradient(to bottom, #E1569E 0%, #CA39A1 50%, #A420A2 100%);
+  background: #e1569e;
+  background: -moz-linear-gradient(top, #e1569e 0%, #ca39a1 50%, #a420a2 100%);
+  background: -webkit-linear-gradient(
+    top,
+    #e1569e 0%,
+    #ca39a1 50%,
+    #a420a2 100%
+  );
+  background: linear-gradient(to bottom, #e1569e 0%, #ca39a1 50%, #a420a2 100%);
   border-radius: 2vh;
 }
 
-.collection-navigation>ul {
+.collection-navigation > ul {
   display: flex;
   justify-content: space-around;
   list-style-type: none;
@@ -96,22 +107,24 @@ main {
 
 .categories-btn {
   width: 90%;
-  color: #FFF6C6;
+  color: #fff6c6;
   background: none;
   border: none;
-  font-size: 1.7vw;
+  font-size: 1.5vw;
   padding: 1vh;
   margin: 1vh auto;
+  box-sizing: border-box;
   position: relative;
 }
 
 .categories-btn:hover {
   border: 1px solid #42e0e0;
   border-radius: 2vh;
+  margin-top: -1px;
+  margin-bottom: -1px;
 }
 
 .active-btn {
-  /* border: 1px solid #42e0e0; */
   border-radius: 2vh;
 }
 
@@ -122,7 +135,7 @@ main {
   left: 50%;
   font-size: 6vh;
   transform: translate(-50%);
-  color: #FFF6C6;
+  color: #fff6c6;
 }
 
 .collection-pick-area {
@@ -130,18 +143,18 @@ main {
   border-radius: 2vh;
   border: 1px solid #ffffff49;
   min-height: 20vh;
+  max-height: 83vh;
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-between;
+  justify-content: center;
   margin-bottom: 10vh;
   -webkit-box-shadow: 5px 5px 5px -5px #000000;
   box-shadow: 5px 5px 5px -5px #000000;
-  overflow-y: scroll;
   scrollbar-width: none;
   -ms-overflow-style: none;
-  width: 80%;
-  height: 100%;
-  padding: 0 10%;
+  width: 96%;
+  padding: 0 2%;
+  overflow-y: scroll;
 }
 
 .lock-mask {
@@ -156,12 +169,8 @@ main {
   border-radius: 2vh;
 }
 
-.space {
-  height: 2vw;
-}
-
 .mask-title {
-  color: #FFF6C6;
+  color: #fff6c6;
   font-size: 1.6vh;
   font-weight: bold;
   text-align: center;
@@ -169,6 +178,7 @@ main {
 
 .card-skin {
   width: 22vh;
+  margin: 0 2vw;
 }
 
 .trophy-skin {
@@ -275,7 +285,7 @@ main {
   padding: 0 2vh 0.7vh 2vh;
 }
 
-#pick-area-2>.start-level-btn {
+#pick-area-2 > .start-level-btn {
   width: 100%;
 }
 
@@ -300,7 +310,6 @@ main {
   .collection-navigation {
     margin-bottom: 2vh;
   }
-
 }
 
 @media screen and (orientation: portrait) {
@@ -311,7 +320,40 @@ main {
   }
 
   .header-navigation-list-icon {
-    width: 10vw;
+    width: 9vw;
+    margin-top: 20%;
+  }
+  main {
+    width: 90vw;
+  }
+  .categories-btn {
+    font-size: 4.5vw;
+  }
+  .active-btn::after {
+    font-size: 4vh;
+  }
+  .collection-navigation {
+    border-radius: 1vh;
+    margin-bottom: 2vh;
+    box-shadow: 0px 3px 5px 2px #0000007d;
+  }
+  .skin-card, .skin-card-back, .trophy-card {
+    width: 15vh;
+  }
+  .skin-card-back, .trophy-card{
+    height: 20vh;
+  }
+  .card-skin{
+    width: 20vh;
+  }
+  .check-icon{
+    width: 6vh;
+  }
+  #play-btn{
+    font-size: 1.5vh;
+  }
+  .mask-title{
+    font-size: 1.4vh;
   }
 }
 
