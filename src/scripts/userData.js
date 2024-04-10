@@ -315,6 +315,14 @@ class User {
 
         return false;
     }
+    getItemCount = function (itemType) {
+        for (let i = 0; i < this.items.length; i++) {
+            const element = this.items[i];
+            if (element.type == itemType) {
+                return element.count;
+            }
+        }
+    }
 
     removeItem = function (type, count) {
         for (let i = 0; i < this.items.length; i++) {

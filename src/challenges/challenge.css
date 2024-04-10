@@ -1,17 +1,22 @@
-*{
+* {
   margin: 0;
   padding: 0;
 }
+
 @viewport {
   user-zoom: fixed;
 }
-html, body{
+
+html,
+body {
   height: 100%;
 }
-.hidden{
+
+.hidden {
   visibility: hidden;
 }
-body{
+
+body {
   background-image: url('../../Sprites/Story Mode/Used_Frame 5.png');
   background-size: cover;
   background-repeat: no-repeat;
@@ -25,23 +30,29 @@ body{
   scrollbar-width: 0;
   font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 }
+
 body::-webkit-scrollbar {
   width: 0;
 }
-header{
+
+header {
   width: 100%;
   z-index: 100;
 }
-.header-interface-list{
+
+.header-interface-list {
   display: flex;
   justify-content: space-between;
   list-style-type: none;
 }
-.header-ui-container{
+
+.header-ui-container {
   display: flex;
   flex-direction: column;
 }
-.header-navigation-btn, .level-btn {
+
+.header-navigation-btn,
+.level-btn {
   width: 5vw;
   height: 5vw;
   margin: .5vw;
@@ -53,11 +64,13 @@ header{
   justify-content: center;
   align-items: start;
 }
+
 .header-navigation-list-icon {
   width: 3vw;
   margin-top: 15%;
 }
-.energy-counter{
+
+.energy-counter {
   display: flex;
   justify-content: center;
   background-image: url('../../Sprites/Frames/Used_Frame_12.png');
@@ -66,13 +79,15 @@ header{
   margin: 1.5vw;
   width: 3vw;
 }
-.energy-text{
+
+.energy-text {
   color: #FFF6C6;
   font-weight: bold;
   font-size: 1.5vw;
   padding-right: 1vw;
 }
-.energy-counter>img{
+
+.energy-counter>img {
   width: 2.5vw;
   position: absolute;
   right: -1vw;
@@ -103,36 +118,42 @@ header{
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  -webkit-box-shadow: 5px 5px 15px -5px #000000; 
+  -webkit-box-shadow: 5px 5px 15px -5px #000000;
   box-shadow: 5px 5px 15px -5px #000000;
   margin: 0 2vh;
   scroll-snap-align: center;
 }
-.closed-card{
+
+.closed-card {
   height: 65vh;
   background-image: url('../../Sprites/Frames/Used_Frame_11_3.png');
-  border: 1px solid #000 ;
+  border: 1px solid #000;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
 }
-.completed-card{
+
+.completed-card {
   height: 65vh;
   background-image: none;
   background-color: #044802;
-  border: 1px solid #000 ;
+  border: 1px solid #000;
 }
-.check-icon, .lock-icon{
+
+.check-icon,
+.lock-icon {
   width: 10vh;
 }
-.lock-screen-info, .check-info{
+
+.lock-screen-info,
+.check-info {
   font-size: 3vh;
   text-align: center;
   color: #FFF6C6;
 }
 
-.challenge-header{
+.challenge-header {
   background-image: url('../../Sprites/Frames/Used_Frame_08.png');
   background-size: 100% 100%;
   display: flex;
@@ -143,33 +164,39 @@ header{
   position: relative;
   text-align: center;
 }
-.challenge-header>h3{
+
+.challenge-header>h3 {
   color: #FFF6C6;
   font-size: 2.5vh;
   margin-top: 1vh;
 }
-.challenge-header>p{
+
+.challenge-header>p {
   color: #FFF6C6;
   font-weight: 500;
   font-size: 1.5vh;
   margin-bottom: 1.5vh;
 }
-.rules-container{
+
+.rules-container {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
 }
-.rules-container>span{
+
+.rules-container>span {
   color: #FFF6C6;
   font-weight: bold;
   font-size: 2vh;
 }
-.rules-cards-container{
+
+.rules-cards-container {
   display: flex;
 
 }
-.rules-card{
+
+.rules-card {
   display: flex;
   width: 13vh;
   flex-direction: column;
@@ -179,78 +206,98 @@ header{
   background-size: 120% 120%;
   background-position: center;
 }
-.rules-card>span{
+
+.rules-card>span {
   color: #FFF6C6;
   font-weight: bold;
   font-size: 1.6vh;
   padding: 1.8vh 0;
 }
-.rules-icon{
+
+.rules-icon {
   width: 8.5vh;
-  margin: -3vh auto;
+  margin: -2.8vh auto;
 }
-.level-info{
+
+.level-info {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
 }
-.level-info-header{
+
+.level-info-header {
   color: #FFF6C6;
   font-weight: bold;
   font-size: 2.2vh;
   padding-top: 2.5vh;
 }
-.boosters-container{
+
+.boosters-container {
   padding-top: 1vh;
   display: flex;
 }
-.booster-container{
+
+.booster-container {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   margin: 0.5vh;
 }
-.booster{
+
+.booster {
   background-image: url('../../Sprites/Frames/Used_Frame_17.png');
-  background-size: 100% 100%; 
+  background-size: 100% 100%;
   position: relative;
   width: 8vh;
-  height: 8vh;
+  height: 7.6vh;
   display: flex;
   justify-content: center;
   align-items: center;
+  padding-bottom: 0.5vh;
 }
-.add-booster-icon{
+
+.add-booster-icon {
   position: absolute;
   top: -20%;
   right: -20%;
   width: 3vh;
 }
-.booster-counter{
+
+.booster-counter {
   position: absolute;
   bottom: 0.8vh;
   right: 0.8vh;
 }
-.booster-title, .booster-counter{
-  color: #FFF6C6;
-  font-weight: bold;
+
+.booster-title,
+.booster-counter {
+  color: #FFF6C6cc;
+  font-weight: 600;
   font-size: 1.6vh;
 }
-.booster-icon{
+
+.booster-title {
+  text-align: center;
+}
+
+.booster-icon {
   width: 6vh;
 }
-.rewards-title{
-  color: #FFF6C6;
+
+.rewards-title {
+  color: #FFF6C6cc;
   font-weight: 500;
   font-size: 2vh;
   margin-bottom: 3.2vh;
 }
-.rewards-container{
+
+.rewards-container {
   display: flex;
 }
-.rewards{
+
+.rewards {
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
@@ -261,16 +308,19 @@ header{
   height: 8vh;
   margin-bottom: 1.5vh;
 }
-.rewards-icon{
+
+.rewards-icon {
   width: 7vh;
   margin-top: -2.5vh;
 }
-.start-btn-container{
+
+.start-btn-container {
   display: flex;
   justify-content: space-evenly;
   align-items: center;
 }
-.start-level-btn{
+
+.start-level-btn {
   border-radius: 30px;
   width: 21vh;
   height: 8vh;
@@ -280,44 +330,52 @@ header{
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 0 1.5vh 1.1vh 3vh;
+  padding: 0 1.5vh 1.1vh 1.5vh;
 }
-.start-level-btn-title{
+
+.start-level-btn-title {
   font-weight: bold;
-  color: #00000049;
+  color: #892C0088;
 }
-#play-btn{
+
+#play-btn {
   background-image: url('../../Sprites/Buttons/Used_Button_03.png');
   font-size: 2.5vh;
 }
-.interactive-btn-info{
+
+.interactive-btn-info {
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
-@media screen and (orientation: landscape ) {
-  .story-map-container{
+@media screen and (orientation: landscape) {
+  .story-map-container {
     scale: calc(1 - 0.1 + 1 / 10);
   }
 }
-@media screen and (orientation: portrait ) {
-  .header-navigation-btn{
+
+@media screen and (orientation: portrait) {
+  .header-navigation-btn {
     width: 17vw;
     height: 17vw;
     margin: 2vw;
   }
-  .header-navigation-list-icon{
+
+  .header-navigation-list-icon {
     width: 10vw;
   }
-  .energy-counter{
+
+  .energy-counter {
     width: 9vw;
     margin: 3vw;
   }
-  .energy-text{
+
+  .energy-text {
     font-size: 4vw;
   }
-  .energy-counter>img{
+
+  .energy-counter>img {
     width: 8vw;
     right: -3vw;
     top: -1vw;

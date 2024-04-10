@@ -31,6 +31,11 @@ const IconsByItem = [
     { type: Items.BoosterUndo, url: '../../Sprites/Icons/Icon_Undo.png' },
     { type: Items.BoosterMage, url: '../../Sprites/Icons/Icon_Mage.png' },
     { type: Items.BoosterTime, url: '../../Sprites/Icons/Icon_Time.png' },
+    { type: Items.Trophy01, url: '../../Sprites/Trophies/Trophy_01.png' },
+    { type: Items.Trophy02, url: '../../Sprites/Trophies/Trophy_02.png' },
+    { type: Items.Trophy03, url: '../../Sprites/Trophies/Trophy_03.png' },
+    { type: Items.Trophy05, url: '../../Sprites/Trophies/Trophy_04.png' },
+    { type: Items.Trophy05, url: '../../Sprites/Trophies/Trophy_05.png' },
 ]
 
 const Content = {

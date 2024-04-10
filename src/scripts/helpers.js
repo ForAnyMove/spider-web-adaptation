@@ -1,3 +1,7 @@
+import { backSkinDatabase, backgroundDatabase, skinDatabase } from "./data/card_skin_database.js"
+import { Pattern, SuitMode } from "./statics/enums.js"
+import { IconsByItem } from "./statics/staticValues.js"
+
 function createItem(type, count) {
     return {
         type: type,
@@ -7,9 +11,8 @@ function createItem(type, count) {
 
 function createDeckTrial(count) {
     return {
-        levelTrial: {
-            decksToComplete: count
-        }
+        decksToComplete: count,
+        description: `Соберите ${count} колоды, чтобы завершить испытание`,
     }
 }
 
@@ -21,7 +24,7 @@ function createTrialLevel(order, type, state, rule, rewards, time, levelTrial) {
         gameRule: rule,
         rewards: rewards,
         time: time,
-        levelTrial: levelTrial
+        trial: levelTrial
     }
 }
 
@@ -64,6 +67,67 @@ function secondsToTime(seconds) {
     timeString += remainingSeconds.toString().padStart(2, '0');
 
     return timeString;
+}
+
+function getIconByItem(itemType) {
+    for (let i = 0; i < IconsByItem.length; i++) {
+        const element = IconsByItem[i];
+        if (element.type == itemType) {
+            return element.url;
+        }
+    }
+}
+
+function getIconByContent(id) {
+    for (let i = 0; i < skinDatabase.skinList.length; i++) {
+        const element = skinDatabase.skinList[i];
+        if (element.id == id) {
+            return element.itemPreviewPath;
+        }
+    }
+    for (let i = 0; i < backSkinDatabase.skinList.length; i++) {
+        const element = backSkinDatabase.skinList[i];
+        if (element.id == id) {
+            return element.itemPreviewPath;
+        }
+    }
+    for (let i = 0; i < backgroundDatabase.skinList.length; i++) {
+        const element = backgroundDatabase.skinList[i];
+        if (element.id == id) {
+            return element.itemPreviewPath;
+        }
+    }
+}
+
+
+function getSuitName(suit) {
+    switch (suit) {
+        case SuitMode.OneSuit: return 'Одна масть'
+        case SuitMode.TwoSuits: return 'Две масти'
+        case SuitMode.FourSuits: return 'Четыре масти'
+    }
+}
+
+function getIconBySuit(suit) {
+    switch (suit) {
+        case SuitMode.OneSuit: return '../../Sprites/Icons/Icon_OneSuit.png'
+        case SuitMode.TwoSuits: return '../../Sprites/Icons/Icon_TwoSuits.png'
+        case SuitMode.FourSuits: return '../../Sprites/Icons/Icon_FourSuits.png'
+    }
+}
+
+function getPatternName(pattern) {
+    switch (pattern) {
+        case Pattern.Spider: return 'Паук'
+        case Pattern.SpiderLady: return 'Паучиха'
+    }
+}
+
+function getIconByPattern(pattern) {
+    switch (pattern) {
+        case Pattern.Spider: return '../../Sprites/Icons/Icon_Spider.png'
+        case Pattern.SpiderLady: return '../../Sprites/Icons/Icon_Spider_L.png'
+    }
 }
 
 function createElement(id, classList, styleList, parent) {
@@ -122,4 +186,41 @@ function createTextSpan(classList, styleList, parent, text) {
     return element;
 }
 
-export { createElement, createButton, createImage, createTextP, createTextSpan, shuffle, createItem, createDeckTrial, createTrialLevel, createStoryLevel, createLevelCompleteRequirement, secondsToTime }
+function createTextH3(classList, styleList, parent, text) {
+    const element = createElement('h3', classList, styleList, parent);
+    element.innerText = text;
+    return element;
+}
+
+function createHSpace(width, parent) {
+    const element = createElement('h3', null, { width: width }, parent);
+    return element;
+}
+
+function createVSpace(height, parent) {
+    const element = createElement('h3', null, { height: height }, parent);
+    return element;
+}
+
+export {
+    createElement,
+    createTextH3,
+    createButton, createImage,
+    createTextP,
+    createTextSpan,
+    createHSpace,
+    shuffle,
+    createItem,
+    createDeckTrial,
+    createTrialLevel,
+    createStoryLevel,
+    createLevelCompleteRequirement,
+    secondsToTime,
+    getSuitName,
+    getPatternName,
+    getIconByPattern,
+    getIconBySuit,
+    getIconByItem,
+    getIconByContent,
+    createVSpace
+}
