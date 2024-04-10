@@ -6,3 +6,4 @@ window.addEventListener('load', () => {
     mask.remove()
   }, 600);
 })
+

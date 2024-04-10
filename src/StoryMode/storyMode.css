@@ -290,13 +290,6 @@ main{
   margin-right: 1vw;
 }
 
-.close {
-  position: absolute;
-  top: 10px;
-  right: 10px;
-  cursor: pointer;
-}
-
 /* pop-us visual */
 
 .booster-icon, .rules-icon, .btn-info-icon, .rewards-icon{

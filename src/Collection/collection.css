@@ -51,8 +51,8 @@ header{
   align-items: start;
 }
 .header-navigation-list-icon {
-  width: 3vw;
-  margin-top: 15%;
+  width: 2.5vw;
+  margin-top: 20%;
 }
 
 /* cards container */
@@ -113,16 +113,14 @@ main{
   min-height: 20vh;
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-between;
   margin-bottom: 10vh;
   -webkit-box-shadow: 5px 5px 5px -5px #000000; 
   box-shadow: 5px 5px 5px -5px #000000;
   overflow-y: scroll;
   scrollbar-width: none;
   -ms-overflow-style: none;
-  width: 80%;
-  height: 100%;
-  padding: 0 10%;
+  width: 96%;
+  padding: 0 2%;
 }
 .lock-mask{
   position: absolute;
@@ -137,12 +135,12 @@ main{
 }
 .mask-title{
   color: #FFF6C6;
-  font-size: 1.6vh;
+  font-size: 1.4vh;
   font-weight: bold;
   text-align: center;
 }
 .card-skin{
-  width: 22vh;
+  width: 20vh;
 }
 .trophy-skin{
   width: 15vh;
@@ -152,7 +150,7 @@ main{
   background-image: url('../../Sprites/Frames/Used_Frame_04.png');
   background-size: 150%;
   background-position: center;
-  width: 18vh;
+  width: 15vh;
   border-radius: 2vh;
   border: 0.1vh solid #18ed00;
   display: flex;
@@ -165,13 +163,13 @@ main{
   position: relative;
 }
 .skin-card-back {
-  height: 25vh;
+  height: 23vh;
   justify-content: flex-end;
   background-image: url('../../Sprites/Card Backs/Card_Backs.png');
 }
 .background-card {
   height: 20vh;
-  width: 36vh;
+  width: 34vh;
   justify-content: flex-end;
   background-image: url('../../Sprites/Card Backs/Card_Backs.png');
 }
@@ -206,7 +204,7 @@ main{
   background-image: url('../../Sprites/Backgrounds/Release/Background_09.png');
 }
 .check-icon, .lock-icon{
-  width: 7vh;
+  width: 5.5vh;
   z-index: 10;
 }
 .tonned{
@@ -220,7 +218,8 @@ main{
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 0 1.5vh 1.1vh 3vh;
+  padding: 0 2vh 1.1vh;
+  margin: 0 2vh;
 }
 #pick-area-2>.start-level-btn{
   width: 100%;
@@ -232,7 +231,7 @@ main{
 }
 #play-btn{
   background-image: url('../../Sprites/Buttons/Used_Button_03.png');
-  font-size: 1.8vh;
+  font-size: 1.5vh;
 }
 .interactive-btn-info{
   display: flex;
@@ -254,6 +253,9 @@ main{
   }
   .header-navigation-list-icon{
     width: 10vw;
+  }
+  .collection-pick-area{
+    
   }
 }
 
