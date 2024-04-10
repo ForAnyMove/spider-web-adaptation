@@ -38,7 +38,7 @@ function createStoryLevel(order, type, state, rule, rewards, pass, lvReq) {
 }
 
 function createLevelCompleteRequirement(type, order) {
-    return { type, order }
+    return { type: type, order: order }
 }
 
 function shuffle(array) {
@@ -66,4 +66,60 @@ function secondsToTime(seconds) {
     return timeString;
 }
 
-export { shuffle, createItem, createDeckTrial, createTrialLevel, createStoryLevel, createLevelCompleteRequirement, secondsToTime }
+function createElement(id, classList, styleList, parent) {
+    const element = document.createElement(id);
+
+    if (element == null) return null;
+
+    if (classList != null) {
+        for (let i = 0; i < classList.length; i++) {
+            if (classList[i] === '') continue;
+
+            element.classList.add(classList[i]);
+        }
+    }
+
+    if (styleList != null) {
+        const keys = Object.keys(styleList);
+        for (let i = 0; i < keys.length; i++) {
+            element.style[keys[i]] = styleList[keys[i]];
+        }
+    }
+
+    if (parent != null) {
+        parent.appendChild(element);
+    }
+
+    return element;
+}
+
+function createImage(classList, styleList, parent, src) {
+    const element = createElement('img', classList, styleList, parent);
+    element.src = src;
+
+    return element;
+}
+
+function createButton(classList, styleList, parent, onClick) {
+    const element = createElement('button', classList, styleList, parent);
+    if (onClick != null) {
+        element.onclick = function () {
+            onClick();
+        }
+    }
+    return element;
+}
+
+function createTextP(classList, styleList, parent, text) {
+    const element = createElement('p', classList, styleList, parent);
+    element.innerText = text;
+    return element;
+}
+
+function createTextSpan(classList, styleList, parent, text) {
+    const element = createElement('span', classList, styleList, parent);
+    element.innerText = text;
+    return element;
+}
+
+export { createElement, createButton, createImage, createTextP, createTextSpan, shuffle, createItem, createDeckTrial, createTrialLevel, createStoryLevel, createLevelCompleteRequirement, secondsToTime }

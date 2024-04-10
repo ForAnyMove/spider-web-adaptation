@@ -53,7 +53,7 @@ class Croupier {
 
                 const dist = distributions[0];
                 const card = mc.cards[mc.cards.length - 1];
-                pc[dist.column].translateCardsToColumnWithOffset([card], null, { opened: 0, closed: 0 }, { opened: 1.25, closed: 0.5 }, { affectInteraction: false, addCards: true, openOnFinish: dist.opened });
+                pc[dist.column].translateCardsToColumnWithOffset([card], null, { opened: 0, closed: 0 }, { opened: null, closed: null }, { affectInteraction: false, addCards: true, openOnFinish: dist.opened });
                 distributions.splice(0, 1);
 
                 time = 0;

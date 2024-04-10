@@ -241,7 +241,7 @@ class User {
         }
     }
 
-    addItem = function (type, count) {
+    addItem = function (type, count = 1) {
         if (type == null || count == null) return;
 
         for (let i = 0; i < this.items.length; i++) {

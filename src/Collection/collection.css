@@ -1,14 +1,18 @@
-*{
+* {
   margin: 0;
   padding: 0;
 }
+
 @viewport {
   user-zoom: fixed;
 }
-html, body{
+
+html,
+body {
   height: 100%;
 }
-body{
+
+body {
   background-image: url('../../Sprites/Story Mode/Used_Frame 5.png');
   background-size: cover;
   background-repeat: no-repeat;
@@ -22,23 +26,29 @@ body{
   scrollbar-width: 0;
   font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 }
+
 body::-webkit-scrollbar {
   width: 0;
 }
-header{
+
+header {
   width: 100%;
   z-index: 100;
 }
-.header-interface-list{
+
+.header-interface-list {
   display: flex;
   justify-content: space-between;
   list-style-type: none;
 }
-.header-ui-container{
+
+.header-ui-container {
   display: flex;
   flex-direction: column;
 }
-.header-navigation-btn, .level-btn {
+
+.header-navigation-btn,
+.level-btn {
   width: 5vw;
   height: 5vw;
   margin: .5vw;
@@ -50,36 +60,41 @@ header{
   justify-content: center;
   align-items: start;
 }
+
 .header-navigation-list-icon {
-  width: 2.5vw;
-  margin-top: 20%;
+  width: 3vw;
+  margin-top: 15%;
 }
 
 /* cards container */
 
-main{
+main {
   width: 97vw;
   overflow: hidden;
 }
-.collection-navigation{
+
+.collection-navigation {
   background: #E1569E;
   background: -moz-linear-gradient(top, #E1569E 0%, #CA39A1 50%, #A420A2 100%);
   background: -webkit-linear-gradient(top, #E1569E 0%, #CA39A1 50%, #A420A2 100%);
   background: linear-gradient(to bottom, #E1569E 0%, #CA39A1 50%, #A420A2 100%);
   border-radius: 2vh;
 }
-.collection-navigation>ul{
+
+.collection-navigation>ul {
   display: flex;
   justify-content: space-around;
   list-style-type: none;
 }
-.categories-btn-container{
+
+.categories-btn-container {
   width: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
 }
-.categories-btn{
+
+.categories-btn {
   width: 90%;
   color: #FFF6C6;
   background: none;
@@ -89,15 +104,18 @@ main{
   margin: 1vh auto;
   position: relative;
 }
-.categories-btn:hover{
+
+.categories-btn:hover {
   border: 1px solid #42e0e0;
   border-radius: 2vh;
 }
-.active-btn{
-  border: 1px solid #42e0e0;
+
+.active-btn {
+  /* border: 1px solid #42e0e0; */
   border-radius: 2vh;
 }
-.active-btn::after{
+
+.active-btn::after {
   content: '___';
   position: absolute;
   bottom: -1vh;
@@ -106,6 +124,7 @@ main{
   transform: translate(-50%);
   color: #FFF6C6;
 }
+
 .collection-pick-area {
   background-color: #ffffff49;
   border-radius: 2vh;
@@ -113,16 +132,19 @@ main{
   min-height: 20vh;
   display: flex;
   flex-wrap: wrap;
+  justify-content: space-between;
   margin-bottom: 10vh;
-  -webkit-box-shadow: 5px 5px 5px -5px #000000; 
+  -webkit-box-shadow: 5px 5px 5px -5px #000000;
   box-shadow: 5px 5px 5px -5px #000000;
   overflow-y: scroll;
   scrollbar-width: none;
   -ms-overflow-style: none;
-  width: 96%;
-  padding: 0 2%;
+  width: 80%;
+  height: 100%;
+  padding: 0 10%;
 }
-.lock-mask{
+
+.lock-mask {
   position: absolute;
   width: calc(100% + 2px);
   height: calc(100% + 2px);
@@ -133,84 +155,116 @@ main{
   justify-content: center;
   border-radius: 2vh;
 }
-.mask-title{
+
+.space {
+  height: 2vw;
+}
+
+.mask-title {
   color: #FFF6C6;
-  font-size: 1.4vh;
+  font-size: 1.6vh;
   font-weight: bold;
   text-align: center;
 }
-.card-skin{
-  width: 20vh;
+
+.card-skin {
+  width: 22vh;
 }
-.trophy-skin{
+
+.trophy-skin {
   width: 15vh;
 }
-.skin-card, .skin-card-back, .background-card, .trophy-card {
+
+.skin-card,
+.skin-card-back,
+.background-card,
+.trophy-card {
   background-color: #ffffff48;
   background-image: url('../../Sprites/Frames/Used_Frame_04.png');
   background-size: 150%;
   background-position: center;
-  width: 15vh;
+  width: 18vh;
   border-radius: 2vh;
   border: 0.1vh solid #18ed00;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  -webkit-box-shadow: 5px 5px 15px -5px #000000; 
+  -webkit-box-shadow: 5px 5px 15px -5px #000000;
   box-shadow: 5px 5px 15px -5px #000000;
   margin: 2vh;
   position: relative;
 }
+
 .skin-card-back {
-  height: 23vh;
+  height: 25vh;
   justify-content: flex-end;
   background-image: url('../../Sprites/Card Backs/Card_Backs.png');
 }
+
 .background-card {
   height: 20vh;
-  width: 34vh;
+  width: 36vh;
   justify-content: flex-end;
   background-image: url('../../Sprites/Card Backs/Card_Backs.png');
 }
+
 .trophy-card {
   height: 25vh;
 }
-#cart-background-1{
+
+#cart-background-1 {
   background-image: url('../../Sprites/Backgrounds/Release/Background_01.png');
 }
-#cart-background-2{
+
+#cart-background-2 {
   background-image: url('../../Sprites/Backgrounds/Release/Background_02.png');
 }
-#cart-background-3{
+
+#cart-background-3 {
   background-image: url('../../Sprites/Backgrounds/Release/Background_03.png');
 }
-#cart-background-4{
+
+#cart-background-4 {
   background-image: url('../../Sprites/Backgrounds/Release/Background_04.png');
 }
-#cart-background-5{
+
+#cart-background-5 {
   background-image: url('../../Sprites/Backgrounds/Release/Background_05.png');
 }
-#cart-background-6{
+
+#cart-background-6 {
   background-image: url('../../Sprites/Backgrounds/Release/Background_06.png');
 }
-#cart-background-7{
+
+#cart-background-7 {
   background-image: url('../../Sprites/Backgrounds/Release/Background_07.png');
 }
-#cart-background-8{
+
+#cart-background-8 {
   background-image: url('../../Sprites/Backgrounds/Release/Background_08.png');
 }
-#cart-background-9{
+
+#cart-background-9 {
   background-image: url('../../Sprites/Backgrounds/Release/Background_09.png');
 }
-.check-icon, .lock-icon{
-  width: 5.5vh;
+
+.check-icon,
+.lock-icon {
+  width: 7vh;
   z-index: 10;
 }
-.tonned{
-  filter: brightness(70%); 
+
+.tonned {
+  filter: brightness(70%);
 }
-.start-level-btn{
+
+.black {
+  filter: brightness(0%);
+  opacity: 30%;
+}
+
+.start-level-btn {
   border-radius: 1vh;
   border: none;
   background: no-repeat;
@@ -218,47 +272,49 @@ main{
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 0 2vh 1.1vh;
-  margin: 0 2vh;
+  padding: 0 2vh 0.7vh 2vh;
 }
-#pick-area-2>.start-level-btn{
+
+#pick-area-2>.start-level-btn {
   width: 100%;
 }
-.start-level-btn-title{
+
+.start-level-btn-title {
   font-weight: bold;
   color: #00000049;
   padding: 1.6vh 0;
 }
-#play-btn{
+
+#play-btn {
   background-image: url('../../Sprites/Buttons/Used_Button_03.png');
-  font-size: 1.5vh;
+  font-size: 1.8vh;
 }
-.interactive-btn-info{
+
+.interactive-btn-info {
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
-@media screen and (orientation: landscape ) {
-  .collection-navigation{
+@media screen and (orientation: landscape) {
+  .collection-navigation {
     margin-bottom: 2vh;
   }
 
 }
-@media screen and (orientation: portrait ) {
-  .header-navigation-btn{
+
+@media screen and (orientation: portrait) {
+  .header-navigation-btn {
     width: 17vw;
     height: 17vw;
     margin: 2vw;
   }
-  .header-navigation-list-icon{
+
+  .header-navigation-list-icon {
     width: 10vw;
-  }
-  .collection-pick-area{
-    
   }
 }
 
-.hidden{
+.hidden {
   display: none;
 }
