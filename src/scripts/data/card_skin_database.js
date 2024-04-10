@@ -60,6 +60,17 @@ const skinDatabase = {
     ]
 }
 
+function getSkinImage(content, suit, rank) {
+    for (let i = 0; i < skinDatabase.skinList.length; i++) {
+        const element = skinDatabase.skinList[i];
+        const index = i + 1;
+
+        if (element.id == content) {
+            return `url('../../Sprites/Card Skins/Release/Skin_${(index > 9 ? index : `0${index}`)}/${rank}_${suit}_${(index > 9 ? index : `0${index}`)}.png')`
+        }
+    }
+}
+
 const backSkinDatabase = {
     skinList: [
         {
@@ -119,63 +130,82 @@ const backSkinDatabase = {
     ]
 }
 
+function getSkinBackImage(content) {
+    for (let i = 0; i < backSkinDatabase.skinList.length; i++) {
+        const element = backSkinDatabase.skinList[i];
+        if (element.id == content) {
+            return `url(${element.previewPath})`;
+        }
+    }
+}
+
 const backgroundDatabase = {
     skinList: [
         {
             id: Content.Background01,
-            previewPath: "../../Sprites/BackgroundPreview/Used_Background_01.png",
+            previewPath: "../../Sprites/Backgrounds/Release/Background_01.png",
             itemPreviewPath: "../../Sprites/BackgroundPreview/Used_Background_01.png",
             unlockDescription: ""
         },
         {
             id: Content.Background02,
-            previewPath: "../../Sprites/BackgroundPreview/Used_Background_02.png",
+            previewPath: "../../Sprites/Backgrounds/Release/Background_02.png",
             itemPreviewPath: "../../Sprites/BackgroundPreview/Used_Background_02.png",
             unlockDescription: ""
         },
         {
             id: Content.Background03,
-            previewPath: "../../Sprites/BackgroundPreview/Used_Background_03.png",
+            previewPath: "../../Sprites/Backgrounds/Release/Background_03.png",
             itemPreviewPath: "../../Sprites/BackgroundPreview/Used_Background_03.png",
             unlockDescription: "1"
         },
         {
             id: Content.Background04,
-            previewPath: "../../Sprites/BackgroundPreview/Used_Background_04.png",
+            previewPath: "../../Sprites/Backgrounds/Release/Background_04.png",
             itemPreviewPath: "../../Sprites/BackgroundPreview/Used_Background_04.png",
             unlockDescription: "2"
         },
         {
             id: Content.Background05,
-            previewPath: "../../Sprites/BackgroundPreview/Used_Background_05.png",
+            previewPath: "../../Sprites/Backgrounds/Release/Background_05.png",
             itemPreviewPath: "../../Sprites/BackgroundPreview/Used_Background_05.png",
             unlockDescription: "3"
         },
         {
             id: Content.Background06,
-            previewPath: "../../Sprites/BackgroundPreview/Used_Background_06.png",
+            previewPath: "../../Sprites/Backgrounds/Release/Background_06.png",
             itemPreviewPath: "../../Sprites/BackgroundPreview/Used_Background_06.png",
             unlockDescription: "4"
         },
         {
             id: Content.Background07,
-            previewPath: "../../Sprites/BackgroundPreview/Used_Background_07.png",
+            previewPath: "../../Sprites/Backgrounds/Release/Background_07.png",
             itemPreviewPath: "../../Sprites/BackgroundPreview/Used_Background_07.png",
             unlockDescription: "5"
         },
         {
             id: Content.Background08,
-            previewPath: "../../Sprites/BackgroundPreview/Used_Background_08.png",
+            previewPath: "../../Sprites/Backgrounds/Release/Background_08.png",
             itemPreviewPath: "../../Sprites/BackgroundPreview/Used_Background_08.png",
             unlockDescription: "6"
         },
         {
             id: Content.Background09,
-            previewPath: "../../Sprites/BackgroundPreview/Used_Background_09.png",
+            previewPath: "../../Sprites/Backgrounds/Release/Background_09.png",
             itemPreviewPath: "../../Sprites/BackgroundPreview/Used_Background_09.png",
             unlockDescription: "7"
         }
     ]
 }
 
-export { skinDatabase, backSkinDatabase, backgroundDatabase }
+
+function getBackgroundImage(content) {
+    for (let i = 0; i < backgroundDatabase.skinList.length; i++) {
+        const element = backgroundDatabase.skinList[i];
+        if (element.id == content) {
+            return `url(${element.previewPath})`;
+        }
+    }
+}
+
+export { skinDatabase, backSkinDatabase, backgroundDatabase, getSkinImage, getSkinBackImage, getBackgroundImage }

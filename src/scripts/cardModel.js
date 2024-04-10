@@ -2,22 +2,21 @@ import { animator } from "./animator.js";
 import { boundsChecker } from "./cardBoundsChecker.js";
 import { cardSelector } from "./cardSelector.js";
 import { cardCollector } from "./cardsCollector.js";
+import { getSkinBackImage, getSkinImage } from "./data/card_skin_database.js";
 import { DOChangeValue, DOChangeXY, Ease } from "./dotween/dotween.js";
 import { Action, CanInteract, disableInteractions, enableInteractions } from "./globalEvents.js";
 import { selectedRules } from "./rules/gameRules.js";
 import { getPlatform } from "./sdk/sdk.js";
-import { CardSide } from "./statics/enums.js";
+import { CardSide, RanksStringList } from "./statics/enums.js";
 import { Platform } from "./statics/staticValues.js";
 import { stepRecorder } from "./stepRecorder.js";
 
-const backImage = `url('../../Sprites/Card Backs/Card_Back_TV.png')`
-
-const closedCardOffset = 0.5;
-const openedCardOffset = 1.5;
-
 export default class Card {
     constructor(suit, rank, side, domElement) {
-        this.faceSkinReference = domElement.style.backgroundImage;
+        this.faceImage = '';
+        this.backImage = '';
+        this.lastFaceContent = null;
+        this.lastBackContent = null;
 
         this.suit = suit;
         this.rank = rank;
@@ -25,13 +24,12 @@ export default class Card {
         this.domElement = domElement;
 
         this.cardColumn = null;
-
         this.subscribeDragAndDrop();
     }
 
     setClosed = function () {
         this.side = CardSide.Back;
-        this.domElement.style.backgroundImage = backImage;
+        this.domElement.style.backgroundImage = this.backImage;
 
         if (!this.domElement.classList.contains('opened') && !this.domElement.classList.contains('closed')) {
             this.domElement.classList.add('closed');
@@ -42,7 +40,7 @@ export default class Card {
 
     setOpened = function () {
         this.side = CardSide.Face;
-        this.domElement.style.backgroundImage = this.faceSkinReference;
+        this.domElement.style.backgroundImage = this.faceImage;
 
         if (!this.domElement.classList.contains('opened') && !this.domElement.classList.contains('closed')) {
             this.domElement.classList.add('opened');
@@ -77,6 +75,27 @@ export default class Card {
                 this.domElement.style.scale = `${value} 1`;
             }, 1, 0.03, Ease.SineInOut)
         });
+    }
+
+    setupCardBackImage = function (backContent) {
+        if (this.lastBackContent == backContent) return;
+
+        this.backImage = getSkinBackImage(backContent);
+        this.lastBackContent = backContent;
+
+        if (this.side == CardSide.Back) {
+            this.domElement.style.backgroundImage = this.backImage;
+        }
+    }
+
+    setupCardFaceImage = function (faceContent) {
+        if (this.lastFaceContent == faceContent) return;
+
+        this.faceImage = getSkinImage(faceContent, this.suit, RanksStringList[this.rank - 1]);
+        this.lastFaceContent = faceContent;
+        if (this.side == CardSide.Face) {
+            this.domElement.style.backgroundImage = this.faceImage;
+        }
     }
 
     applyTVInput = function () {

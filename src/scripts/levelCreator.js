@@ -2,11 +2,15 @@ import { boundsChecker } from './cardBoundsChecker.js';
 import Card, { CardColumn } from './cardModel.js';
 import { cardCollector } from './cardsCollector.js';
 import { SpiderCroupier, SpiderLadyCroupier } from './croupier.js';
+import { getSkinBackImage, getSkinImage } from './data/card_skin_database.js';
 import { shuffle } from './helpers.js';
 import { changeRules, selectedRules } from './rules/gameRules.js';
-import { CardSide, Pattern, RanksStringList } from './statics/enums.js';
+import { CardSide, ContentType, Pattern, RanksStringList } from './statics/enums.js';
+import { Content } from './statics/staticValues.js';
+import { user } from './userData.js';
 
 let croupier = null;
+let allCards = [];
 
 function createCollectableCardColumns() {
     let collectContainers = document.getElementsByClassName('cards-container');
@@ -49,6 +53,8 @@ function generateCards() {
     mainCardColumn.setCantPlace();
     mainCardColumn.setCantRemove();
 
+    let selectedFaceSkin = user.getContentOfType(ContentType.CardSkin) ?? Content.CardSkin01;
+    let selectedBackSkin = user.getContentOfType(ContentType.CardBack) ?? Content.CardBackSkin01;
 
     const generatedCards = [];
 
@@ -61,17 +67,22 @@ function generateCards() {
 
                 const cardElement = document.createElement('div');
 
-                cardElement.style.backgroundImage = `url('../../Sprites/Card Skins/Release/Skin_${(skin > 9 ? skin : `0${skin}`)}/${rank}_${suit}_${(skin > 9 ? skin : `0${skin}`)}.png')`;
                 cardElement.style.backgroundSize = "100% 100%";
 
                 cardElement.id = `card_${rank}_${suit}_${(skin > 9 ? skin : `0${skin}`)}`;
                 cardElement.classList.add('card-element');
 
                 const cardModel = new Card(suit, k + 1, CardSide.Face, cardElement);
+
+                cardModel.setupCardFaceImage(selectedFaceSkin);
+                cardModel.setupCardBackImage(selectedBackSkin);
+
                 generatedCards.push(cardModel);
             }
         }
     }
+
+    allCards = generatedCards;
 
     shuffle(generatedCards);
     shuffle(generatedCards);
@@ -100,6 +111,18 @@ function createLevel(options = { rules }) {
     //     }
     // }, 3000);
     croupier.initialDistribution();
+
+    user.contentUsageChanged.addListener(() => {
+        const skin = user.getContentOfType(ContentType.CardSkin);
+        const back = user.getContentOfType(ContentType.CardBack);
+
+        for (let i = 0; i < allCards.length; i++) {
+            const card = allCards[i];
+
+            card.setupCardFaceImage(skin);
+            card.setupCardBackImage(back);
+        }
+    })
 
     return { croupier: croupier, playableCardColumns: result.playableCardColumns, mainCardColumn: result.mainCardColumn }
 }

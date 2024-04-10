@@ -199,12 +199,13 @@ class User {
 
         if (!hasContentInUsageList) {
             this.usedContent.push(content);
+            this.contentUsageChanged.invoke(this.usedContent);
         }
     }
 
     getContentOfType = function (type) {
         for (let i = 0; i < this.usedContent.length; i++) {
-            const element = usedContent[i];
+            const element = this.usedContent[i];
             if (element.type == type) return element;
         }
     }

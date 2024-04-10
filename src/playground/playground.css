@@ -14,7 +14,6 @@ body {
 }
 
 body {
-  background-image: url('../../Sprites/Backgrounds/Release/Background_04.png');
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
@@ -215,15 +214,7 @@ main {
 }
 
 .closed {
-  background-image: url('../../Sprites/Card Backs/Card_Back_TV.png');
   background-size: cover;
-}
-
-.test-card {
-  background-image: url('../../Sprites/Card Skins/Release/Skin_01/ace_clubs_01.png');
-  background-size: 100% 100%;
-  width: 6vw;
-  height: 8vw;
 }
 
 footer {

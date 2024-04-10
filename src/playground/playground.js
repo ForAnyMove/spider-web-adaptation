@@ -5,18 +5,20 @@ import { createTweener } from "../scripts/dotween/dotween.js";
 import { CanInteract, disableInteractions } from "../scripts/globalEvents.js";
 import { secondsToTime } from "../scripts/helpers.js";
 import { createLevel } from "../scripts/levelCreator.js";
-import { Pattern } from "../scripts/statics/enums.js";
-import { Items } from "../scripts/statics/staticValues.js";
+import { ContentType, Pattern } from "../scripts/statics/enums.js";
+import { Content, Items } from "../scripts/statics/staticValues.js";
 import { stepRecorder } from "../scripts/stepRecorder.js";
 import { user } from "../scripts/userData.js"
 
 import { fourSuitSpider, fourSuitSpiderLady, oneSuitSpider, oneSuitSpiderLady } from "../scripts/rules/gameRules.js";
+import { getBackgroundImage, getSkinBackImage } from "../scripts/data/card_skin_database.js";
 const screenParameters = { rules: oneSuitSpider };
 
 user.addItem(Items.BoosterUndo, 999);
 user.addItem(Items.BoosterHint, 999);
 user.addItem(Items.BoosterMage, 999);
 user.addItem(Items.BoosterTime, 999);
+
 
 createTweener();
 
@@ -83,7 +85,6 @@ if (screenParameters.rules.pattern == Pattern.SpiderLady) {
     main.style.width = '48vw';
   }
 }
-
 let result = createLevel({ rules: screenParameters.rules });
 
 function distributeDefault() {
@@ -92,7 +93,7 @@ function distributeDefault() {
   }
 }
 
-document.getElementById('extra-cards-container').onclick = function (params) {
+document.getElementById('extra-cards-container').onclick = function () {
   distributeDefault();
 }
 
@@ -190,3 +191,18 @@ updateStepText(0);
 
 cardCollector.onCollected.addListener(checkIfLevelWon);
 stepRecorder.stepRecordedEvent.addListener(updateStepText)
+
+const backgroundImage = document.getElementById('background');
+
+let usedBackground = user.getContentOfType(ContentType.Background) ?? Content.Background01;
+
+backgroundImage.style.backgroundImage = getBackgroundImage(usedBackground);
+
+user.contentUsageChanged.addListener(() => {
+  const background = user.getContentOfType(ContentType.Background);
+
+  if (background == usedBackground) return;
+
+  usedBackground = background;
+  backgroundImage.style.backgroundImage = getBackgroundImage(usedBackground);
+});
