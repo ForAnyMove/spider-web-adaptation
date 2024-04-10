@@ -13,6 +13,22 @@ import { user } from "../scripts/userData.js"
 import { fourSuitSpider, fourSuitSpiderLady, oneSuitSpider, oneSuitSpiderLady } from "../scripts/rules/gameRules.js";
 const screenParameters = { rules: oneSuitSpider };
 
+// GET level ID from the link
+document.addEventListener("DOMContentLoaded", function() {
+  const levelTypesList = [
+    'level_def_s_',
+    'level_def_sl_',
+    'level_story_',
+    'level_trial_'
+  ]
+  const urlParams = new URLSearchParams(window.location.search);
+  const levelID = urlParams.get('levelID'); 
+  
+  console.log('Picked level ID:', levelID);
+  console.log('Picked level type:', levelTypesList.some((type) => levelID.includes(type)));
+});
+
+
 user.addItem(Items.BoosterUndo, 999);
 user.addItem(Items.BoosterHint, 999);
 user.addItem(Items.BoosterMage, 999);

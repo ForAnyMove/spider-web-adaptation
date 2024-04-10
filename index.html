@@ -35,7 +35,7 @@
                 </div>
               </button>
             </a>
-            <button class="header-navigation-btn">
+            <button class="header-navigation-btn" id="daily-btn">
               <div class="header-navigation-icon-container">
                 <img
                   src="./Sprites/Icons/Icon_Chest.png"
@@ -46,7 +46,7 @@
             </button>
           </li>
           <li class="nav-btn">
-            <button class="header-navigation-btn">
+            <button class="header-navigation-btn" id="settings-btn">
               <div class="header-navigation-icon-container">
                 <img
                   src="./Sprites/Icons/Icon_Settings.png"
@@ -69,7 +69,8 @@
           <img
             src="../../Sprites/Icons/Icon_Close.png"
             alt="close"
-            id="close-popup"
+            id="close-popup-daily"
+            class="close-popup"
           />
         </div>
         <div class="daily-boosters-container">
@@ -155,7 +156,8 @@
           <img
             src="../../Sprites/Icons/Icon_Close.png"
             alt="close"
-            id="close-popup"
+            id="close-popup-regular"
+            class="close-popup"
           />
         </div>
         <div class="regular-boosters-container">
@@ -259,7 +261,8 @@
           <img
             src="../../Sprites/Icons/Icon_Close.png"
             alt="close"
-            id="close-popup"
+            id="close-popup-settings"
+            class="close-popup"
           />
         </div>
         <div class="settings-panel">
@@ -294,7 +297,10 @@
             <span class="settings-btn-title">Обучение</span>
           </div>
           <div class="setting-btn-container">
-            <button class="special-language-btn header-navigation-btn" id="lang-btn">
+            <button
+              class="special-language-btn header-navigation-btn"
+              id="lang-btn"
+            >
               <img
                 src="./Sprites/Lang/ru.png "
                 alt="Lang"
@@ -312,7 +318,7 @@
     <main class="main-content">
       <section class="btn-panel">
         <div class="main-panel-btn-container-1">
-          <a href="./src/playground/playground.html">
+          <a href="./src/playground/playground.html?levelID=level_def_s_1">
             <button class="main-panel-btn main-panel-btn-1">
               <span class="main-panel-btn-title">Одна масть</span>
               <span class="main-panel-btn-level">Паук</span>
@@ -320,34 +326,44 @@
           </a>
         </div>
         <div class="main-panel-btn-container-2">
-          <button class="main-panel-btn main-panel-btn-2">
-            <span class="main-panel-btn-title">Две масти</span>
-            <span class="main-panel-btn-level">Паук</span>
-          </button>
+          <a href="./src/playground/playground.html?levelID=level_def_s_2">
+            <button class="main-panel-btn main-panel-btn-2">
+              <span class="main-panel-btn-title">Две масти</span>
+              <span class="main-panel-btn-level">Паук</span>
+            </button>
+          </a>
         </div>
         <div class="main-panel-btn-container-3">
-          <button class="main-panel-btn main-panel-btn-3">
-            <span class="main-panel-btn-title">Четыре масти</span>
-            <span class="main-panel-btn-level">Паук</span>
-          </button>
+          <a href="./src/playground/playground.html?levelID=level_def_s_4">
+            <button class="main-panel-btn main-panel-btn-3">
+              <span class="main-panel-btn-title">Четыре масти</span>
+              <span class="main-panel-btn-level">Паук</span>
+            </button>
+          </a>
         </div>
         <div class="main-panel-btn-container-4">
-          <button class="main-panel-btn main-panel-btn-4">
-            <span class="main-panel-btn-title">Одна масть</span>
-            <span class="main-panel-btn-level">Паучиха</span>
-          </button>
+          <a href="./src/playground/playground.html?levelID=level_def_sl_1">
+            <button class="main-panel-btn main-panel-btn-4">
+              <span class="main-panel-btn-title">Одна масть</span>
+              <span class="main-panel-btn-level">Паучиха</span>
+            </button>
+          </a>
         </div>
         <div class="main-panel-btn-container-5">
-          <button class="main-panel-btn main-panel-btn-5">
-            <span class="main-panel-btn-title">Две масти</span>
-            <span class="main-panel-btn-level">Паучиха</span>
-          </button>
+          <a href="./src/playground/playground.html?levelID=level_def_sl_2">
+            <button class="main-panel-btn main-panel-btn-5">
+              <span class="main-panel-btn-title">Две масти</span>
+              <span class="main-panel-btn-level">Паучиха</span>
+            </button>
+          </a>
         </div>
         <div class="main-panel-btn-container-6">
-          <button class="main-panel-btn main-panel-btn-6">
-            <span class="main-panel-btn-title">Четыре масти</span>
-            <span class="main-panel-btn-level">Паучиха</span>
-          </button>
+          <a href="./src/playground/playground.html?levelID=level_def_sl_4">
+            <button class="main-panel-btn main-panel-btn-6">
+              <span class="main-panel-btn-title">Четыре масти</span>
+              <span class="main-panel-btn-level">Паучиха</span>
+            </button>
+          </a>
         </div>
       </section>
     </main>
@@ -398,7 +414,7 @@
               <span class="control-button-title">Коллекция</span>
             </li>
             <li>
-              <button class="control-btn">
+              <button class="control-btn" id="regular-btn">
                 <div class="header-navigation-icon-container">
                   <img
                     src="./Sprites/Icons/Icon_Booster.png"
