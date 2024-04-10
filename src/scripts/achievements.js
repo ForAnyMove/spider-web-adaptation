@@ -5,6 +5,9 @@ import { log } from "./logger.js";
 
 class Achievement {
     constructor(options) {
+        this.title = options.title;
+        this.icon = options.icon;
+
         this.currentValue = options.loadData.currentValue;
         this.completedIndex = options.loadData.completedIndex;
 
@@ -23,6 +26,14 @@ class Achievement {
 
     sendEvent = () => {
         this.updateEvent.invoke();
+    }
+
+    getValueText = function () {
+        return `${this.currentValue}/${this.trials[this.completedIndex].targetValue}`;
+    }
+
+    getCompletionPercent = function () {
+        return (Math.floor(this.currentValue / this.trials[this.completedIndex].targetValue * 100));
     }
 
     tryCompleteCurrentTrial = function () {
@@ -221,6 +232,14 @@ class WinWithSomeStepCount extends Achievement {
         this.handle();
     }
 
+    getValueText = function () {
+        return `${this.currentValue == 9999999 ? '∞' : this.currentValue}/${this.trials[this.completedIndex].targetValue}`;
+    }
+
+    getCompletionPercent = function () {
+        return this.currentValue == 9999999 ? 0 : (Math.floor(this.trials[this.completedIndex].targetValue / this.currentValue * 100));
+    }
+
     onLoad = function () {
         updateEvent.addListener(this.handle);
     }
@@ -335,6 +354,14 @@ class WinWithSomeTime extends Achievement {
         ]
 
         this.handle();
+    }
+
+    getValueText = function () {
+        return `${this.currentValue == 9999999 ? '∞' : this.currentValue}/${this.trials[this.completedIndex].targetValue}`;
+    }
+
+    getCompletionPercent = function () {
+        return this.currentValue == 9999999 ? 0 : (Math.floor(this.trials[this.completedIndex].targetValue / this.currentValue * 100));
     }
 
     onLoad = function () {

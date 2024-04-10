@@ -1,14 +1,18 @@
-*{
+* {
   margin: 0;
   padding: 0;
 }
+
 @viewport {
   user-zoom: fixed;
 }
-html, body{
+
+html,
+body {
   height: 100%;
 }
-body{
+
+body {
   background-image: url('../../Sprites/Story Mode/Used_Frame 5.png');
   background-size: cover;
   background-repeat: no-repeat;
@@ -22,23 +26,29 @@ body{
   scrollbar-width: 0;
   font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 }
+
 body::-webkit-scrollbar {
   width: 0;
 }
-header{
+
+header {
   width: 100%;
   z-index: 100;
 }
-.header-interface-list{
+
+.header-interface-list {
   display: flex;
   justify-content: space-between;
   list-style-type: none;
 }
-.header-ui-container{
+
+.header-ui-container {
   display: flex;
   flex-direction: column;
 }
-.header-navigation-btn, .level-btn {
+
+.header-navigation-btn,
+.level-btn {
   width: 5vw;
   height: 5vw;
   margin: .5vw;
@@ -50,11 +60,13 @@ header{
   justify-content: center;
   align-items: start;
 }
+
 .header-navigation-list-icon {
   width: 3vw;
   margin-top: 15%;
 }
-.energy-counter{
+
+.energy-counter {
   display: flex;
   justify-content: center;
   background-image: url('../../Sprites/Frames/Used_Frame_12.png');
@@ -63,13 +75,15 @@ header{
   margin: 1.5vw;
   width: 3vw;
 }
-.energy-text{
+
+.energy-text {
   color: #FFF6C6;
   font-weight: bold;
   font-size: 1.5vw;
   padding-right: 1vw;
 }
-.energy-counter>img{
+
+.energy-counter>img {
   width: 2.5vw;
   position: absolute;
   right: -1vw;
@@ -78,29 +92,33 @@ header{
 
 /* cards container */
 
-main{
+main {
   width: 97vw;
   overflow: hidden;
 }
-.collection-navigation{
+
+.collection-navigation {
   background: #E1569E;
   background: -moz-linear-gradient(top, #E1569E 0%, #CA39A1 50%, #A420A2 100%);
   background: -webkit-linear-gradient(top, #E1569E 0%, #CA39A1 50%, #A420A2 100%);
   background: linear-gradient(to bottom, #E1569E 0%, #CA39A1 50%, #A420A2 100%);
   border-radius: 2vh;
 }
-.collection-navigation>ul{
+
+.collection-navigation>ul {
   display: flex;
   justify-content: space-around;
   list-style-type: none;
 }
-.categories-btn-container{
+
+.categories-btn-container {
   width: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
 }
-.categories-btn{
+
+.categories-btn {
   width: 97%;
   color: #FFF6C6;
   background: none;
@@ -110,15 +128,17 @@ main{
   margin: 1vh auto;
   position: relative;
 }
-.categories-btn:hover{
+
+.categories-btn:hover {
   border: 1px solid #42e0e0;
   border-radius: 2vh;
 }
-.active-btn{
-  border: 1px solid #42e0e0;
+
+.active-btn {
   border-radius: 2vh;
 }
-.active-btn::after{
+
+.active-btn::after {
   content: '_____';
   position: absolute;
   bottom: -1vh;
@@ -127,7 +147,8 @@ main{
   transform: translate(-50%);
   color: #FFF6C6;
 }
-.achievements{
+
+.achievements {
   display: flex;
   flex-direction: column;
   scroll-snap-type: y proximity;
@@ -147,30 +168,37 @@ main{
   justify-content: space-between;
   align-items: center;
   margin-bottom: 1vh;
-  -webkit-box-shadow: 5px 5px 5px -5px #000000; 
+  -webkit-box-shadow: 5px 5px 5px -5px #000000;
   box-shadow: 5px 5px 5px -5px #000000;
   scroll-snap-align: center;
 }
-.achievement-lable, .achievement-status{
+
+.achievement-lable,
+.achievement-status {
   display: flex;
   align-items: center;
   margin: 0 1vw;
   gap: 1vw;
 }
-.achievement-icon{
+
+.achievement-icon {
   width: 8vh;
 }
-.achievement-title{
+
+.achievement-title {
   color: #fff;
   font-size: 2.3vh;
   text-wrap: nowrap;
   margin-right: 4vw;
 }
-.achievement-status{
+
+.achievement-status {
   justify-content: flex-end;
   width: 100%;
 }
-.status-panel{
+
+.status-panel {
+  overflow: hidden;
   position: relative;
   width: 100%;
   height: 4vh;
@@ -180,7 +208,8 @@ main{
   background: -webkit-linear-gradient(top, #006400 0%, #008E00 50%, #00A200 100%);
   background: linear-gradient(to bottom, #006400 0%, #008E00 50%, #00A200 100%);
 }
-.status-slider{
+
+.status-slider {
   height: 4vh;
   width: 30%;
   border-radius: 2vh;
@@ -189,7 +218,8 @@ main{
   background: -webkit-linear-gradient(top, #ffdd42 0%, #feaa18 50%, #f77105 100%);
   background: linear-gradient(to bottom, #ffdd42 0%, #feaa18 50%, #f77105 100%);
 }
-.status-info{
+
+.status-info {
   position: absolute;
   left: 50%;
   top: 50%;
@@ -197,7 +227,8 @@ main{
   color: #fff;
   font-size: 2.2vh;
 }
-.energy-btn{
+
+.energy-btn {
   background-color: #00000043;
   border-radius: 2vh;
   width: 8vh;
@@ -206,22 +237,26 @@ main{
   flex-direction: column;
   align-items: center;
   border: none;
-  -webkit-box-shadow: 5px 5px 5px -5px #0000008c; 
+  -webkit-box-shadow: 5px 5px 5px -5px #0000008c;
   box-shadow: 0px 2px 2px 0 #00000074;
 }
-.energy-icon{
+
+.energy-icon {
   width: 70%;
 }
-.energy-btn-title{
+
+.energy-btn-title {
   color: #fff;
   font-size: 2.5vh;
 }
-.statistic-counter{
+
+.statistic-counter {
   color: #fff;
   font-size: 3.5vh;
   margin-right: 2vw;
 }
-.get-btn{
+
+.get-btn {
   background: url('../../Sprites/Buttons/Used_Button_03.png');
   font-size: 1.8vh;
   border-radius: 1vh;
@@ -233,29 +268,32 @@ main{
   align-items: center;
   padding: 0 2.5vh 1.1vh;
 }
-.get-btn-title{
+
+.get-btn-title {
   font-weight: bold;
   color: #00000049;
   padding: 1.6vh 0;
 }
 
-@media screen and (orientation: landscape ) {
-  .collection-navigation{
+@media screen and (orientation: landscape) {
+  .collection-navigation {
     margin-bottom: 2vh;
   }
 
 }
-@media screen and (orientation: portrait ) {
-  .header-navigation-btn{
+
+@media screen and (orientation: portrait) {
+  .header-navigation-btn {
     width: 17vw;
     height: 17vw;
     margin: 2vw;
   }
-  .header-navigation-list-icon{
+
+  .header-navigation-list-icon {
     width: 10vw;
   }
 }
 
-.hidden{
+.hidden {
   display: none;
 }

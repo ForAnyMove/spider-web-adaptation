@@ -1,15 +1,15 @@
 import { ContentType } from "./enums.js"
 
-const Platform = {
-    Desktop: "desktop",
-    Mobile: "mobile",
-    Tablet: "tablet",
-    TV: "tv",
-}
-
 const AccessibilityFlags = {
     CanPlace: 1,
     CanRemove: 2
+}
+
+const Platform = {
+    Desktop: 'desktop',
+    Mobile: 'mobile',
+    Tablet: 'tablet',
+    TV: 'tv',
 }
 
 const Items = {
@@ -24,6 +24,14 @@ const Items = {
     Trophy04: "trophy_04",
     Trophy05: "trophy_05",
 }
+
+const IconsByItem = [
+    { type: Items.Energy, url: '../../Sprites/Icons/Icon_Energy.png' },
+    { type: Items.BoosterHint, url: '../../Sprites/Icons/Icon_Hint.png' },
+    { type: Items.BoosterUndo, url: '../../Sprites/Icons/Icon_Undo.png' },
+    { type: Items.BoosterMage, url: '../../Sprites/Icons/Icon_Mage.png' },
+    { type: Items.BoosterTime, url: '../../Sprites/Icons/Icon_Time.png' },
+]
 
 const Content = {
     CardSkin01: { type: ContentType.CardSkin, id: "card_skin_01" },
@@ -57,4 +65,4 @@ const Content = {
     Background09: { type: ContentType.Background, id: "background_09" },
 }
 
-export { Items, Content, Platform }
+export { Items, Content, Platform, IconsByItem }

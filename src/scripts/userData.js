@@ -31,8 +31,14 @@ class User {
         this.usedContent = [Content.CardSkin01, Content.CardBackSkin01, Content.Background01];
 
         this.achievements = [];
-        this.achievements.push(new InGameDayCount({ loadData: { currentValue: 0, completedIndex: 0 } }));
+        this.achievements.push(new InGameDayCount({
+            title: 'Дней в игре',
+            icon: '../../Sprites/Icons/Icon_Calendar.png',
+            loadData: { currentValue: 0, completedIndex: 0 }
+        }));
         this.achievements.push(new WinCount({
+            title: 'Количество побед',
+            icon: '../../Sprites/Icons/Icon_Trophy.png',
             trials: [
                 generateTrial(3, Items.BoosterHint, 1),
                 generateTrial(5, Items.BoosterTime, 1),
@@ -43,6 +49,8 @@ class User {
             loadData: { currentValue: 0, completedIndex: 0 }
         }));
         this.achievements.push(new WinInARow({
+            title: 'Побед подряд',
+            icon: '../../Sprites/Icons/Icon_Trophy.png',
             trials: [
                 generateTrial(3, Items.Energy, 2),
                 generateTrial(5, Items.Energy, 2),
@@ -52,9 +60,19 @@ class User {
             ],
             loadData: { currentValue: 0, completedIndex: 0 }
         }));
-        this.achievements.push(new WinWithSomeStepCount({ loadData: { currentValue: 0, completedIndex: 0 } }));
-        this.achievements.push(new UsedBoostersCount({ loadData: { currentValue: 0, completedIndex: 0 } }));
+        this.achievements.push(new WinWithSomeStepCount({
+            title: 'Выиграть с заданным количеством шагов',
+            icon: '../../Sprites/Icons/Icon_Step.png',
+            loadData: { currentValue: 0, completedIndex: 0 }
+        }));
+        this.achievements.push(new UsedBoostersCount({
+            title: 'Использование бустеров',
+            icon: '../../Sprites/Icons/Icon_Booster.png',
+            loadData: { currentValue: 0, completedIndex: 0 }
+        }));
         this.achievements.push(new WinCount({
+            title: 'Количетво побед в "Испытании"',
+            icon: '../../Sprites/Icons/Icon_Trial.png',
             trials: [
                 generateTrial(3, Items.Energy, 2),
                 generateTrial(5, Items.Energy, 2),
@@ -64,6 +82,8 @@ class User {
             ], levelType: LevelType.Trial, loadData: { currentValue: 0, completedIndex: 0 }
         }));
         this.achievements.push(new GameCount({
+            title: 'Количество игр в "Истории"',
+            icon: '../../Sprites/Icons/Icon_Story.png',
             trials: [
                 generateTrial(3, Items.Energy, 2),
                 generateTrial(5, Items.Energy, 2),
@@ -72,8 +92,14 @@ class User {
                 generateTrial(12, Items.BoosterHint, 3),
             ], levelType: LevelType.Trial, loadData: { currentValue: 0, completedIndex: 0 }
         }));
-        this.achievements.push(new WinWithSomeTime({ loadData: { currentValue: 0, completedIndex: 0 } }));
+        this.achievements.push(new WinWithSomeTime({
+            title: 'Выиграть за время',
+            icon: '../../Sprites/Icons/Icon_Stopwatch.png',
+            loadData: { currentValue: 0, completedIndex: 0 }
+        }));
         this.achievements.push(new WinInARow({
+            title: 'Победы в Пауке одна масть',
+            icon: '../../Sprites/Icons/Icon_WS1.png',
             trials: [
                 generateTrial(3, Items.Energy, 2),
                 generateTrial(5, Items.Energy, 2),
@@ -83,6 +109,8 @@ class User {
             ], rule: Rule.OneSuitSpider, loadData: { currentValue: 0, completedIndex: 0 }
         }));
         this.achievements.push(new WinInARow({
+            title: 'Победы в Пауке две масти',
+            icon: '../../Sprites/Icons/Icon_WS2.png',
             trials: [
                 generateTrial(3, Items.Energy, 2),
                 generateTrial(5, Items.Energy, 2),
@@ -92,6 +120,8 @@ class User {
             ], rule: Rule.TwoSuitsSpider, loadData: { currentValue: 0, completedIndex: 0 }
         }));
         this.achievements.push(new WinInARow({
+            title: 'Победы в Пауке четыре масти',
+            icon: '../../Sprites/Icons/Icon_WS4.png',
             trials: [
                 generateTrial(3, Items.Energy, 2),
                 generateTrial(5, Items.Energy, 2),
@@ -101,6 +131,8 @@ class User {
             ], rule: Rule.FourSuitsSpider, loadData: { currentValue: 0, completedIndex: 0 }
         }));
         this.achievements.push(new WinInARow({
+            title: 'Победы в Паучихе одна масть',
+            icon: '../../Sprites/Icons/Icon_WSL1.png',
             trials: [
                 generateTrial(3, Items.Energy, 2),
                 generateTrial(5, Items.Energy, 2),
@@ -110,6 +142,8 @@ class User {
             ], rule: Rule.OneSuitSpiderLady, loadData: { currentValue: 0, completedIndex: 0 }
         }));
         this.achievements.push(new WinInARow({
+            title: 'Победы в Паучихе две масти',
+            icon: '../../Sprites/Icons/Icon_WSL2.png',
             trials: [
                 generateTrial(3, Items.Energy, 2),
                 generateTrial(5, Items.Energy, 2),
@@ -119,6 +153,8 @@ class User {
             ], rule: Rule.TwoSuitsSpiderLady, loadData: { currentValue: 0, completedIndex: 0 }
         }));
         this.achievements.push(new WinInARow({
+            title: 'Победы в Паучихе четыре масти',
+            icon: '../../Sprites/Icons/Icon_WSL4.png',
             trials: [
                 generateTrial(3, Items.Energy, 2),
                 generateTrial(5, Items.Energy, 2),
