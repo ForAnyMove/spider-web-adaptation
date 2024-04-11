@@ -1,6 +1,6 @@
 import { statistics, updateStatistics } from "./gameStatistics.js";
 import { Action } from "./globalEvents.js";
-import { load, save } from "../../save_system/SaveSystem.js"
+import { load, save } from "./save_system/SaveSystem.js"
 
 let dayCounterUpdated = new Action();
 

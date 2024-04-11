@@ -2,7 +2,6 @@ import { statistics } from "../scripts/gameStatistics.js";
 import { createButton, createElement, createImage, createTextSpan, secondsToTime } from "../scripts/helpers.js";
 import { LevelType } from "../scripts/statics/enums.js";
 import { IconsByItem } from "../scripts/statics/staticValues.js";
-import { user } from "../scripts/userData.js";
 
 function getIconByItem(itemType) {
   for (let i = 0; i < IconsByItem.length; i++) {

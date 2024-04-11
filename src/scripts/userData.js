@@ -5,7 +5,7 @@ import { load, save } from "./save_system/SaveSystem.js";
 import { LevelType, Rule } from "./statics/enums.js";
 import { Content, Items } from "./statics/staticValues.js";
 
-class User {
+export default class User {
     constructor() {
         this.items = [{
             type: Items.Energy,
@@ -179,7 +179,10 @@ class User {
     }
 
     useContent = function (content) {
-
+        log(`Try use content ${content.id}`)
+        log(`Current available:`);
+        log(this.availableContent)
+        log(this.usedContent)
         let hasContentInUsageList = false;
 
         for (let i = 0; i < this.usedContent.length; i++) {
@@ -188,9 +191,11 @@ class User {
             if (element.type == content.type) {
 
                 hasContentInUsageList = true;
-                if (element != content && this.hasContent(content)) {
+                if (element.id != content.id && this.hasContent(content)) {
                     this.usedContent[i] = content;
                     this.contentUsageChanged.invoke(this.usedContent);
+
+                    this.saveData();
 
                     return;
                 }
@@ -200,6 +205,8 @@ class User {
         if (!hasContentInUsageList) {
             this.usedContent.push(content);
             this.contentUsageChanged.invoke(this.usedContent);
+
+            this.saveData();
         }
     }
 
@@ -214,7 +221,17 @@ class User {
         for (let i = 0; i < this.availableContent.length; i++) {
             const element = this.availableContent[i];
 
-            if (element == content) return true;
+            if (element.id == content.id) return true;
+        }
+
+        return false;
+    }
+
+    hasUsedContent = function (content) {
+        for (let i = 0; i < this.usedContent.length; i++) {
+            const element = this.usedContent[i];
+
+            if (element.id == content.id) return true;
         }
 
         return false;
@@ -225,13 +242,15 @@ class User {
 
         for (let i = 0; i < this.availableContent.length; i++) {
             const element = this.availableContent[i];
-            if (element == content) return;
+            if (element.id == content.id) return;
         }
 
         this.availableContent.push(content);
         this.contentListUpdateEvent.invoke(this.availableContent);
 
         log(`Update user content [${content.type.id} (${content.count})]: ${this.availableContent.map(i => ` ${i.id}`)}`, "user", "details");
+
+        this.saveData();
     }
 
     addContents = function (contents) { // xd
@@ -247,13 +266,15 @@ class User {
     removeContent = function (content) {
         for (let i = 0; i < this.availableContent.length; i++) {
             const element = this.availableContent[i];
-            if (element == content) {
+            if (element.id == content.id) {
                 this.availableContent.splice(i, 1);
                 log(`Remove user content: [${element.type}, ${element.id}] ${this.availableContent.map(i => `\n\t(${i.type}, ${i.id})`)}`, "user", "details")
 
                 this.useFirstAvalableContentOfType(content.type);
 
                 this.contentListUpdateEvent.invoke(this.availableContent);
+
+                this.saveData();
                 return;
             }
         }
@@ -287,12 +308,16 @@ class User {
 
                 log(`Update user items [${type} (${count})]: ${this.items[i].type} (${this.items[i].count})`, "user", "details");
                 this.itemListUpdateEvent.invoke(this.items);
+
+                this.saveData();
                 return;
             }
         }
 
         this.items.push({ type: type, count: count });
         this.itemListUpdateEvent.invoke(this.items);
+
+        this.saveData();
     }
 
     addItems = function (items) {
@@ -335,15 +360,21 @@ class User {
                 // }
 
                 this.itemListUpdateEvent.invoke(this.items);
+
+                this.saveData();
                 return;
             }
         }
 
         this.itemListUpdateEvent.invoke(this.items);
+
+        this.saveData();
     }
 
     onUpdate = () => {
         this.updateEvent.invoke();
+
+        this.saveData();
     }
 
     unload = function () {
@@ -355,13 +386,38 @@ class User {
     }
 
     saveData = function () {
-        save("user_01", { items: this.items, availableContent: this.availableContent, usedContent: this.useContent, achievements: this.achievements.map(i => i.completedIndex) });
+        const saveObject = {
+            items: this.items,
+            availableContent: this.availableContent,
+            usedContent: this.usedContent,
+            achievements: this.achievements.map(i => i.completedIndex)
+        }
+
+        save("user_01", saveObject);
+    }
+
+    loadTestData = function (data) {
+        if (data == null) {
+            return;
+        }
+
+        this.items = data.items;
+        this.availableContent = data.availableContent;
+        this.usedContent = data.usedContent;
+
+        for (let i = 0; i < this.achievements.length; i++) {
+            const element = this.achievements[i];
+
+            element.completedIndex = data.achievements[i];
+        }
     }
 
     loadData = function () {
         let data = load("user_01");
 
-        if (data == null) return;
+        if (data == null) {
+            return;
+        }
 
         this.items = data.items;
         this.availableContent = data.availableContent;
@@ -374,7 +430,3 @@ class User {
         }
     }
 }
-
-const user = new User();
-
-export { user }

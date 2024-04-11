@@ -1,19 +1,17 @@
 import { log } from "../logger.js";
-import { saveUserData } from "../sdk/sdk.js";
+import { loadUserData, saveUserData } from "../sdk/sdk.js";
 
-let savesList = [];
-
-const globalSaveKey = 'saves_01';
+const globalSaveKey = 'saves_020017';
 
 let timeThreshold = 0;
 let timeout = false;
 
 function save(key, obj) {
-
     for (let i = 0; i < savesList.length; i++) {
         const element = savesList[i];
+        const keys = Object.keys(element);
 
-        if (Object.keys(element) == key) {
+        if (keys.length > 0 && keys[0] == key) {
             if (obj === savesList[i][key]) return;
             savesList[i][key] = obj;
 
@@ -32,7 +30,9 @@ function load(key, defaultValue) {
     for (let i = 0; i < savesList.length; i++) {
         const element = savesList[i];
 
-        if (Object.keys(element) == key) {
+        const keys = Object.keys(element);
+
+        if (keys.length > 0 && keys[0] == key) {
             return element[key];
         }
     }
@@ -64,24 +64,37 @@ function sendToServer() {
 }
 
 function loadFromServer(data) {
+    log('[SS] Try load from server', "saveSystem");
+    log(typeof (data), "saveSystem");
+    log(data, "saveSystem");
+
+    if (data == {}) {
+        savesList = [];
+        return;
+    }
+    if (typeof (data) == 'object') {
+        if (data[globalSaveKey] != null) {
+            savesList = data[globalSaveKey];
+            return;
+        }
+        savesList = [];
+        return;
+    }
+
     const json = JSON.parse(data);
+    log(`[SS] receive ${json}`, "saveSystem");
 
     if (json[globalSaveKey] == null || json[globalSaveKey] == undefined) {
         return;
     }
 
+    log(`[SS] assign ${json[globalSaveKey]}`, "saveSystem");
     savesList = json[globalSaveKey];
 }
 
-function logSaves() {
-    let saves = '';
-    for (let i = 0; i < savesList.length; i++) {
-        const element = savesList[i];
-
-        saves += `${Object.keys(element)}: ${JSON.stringify(Object.values(element))}\n`
-    }
-
-    console.log(saves);
+async function initialize() {
+    const serverData = await loadUserData(globalSaveKey);
+    loadFromServer(serverData);
 }
 
-export { save, load }
+export { save, load, initialize }

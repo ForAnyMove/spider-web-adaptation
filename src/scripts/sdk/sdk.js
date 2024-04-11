@@ -1,21 +1,28 @@
-import { error } from "../logger.js";
+import { error, log } from "../logger.js";
 import { Platform } from "../statics/staticValues.js";
-
-let ysdk;
-let player;
 
 function isLocalHost() {
     let host = window.location.hostname;
     return host === "localhost" || host === "127.0.0.1";
 }
 
-function showRewarded(openCallback, closeCallback, rewardCallback, errorCallback) {
-    if (ysdk == null || isLocalHost()) {
-        error("SKD is undefined or script launched on localhost", "sdk");
+async function showRewarded(openCallback, closeCallback, rewardCallback, errorCallback) {
+    if (isLocalHost()) {
+        error("[showRewarded] local host usage", "sdk", "sdk");
+
+        closeCallback?.();
         return;
     }
 
-    ysdk.adv.showRewardedVideo({
+    SDK = await getSDK();
+
+    if (SDK == null) {
+        error("[showRewarded] SKD is not defined", "sdk", "sdk");
+        return;
+    }
+
+    log('[showRewarded] Try start rewarded', "sdk", "sdk");
+    SDK.adv.showRewardedVideo({
         callbacks: {
             onOpen: () => {
                 openCallback?.();
@@ -30,13 +37,22 @@ function showRewarded(openCallback, closeCallback, rewardCallback, errorCallback
     });
 }
 
-function showInterstitial(closeCallback, errorCallback) {
-    if (ysdk == null || isLocalHost()) {
-        error("SKD is undefined or script launched on localhost", "sdk");
+async function showInterstitial(closeCallback, errorCallback) {
+    if (isLocalHost()) {
+        error("[showInterstitial] local host usage", "sdk", "sdk");
+
+        closeCallback?.();
         return;
     }
 
-    ysdk.adv.showFullscreenAdv({
+    SDK = await getSDK();
+
+    if (SDK == null) {
+        error("[showInterstitial] SKD is not defined", "sdk", "sdk");
+        return;
+    }
+
+    SDK.adv.showFullscreenAdv({
         callbacks: {
             onClose: function (wasShown) {
                 closeCallback?.(wasShown);
@@ -48,20 +64,18 @@ function showInterstitial(closeCallback, errorCallback) {
 }
 
 function processExit() {
-    if (ysdk == null || isLocalHost()) {
-        error("SKD is undefined or script launched on localhost", "sdk");
+    if (SDK == null || isLocalHost()) {
+        error("SKD is undefined or script launched on localhost", "sdk", "sdk");
         return;
     }
 
-    ysdk.dispatchEvent(ysdk.EVENTS.EXIT);
+    SDK.dispatchEvent(SDK.EVENTS.EXIT);
 }
 
-// TODO: optimize method usage
-function getPlatform() {
+async function getPlatform() {
     let finalPlatformResult = Platform.Desktop;
 
-    if (ysdk == null || isLocalHost()) {
-        error("SKD is undefined or script launched on localhost", "sdk");
+    function returnDefault() {
         const isTv = /SMART-TV|Tizen|Web0S|NetCast|HbbTV|Opera TV|CE-HTML|TV|Television/i.test(navigator.userAgent);
         const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
 
@@ -72,6 +86,20 @@ function getPlatform() {
         }
 
         return finalPlatformResult;
+    }
+
+    if (isLocalHost()) {
+        error("[getPlatform] local host usage", "sdk", "sdk");
+
+        return returnDefault();
+    }
+
+    SDK = await getSDK();
+
+    if (SDK == null) {
+        error("[getPlatform] SKD is not defined", "sdk", "sdk");
+
+        return returnDefault();
     }
 
     const mobile = YaGames.deviceInfo.isMobile();
@@ -89,46 +117,119 @@ function getPlatform() {
     return finalPlatformResult;
 }
 
-function saveUserData(data) {
-    if (ysdk == null || player == null || isLocalHost()) {
-        error("SKD/Player is undefined or script launched on localhost", "sdk");
-        return;
-    }
-
-    player.setData(data);
-}
-
-function loadUserData(key) {
-    if (ysdk == null || player == null || isLocalHost()) {
-        error("SKD/Player is undefined or script launched on localhost", "sdk");
-        return "";
-    }
-
-    player.getData([key]).then(data => {
-        return data;
-    });
-
-    return "";
-}
-
-function getDefaultLanguage() {
-    if (ysdk == null || player == null || isLocalHost()) {
-        error("SKD/Player is undefined or script launched on localhost", "sdk");
-        return "ru";
-    }
-
-    return ysdk.environment.i18n.lang;
-}
-
-async function initilize() {
+async function saveUserData(data) {
     try {
-        ysdk = await YaGames.init();
-        player = await ysdk.getPlayer({ scopes: false });
+        if (isLocalHost()) {
+            error("[saveUserData] local host usage", "sdk", "sdk");
+            return;
+        }
+
+        SDK = await getSDK();
+        if (SDK == null) {
+            error("[saveUserData] SKD is not defined", "sdk", "sdk");
+            return;
+        }
+
+        player = await getPlayer(SDK);
+
+        if (player == null) {
+            error("[saveUserData] PLAYER is not defined", "sdk", "player");
+            return;
+        }
+
+        console.log("[saveUserData] start saving", 'sdk', 'player');
+        player.setData(data);
     } catch (err) {
-        error("Failed to load SDK", "sdk");
+        error(`[saveUserData] catched error ${err}`, 'sdk', 'player');
     }
 }
 
-await initilize();
+async function loadUserData(key) {
+    try {
+        if (isLocalHost()) {
+            error("[loadUserData] local host usage", "sdk", "sdk");
+            return {};
+        }
 
-export { saveUserData, loadUserData, getPlatform }
+        SDK = await getSDK();
+        if (SDK == null) {
+            error("[loadUserData] SKD is not defined", "sdk", "sdk");
+            return {};
+        }
+
+        player = await getPlayer(SDK);
+
+        if (player == null) {
+            error("[loadUserData] PLAYER is not defined", "sdk", "player");
+            return {};
+        }
+
+        const data = await player.getData([key]);
+        log(`[loadUserData] data from server => ${data}`, "sdk", "player");
+
+        return data ?? {};
+    } catch (err) {
+        error(`[loadUserData] catched error ${err}`, 'sdk', 'player');
+    }
+}
+
+async function getDefaultLanguage() {
+    if (isLocalHost()) {
+        error("[getDefaultLanguage] local host usage", "sdk", "sdk");
+        return 'ru';
+    }
+
+    SDK = await getSDK();
+
+    if (SDK == null) {
+        error("[getDefaultLanguage] SKD is not defined", "sdk", "sdk");
+        return 'ru';
+    }
+
+    return SDK.environment.i18n.lang;
+}
+
+async function getSDK() {
+    try {
+        if (SDK != null) {
+            console.log('[getSDK] Has cached SDK');
+            return SDK;
+        }
+
+        console.log('[getSDK] Try initialize SDK');
+        SDK = await YaGames.init();
+        console.log('[getSDK] SDK has been initialized');
+        return SDK;
+    } catch (err) {
+        error(`Failed to load [SDK]: ${err}`, "sdk", "sdk");
+        return null;
+    }
+}
+
+async function getPlayer(sdk) {
+    if (player != null) {
+        console.log('[getPlayer] Has cached PLAYER');
+        return player;
+    }
+    if (sdk == null) {
+        error(`Failed to get [PLAYER]: [SDK] is not defined`, "sdk", "player");
+        return null;
+    }
+
+    try {
+        console.log('[getPlayer] Try initialize PLAYER');
+        player = await sdk.getPlayer({ scopes: false });
+        console.log('[getPlayer] PLAYER has been initialized');
+        return player;
+    } catch (err) {
+        error(`Failed to load [PLAYER]: ${err}`, "sdk", "player");
+        return null;
+    }
+}
+
+async function initializeSDK() {
+    SDK = await getSDK();
+    player = await getPlayer(SDK);
+}
+
+export { saveUserData, loadUserData, getPlatform, showRewarded, showInterstitial, initializeSDK }

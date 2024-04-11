@@ -1,7 +1,6 @@
 import { storyLevelDatabase } from "../scripts/data/level_databases.js";
 import { createButton, createElement, createHSpace, createImage, createTextH3, createTextSpan, createVSpace, getIconByContent, getIconByItem, getIconByPattern, getIconBySuit, getPatternName, getSuitName } from "../scripts/helpers.js";
 import { Items } from "../scripts/statics/staticValues.js";
-import { user } from "../scripts/userData.js";
 
 const levelButtonsContainer = document.getElementsByClassName('story-map-container')[0]
 

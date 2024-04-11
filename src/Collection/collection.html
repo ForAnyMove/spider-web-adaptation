@@ -5,11 +5,27 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <link rel="stylesheet" href="collection.css" />
+  <link rel="stylesheet" href="../loader/loader.css" />
   <meta name="”viewport”" content="”user-scalable"="no”" />
   <title>Challenges</title>
+
+  <script src="https://yandex.ru/games/sdk/v2"></script>
 </head>
 
 <body>
+  <div class="mask">
+    <div class="banter-loader">
+      <div class="banter-loader__box"></div>
+      <div class="banter-loader__box"></div>
+      <div class="banter-loader__box"></div>
+      <div class="banter-loader__box"></div>
+      <div class="banter-loader__box"></div>
+      <div class="banter-loader__box"></div>
+      <div class="banter-loader__box"></div>
+      <div class="banter-loader__box"></div>
+      <div class="banter-loader__box"></div>
+    </div>
+  </div>
   <header>
     <button class="header-navigation-btn">
       <img src="../../Sprites/Icons/Icon_Arrow_Back.png" alt="Profile" class="header-navigation-list-icon" />
@@ -41,7 +57,30 @@
     <div class="collection-pick-area hidden" id="pick-area-4">
     </div>
   </main>
-  <script type="module" src="collection.js"></script>
+  <script>
+    let savesList = [];
+    let SDK = null;
+    let player = null;
+    let user = null;
+  </script>
+  <script type="module">
+    import { preload } from '../loader/loader.js';
+    import { initializeSDK } from '../scripts/sdk/sdk.js';
+    import { initialize } from '../scripts/save_system/SaveSystem.js'
+    import User from '../scripts/userData.js'
+
+    user = new User();
+
+    preload(async () => {
+      console.log('[collection.html]=> start initializeSDK');
+      await initializeSDK();
+      console.log('[collection.html]=> start initialize');
+      await initialize();
+      user.loadData();
+      console.log('[collection.html]=> start import("./collection.js")');
+      await import('./collection.js')
+    })
+  </script>
 </body>
 
 </html>

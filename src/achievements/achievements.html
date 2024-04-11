@@ -5,11 +5,27 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <link rel="stylesheet" href="achievements.css" />
+  <link rel="stylesheet" href="../loader/loader.css" />
   <meta name="”viewport”" content="”user-scalable"="no”" />
   <title>Achievements</title>
+
+  <script src="https://yandex.ru/games/sdk/v2"></script>
 </head>
 
 <body>
+  <div class="mask">
+    <div class="banter-loader">
+      <div class="banter-loader__box"></div>
+      <div class="banter-loader__box"></div>
+      <div class="banter-loader__box"></div>
+      <div class="banter-loader__box"></div>
+      <div class="banter-loader__box"></div>
+      <div class="banter-loader__box"></div>
+      <div class="banter-loader__box"></div>
+      <div class="banter-loader__box"></div>
+      <div class="banter-loader__box"></div>
+    </div>
+  </div>
   <header>
     <ul class="header-interface-list">
       <li class="header-ui-container">
@@ -90,7 +106,32 @@
       </div>
     </div>
   </main>
-  <script type="module" src="achievements.js"></script>
+  <script>
+    let savesList = [];
+    let SDK = null;
+    let player = null;
+    let user = null;
+    let platform;
+  </script>
+  <script type="module">
+    import { preload } from '../loader/loader.js';
+    import { initializeSDK, getPlatform } from '../scripts/sdk/sdk.js';
+    import { initialize } from '../scripts/save_system/SaveSystem.js'
+    import User from '../scripts/userData.js'
+
+    user = new User();
+
+    preload(async () => {
+      console.log('[achievements.html]=> start initializeSDK');
+      await initializeSDK();
+      platform = await getPlatform();
+      console.log('[achievements.html]=> start initialize');
+      await initialize();
+      user.loadData();
+      console.log('[achievements.html]=> start import("./achievements.js")');
+      await import('./achievements.js')
+    })
+  </script>
 </body>
 
 </html>

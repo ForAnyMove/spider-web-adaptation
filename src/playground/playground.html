@@ -5,10 +5,26 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <link rel="stylesheet" href="playground.css" />
+  <link rel="stylesheet" href="../loader/loader.css" />
   <title>Spider</title>
+
+  <!-- <script src="https://yandex.ru/games/sdk/v2"></script> -->
 </head>
 
 <body id="background">
+  <div class="mask">
+    <div class="banter-loader">
+      <div class="banter-loader__box"></div>
+      <div class="banter-loader__box"></div>
+      <div class="banter-loader__box"></div>
+      <div class="banter-loader__box"></div>
+      <div class="banter-loader__box"></div>
+      <div class="banter-loader__box"></div>
+      <div class="banter-loader__box"></div>
+      <div class="banter-loader__box"></div>
+      <div class="banter-loader__box"></div>
+    </div>
+  </div>
   <header>
     <ul class="header-interface-list">
       <li class="header-ui-container">
@@ -118,7 +134,32 @@
     </nav>
   </footer>
   <script type="module" src="../scripts/animator.js"></script>
-  <script type="module" src="./playground.js"></script>
+  <script>
+    let savesList = [];
+    let SDK = null;
+    let player = null;
+    let user = null;
+    let platform;
+  </script>
+  <script type="module">
+    import { preload } from '../loader/loader.js';
+    import { initializeSDK, getPlatform } from '../scripts/sdk/sdk.js';
+    import { initialize } from '../scripts/save_system/SaveSystem.js'
+    import User from '../scripts/userData.js'
+
+    user = new User();
+
+    preload(async () => {
+      console.log('[playground.html]=> start initializeSDK');
+      await initializeSDK();
+      platform = await getPlatform();
+      console.log('[playground.html]=> start initialize');
+      await initialize();
+      user.loadData();
+      console.log('[playground.html]=> start import("./playground.js")');
+      await import('./playground.js')
+    })
+  </script>
 </body>
 
 </html>

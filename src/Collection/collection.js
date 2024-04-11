@@ -2,11 +2,6 @@ import { backSkinDatabase, backgroundDatabase, skinDatabase } from "../scripts/d
 import { trophyDatabase } from "../scripts/data/trophy_database.js";
 import { createButton, createElement, createImage, createTextP, createTextSpan } from "../scripts/helpers.js";
 import { Statefull } from "../scripts/statics/enums.js"
-import { Items } from "../scripts/statics/staticValues.js";
-import { user } from "../scripts/userData.js";
-
-user.addContent(skinDatabase.skinList[4].id);
-user.addItem(Items.Trophy01);
 
 const checkIconPath = '../../Sprites/Icons/Icon_Check.png'
 const lockIconPath = '../../Sprites/Icons/Icon_Lock.png'
@@ -52,7 +47,7 @@ function createBackgroundInstance(data) {
   if (user.hasContent(data.id)) {
     state = Statefull.AvailableToEquip;
   }
-  if (user.usedContent.includes(data.id)) {
+  if (user.hasUsedContent(data.id)) {
     state = Statefull.Equipped;
   }
   const plane = createElement('div', ['background-card'], {
@@ -76,11 +71,11 @@ function createBackgroundInstance(data) {
     if (state != Statefull.Equipped) {
       usedIcon.classList.add('hidden');
     }
-    user.contentUsageChanged.addListener((usedContent) => {
-      if (usedContent.includes(data.id) && !useButton.classList.contains('hidden')) {
+    user.contentUsageChanged.addListener(() => {
+      if (user.hasUsedContent(data.id) && !useButton.classList.contains('hidden')) {
         useButton.classList.add('hidden');
         usedIcon.classList.remove('hidden');
-      } else if (!usedContent.includes(data.id) && !usedIcon.classList.contains('hidden')) {
+      } else if (!user.hasUsedContent(data.id) && !usedIcon.classList.contains('hidden')) {
         useButton.classList.remove('hidden');
         usedIcon.classList.add('hidden');
       }
@@ -96,7 +91,7 @@ function createSkinInstance(data) {
   if (user.hasContent(data.id)) {
     state = Statefull.AvailableToEquip;
   }
-  if (user.usedContent.includes(data.id)) {
+  if (user.hasUsedContent(data.id)) {
     state = Statefull.Equipped;
   }
   const plane = createElement('div', ['skin-card']);
@@ -121,11 +116,11 @@ function createSkinInstance(data) {
     if (state != Statefull.Equipped) {
       usedIcon.classList.add('hidden');
     }
-    user.contentUsageChanged.addListener((usedContent) => {
-      if (usedContent.includes(data.id) && !useButton.classList.contains('hidden')) {
+    user.contentUsageChanged.addListener(() => {
+      if (user.hasUsedContent(data.id) && !useButton.classList.contains('hidden')) {
         useButton.classList.add('hidden');
         usedIcon.classList.remove('hidden');
-      } else if (!usedContent.includes(data.id) && !usedIcon.classList.contains('hidden')) {
+      } else if (!user.hasUsedContent(data.id) && !usedIcon.classList.contains('hidden')) {
         useButton.classList.remove('hidden');
         usedIcon.classList.add('hidden');
       }
@@ -141,7 +136,7 @@ function createSkinBackInstance(data) {
   if (user.hasContent(data.id)) {
     state = Statefull.AvailableToEquip;
   }
-  if (user.usedContent.includes(data.id)) {
+  if (user.hasUsedContent(data.id)) {
     state = Statefull.Equipped;
   }
   const plane = createElement('div', ['skin-card-back'], {
@@ -166,11 +161,11 @@ function createSkinBackInstance(data) {
     if (state != Statefull.Equipped) {
       usedIcon.classList.add('hidden');
     }
-    user.contentUsageChanged.addListener((usedContent) => {
-      if (usedContent.includes(data.id) && !useButton.classList.contains('hidden')) {
+    user.contentUsageChanged.addListener(() => {
+      if (user.hasUsedContent(data.id) && !useButton.classList.contains('hidden')) {
         useButton.classList.add('hidden');
         usedIcon.classList.remove('hidden');
-      } else if (!usedContent.includes(data.id) && !usedIcon.classList.contains('hidden')) {
+      } else if (!user.hasUsedContent(data.id) && !usedIcon.classList.contains('hidden')) {
         useButton.classList.remove('hidden');
         usedIcon.classList.add('hidden');
       }

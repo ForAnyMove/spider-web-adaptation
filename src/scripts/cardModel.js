@@ -6,7 +6,6 @@ import { getSkinBackImage, getSkinImage } from "./data/card_skin_database.js";
 import { DOChangeValue, DOChangeXY, Ease } from "./dotween/dotween.js";
 import { Action, CanInteract, disableInteractions, enableInteractions } from "./globalEvents.js";
 import { selectedRules } from "./rules/gameRules.js";
-import { getPlatform } from "./sdk/sdk.js";
 import { CardSide, RanksStringList } from "./statics/enums.js";
 import { Platform } from "./statics/staticValues.js";
 import { stepRecorder } from "./stepRecorder.js";
@@ -223,8 +222,6 @@ export default class Card {
     }
 
     subscribeDragAndDrop = () => {
-        const platform = getPlatform();
-        // const platform = Platform.Mobile;
 
         switch (platform) {
             case Platform.Desktop:

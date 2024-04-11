@@ -1,11 +1,7 @@
-let mask = document.querySelector('.mask');
-
-window.addEventListener('load', () => {
-  mask.classList.add('hide');
-  setTimeout(() => {
-    mask.remove();
-  }, 600);
-});
+import { Items } from './src/scripts/statics/staticValues.js';
+import { inDayGameCount } from './src/scripts/ingameDayCounter.js';
+import { dailyRewards, isCompleted, tryCompleteDailyReward } from './src/scripts/dailyRewards.js';
+import { showInterstitial, showRewarded } from './src/scripts/sdk/sdk.js';
 
 const closeDailyPopupButton = document.getElementById('close-popup-daily');
 const dailyBonuses = document.getElementById('daily-bonuses');
@@ -42,3 +38,81 @@ settingsBtn.addEventListener('click', () => {
 closeSettingsPopupButton.addEventListener('click', function () {
   settingsBonuses.style.display = 'none';
 });
+
+
+function setupReqularBonusesButtons() {
+  const itemCountPairs = [
+    { item: Items.Energy, count: 5 },
+    { item: Items.BoosterHint, count: 4 },
+    { item: Items.BoosterMage, count: 2 },
+    { item: Items.BoosterUndo, count: 5 },
+    { item: Items.BoosterTime, count: 1 },
+  ]
+
+  const buttons = document.getElementsByClassName('regular-boosters-container')[0].getElementsByClassName('start-level-btn');
+
+  for (let i = 0; i < buttons.length; i++) {
+    const button = buttons[i];
+    button.onclick = function () {
+      user.addItem(itemCountPairs[i].item, itemCountPairs[i].count);
+    }
+  }
+}
+setupReqularBonusesButtons();
+
+const dayInGame = inDayGameCount();
+
+function setupDailyRewards() {
+  const commonDays = document.getElementsByClassName('daily-boosters-container')[0].getElementsByClassName('booster');
+  const allDays = [];
+
+  for (let i = 0; i < commonDays.length; i++) {
+    const element = commonDays[i];
+    allDays.push(element);
+  }
+
+  allDays.push(document.getElementsByClassName('special-booster')[0]);
+
+  for (let i = 0; i < allDays.length; i++) {
+    const element = allDays[i];
+
+    if (isCompleted(i)) {
+      element.classList.add('completed');
+      continue;
+    }
+
+    if (dayInGame - 1 >= i) {
+      // dailyBonuses.style.display = 'flex'; // if tutorial popup was showen and just once per session
+      element.classList.add('ready');
+      element.onclick = function () {
+        if (tryCompleteDailyReward(i)) {
+          element.classList.remove('ready');
+          element.classList.add('completed');
+
+          if (typeof (dailyRewards[i].item) == 'object') {
+            for (let j = 0; j < dailyRewards[i].item.length; j++) {
+              const element = dailyRewards[i].item[j];
+              user.addItem(element.item, element.count)
+            }
+          } else {
+            user.addItem(dailyRewards[i].item, dailyRewards[i].count)
+          }
+        }
+      }
+    }
+  }
+}
+
+const el1 = document.getElementById('ads-btn-1');
+el1.onclick = function () {
+  console.log('[index.js] Try load rewardsd');
+  showRewarded();
+}
+
+const el2 = document.getElementById('ads-btn-2');
+el2.onclick = function () {
+  console.log('[index.js] Try load interstitial');
+  showInterstitial();
+}
+
+setupDailyRewards();

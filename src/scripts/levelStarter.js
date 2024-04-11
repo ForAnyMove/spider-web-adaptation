@@ -1,7 +1,6 @@
 import { levelManagement } from "./levelManagement.js";
 import { log } from "./logger.js";
 import { Items } from "../../statics/staticValues.js";
-import { user } from "./userData.js";
 
 function startLevel(database) {
     const selectionOptions = levelManagement.selectLevel(database, database.currentLevel);

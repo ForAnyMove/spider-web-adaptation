@@ -7,7 +7,6 @@ import { shuffle } from './helpers.js';
 import { changeRules, selectedRules } from './rules/gameRules.js';
 import { CardSide, ContentType, Pattern, RanksStringList } from './statics/enums.js';
 import { Content } from './statics/staticValues.js';
-import { user } from './userData.js';
 
 let croupier = null;
 let allCards = [];

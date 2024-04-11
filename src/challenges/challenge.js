@@ -1,7 +1,6 @@
 import { trialLevelDatabase } from "../scripts/data/level_databases.js";
 import { createButton, createElement, createHSpace, createImage, createTextH3, createTextP, createTextSpan, createVSpace, getIconByContent, getIconByItem, getIconByPattern, getIconBySuit, getPatternName, getSuitName } from "../scripts/helpers.js";
 import { Items } from "../scripts/statics/staticValues.js";
-import { user } from "../scripts/userData.js";
 
 user.addItem(Items.BoosterHint, 10);
 user.addItem(Items.BoosterUndo, 5);

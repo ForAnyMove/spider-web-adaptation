@@ -8,14 +8,14 @@ import { createLevel } from "../scripts/levelCreator.js";
 import { ContentType, Pattern } from "../scripts/statics/enums.js";
 import { Content, Items } from "../scripts/statics/staticValues.js";
 import { stepRecorder } from "../scripts/stepRecorder.js";
-import { user } from "../scripts/userData.js"
 
 import { fourSuitSpider, fourSuitSpiderLady, oneSuitSpider, oneSuitSpiderLady } from "../scripts/rules/gameRules.js";
-import { getBackgroundImage, getSkinBackImage } from "../scripts/data/card_skin_database.js";
+import { getBackgroundImage } from "../scripts/data/card_skin_database.js";
+
 const screenParameters = { rules: oneSuitSpider };
 
 // GET level ID from the link
-document.addEventListener("DOMContentLoaded", function() {
+document.addEventListener("DOMContentLoaded", function () {
   const levelTypesList = [
     'level_def_s_',
     'level_def_sl_',
@@ -23,18 +23,11 @@ document.addEventListener("DOMContentLoaded", function() {
     'level_trial_'
   ]
   const urlParams = new URLSearchParams(window.location.search);
-  const levelID = urlParams.get('levelID'); 
-  
+  const levelID = urlParams.get('levelID');
+
   console.log('Picked level ID:', levelID);
   console.log('Picked level type:', levelTypesList.some((type) => levelID.includes(type)));
 });
-
-
-user.addItem(Items.BoosterUndo, 999);
-user.addItem(Items.BoosterHint, 999);
-user.addItem(Items.BoosterMage, 999);
-user.addItem(Items.BoosterTime, 999);
-
 
 createTweener();
 
@@ -101,6 +94,7 @@ if (screenParameters.rules.pattern == Pattern.SpiderLady) {
     main.style.width = '48vw';
   }
 }
+
 let result = createLevel({ rules: screenParameters.rules });
 
 function distributeDefault() {

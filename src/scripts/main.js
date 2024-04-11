@@ -8,7 +8,6 @@ import { oneSuitSpider } from "../../rules/gameRules.js";
 import { load, save } from "../../save_system/SaveSystem.js";
 import { CardSide, Rank, Suit } from "../../statics/enums.js";
 import { Content, Items } from "../../statics/staticValues.js";
-import { user } from "./userData.js"
 
 let database = storyLevelDatabase;
 

@@ -1,434 +1,358 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="main.css" />
-    <title>Spider Web</title>
-  </head>
-  <body>
-    <div class="mask">
-      <div class="banter-loader">
-        <div class="banter-loader__box"></div>
-        <div class="banter-loader__box"></div>
-        <div class="banter-loader__box"></div>
-        <div class="banter-loader__box"></div>
-        <div class="banter-loader__box"></div>
-        <div class="banter-loader__box"></div>
-        <div class="banter-loader__box"></div>
-        <div class="banter-loader__box"></div>
-        <div class="banter-loader__box"></div>
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="main.css" />
+  <title>Spider Web</title>
+
+  <script src="https://yandex.ru/games/sdk/v2"></script>
+</head>
+
+<body>
+  <div class="mask">
+    <div class="banter-loader">
+      <div class="banter-loader__box"></div>
+      <div class="banter-loader__box"></div>
+      <div class="banter-loader__box"></div>
+      <div class="banter-loader__box"></div>
+      <div class="banter-loader__box"></div>
+      <div class="banter-loader__box"></div>
+      <div class="banter-loader__box"></div>
+      <div class="banter-loader__box"></div>
+      <div class="banter-loader__box"></div>
+    </div>
+  </div>
+  <header>
+    <nav class="header-navigation">
+      <ul class="header-navigation-list">
+        <li class="nav-btn">
+          <a href="./src/achievements/achievements.html">
+            <button class="header-navigation-btn">
+              <div class="header-navigation-icon-container">
+                <img src="./Sprites/Icons/Icon_Profile.png" alt="Profile" class="header-navigation-list-icon" />
+              </div>
+            </button>
+          </a>
+          <button class="header-navigation-btn" id="daily-btn">
+            <div class="header-navigation-icon-container">
+              <img src="./Sprites/Icons/Icon_Chest.png" alt="Profile" class="header-navigation-list-icon" />
+            </div>
+          </button>
+          <button class="header-navigation-btn" id="ads-btn-1">
+            <div class="header-navigation-icon-container"
+              style="position: relative; display: flex; justify-content: center;">
+              <img src="./Sprites/Icons/Icon_Ads.png" alt="Profile" class="header-navigation-list-icon" />
+              <p style="position: absolute; bottom: -70%; font-weight: bold; color: bisque; font-size: 1vw;">Rewarded
+              </p>
+            </div>
+          </button>
+          <button class="header-navigation-btn" id="ads-btn-2" style="margin-top: 2vw;">
+            <div class="header-navigation-icon-container"
+              style="position: relative; display: flex; justify-content: center;">
+              <img src="./Sprites/Icons/Icon_Ads.png" alt="Profile" class="header-navigation-list-icon" />
+              <p style="position: absolute; bottom: -70%; font-weight: bold; color: bisque; font-size: 1vw;">
+                Interstitial</p>
+            </div>
+          </button>
+        </li>
+        <li class="nav-btn">
+          <button class="header-navigation-btn" id="settings-btn">
+            <div class="header-navigation-icon-container">
+              <img src="./Sprites/Icons/Icon_Settings.png" alt="Settings" class="header-navigation-list-icon" />
+            </div>
+          </button>
+        </li>
+      </ul>
+    </nav>
+  </header>
+  <section class="logo">
+    <img src="./Sprites/Logos/Logo_RU.png" alt="Logo" class="logo-icon" />
+  </section>
+  <div class="popup daily-bonuses hidden" id="daily-bonuses">
+    <div class="popup-content">
+      <div class="popup-header">
+        <h3>Ежедневные бонусы</h3>
+        <img src="./Sprites/Icons/Icon_Close.png" alt="close" id="close-popup-daily" class="close-popup" />
+      </div>
+      <div class="daily-boosters-container">
+        <div class="regular-daily">
+          <div class="booster">
+            <span class="completed-flag">Готово</span>
+            <span class="booster-title">День 1</span>
+            <img src="./Sprites/Icons/Icon_Energy.png" alt="hint" class="booster-icon" />
+            <span class="booster-counter">2</span>
+            <div class="complete-overlay"> Выполнено </div>
+          </div>
+          <div class="booster">
+            <span class="completed-flag">Готово</span>
+            <span class="booster-title">День 2</span>
+            <img src="./Sprites/Icons/Icon_Hint.png" alt="hint" class="booster-icon" />
+            <span class="booster-counter">3</span>
+            <div class="complete-overlay"> Выполнено </div>
+          </div>
+          <div class="booster">
+            <span class="completed-flag">Готово</span>
+            <span class="booster-title">День 3</span>
+            <img src="./Sprites/Icons/Icon_Energy.png" alt="hint" class="booster-icon" />
+            <span class="booster-counter">5</span>
+            <div class="complete-overlay"> Выполнено </div>
+          </div>
+          <div class="booster">
+            <span class="completed-flag">Готово</span>
+            <span class="booster-title">День 4</span>
+            <img src="./Sprites/Icons/Icon_Mage.png" alt="hint" class="booster-icon" />
+            <span class="booster-counter">3</span>
+            <div class="complete-overlay"> Выполнено </div>
+          </div>
+          <div class="booster">
+            <span class="completed-flag">Готово</span>
+            <span class="booster-title">День 5</span>
+            <img src="./Sprites/Icons/Icon_Energy.png" alt="hint" class="booster-icon" />
+            <span class="booster-counter">10</span>
+            <div class="complete-overlay"> Выполнено </div>
+          </div>
+          <div class="booster">
+            <span class="completed-flag">Готово</span>
+            <span class="booster-title">День 3</span>
+            <img src="./Sprites/Icons/Icon_Undo.png" alt="hint" class="booster-icon" />
+            <span class="booster-counter">5</span>
+            <div class="complete-overlay"> Выполнено </div>
+          </div>
+        </div>
+        <div class="special-booster">
+          <span class="completed-flag">Готово</span>
+          <span class="special-booster-title">День 7</span>
+          <img src="./Sprites/Icons/Icon_Chest.png" alt="hint" class="special-booster-icon" />
+          <span class="booster-counter">Специальная награда</span>
+          <div class="complete-overlay"> Выполнено </div>
+        </div>
       </div>
     </div>
-    <header>
-      <nav class="header-navigation">
-        <ul class="header-navigation-list">
-          <li class="nav-btn">
-            <a href="./src/achievements/achievements.html">
-              <button class="header-navigation-btn">
+  </div>
+  <div class="popup regular-bonuses hidden" id="regular-bonuses">
+    <div class="popup-content">
+      <div class="web-mask"></div>
+      <div class="popup-header">
+        <h3>Бонусы</h3>
+        <img src="./Sprites/Icons/Icon_Close.png" alt="close" id="close-popup-regular" class="close-popup" />
+      </div>
+      <div class="regular-boosters-container">
+        <div class="booster">
+          <div class="booster-type">
+            <img src="./Sprites/Icons/Icon_Energy.png" alt="arrow" class="booster-icon" />
+            <span class="booster-counter">5</span>
+          </div>
+          <button class="start-level-btn" id="play-btn">
+            <span class="start-level-btn-title">Бесплатно</span>
+            <img src="./Sprites/Icons/Icon_Ads.png" alt="Ads" class="btn-info-icon" />
+          </button>
+        </div>
+        <div class="booster">
+          <div class="booster-type">
+            <img src="./Sprites/Icons/Icon_Hint.png" alt="arrow" class="booster-icon" />
+            <span class="booster-counter">4</span>
+          </div>
+          <button class="start-level-btn" id="play-btn">
+            <span class="start-level-btn-title">Бесплатно</span>
+            <img src="./Sprites/Icons/Icon_Ads.png" alt="Ads" class="btn-info-icon" />
+          </button>
+        </div>
+        <div class="booster">
+          <div class="booster-type">
+            <img src="./Sprites/Icons/Icon_Mage.png" alt="arrow" class="booster-icon" />
+            <span class="booster-counter">2</span>
+          </div>
+          <button class="start-level-btn" id="play-btn">
+            <span class="start-level-btn-title">Бесплатно</span>
+            <img src="./Sprites/Icons/Icon_Ads.png" alt="Ads" class="btn-info-icon" />
+          </button>
+        </div>
+        <div class="booster">
+          <div class="booster-type">
+            <img src="./Sprites/Icons/Icon_Undo.png" alt="arrow" class="booster-icon" />
+            <span class="booster-counter">5</span>
+          </div>
+          <button class="start-level-btn" id="play-btn">
+            <span class="start-level-btn-title">Бесплатно</span>
+            <img src="./Sprites/Icons/Icon_Ads.png" alt="Ads" class="btn-info-icon" />
+          </button>
+        </div>
+        <div class="booster">
+          <div class="booster-type">
+            <img src="./Sprites/Icons/Icon_Time.png" alt="arrow" class="booster-icon" />
+            <span class="booster-counter">1</span>
+          </div>
+          <button class="start-level-btn" id="play-btn">
+            <span class="start-level-btn-title">Бесплатно</span>
+            <img src="./Sprites/Icons/Icon_Ads.png" alt="Ads" class="btn-info-icon" />
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="popup settings hidden" id="settings">
+    <div class="popup-content">
+      <div class="popup-header">
+        <h3>Настройки</h3>
+        <img src="./Sprites/Icons/Icon_Close.png" alt="close" id="close-popup-settings" class="close-popup" />
+      </div>
+      <div class="settings-panel">
+        <div class="setting-btn-container">
+          <button class="header-navigation-btn">
+            <img src="./Sprites/Icons/Icon_Music_Off.png" alt="Icon_Music_Off" class="header-navigation-list-icon" />
+          </button>
+          <span class="settings-btn-title">Музыка</span>
+        </div>
+        <div class="setting-btn-container">
+          <button class="header-navigation-btn">
+            <img src="./Sprites/Icons/Icon_Sound_Off.png" alt="Icon_Sound_Off" class="header-navigation-list-icon" />
+          </button>
+          <span class="settings-btn-title">Звук</span>
+        </div>
+        <div class="setting-btn-container">
+          <button class="header-navigation-btn">
+            <img src="./Sprites/Icons/Icon_Tutorial.png " alt="Tutorial" class="header-navigation-list-icon" />
+          </button>
+          <span class="settings-btn-title">Обучение</span>
+        </div>
+        <div class="setting-btn-container">
+          <button class="special-language-btn header-navigation-btn" id="lang-btn">
+            <img src="./Sprites/Lang/ru.png " alt="Lang" class="header-navigation-list-icon" />
+          </button>
+          <span class="settings-btn-title">Язык</span>
+        </div>
+      </div>
+      <div class="version">
+        <span class="version-title">v0.0.2.19</span>
+      </div>
+    </div>
+  </div>
+  <main class="main-content">
+    <section class="btn-panel">
+      <div class="main-panel-btn-container-1">
+        <a href="./src/playground/playground.html?levelID=level_def_s_1">
+          <button class="main-panel-btn main-panel-btn-1">
+            <span class="main-panel-btn-title">Одна масть</span>
+            <span class="main-panel-btn-level">Паук</span>
+          </button>
+        </a>
+      </div>
+      <div class="main-panel-btn-container-2">
+        <a href="./src/playground/playground.html?levelID=level_def_s_2">
+          <button class="main-panel-btn main-panel-btn-2">
+            <span class="main-panel-btn-title">Две масти</span>
+            <span class="main-panel-btn-level">Паук</span>
+          </button>
+        </a>
+      </div>
+      <div class="main-panel-btn-container-3">
+        <a href="./src/playground/playground.html?levelID=level_def_s_4">
+          <button class="main-panel-btn main-panel-btn-3">
+            <span class="main-panel-btn-title">Четыре масти</span>
+            <span class="main-panel-btn-level">Паук</span>
+          </button>
+        </a>
+      </div>
+      <div class="main-panel-btn-container-4">
+        <a href="./src/playground/playground.html?levelID=level_def_sl_1">
+          <button class="main-panel-btn main-panel-btn-4">
+            <span class="main-panel-btn-title">Одна масть</span>
+            <span class="main-panel-btn-level">Паучиха</span>
+          </button>
+        </a>
+      </div>
+      <div class="main-panel-btn-container-5">
+        <a href="./src/playground/playground.html?levelID=level_def_sl_2">
+          <button class="main-panel-btn main-panel-btn-5">
+            <span class="main-panel-btn-title">Две масти</span>
+            <span class="main-panel-btn-level">Паучиха</span>
+          </button>
+        </a>
+      </div>
+      <div class="main-panel-btn-container-6">
+        <a href="./src/playground/playground.html?levelID=level_def_sl_4">
+          <button class="main-panel-btn main-panel-btn-6">
+            <span class="main-panel-btn-title">Четыре масти</span>
+            <span class="main-panel-btn-level">Паучиха</span>
+          </button>
+        </a>
+      </div>
+    </section>
+  </main>
+  <footer>
+    <section class="footer-container">
+      <div class="absolute-footer">
+        <ul>
+          <li>
+            <a href="./src/StoryMode/storyMode.html">
+              <button class="control-btn">
                 <div class="header-navigation-icon-container">
-                  <img
-                    src="./Sprites/Icons/Icon_Profile.png"
-                    alt="Profile"
-                    class="header-navigation-list-icon"
-                  />
+                  <img src="./Sprites/Icons/Icon_Story.png" alt="StoryMode" class="control-button-list-icon" />
                 </div>
               </button>
             </a>
-            <button class="header-navigation-btn" id="daily-btn">
-              <div class="header-navigation-icon-container">
-                <img
-                  src="./Sprites/Icons/Icon_Chest.png"
-                  alt="Profile"
-                  class="header-navigation-list-icon"
-                />
-              </div>
-            </button>
+            <span class="control-button-title">Режим История</span>
           </li>
-          <li class="nav-btn">
-            <button class="header-navigation-btn" id="settings-btn">
-              <div class="header-navigation-icon-container">
-                <img
-                  src="./Sprites/Icons/Icon_Settings.png"
-                  alt="Settings"
-                  class="header-navigation-list-icon"
-                />
-              </div>
-            </button>
-          </li>
-        </ul>
-      </nav>
-    </header>
-    <section class="logo">
-      <img src="./Sprites/Logos/Logo_RU.png" alt="Logo" class="logo-icon" />
-    </section>
-    <div class="popup daily-bonuses hidden" id="daily-bonuses">
-      <div class="popup-content">
-        <div class="popup-header">
-          <h3>Ежедневные бонусы</h3>
-          <img
-            src="./Sprites/Icons/Icon_Close.png"
-            alt="close"
-            id="close-popup-daily"
-            class="close-popup"
-          />
-        </div>
-        <div class="daily-boosters-container">
-          <div class="regular-daily">
-            <div class="booster">
-              <span class="completed-flag">Готово</span>
-              <span class="booster-title">День 1</span>
-              <img
-                src="./Sprites/Icons/Icon_Energy.png"
-                alt="hint"
-                class="booster-icon"
-              />
-              <span class="booster-counter">2</span>
-            </div>
-            <div class="booster">
-              <span class="completed-flag">Готово</span>
-              <span class="booster-title">День 2</span>
-              <img
-                src="./Sprites/Icons/Icon_Hint.png"
-                alt="hint"
-                class="booster-icon"
-              />
-              <span class="booster-counter">3</span>
-            </div>
-            <div class="booster">
-              <span class="completed-flag">Готово</span>
-              <span class="booster-title">День 3</span>
-              <img
-                src="./Sprites/Icons/Icon_Energy.png"
-                alt="hint"
-                class="booster-icon"
-              />
-              <span class="booster-counter">5</span>
-            </div>
-            <div class="booster">
-              <span class="completed-flag">Готово</span>
-              <span class="booster-title">День 4</span>
-              <img
-                src="./Sprites/Icons/Icon_Mage.png"
-                alt="hint"
-                class="booster-icon"
-              />
-              <span class="booster-counter">3</span>
-            </div>
-            <div class="booster">
-              <span class="completed-flag">Готово</span>
-              <span class="booster-title">День 5</span>
-              <img
-                src="./Sprites/Icons/Icon_Energy.png"
-                alt="hint"
-                class="booster-icon"
-              />
-              <span class="booster-counter">10</span>
-            </div>
-            <div class="booster">
-              <span class="completed-flag">Готово</span>
-              <span class="booster-title">День 3</span>
-              <img
-                src="./Sprites/Icons/Icon_Undo.png"
-                alt="hint"
-                class="booster-icon"
-              />
-              <span class="booster-counter">5</span>
-            </div>
-          </div>
-          <div class="special-booster">
-            <span class="special-booster-title">День 7</span>
-            <img
-              src="./Sprites/Icons/Icon_Chest.png"
-              alt="hint"
-              class="special-booster-icon"
-            />
-            <span class="booster-counter">Специальная награда</span>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="popup regular-bonuses hidden" id="regular-bonuses">
-      <div class="popup-content">
-        <div class="web-mask"></div>
-        <div class="popup-header">
-          <h3>Бонусы</h3>
-          <img
-            src="./Sprites/Icons/Icon_Close.png"
-            alt="close"
-            id="close-popup-regular"
-            class="close-popup"
-          />
-        </div>
-        <div class="regular-boosters-container">
-          <div class="booster">
-            <div class="booster-type">
-              <img
-                src="./Sprites/Icons/Icon_Energy.png"
-                alt="arrow"
-                class="booster-icon"
-              />
-              <span class="booster-counter">5</span>
-            </div>
-            <button class="start-level-btn" id="play-btn">
-              <span class="start-level-btn-title">Бесплатно</span>
-              <img
-                src="./Sprites/Icons/Icon_Ads.png"
-                alt="Ads"
-                class="btn-info-icon"
-              />
-            </button>
-          </div>
-          <div class="booster">
-            <div class="booster-type">
-              <img
-                src="./Sprites/Icons/Icon_Hint.png"
-                alt="arrow"
-                class="booster-icon"
-              />
-              <span class="booster-counter">4</span>
-            </div>
-            <button class="start-level-btn" id="play-btn">
-              <span class="start-level-btn-title">Бесплатно</span>
-              <img
-                src="./Sprites/Icons/Icon_Ads.png"
-                alt="Ads"
-                class="btn-info-icon"
-              />
-            </button>
-          </div>
-          <div class="booster">
-            <div class="booster-type">
-              <img
-                src="./Sprites/Icons/Icon_Mage.png"
-                alt="arrow"
-                class="booster-icon"
-              />
-              <span class="booster-counter">2</span>
-            </div>
-            <button class="start-level-btn" id="play-btn">
-              <span class="start-level-btn-title">Бесплатно</span>
-              <img
-                src="./Sprites/Icons/Icon_Ads.png"
-                alt="Ads"
-                class="btn-info-icon"
-              />
-            </button>
-          </div>
-          <div class="booster">
-            <div class="booster-type">
-              <img
-                src="./Sprites/Icons/Icon_Undo.png"
-                alt="arrow"
-                class="booster-icon"
-              />
-              <span class="booster-counter">5</span>
-            </div>
-            <button class="start-level-btn" id="play-btn">
-              <span class="start-level-btn-title">Бесплатно</span>
-              <img
-                src="./Sprites/Icons/Icon_Ads.png"
-                alt="Ads"
-                class="btn-info-icon"
-              />
-            </button>
-          </div>
-          <div class="booster">
-            <div class="booster-type">
-              <img
-                src="./Sprites/Icons/Icon_Time.png"
-                alt="arrow"
-                class="booster-icon"
-              />
-              <span class="booster-counter">1</span>
-            </div>
-            <button class="start-level-btn" id="play-btn">
-              <span class="start-level-btn-title">Бесплатно</span>
-              <img
-                src="./Sprites/Icons/Icon_Ads.png"
-                alt="Ads"
-                class="btn-info-icon"
-              />
-            </button>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="popup settings hidden" id="settings">
-      <div class="popup-content">
-        <div class="popup-header">
-          <h3>Настройки</h3>
-          <img
-            src="./Sprites/Icons/Icon_Close.png"
-            alt="close"
-            id="close-popup-settings"
-            class="close-popup"
-          />
-        </div>
-        <div class="settings-panel">
-          <div class="setting-btn-container">
-            <button class="header-navigation-btn">
-              <img
-                src="./Sprites/Icons/Icon_Music_Off.png"
-                alt="Icon_Music_Off"
-                class="header-navigation-list-icon"
-              />
-            </button>
-            <span class="settings-btn-title">Музыка</span>
-          </div>
-          <div class="setting-btn-container">
-            <button class="header-navigation-btn">
-              <img
-                src="./Sprites/Icons/Icon_Sound_Off.png"
-                alt="Icon_Sound_Off"
-                class="header-navigation-list-icon"
-              />
-            </button>
-            <span class="settings-btn-title">Звук</span>
-          </div>
-          <div class="setting-btn-container">
-            <button class="header-navigation-btn">
-              <img
-                src="./Sprites/Icons/Icon_Tutorial.png "
-                alt="Tutorial"
-                class="header-navigation-list-icon"
-              />
-            </button>
-            <span class="settings-btn-title">Обучение</span>
-          </div>
-          <div class="setting-btn-container">
-            <button
-              class="special-language-btn header-navigation-btn"
-              id="lang-btn"
-            >
-              <img
-                src="./Sprites/Lang/ru.png "
-                alt="Lang"
-                class="header-navigation-list-icon"
-              />
-            </button>
-            <span class="settings-btn-title">Язык</span>
-          </div>
-        </div>
-        <div class="version">
-          <span class="version-title">v0.0.2.19</span>
-        </div>
-      </div>
-    </div>
-    <main class="main-content">
-      <section class="btn-panel">
-        <div class="main-panel-btn-container-1">
-          <a href="./src/playground/playground.html?levelID=level_def_s_1">
-            <button class="main-panel-btn main-panel-btn-1">
-              <span class="main-panel-btn-title">Одна масть</span>
-              <span class="main-panel-btn-level">Паук</span>
-            </button>
-          </a>
-        </div>
-        <div class="main-panel-btn-container-2">
-          <a href="./src/playground/playground.html?levelID=level_def_s_2">
-            <button class="main-panel-btn main-panel-btn-2">
-              <span class="main-panel-btn-title">Две масти</span>
-              <span class="main-panel-btn-level">Паук</span>
-            </button>
-          </a>
-        </div>
-        <div class="main-panel-btn-container-3">
-          <a href="./src/playground/playground.html?levelID=level_def_s_4">
-            <button class="main-panel-btn main-panel-btn-3">
-              <span class="main-panel-btn-title">Четыре масти</span>
-              <span class="main-panel-btn-level">Паук</span>
-            </button>
-          </a>
-        </div>
-        <div class="main-panel-btn-container-4">
-          <a href="./src/playground/playground.html?levelID=level_def_sl_1">
-            <button class="main-panel-btn main-panel-btn-4">
-              <span class="main-panel-btn-title">Одна масть</span>
-              <span class="main-panel-btn-level">Паучиха</span>
-            </button>
-          </a>
-        </div>
-        <div class="main-panel-btn-container-5">
-          <a href="./src/playground/playground.html?levelID=level_def_sl_2">
-            <button class="main-panel-btn main-panel-btn-5">
-              <span class="main-panel-btn-title">Две масти</span>
-              <span class="main-panel-btn-level">Паучиха</span>
-            </button>
-          </a>
-        </div>
-        <div class="main-panel-btn-container-6">
-          <a href="./src/playground/playground.html?levelID=level_def_sl_4">
-            <button class="main-panel-btn main-panel-btn-6">
-              <span class="main-panel-btn-title">Четыре масти</span>
-              <span class="main-panel-btn-level">Паучиха</span>
-            </button>
-          </a>
-        </div>
-      </section>
-    </main>
-    <footer>
-      <section class="footer-container">
-        <div class="absolute-footer">
-          <ul>
-            <li>
-              <a href="./src/StoryMode/storyMode.html">
-                <button class="control-btn">
-                  <div class="header-navigation-icon-container">
-                    <img
-                      src="./Sprites/Icons/Icon_Story.png"
-                      alt="StoryMode"
-                      class="control-button-list-icon"
-                    />
-                  </div>
-                </button>
-              </a>
-              <span class="control-button-title">Режим История</span>
-            </li>
-            <li>
-              <a href="./src/challenges/challenge.html">
-                <button class="control-btn">
-                  <div class="header-navigation-icon-container">
-                    <img
-                      src="./Sprites/Icons/Icon_Trial.png"
-                      alt="Icon_Trial"
-                      class="control-button-list-icon"
-                    />
-                  </div>
-                </button>
-              </a>
-              <span class="control-button-title">Испытания</span>
-            </li>
-            <li>
-              <a href="./src/Collection/collection.html">
-                <button class="control-btn">
-                  <div class="header-navigation-icon-container">
-                    <img
-                      src="./Sprites/Icons/Icon_Skins.png"
-                      alt="Icon_Skins"
-                      class="control-button-list-icon"
-                    />
-                  </div>
-                </button>
-              </a>
-              <span class="control-button-title">Коллекция</span>
-            </li>
-            <li>
-              <button class="control-btn" id="regular-btn">
+          <li>
+            <a href="./src/challenges/challenge.html">
+              <button class="control-btn">
                 <div class="header-navigation-icon-container">
-                  <img
-                    src="./Sprites/Icons/Icon_Booster.png"
-                    alt="Bonuses"
-                    class="control-button-list-icon"
-                  />
+                  <img src="./Sprites/Icons/Icon_Trial.png" alt="Icon_Trial" class="control-button-list-icon" />
                 </div>
               </button>
-              <span class="control-button-title">Бонусы</span>
-            </li>
-          </ul>
-        </div>
-      </section>
-    </footer>
-    <script src="index.js"></script>
-  </body>
+            </a>
+            <span class="control-button-title">Испытания</span>
+          </li>
+          <li>
+            <a href="./src/Collection/collection.html">
+              <button class="control-btn">
+                <div class="header-navigation-icon-container">
+                  <img src="./Sprites/Icons/Icon_Skins.png" alt="Icon_Skins" class="control-button-list-icon" />
+                </div>
+              </button>
+            </a>
+            <span class="control-button-title">Коллекция</span>
+          </li>
+          <li>
+            <button class="control-btn" id="regular-btn">
+              <div class="header-navigation-icon-container">
+                <img src="./Sprites/Icons/Icon_Booster.png" alt="Bonuses" class="control-button-list-icon" />
+              </div>
+            </button>
+            <span class="control-button-title">Бонусы</span>
+          </li>
+        </ul>
+      </div>
+    </section>
+  </footer>
+  <script>
+    let savesList = [];
+    let SDK = null;
+    let player = null;
+    let user = null;
+  </script>
+  <script type="module">
+    import { preload } from './src/loader/loader.js';
+    import { initializeSDK } from './src/scripts/sdk/sdk.js';
+    import { initialize } from './src/scripts/save_system/SaveSystem.js'
+    import User from './src/scripts/userData.js'
+
+    user = new User();
+
+
+    preload(async () => {
+      console.log('[index.html]=> start initializeSDK');
+      await initializeSDK();
+      console.log('[index.html]=> start initialize');
+      await initialize();
+      user.loadData();
+      console.log('[index.html]=> start import("./index.js")');
+      await import('./index.js')
+    })
+
+  </script>
+</body>
+
 </html>
