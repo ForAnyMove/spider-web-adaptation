@@ -132,6 +132,8 @@ main {
 .categories-btn:hover {
   border: 1px solid #42e0e0;
   border-radius: 2vh;
+  margin-top: -1px;
+  margin-bottom: -1px;
 }
 
 .active-btn {
@@ -156,7 +158,7 @@ main {
   scrollbar-width: none;
   -ms-overflow-style: none;
   width: 100%;
-  height: 100%;
+  height: 82vh;
 }
 
 .achievement {
@@ -180,7 +182,9 @@ main {
   margin: 0 1vw;
   gap: 1vw;
 }
-
+.achievement-lable{
+  max-width: 60%;
+}
 .achievement-icon {
   width: 8vh;
 }
@@ -232,10 +236,10 @@ main {
   background-color: #00000043;
   border-radius: 2vh;
   width: 8vh;
-  height: 8vh;
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
   border: none;
   -webkit-box-shadow: 5px 5px 5px -5px #0000008c;
   box-shadow: 0px 2px 2px 0 #00000074;
@@ -243,6 +247,8 @@ main {
 
 .energy-icon {
   width: 70%;
+  margin-top: 0.5vw;
+  margin-bottom: -1.5vh;
 }
 
 .energy-btn-title {
@@ -291,6 +297,39 @@ main {
 
   .header-navigation-list-icon {
     width: 10vw;
+  }
+  main{
+    width: 90vw;
+  }
+  .energy-counter{
+    width: 7vw;
+    margin: 2vh;
+  }
+  .energy-text{
+    font-size: 4vw;
+  }
+  .energy-counter>img{
+    width: 7.5vw;
+    right: -3vw;
+  }
+  .collection-navigation {
+    border-radius: 1.5vh;
+    margin-bottom: 2vh;
+    box-shadow: 0px 3px 5px 2px #0000007d;
+  }
+  .categories-btn{
+    font-size: 5.5vw;
+  }
+  .achievement-title{
+    text-wrap: wrap;
+    font-size: 1.7vh;
+  }
+  .energy-btn{
+    width: 10vh;
+    margin: 0 1vw;
+  }
+  .statistic-counter{
+    font-size: 2.5vh;
   }
 }
 
