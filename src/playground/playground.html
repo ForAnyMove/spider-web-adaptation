@@ -11,13 +11,15 @@
     <header>
       <ul class="header-interface-list">
         <li class="header-ui-container">
-          <button class="header-navigation-btn">
-            <img
-              src="../../Sprites/Icons/Icon_Home.png"
-              alt="Profile"
-              class="header-navigation-list-icon"
-            />
-          </button>
+          <a href="../../index.html" class="back-to">
+            <button class="header-navigation-btn">
+              <img
+                src="../../Sprites/Icons/Icon_Home.png"
+                alt="Profile"
+                class="header-navigation-list-icon"
+              />
+            </button>
+          </a>
         </li>
         <li class="header-ui-container">
           <div class="steps-counter-container" style="margin-top: 1%">
@@ -192,38 +194,36 @@
               ></div>
             </div>
             <style>
-
-              .story-mode-level-container{
+              .story-mode-level-container {
                 display: flex;
                 justify-content: space-between;
                 width: 80%;
               }
 
-              .story-mode-cards-container{
+              .story-mode-cards-container {
                 display: flex;
                 flex-direction: column-reverse;
               }
-              
-              .story-mode-cards-container>.card-element:not(:first-child){
+
+              .story-mode-cards-container > .card-element:not(:first-child) {
                 margin-bottom: -6vw;
               }
 
-              .first-column>.card-element:not(:first-child){
+              .first-column > .card-element:not(:first-child) {
                 transform: translate(30%);
               }
-              .second-column>.card-element:not(:first-child){
+              .second-column > .card-element:not(:first-child) {
                 transform: translate(15%);
               }
-              .third-column>.card-element:not(:first-child){
+              .third-column > .card-element:not(:first-child) {
                 /* transform: translate(0%); */
               }
-              .fourth-column>.card-element:not(:first-child){
+              .fourth-column > .card-element:not(:first-child) {
                 transform: translate(-15%);
               }
-              .fifth-column>.card-element:not(:first-child){
+              .fifth-column > .card-element:not(:first-child) {
                 transform: translate(-30%);
               }
-
             </style>
           </div>
         </div>
