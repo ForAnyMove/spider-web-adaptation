@@ -1,124 +1,303 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="playground.css" />
+    <title>Spider</title>
+  </head>
 
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link rel="stylesheet" href="playground.css" />
-  <title>Spider</title>
-</head>
-
-<body id="background">
-  <header>
-    <ul class="header-interface-list">
-      <li class="header-ui-container">
-        <button class="header-navigation-btn">
-          <img src="../../Sprites/Icons/Icon_Home.png" alt="Profile" class="header-navigation-list-icon" />
-        </button>
-      </li>
-      <li class="header-ui-container">
-        <div class="steps-counter-container" style="margin-top: 1%;">
-          <div class="header-timer hidden timer">
-            <img src="../../Sprites/Icons/Icon_Stopwatch.png" alt="step" class="step-icon" style="margin-bottom: -3%" />
+  <body id="background">
+    <header>
+      <ul class="header-interface-list">
+        <li class="header-ui-container">
+          <button class="header-navigation-btn">
+            <img
+              src="../../Sprites/Icons/Icon_Home.png"
+              alt="Profile"
+              class="header-navigation-list-icon"
+            />
+          </button>
+        </li>
+        <li class="header-ui-container">
+          <div class="steps-counter-container" style="margin-top: 1%">
+            <div class="header-timer hidden timer">
+              <img
+                src="../../Sprites/Icons/Icon_Stopwatch.png"
+                alt="step"
+                class="step-icon"
+                style="margin-bottom: -3%"
+              />
+            </div>
+            <div class="steps-counter">
+              <span class="counter-text" id="step-counter">1</span>
+              <img
+                src="../../Sprites/Icons/Icon_Step.png"
+                alt="step"
+                class="step-icon"
+              />
+            </div>
           </div>
-          <div class="steps-counter">
-            <span class="counter-text" id="step-counter">1</span>
-            <img src="../../Sprites/Icons/Icon_Step.png" alt="step" class="step-icon" />
-          </div>
-        </div>
-      </li>
-      <li class="header-ui-container">
-        <button class="header-navigation-btn">
-          <img src="../../Sprites/Icons/Icon_Settings.png" alt="Profile" class="header-navigation-list-icon" />
-        </button>
-      </li>
-    </ul>
-  </header>
-  <main id="main">
-    <div class="main-container">
-      <div class="active-cards-zone">
-        <div class="active-cards-container playable-card-column">
-        </div>
-        <div class="active-cards-container playable-card-column">
-        </div>
-        <div class="active-cards-container playable-card-column">
-        </div>
-        <div class="active-cards-container playable-card-column">
-        </div>
-        <div class="active-cards-container playable-card-column">
-        </div>
-        <div class="active-cards-container playable-card-column">
-        </div>
-        <div class="active-cards-container playable-card-column">
-        </div>
-        <div class="active-cards-container playable-card-column">
-        </div>
-        <div class="active-cards-container playable-card-column">
-        </div>
-        <div class="active-cards-container playable-card-column">
-        </div>
-      </div>
-      <div class="bottom-cards-zone">
-        <div class="cards-container">
-        </div>
-        <div class="cards-container">
-        </div>
-        <div class="cards-container">
-        </div>
-        <div class="cards-container">
-        </div>
-        <div class="cards-container">
-        </div>
-        <div class="cards-container">
-        </div>
-        <div class="cards-container">
-        </div>
-        <div class="cards-container">
-        </div>
-        <div class="cards-container hidden"></div>
-        <div class="extra-cards-container" id="extra-cards-container">
-        </div>
-      </div>
-    </div>
-  </main>
-  <footer>
-    <nav>
-      <ul class="footer-control-panel">
-        <li>
-          <button class="control-btn">
-            <img src="../../Sprites/Icons/Icon_Restart.png" alt="Icon_Skins" class="control-button-list-icon"
-              id="restart-button" />
-          </button>
         </li>
-        <li>
-          <button class="control-btn">
-            <img src="../../Sprites/Icons/Icon_Hint.png" alt="Icon_Skins" class="control-button-list-icon"
-              id="hint-button" />
-          </button>
-        </li>
-        <li>
-          <button class="control-btn">
-            <img src="../../Sprites/Icons/Icon_Undo.png" alt="Icon_Skins" class="control-button-list-icon"
-              id="undo-button" />
-          </button>
-        </li>
-        <li>
-          <button class="control-btn">
-            <img src="../../Sprites/Icons/Icon_Mage.png" alt="Icon_Skins" class="control-button-list-icon"
-              id="mage-button" />
-          </button>
-        </li>
-        <li>
-          <button class="control-btn">
-            <img src="../../Sprites/Icons/Icon_Time.png" alt="Icon_Skins" class="control-button-list-icon"
-              id="time-button" />
+        <li class="header-ui-container">
+          <button class="header-navigation-btn">
+            <img
+              src="../../Sprites/Icons/Icon_Settings.png"
+              alt="Profile"
+              class="header-navigation-list-icon"
+            />
           </button>
         </li>
       </ul>
-    </nav>
-  </footer>
-  <script type="module" src="../scripts/animator.js"></script>
-  <script type="module" src="./playground.js"></script>
-</body>
+    </header>
+    <main id="main">
+      <div class="main-container">
+        <div class="active-cards-zone">
+          <div class="active-cards-container playable-card-column"></div>
+          <div class="active-cards-container playable-card-column"></div>
+          <div class="active-cards-container playable-card-column"></div>
+          <div class="active-cards-container playable-card-column"></div>
+          <div class="active-cards-container playable-card-column"></div>
+          <div class="active-cards-container playable-card-column"></div>
+          <div class="active-cards-container playable-card-column"></div>
+          <div class="active-cards-container playable-card-column"></div>
+          <div class="active-cards-container playable-card-column"></div>
+          <div class="active-cards-container playable-card-column"></div>
+        </div>
+        <div class="story-mode-card-zone">
+          <div class="story-mode-level-container" id="story-mode-level-1">
+            <div class="story-mode-cards-container first-column first-column">
+              <div
+                id="card_nine_spades_01"
+                class="card-element closed"
+                style="
+                  background-size: 100% 100%;
+                  background-image: url('../../Sprites/CardBacks/Card_Back_01.png');
+                  position: relative;
+                  left: 0px;
+                  top: 0px;
+                "
+              ></div>
+              <div
+                id="card_three_spades_01"
+                class="card-element opened first"
+                style="
+                  background-size: 100% 100%;
+                  background-image: url('../../Sprites/Card Skins/Release/Skin_01/three_spades_01.png');
+                  position: relative;
+                  left: 0px;
+                  top: 0px;
+                  scale: 0.983337 1;
+                "
+              ></div>
+            </div>
+            <div class="story-mode-cards-container second-column">
+              <div
+                id="card_nine_spades_01"
+                class="card-element closed"
+                style="
+                  background-size: 100% 100%;
+                  background-image: url('../../Sprites/CardBacks/Card_Back_01.png');
+                  position: relative;
+                  left: 0px;
+                  top: 0px;
+                "
+              ></div>
+              <div
+                id="card_three_spades_01"
+                class="card-element opened first"
+                style="
+                  background-size: 100% 100%;
+                  background-image: url('../../Sprites/Card Skins/Release/Skin_01/three_spades_01.png');
+                  position: relative;
+                  left: 0px;
+                  top: 0px;
+                  scale: 0.983337 1;
+                "
+              ></div>
+            </div>
+            <div class="story-mode-cards-container third-column">
+              <div
+                id="card_nine_spades_01"
+                class="card-element closed"
+                style="
+                  background-size: 100% 100%;
+                  background-image: url('../../Sprites/CardBacks/Card_Back_01.png');
+                  position: relative;
+                  left: 0px;
+                  top: 0px;
+                "
+              ></div>
+              <div
+                id="card_three_spades_01"
+                class="card-element opened first"
+                style="
+                  background-size: 100% 100%;
+                  background-image: url('../../Sprites/Card Skins/Release/Skin_01/three_spades_01.png');
+                  position: relative;
+                  left: 0px;
+                  top: 0px;
+                  scale: 0.983337 1;
+                "
+              ></div>
+            </div>
+            <div class="story-mode-cards-container fourth-column">
+              <div
+                id="card_nine_spades_01"
+                class="card-element closed"
+                style="
+                  background-size: 100% 100%;
+                  background-image: url('../../Sprites/CardBacks/Card_Back_01.png');
+                  position: relative;
+                  left: 0px;
+                  top: 0px;
+                "
+              ></div>
+              <div
+                id="card_three_spades_01"
+                class="card-element opened first"
+                style="
+                  background-size: 100% 100%;
+                  background-image: url('../../Sprites/Card Skins/Release/Skin_01/three_spades_01.png');
+                  position: relative;
+                  left: 0px;
+                  top: 0px;
+                  scale: 0.983337 1;
+                "
+              ></div>
+            </div>
+            <div class="story-mode-cards-container fifth-column">
+              <div
+                id="card_nine_spades_01"
+                class="card-element closed"
+                style="
+                  background-size: 100% 100%;
+                  background-image: url('../../Sprites/CardBacks/Card_Back_01.png');
+                  position: relative;
+                  left: 0px;
+                  top: 0px;
+                "
+              ></div>
+              <div
+                id="card_three_spades_01"
+                class="card-element opened first"
+                style="
+                  background-size: 100% 100%;
+                  background-image: url('../../Sprites/Card Skins/Release/Skin_01/three_spades_01.png');
+                  position: relative;
+                  left: 0px;
+                  top: 0px;
+                  scale: 0.983337 1;
+                "
+              ></div>
+            </div>
+            <style>
 
+              .story-mode-level-container{
+                display: flex;
+                justify-content: space-between;
+                width: 80%;
+              }
+
+              .story-mode-cards-container{
+                display: flex;
+                flex-direction: column-reverse;
+              }
+              
+              .story-mode-cards-container>.card-element:not(:first-child){
+                margin-bottom: -6vw;
+              }
+
+              .first-column>.card-element:not(:first-child){
+                transform: translate(30%);
+              }
+              .second-column>.card-element:not(:first-child){
+                transform: translate(15%);
+              }
+              .third-column>.card-element:not(:first-child){
+                /* transform: translate(0%); */
+              }
+              .fourth-column>.card-element:not(:first-child){
+                transform: translate(-15%);
+              }
+              .fifth-column>.card-element:not(:first-child){
+                transform: translate(-30%);
+              }
+
+            </style>
+          </div>
+        </div>
+        <div class="bottom-cards-zone">
+          <div class="cards-container"></div>
+          <div class="cards-container"></div>
+          <div class="cards-container"></div>
+          <div class="cards-container"></div>
+          <div class="cards-container"></div>
+          <div class="cards-container"></div>
+          <div class="cards-container"></div>
+          <div class="cards-container"></div>
+          <div class="cards-container hidden"></div>
+          <div class="extra-cards-container" id="extra-cards-container"></div>
+        </div>
+      </div>
+    </main>
+    <footer>
+      <nav>
+        <ul class="footer-control-panel">
+          <li>
+            <button class="control-btn">
+              <img
+                src="../../Sprites/Icons/Icon_Restart.png"
+                alt="Icon_Skins"
+                class="control-button-list-icon"
+                id="restart-button"
+              />
+            </button>
+          </li>
+          <li>
+            <button class="control-btn">
+              <img
+                src="../../Sprites/Icons/Icon_Hint.png"
+                alt="Icon_Skins"
+                class="control-button-list-icon"
+                id="hint-button"
+              />
+            </button>
+          </li>
+          <li>
+            <button class="control-btn">
+              <img
+                src="../../Sprites/Icons/Icon_Undo.png"
+                alt="Icon_Skins"
+                class="control-button-list-icon"
+                id="undo-button"
+              />
+            </button>
+          </li>
+          <li>
+            <button class="control-btn">
+              <img
+                src="../../Sprites/Icons/Icon_Mage.png"
+                alt="Icon_Skins"
+                class="control-button-list-icon"
+                id="mage-button"
+              />
+            </button>
+          </li>
+          <li>
+            <button class="control-btn">
+              <img
+                src="../../Sprites/Icons/Icon_Time.png"
+                alt="Icon_Skins"
+                class="control-button-list-icon"
+                id="time-button"
+              />
+            </button>
+          </li>
+        </ul>
+      </nav>
+    </footer>
+    <script type="module" src="../scripts/animator.js"></script>
+    <script type="module" src="./playground.js"></script>
+  </body>
 </html>
