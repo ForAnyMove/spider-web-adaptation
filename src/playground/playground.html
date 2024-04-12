@@ -5,7 +5,10 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <link rel="stylesheet" href="playground.css" />
-  <title>Spider</title>
+  <link rel="stylesheet" href="../loader/loader.css" />
+  <title>Playground</title>
+
+  <script src="https://yandex.ru/games/sdk/v2"></script>
 </head>
 
 <body id="background">
@@ -255,7 +258,28 @@
     import User from '../scripts/userData.js'
 
     user = new User();
-
+    // const data = {
+    //   "user_01": {
+    //     "items": [
+    //       { "type": "energy", "count": 0 },
+    //       { "type": "booster_hint", "count": 0 },
+    //       { "type": "booster_undo", "count": 0 },
+    //       { "type": "booster_mage", "count": 0 },
+    //       { "type": "booster_time", "count": 0 }],
+    //     "availableContent": [
+    //       { "id": "card_skin_01", "type": "cardSkin" },
+    //       { "id": "card_back_skin_01", "type": "cardBack" },
+    //       { "id": "background_01", "type": "background" },
+    //       { "id": "card_skin_02", "type": "cardSkin" },
+    //       { "id": "card_back_skin_02", "type": "cardBack" },
+    //       { "id": "background_02", "type": "background" }],
+    //     "usedContent": [
+    //       { "id": "card_skin_02", "type": "cardSkin" },
+    //       { "id": "card_back_skin_01", "type": "cardBack" },
+    //       { "id": "background_02", "type": "background" }],
+    //     "achievements": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+    //   }
+    // }['user_01'];
     preload(async () => {
       console.log('[playground.html]=> start initializeSDK');
       await initializeSDK();
@@ -263,6 +287,7 @@
       console.log('[playground.html]=> start initialize');
       await initialize();
       user.loadData();
+      // user.loadTestData(data);
       console.log('[playground.html]=> start import("./playground.js")');
       await import('./playground.js')
     })

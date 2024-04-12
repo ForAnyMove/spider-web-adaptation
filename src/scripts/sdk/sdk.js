@@ -10,7 +10,7 @@ async function showRewarded(openCallback, closeCallback, rewardCallback, errorCa
     if (isLocalHost()) {
         error("[showRewarded] local host usage", "sdk", "sdk");
 
-        closeCallback?.();
+        rewardCallback?.();
         return;
     }
 

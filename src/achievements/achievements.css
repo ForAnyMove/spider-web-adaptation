@@ -1,6 +1,10 @@
 * {
   margin: 0;
   padding: 0;
+  user-select: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
 }
 
 @viewport {
@@ -182,9 +186,11 @@ main {
   margin: 0 1vw;
   gap: 1vw;
 }
-.achievement-lable{
+
+.achievement-lable {
   max-width: 60%;
 }
+
 .achievement-icon {
   width: 8vh;
 }
@@ -298,37 +304,46 @@ main {
   .header-navigation-list-icon {
     width: 10vw;
   }
-  main{
+
+  main {
     width: 90vw;
   }
-  .energy-counter{
+
+  .energy-counter {
     width: 7vw;
     margin: 2vh;
   }
-  .energy-text{
+
+  .energy-text {
     font-size: 4vw;
   }
-  .energy-counter>img{
+
+  .energy-counter>img {
     width: 7.5vw;
     right: -3vw;
   }
+
   .collection-navigation {
     border-radius: 1.5vh;
     margin-bottom: 2vh;
     box-shadow: 0px 3px 5px 2px #0000007d;
   }
-  .categories-btn{
+
+  .categories-btn {
     font-size: 5.5vw;
   }
-  .achievement-title{
+
+  .achievement-title {
     text-wrap: wrap;
     font-size: 1.7vh;
   }
-  .energy-btn{
+
+  .energy-btn {
     width: 10vh;
     margin: 0 1vw;
   }
-  .statistic-counter{
+
+  .statistic-counter {
     font-size: 2.5vh;
   }
 }

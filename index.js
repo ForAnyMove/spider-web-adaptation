@@ -54,7 +54,7 @@ function setupReqularBonusesButtons() {
   for (let i = 0; i < buttons.length; i++) {
     const button = buttons[i];
     button.onclick = function () {
-      user.addItem(itemCountPairs[i].item, itemCountPairs[i].count);
+      showRewarded(null, null, () => user.addItem(itemCountPairs[i].item, itemCountPairs[i].count), null);
     }
   }
 }
@@ -101,18 +101,6 @@ function setupDailyRewards() {
       }
     }
   }
-}
-
-const el1 = document.getElementById('ads-btn-1');
-el1.onclick = function () {
-  console.log('[index.js] Try load rewardsd');
-  showRewarded();
-}
-
-const el2 = document.getElementById('ads-btn-2');
-el2.onclick = function () {
-  console.log('[index.js] Try load interstitial');
-  showInterstitial();
 }
 
 setupDailyRewards();

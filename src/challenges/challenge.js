@@ -1,11 +1,7 @@
 import { trialLevelDatabase } from "../scripts/data/level_databases.js";
 import { createButton, createElement, createHSpace, createImage, createTextH3, createTextP, createTextSpan, createVSpace, getIconByContent, getIconByItem, getIconByPattern, getIconBySuit, getPatternName, getSuitName } from "../scripts/helpers.js";
+import { showRewarded } from "../scripts/sdk/sdk.js";
 import { Items } from "../scripts/statics/staticValues.js";
-
-user.addItem(Items.BoosterHint, 10);
-user.addItem(Items.BoosterUndo, 5);
-user.addItem(Items.BoosterMage, 2);
-user.addItem(Items.BoosterTime, 1);
 
 const parent = document.getElementsByClassName('challenges')[0];
 
@@ -21,7 +17,7 @@ function createBooster(itemType, title, user, parent) {
                 backgroundImage: 'url(../../Sprites/Buttons/Used_plus.png)',
                 backgroundSize: '100% 100%',
             }, div, () => {
-                user.addItem(itemType);
+                showRewarded(null, null, () => user.addItem(itemType), null);
             });
             createImage(['booster-icon'], null, div, getIconByItem(itemType));
             const count = createTextSpan(['booster-counter'], null, div, user.getItemCount(itemType));
@@ -131,6 +127,7 @@ function createUnlockedLevelInstance(data) {
             {
                 const startButton = createButton(['start-level-btn'], null, levelStartContainer, () => {
 
+                    window.location.href = `../playground/playground.html?levelID=level_trial_${currentLevel}`;
                     // TODO: level scene starting with ID parameter
                 });
                 startButton.id = 'play-btn';
