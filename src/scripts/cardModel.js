@@ -61,7 +61,9 @@ export default class Card {
             this.setOpened();
             DOChangeValue(() => 0, (value) => {
                 this.domElement.style.scale = `${value} 1`;
-            }, 1, 0.03, Ease.SineInOut)
+            }, 1, 0.03, Ease.SineInOut).onComplete(() => {
+                this.domElement.style.scale = `1 1`;
+            })
         });
     }
 
@@ -74,7 +76,9 @@ export default class Card {
             this.setClosed();
             DOChangeValue(() => 0, (value) => {
                 this.domElement.style.scale = `${value} 1`;
-            }, 1, 0.03, Ease.SineInOut)
+            }, 1, 0.03, Ease.SineInOut).onComplete(() => {
+                this.domElement.style.scale = `1 1`;
+            })
         });
     }
 
