@@ -1,6 +1,8 @@
+import { statistics } from "./gameStatistics.js";
 import { levelManagement } from "./levelManagement.js";
 import { log } from "./logger.js";
-import { Items } from "../../statics/staticValues.js";
+import { LevelType } from "./statics/enums.js";
+// import { Items } from "./statics/staticValues.js";
 
 function startLevel(database) {
     const selectionOptions = levelManagement.selectLevel(database, database.currentLevel);
@@ -8,42 +10,103 @@ function startLevel(database) {
     if (selectionOptions == null) return;
 
     let message = `Start level №_${levelManagement.selectedOrder}`;
+    console.log(message);
 
-    let pass = selectionOptions.pass;
+    // let pass = selectionOptions.pass;
 
-    if (pass != null) {
-        message += `\n - Has pass requirement: ${pass.type} (${pass.count})`;
-    } else {
-        message += `\n - Has no pass requirement, level can be started`;
-        log(message);
-        return true;
-    }
+    // if (pass != null) {
+    //     message += `\n - Has pass requirement: ${pass.type} (${pass.count})`;
+    // } else {
+    //     message += `\n - Has no pass requirement, level can be started`;
+    //     log(message);
+    //     return true;
+    // }
 
-    let passed = false;
+    // let passed = false;
 
-    for (let i = 0; i < user.items.length; i++) {
-        const element = user.items[i];
-        if (element.type == Items.Energy && element.count >= pass.count) {
-            message += `\n - Has enougn required pass item: ${element.type} (${element.count})`;
-            user.removeItem(element.type, pass.count);
+    // for (let i = 0; i < user.items.length; i++) {
+    //     const element = user.items[i];
+    //     if (element.type == Items.Energy && element.count >= pass.count) {
+    //         message += `\n - Has enougn required pass item: ${element.type} (${element.count})`;
+    //         user.removeItem(element.type, pass.count);
 
-            message += `\n - Taken item: ${pass.type} (${pass.count})`;
-            message += `\n - User item left: ${element.type} (${element.count})`;
-            message += '\n - Level can be started\n\n';
+    //         message += `\n - Taken item: ${pass.type} (${pass.count})`;
+    //         message += `\n - User item left: ${element.type} (${element.count})`;
+    //         message += '\n - Level can be started\n\n';
 
-            passed = true;
-            break
-        } else {
-            message += `\n - Has no item: ${element.type} (${element.count}), need ${pass.type} (${pass.count})`;
-            message += '\n - Level can\'t be started';
-            message += '\n - Exit\n\n';
-            passed = false;
-            break;
+    //         passed = true;
+    //         break
+    //     } else {
+    //         message += `\n - Has no item: ${element.type} (${element.count}), need ${pass.type} (${pass.count})`;
+    //         message += '\n - Level can\'t be started';
+    //         message += '\n - Exit\n\n';
+    //         passed = false;
+    //         break;
+    //     }
+    // }
+
+    // log(message, "levelStarter");
+    // return passed;
+}
+
+function completeMode(rule) {
+    let message = `Win level ${rule}`;
+    console.log(message);
+
+    levelManagement.udpateGameCount(LevelType.Default, rule);
+    levelManagement.udpateGameRowCount(LevelType.Default, rule, true);
+
+    statistics.winCount.overall++;
+
+    for (let i = 0; i < statistics.winCount.byLevelType.length; i++) {
+        const element = statistics.winCount.byLevelType[i];
+        if (element.type == LevelType.Default) {
+            element.count++;
         }
     }
 
-    log(message, "levelStarter");
-    return passed;
+    for (let i = 0; i < statistics.winCount.byRules.length; i++) {
+        const element = statistics.winCount.byRules[i];
+        if (element.rule == rule) {
+            element.count++;
+        }
+    }
+
+    this.selectedDatabase.currentLevel++;
+
+    updateStatistics();
+
+    return true;
+}
+
+function failMode(rule) {
+    let message = `Lose level ${rule}`;
+    console.log(message);
+
+    levelManagement.udpateGameCount(LevelType.Default, rule);
+    levelManagement.udpateGameRowCount(LevelType.Default, rule, false);
+
+    statistics.loseCount.overall++;
+
+    for (let i = 0; i < statistics.loseCount.byLevelType.length; i++) {
+        const element = statistics.loseCount.byLevelType[i];
+        if (element.type == LevelType.Default) {
+            element.count++;
+        }
+    }
+
+    for (let i = 0; i < statistics.loseCount.byRules.length; i++) {
+        const element = statistics.loseCount.byRules[i];
+        if (element.rule == rule) {
+            element.count++;
+        }
+    }
+
+    this.selectedDatabase.currentLevel++;
+
+    updateStatistics();
+
+    return true;
 }
 
 function completeLevel() {
@@ -105,4 +168,4 @@ function leaveLevel() {
     failLevel();
 }
 
-export { startLevel, completeLevel, failLevel, leaveLevel }
+export { startLevel, completeLevel, failLevel, leaveLevel, completeMode, failMode }

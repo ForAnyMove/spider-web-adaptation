@@ -2,6 +2,10 @@ import { backSkinDatabase, backgroundDatabase, skinDatabase } from "./data/card_
 import { Pattern, SuitMode } from "./statics/enums.js"
 import { IconsByItem } from "./statics/staticValues.js"
 
+function getRandomInt(max) {
+    return Math.floor(Math.random() * max);
+}
+
 function createItem(type, count) {
     return {
         type: type,
@@ -202,6 +206,51 @@ function createVSpace(height, parent) {
     return element;
 }
 
+function isSameCard(card, template) {
+    return card.id == template.id;
+}
+
+function isCardHasRange(cards, card, range, maximumCountOfSameCards) {
+    function calculateCount(cardStructure) {
+        let count = 0;
+        for (let i = 0; i < cards.length; i++)
+            if (isSameCard(cards[i], cardStructure))
+                count++;
+
+        return count;
+    }
+
+    let selectedRank = card.rank;
+    let selectedSuit = card.suit;
+
+    for (let i = 0; i < cards.length; i++) {
+        let rank = cards[i].rank;
+        let suit = cards[i].suit;
+        for (let j = 0; j < range + 1; j++)
+            if (selectedSuit == suit && (rank == selectedRank - j || rank == selectedRank + j)) {
+                let count = calculateCount(cards[i]);
+
+                if (count >= maximumCountOfSameCards)
+                    return true;
+                return false;
+            }
+    }
+
+    return false;
+}
+
+function compareCards(cardOne, cardTwo) {
+    return cardOne.suit == cardTwo.suit && cardOne.rank == cardTwo.rank;
+}
+function compareCardsFull(rankOne, suitOne, rankTwo, suitTwo) {
+    return rankOne == rankTwo && suitOne == suitTwo;
+}
+function isCardAtRankLower(card, template) {
+    return card.suit == template.suit && card.rank == template.rank - 1;
+}
+
+
+
 export {
     createElement,
     createTextH3,
@@ -222,5 +271,11 @@ export {
     getIconBySuit,
     getIconByItem,
     getIconByContent,
-    createVSpace
+    createVSpace,
+    getRandomInt,
+    isCardHasRange,
+    isSameCard,
+    compareCards,
+    compareCardsFull,
+    isCardAtRankLower
 }

@@ -4,34 +4,20 @@ import { cardCollector } from "../scripts/cardsCollector.js";
 import { createTweener } from "../scripts/dotween/dotween.js";
 import { CanInteract, disableInteractions } from "../scripts/globalEvents.js";
 import { secondsToTime } from "../scripts/helpers.js";
-import { createLevel } from "../scripts/levelCreator.js";
+import { createLevel, createSolitaireLevel } from "../scripts/levelCreator.js";
 import { ContentType, Pattern, SuitMode } from "../scripts/statics/enums.js";
 import { Content, Items } from "../scripts/statics/staticValues.js";
 import { stepRecorder } from "../scripts/stepRecorder.js";
 
 import { fourSuitSpider, fourSuitSpiderLady, oneSuitSpider, oneSuitSpiderLady, twoSuitSpider, twoSuitSpiderLady } from "../scripts/rules/gameRules.js";
 import { getBackgroundImage } from "../scripts/data/card_skin_database.js";
-import { trialLevelDatabase } from "../scripts/data/level_databases.js";
+import { trialLevelDatabase, storyLevelDatabase } from "../scripts/data/level_databases.js";
+import { SolitaireCardColumn } from "../scripts/cardModel.js";
+import { completeLevel, completeMode, failLevel, failMode, startLevel } from "../scripts/levelStarter.js";
 
 let timer = 0;
 
-const screenParameters = { rules: oneSuitSpider, decksToWin: 8 };
-
-// GET level ID from the link
-// document.addEventListener("DOMContentLoaded", function () {
-//   const levelTypesList = [
-//     'level_def_s_',
-//     'level_def_sl_',
-//     'level_story_',
-//     'level_trial_'
-//   ]
-//   const urlParams = new URLSearchParams(window.location.search);
-//   const levelID = urlParams.get('levelID');
-
-//   console.log('Picked level ID:', levelID);
-//   console.log('Picked level type:', levelTypesList.some((type) => levelID.includes(type)));
-// });
-
+const screenParameters = { rules: oneSuitSpider, decksToWin: 8, onWinCallback: null, onLoseCallback: null, isSolitaire: false };
 
 function trySelectLevel() {
   const levelTypesList = [
@@ -42,8 +28,7 @@ function trySelectLevel() {
   ]
   const urlParams = new URLSearchParams(window.location.search);
   const levelID = urlParams.get('levelID');
-  console.log('Picked level ID:', levelID);
-  console.log('Picked level type:', levelTypesList.some((type) => levelID.includes(type)));
+  if (levelID == null) return;
 
   const type = levelID.substring(0, levelID.lastIndexOf('_') + 1);
   const number = parseInt(levelID.substring(type.length, levelID.length));
@@ -63,6 +48,12 @@ function trySelectLevel() {
           break;
       }
       screenParameters.decksToWin = 8;
+      screenParameters.onWinCallback = () => {
+        completeMode(screenParameters.rules.rule);
+      };
+      screenParameters.onLoseCallback = () => {
+        failMode(screenParameters.rules.rule);
+      }
       break
     case levelTypesList[1]:
       console.log("Selected [Spider Lady]");
@@ -78,17 +69,21 @@ function trySelectLevel() {
           break;
       }
       screenParameters.decksToWin = 4;
+      screenParameters.onWinCallback = () => {
+        completeMode(screenParameters.rules.rule);
+      };
+      screenParameters.onLoseCallback = () => {
+        failMode(screenParameters.rules.rule);
+      }
       break
     case levelTypesList[2]:
       console.log("Selected [Story]");
-      break
-    case levelTypesList[3]:
-      console.log("Selected [Trial]");
+      const storyLevel = storyLevelDatabase.levels[number];
 
-      const level = trialLevelDatabase.levels[number];
-      switch (level.gameRule.Pattern) {
+      switch (storyLevel.gameRule.Pattern) {
         case Pattern.Spider:
-          switch (level.gameRule.SuitMode) {
+          screenParameters.decksToWin = 8;
+          switch (storyLevel.gameRule.SuitMode) {
             case SuitMode.OneSuit:
               screenParameters.rules = oneSuitSpider;
               break
@@ -101,7 +96,50 @@ function trySelectLevel() {
           }
           break;
         case Pattern.SpiderLady:
-          switch (level.gameRule.SuitMode) {
+          screenParameters.decksToWin = 4;
+          switch (storyLevel.gameRule.SuitMode) {
+            case SuitMode.OneSuit:
+              screenParameters.rules = oneSuitSpiderLady;
+              break
+            case SuitMode.TwoSuits:
+              screenParameters.rules = twoSuitSpiderLady;
+              break
+            case SuitMode.FourSuits:
+              screenParameters.rules = fourSuitSpiderLady;
+              break
+          }
+          break;
+      }
+      screenParameters.isSolitaire = true;
+
+      screenParameters.onWinCallback = () => {
+        completeLevel();
+      };
+      screenParameters.onLoseCallback = () => {
+        failLevel();
+      }
+      startLevel(storyLevelDatabase);
+      break
+    case levelTypesList[3]:
+      console.log("Selected [Trial]");
+
+      const trialLevel = trialLevelDatabase.levels[number];
+      switch (trialLevel.gameRule.Pattern) {
+        case Pattern.Spider:
+          switch (trialLevel.gameRule.SuitMode) {
+            case SuitMode.OneSuit:
+              screenParameters.rules = oneSuitSpider;
+              break
+            case SuitMode.TwoSuits:
+              screenParameters.rules = twoSuitSpider;
+              break
+            case SuitMode.FourSuits:
+              screenParameters.rules = fourSuitSpider;
+              break
+          }
+          break;
+        case Pattern.SpiderLady:
+          switch (trialLevel.gameRule.SuitMode) {
             case SuitMode.OneSuit:
               screenParameters.rules = oneSuitSpiderLady;
               break
@@ -115,17 +153,22 @@ function trySelectLevel() {
           break;
       }
 
-      screenParameters.decksToWin = level.trial.decksToComplete;
+      screenParameters.decksToWin = trialLevel.trial.decksToComplete;
+      startTimer(trialLevel.time);
 
-      startTimer(level.time);
+      screenParameters.onWinCallback = () => {
+        completeLevel();
+      };
+      screenParameters.onLoseCallback = () => {
+        failLevel();
+      }
+      startLevel(trialLevelDatabase);
       break
   }
 }
 
-trySelectLevel();
-
 createTweener();
-
+trySelectLevel();
 
 function startTimer(seconds) {
   let container = document.getElementsByClassName('header-timer hidden')[0];
@@ -160,7 +203,6 @@ function startTimer(seconds) {
   animator.addRequest(request);
 }
 
-
 function checkAndMakeSpiderLadyPatternView() {
   if (screenParameters.rules.pattern == Pattern.SpiderLady) {
     const playableCardColumns = document.getElementsByClassName('playable-card-column');
@@ -192,8 +234,7 @@ function checkAndMakeSpiderLadyPatternView() {
 
 checkAndMakeSpiderLadyPatternView();
 
-let result = createLevel({ rules: screenParameters.rules });
-
+let result = screenParameters.isSolitaire ? createSolitaireLevel({ rules: screenParameters.rules }) : createLevel({ rules: screenParameters.rules });
 
 function setupDistribution() {
   function distributeDefault() {
@@ -284,6 +325,10 @@ function checkIfLevelWon(options) {
   console.log(`${options.columnCount}, ${options.collectedCount}`);
 
   if (options.collectedCount == screenParameters.decksToWin) {
+    screenParameters.onWinCallback?.();
+    disableInteractions();
+
+    // open win screen with rewards
     const el = document.createElement('span');
     el.innerHTML = "Level completed";
 
@@ -295,11 +340,13 @@ function checkIfLevelWon(options) {
     el.style.top = window.innerHeight / 2 - 10 + 'px';
     document.getElementsByTagName('main')[0].appendChild(el);
 
-    disableInteractions();
   }
 }
 
 function levelLostFlow() {
+  disableInteractions();
+
+  // open lose screen
   const el = document.createElement('span');
   el.innerHTML = "Level lost";
 
@@ -310,17 +357,113 @@ function levelLostFlow() {
   el.style.left = window.innerWidth / 2 - 25 * 8 + 'px';
   el.style.top = window.innerHeight / 2 - 10 + 'px';
   document.getElementsByTagName('main')[0].appendChild(el);
-
-  disableInteractions();
 }
 
 function updateStepText(stepCount) {
   document.getElementById('step-counter').innerText = stepCount;
 }
 
-setupDistribution();
-setupButtons();
+function setupDefaultLevel() {
+  setupDistribution();
+  setupButtons();
+  stepRecorder.stepRecordedEvent.addListener(updateStepText);
+}
+
+function setupSolitaireLevel() {
+  const solitaireSlots = document.getElementsByClassName('sol-slot');
+
+  const cardColumns = [];
+
+  for (let i = 0; i < solitaireSlots.length; i++) {
+    {
+      const element = solitaireSlots[i];
+      const elementNumer = parseInt(element.id.substring(element.id.lastIndexOf('-') + 1, element.id.lastIndexOf('-') + 3));
+      let overlapArray = null;
+
+      if (element.id.includes('<')) {
+        let arrayText = element.id.substring(element.id.indexOf('['), element.id.indexOf(']') + 1);
+        arrayText = arrayText.replace(' ', '').replace('[0', '[').replace(',0', ',');
+        overlapArray = JSON.parse(arrayText);
+      }
+
+      const cardColumn = new SolitaireCardColumn(element, elementNumer, overlapArray, element.classList.contains('closed'));
+      cardColumns.push(cardColumn);
+    }
+  }
+
+  result.croupier.onDistributionFinished.addListener(() => {
+    result.croupier.onDistributionFinished.removeAllListeners();
+    let unlockedCount = 0;
+
+    for (let i = 0; i < result.playableCardColumns.length; i++) {
+      const element = result.playableCardColumns[i];
+      element.cardAddedEvent.addListener(() => {
+        unlockedCount++;
+        if (unlockedCount == result.playableCardColumns.length) {
+          setupDefaultLevel();
+
+          for (let j = 0; j < result.playableCardColumns.length; j++) {
+            const element = result.playableCardColumns[j];
+            element.setCanRemove();
+            element.setCanPlace();
+          }
+        }
+      });
+      element.lock();
+    }
+
+    function transitionFinishedCallback() {
+      for (let i = 0; i < cardColumns.length; i++) {
+        const column = cardColumns[i];
+
+        if (column.overlapArray == null) continue;
+        for (let j = 0; j < cardColumns.length; j++) {
+          if (i == j) continue;
+          const other = cardColumns[j];
+
+          if (column.overlapArray.includes(other.number)) {
+            column.addOverlapColumns(other);
+          }
+        }
+      }
+    }
+
+    for (let i = 0; i < cardColumns.length; i++) {
+      const column = cardColumns[i];
+      const card = result.solitaireCards[i];
+
+      column.translateCardsToColumn([card], () => {
+        if (i == 0) {
+          transitionFinishedCallback();
+        }
+        if (column.isClosed) {
+          card.close();
+        } else {
+          card.open();
+        }
+      })
+    }
+  })
+}
+
+function setupFastFinish() {
+  document.getElementById('fast-win').onclick = function () {
+    screenParameters.onWinCallback?.();
+  }
+
+  document.getElementById('fast-lose').onclick = function () {
+    screenParameters.onLoseCallback?.();
+  }
+}
+
+// setupFastFinish();
+
 updateStepText(0);
 setupBackgroundChange();
 cardCollector.onCollected.addListener(checkIfLevelWon);
-stepRecorder.stepRecordedEvent.addListener(updateStepText)
+
+if (screenParameters.isSolitaire) {
+  setupSolitaireLevel();
+} else {
+  setupDefaultLevel();
+}

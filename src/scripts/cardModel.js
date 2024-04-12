@@ -3,7 +3,7 @@ import { boundsChecker } from "./cardBoundsChecker.js";
 import { cardSelector } from "./cardSelector.js";
 import { cardCollector } from "./cardsCollector.js";
 import { getSkinBackImage, getSkinImage } from "./data/card_skin_database.js";
-import { DOChangeValue, DOChangeXY, Ease } from "./dotween/dotween.js";
+import { DOChangeValue, DOChangeXY, DelayedCall, Ease } from "./dotween/dotween.js";
 import { Action, CanInteract, disableInteractions, enableInteractions } from "./globalEvents.js";
 import { selectedRules } from "./rules/gameRules.js";
 import { CardSide, RanksStringList } from "./statics/enums.js";
@@ -11,7 +11,8 @@ import { Platform } from "./statics/staticValues.js";
 import { stepRecorder } from "./stepRecorder.js";
 
 export default class Card {
-    constructor(suit, rank, side, domElement) {
+    constructor(suit, rank, side, domElement, id) {
+        this.id = id;
         this.faceImage = '';
         this.backImage = '';
         this.lastFaceContent = null;
@@ -24,6 +25,7 @@ export default class Card {
 
         this.cardColumn = null;
         this.subscribeDragAndDrop();
+        this.dropFinishedEvent = new Action();
     }
 
     setClosed = function () {
@@ -241,8 +243,11 @@ export default class Card {
         const columns = boundsChecker.getColumnsByCard(this);
         for (let i = 0; i < columns.length; i++) {
             const cardColumn = columns[i];
-            if (selectedRules.isCanPlace([this], cardColumn.cards)) {
-                cardColumn.translateCardsToColumn(cards, () => previousColumn.checkIfLastCardClosedAndOpen());
+            if (cardColumn.canPlace && selectedRules.isCanPlace([this], cardColumn.cards)) {
+                cardColumn.translateCardsToColumn(cards, () => {
+                    this.dropFinishedEvent.invoke(this);
+                    previousColumn.checkIfLastCardClosedAndOpen()
+                });
                 const lastCardSide = previousColumn.getLastCard()?.side;
 
                 stepRecorder.record(() => {
@@ -257,7 +262,9 @@ export default class Card {
             }
         }
 
-        previousColumn.translateCardsToColumn(cards);
+        previousColumn.translateCardsToColumn(cards, () => {
+            this.dropFinishedEvent.invoke(this);
+        });
     }
 
     joinToColumn = function (cardColumn) {
@@ -301,7 +308,7 @@ class CardColumn {
         this.lockedCanPlaceState = this.canPlace;
         this.lockedCanRemoveState = this.canRemove;
 
-        this.setCantPlace();
+        // this.setCantPlace();
         this.setCantRemove();
 
         for (let i = 0; i < this.cards.length; i++) {
@@ -313,27 +320,36 @@ class CardColumn {
         this.lockElement.classList.add('card-locker-hidden');
         this.domElement.appendChild(this.lockElement)
 
-        setTimeout(() => {
+        DelayedCall(0.1, () => {
             this.lockElement.classList.replace('card-locker-hidden', 'card-locked-showed');
-        }, 100);
+        })
+
+        this.cardAddedEvent.addListener(() => {
+            this.unlock();
+            this.cardAddedEvent.removeAllListeners();
+            this.recalculateFirstOpened();
+        })
     }
 
-    unlock = function () {
+    unlock = () => {
         if (!this.locked) return;
         this.locked = false;
 
-        if (this.lockedCanPlaceState) {
-            this.setCanPlace();
-        }
+        this.setCantPlace();
+        // if (this.lockedCanPlaceState) {
+        //     this.setCanPlace();
+        // }
 
-        if (this.lockedCanRemoveState) {
-            this.setCanRemove();
-        }
+        // if (this.lockedCanRemoveState) {
+        // this.setCanRemove();
+        // }
 
         for (let i = 0; i < this.cards.length; i++) {
             const card = this.cards[i];
             card.domElement.classList.remove('locked')
         }
+
+        this.lockElement.remove();
     }
 
     setCanPlace = function () {
@@ -480,7 +496,7 @@ class CardColumn {
         if (this.cards.includes(card)) return;
 
         this.cards.push(card);
-        this.cardAddedEvent.invoke();
+        this.cardAddedEvent.invoke(card);
 
         card.joinToColumn(this);
         this.domElement.appendChild(card.domElement);
@@ -499,7 +515,7 @@ class CardColumn {
         if (this.cards.includes(card)) {
 
             this.cards.splice(this.cards.indexOf(card), 1);
-            this.cardRemovedEvent.invoke();
+            this.cardRemovedEvent.invoke(card);
 
             card.leaveFromColumn();
         }
@@ -566,4 +582,69 @@ class CardColumn {
     }
 }
 
-export { CardColumn }
+class SolitaireCardColumn extends CardColumn {
+    constructor(domElement, number, overlapArray, isClosed) {
+        super(domElement);
+
+        this.number = number;
+        this.overlapArray = overlapArray;
+        this.isClosed = isClosed;
+        this.topLevelColumns = [];
+
+        this.cardAddedEvent.addListener(this.cardAdded);
+    }
+
+    makeColumnFree = function () {
+        if (!this.domElement.classList.contains('removed')) {
+            this.domElement.classList.add('removed');
+        }
+    }
+
+    makeColumnFilled = function () {
+        this.domElement.classList.remove('removed')
+    }
+
+    onCardDropped = (card) => {
+        if (card.cardColumn == this) return;
+
+        if (this.cards.length == 0) {
+            this.makeColumnFree();
+        }
+
+    }
+
+    cardAdded = (card) => {
+        this.makeColumnFilled();
+
+        card.dropFinishedEvent.removeListener(this.onCardDropped);
+        card.dropFinishedEvent.addListenerToStart(this.onCardDropped);
+    }
+
+
+    addOverlapColumns = function (column) {
+        this.topLevelColumns.push(column);
+
+        const lastCard = column.getLastCard();
+
+        lastCard.dropFinishedEvent.addListener((card) => {
+            if (card.cardColumn == column) return;
+
+            this.checkIfCanOpen();
+            lastCard.dropFinishedEvent.removeAllListeners();
+        });
+    }
+
+    checkIfCanOpen = function () {
+        for (let i = 0; i < this.topLevelColumns.length; i++) {
+            const element = this.topLevelColumns[i];
+            if (element.getLastCard() != null) {
+                return false;
+            }
+        }
+
+        this.getLastCard()?.open();
+        return true;
+    }
+}
+
+export { CardColumn, SolitaireCardColumn }

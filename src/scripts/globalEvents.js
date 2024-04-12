@@ -26,6 +26,10 @@ class Action {
         this.actions.push(func);
     }
 
+    addListenerToStart = function (func) {
+        this.actions = [func].concat(this.actions);
+    }
+
     removeListener = function (func) {
         this.actions.splice(this.actions.indexOf(func), 1);
     }

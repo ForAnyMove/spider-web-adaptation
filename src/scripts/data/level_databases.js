@@ -54,7 +54,14 @@ const storyLevelDatabase = {
         createStoryLevel(33, LevelType.Story, LevelState.Locked, Rule.FourSuitsSpider, { content: [createItem(skinDatabase.skinList[8].id, 1)] }, createItem(Items.Energy, 17), createLevelCompleteRequirement(LevelType.Trial, 14)),
         createStoryLevel(34, LevelType.Story, LevelState.Locked, Rule.FourSuitsSpiderLady, { content: [createItem(backSkinDatabase.skinList[8].id, 1)] }, createItem(Items.Energy, 17)),
         createStoryLevel(35, LevelType.Story, LevelState.Locked, Rule.FourSuitsSpider, { content: [createItem(backgroundDatabase.skinList[8].id, 1)] }, createItem(Items.Energy, 18), createLevelCompleteRequirement(LevelType.Trial, 15)),
-    ]
+    ],
+    loadData: function () {
+        this.currentLevel = load(this.id, 0);
+    },
+    nextLevel: function () {
+        this.currentLevel++;
+        save(this.id, this.currentLevel);
+    }
 }
 
 const trialLevelDatabase = {
@@ -77,7 +84,14 @@ const trialLevelDatabase = {
         createTrialLevel(13, LevelType.Trial, LevelState.Locked, Rule.FourSuitsSpider, { items: [createItem(Items.Energy, 5), createItem(Items.Trophy04, 1)] }, 1200, createDeckTrial(4)),
         createTrialLevel(14, LevelType.Trial, LevelState.Locked, Rule.FourSuitsSpider, { items: [createItem(Items.Energy, 5)] }, 1200, createDeckTrial(6)),
         createTrialLevel(15, LevelType.Trial, LevelState.Locked, Rule.FourSuitsSpider, { items: [createItem(Items.Energy, 5), createItem(Items.Trophy05, 1)] }, 1200),
-    ]
+    ],
+    loadData: function () {
+        this.currentLevel = load(this.id, 0);
+    },
+    nextLevel: function () {
+        this.currentLevel++;
+        save(this.id, this.currentLevel);
+    }
 }
 
 function saveStoryDatabase() {

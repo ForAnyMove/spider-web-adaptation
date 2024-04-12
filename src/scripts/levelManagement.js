@@ -1,5 +1,4 @@
 import { statistics, updateStatistics } from "./gameStatistics.js";
-import { LevelType, Rule } from "../../statics/enums.js";
 
 class LevelManagement {
     selectLevel = function (database, order) {

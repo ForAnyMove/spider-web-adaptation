@@ -1,4 +1,4 @@
-import { CardSide, Pattern, Suit, SuitMode } from "../statics/enums.js";
+import { CardSide, Pattern, Rule, Suit, SuitMode } from "../statics/enums.js";
 
 function isSuitableRank(first, second) {
     let compareRank = second.rank + 1;
@@ -39,11 +39,12 @@ function isSuitableRankStuck(cards, maxCount) {
 }
 
 class GameRule {
-    constructor(suits, suitMode, pattern, deckCount) {
+    constructor(suits, suitMode, pattern, rule, deckCount) {
         this.suits = suits;
         this.suitMode = suitMode;
         this.pattern = pattern;
         this.deckCount = deckCount;
+        this.rule = rule;
     }
 }
 
@@ -116,13 +117,13 @@ class OneSuitGameRule extends GameRule {
     }
 }
 
-const oneSuitSpider = new OneSuitGameRule([Suit.Spades, Suit.Spades, Suit.Spades, Suit.Spades], SuitMode.OneSuit, Pattern.Spider, 2);
-const twoSuitSpider = new OneSuitGameRule([Suit.Spades, Suit.Diamonds, Suit.Spades, Suit.Diamonds], SuitMode.TwoSuits, Pattern.Spider, 2);
-const fourSuitSpider = new OneSuitGameRule([Suit.Spades, Suit.Diamonds, Suit.Clubs, Suit.Hearts], SuitMode.FourSuits, Pattern.Spider, 2);
+const oneSuitSpider = new OneSuitGameRule([Suit.Spades, Suit.Spades, Suit.Spades, Suit.Spades], SuitMode.OneSuit, Pattern.Spider, Rule.OneSuitSpider, 2);
+const twoSuitSpider = new OneSuitGameRule([Suit.Spades, Suit.Diamonds, Suit.Spades, Suit.Diamonds], SuitMode.TwoSuits, Pattern.Spider, Rule.TwoSuitsSpider, 2);
+const fourSuitSpider = new OneSuitGameRule([Suit.Spades, Suit.Diamonds, Suit.Clubs, Suit.Hearts], SuitMode.FourSuits, Pattern.Spider, Rule.FourSuitsSpider, 2);
 
-const oneSuitSpiderLady = new OneSuitGameRule([Suit.Spades, Suit.Spades, Suit.Spades, Suit.Spades], SuitMode.OneSuit, Pattern.SpiderLady, 1);
-const twoSuitSpiderLady = new OneSuitGameRule([Suit.Spades, Suit.Diamonds, Suit.Spades, Suit.Diamonds], SuitMode.TwoSuits, Pattern.SpiderLady, 1);
-const fourSuitSpiderLady = new OneSuitGameRule([Suit.Spades, Suit.Diamonds, Suit.Clubs, Suit.Hearts], SuitMode.FourSuits, Pattern.SpiderLady, 1);
+const oneSuitSpiderLady = new OneSuitGameRule([Suit.Spades, Suit.Spades, Suit.Spades, Suit.Spades], SuitMode.OneSuit, Pattern.SpiderLady, Rule.OneSuitSpiderLady, 1);
+const twoSuitSpiderLady = new OneSuitGameRule([Suit.Spades, Suit.Diamonds, Suit.Spades, Suit.Diamonds], SuitMode.TwoSuits, Pattern.SpiderLady, Rule.TwoSuitsSpiderLady, 1);
+const fourSuitSpiderLady = new OneSuitGameRule([Suit.Spades, Suit.Diamonds, Suit.Clubs, Suit.Hearts], SuitMode.FourSuits, Pattern.SpiderLady, Rule.FourSuitsSpiderLady, 1);
 
 let selectedRules = oneSuitSpider;
 

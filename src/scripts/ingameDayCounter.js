@@ -9,7 +9,10 @@ let data = {
     lastDay: 0
 }
 
-data = load("day_counter", data);
+data = load("day_counter", {
+    time: -1,
+    lastDay: 0
+});
 
 if (data.lastDay == 0) {
     data.time = Date.now();
@@ -36,8 +39,9 @@ function check() {
     if (daysFromStart >= 1) {
         data.lastDay++;
         data.time = Date.now();
+        save("day_counter", data);
 
-        statistics.ingameDayCount = lastDay;
+        statistics.ingameDayCount = data.lastDay;
         updateStatistics();
 
         dayCounterUpdated.invoke();

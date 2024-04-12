@@ -1,5 +1,6 @@
 import { animator } from "./animator.js";
-import { CanInteract, disableInteractions, enableInteractions } from "./globalEvents.js";
+import { DelayedCall } from "./dotween/dotween.js";
+import { Action, CanInteract, disableInteractions, enableInteractions } from "./globalEvents.js";
 import { stepRecorder } from "./stepRecorder.js";
 
 class Croupier {
@@ -9,6 +10,8 @@ class Croupier {
 
         this.firstDistribution = [];
         this.defaultDistribution = [];
+
+        this.onDistributionFinished = new Action();
     }
 
     initialDistribution = function () {
@@ -41,6 +44,7 @@ class Croupier {
         const mc = this.mainCardColumn;
         const pc = this.playableCardColumns;
 
+        const callback = this.onDistributionFinished;
         let time = 0;
         function update(dt) {
             time += dt * 60 / 1000;
@@ -48,6 +52,10 @@ class Croupier {
                 if (distributions.length == 0 || mc.cards.length == 0) {
                     animator.removeRequest(update);
                     enableInteractions();
+
+                    DelayedCall(0.15, () => {
+                        callback.invoke();
+                    });
                     return;
                 }
 

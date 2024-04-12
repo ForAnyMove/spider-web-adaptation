@@ -3,9 +3,9 @@ import Card, { CardColumn } from './cardModel.js';
 import { cardCollector } from './cardsCollector.js';
 import { SpiderCroupier, SpiderLadyCroupier } from './croupier.js';
 import { getSkinBackImage, getSkinImage } from './data/card_skin_database.js';
-import { shuffle } from './helpers.js';
+import { compareCards, compareCardsFull, getRandomInt, isCardAtRankLower, isCardHasRange, isSameCard, shuffle } from './helpers.js';
 import { changeRules, selectedRules } from './rules/gameRules.js';
-import { CardSide, ContentType, Pattern, RanksStringList } from './statics/enums.js';
+import { CardSide, ContentType, Pattern, Rank, RanksStringList, Suit, SuitMode } from './statics/enums.js';
 import { Content } from './statics/staticValues.js';
 
 let croupier = null;
@@ -26,7 +26,7 @@ function createCollectableCardColumns() {
 }
 
 
-function generateCards() {
+function generateCards(shuffleTime, fillCardsToMainDeck = true) {
     const skin = 1;
 
     const ranks = RanksStringList;
@@ -57,6 +57,7 @@ function generateCards() {
 
     const generatedCards = [];
 
+    let iteration = 0;
     for (let i = 0; i < decks; i++) {
         for (let j = 0; j < suits.length; j++) {
             const suit = suits[j];
@@ -71,44 +72,43 @@ function generateCards() {
                 cardElement.id = `card_${rank}_${suit}_${(skin > 9 ? skin : `0${skin}`)}`;
                 cardElement.classList.add('card-element');
 
-                const cardModel = new Card(suit, k + 1, CardSide.Face, cardElement);
+                const cardModel = new Card(suit, k + 1, CardSide.Face, cardElement, iteration);
 
                 cardModel.setupCardFaceImage(selectedFaceSkin);
                 cardModel.setupCardBackImage(selectedBackSkin);
 
                 generatedCards.push(cardModel);
+                iteration++;
             }
         }
     }
 
     allCards = generatedCards;
 
-    shuffle(generatedCards);
-    shuffle(generatedCards);
 
-    for (let i = 0; i < generatedCards.length; i++) {
-        const cardModel = generatedCards[i];
+    shuffleTime?.(generatedCards);
 
-        mainCardColumn.addCard(cardModel);
-        cardModel.setClosed();
+    if (fillCardsToMainDeck) {
+        for (let i = 0; i < generatedCards.length; i++) {
+            const cardModel = generatedCards[i];
+
+            mainCardColumn.addCard(cardModel);
+            cardModel.setClosed();
+        }
     }
-    return { mainCardColumn: mainCardColumn, playableCardColumns: cardColumns };
+    return { mainCardColumn: mainCardColumn, playableCardColumns: cardColumns, cards: generatedCards };
 }
 
 function createLevel(options = { rules }) {
     changeRules(options.rules);
 
     createCollectableCardColumns();
-    const result = generateCards();
+    const result = generateCards((cards) => {
+        shuffle(cards);
+        shuffle(cards);
+    });
 
     croupier = selectedRules.pattern == Pattern.Spider ? new SpiderCroupier({ mainCardColumn: result.mainCardColumn, playableCardColumns: result.playableCardColumns }) : new SpiderLadyCroupier({ mainCardColumn: result.mainCardColumn, playableCardColumns: result.playableCardColumns });
-    // setTimeout(() => croupier.initialDistribution(), 500);
-    // setTimeout(() => {
-    //     for (let i = 0; i < result.playableCardColumns.length; i++) {
-    //         const element = result.playableCardColumns[i];
-    //         element.lock();
-    //     }
-    // }, 3000);
     croupier.initialDistribution();
 
     user.contentUsageChanged.addListener(() => {
@@ -126,4 +126,137 @@ function createLevel(options = { rules }) {
     return { croupier: croupier, playableCardColumns: result.playableCardColumns, mainCardColumn: result.mainCardColumn }
 }
 
-export { createLevel }
+function createSolitaireLevel(options = { ruled, solitaireColumns }) {
+
+    changeRules(options.rules);
+    const result = generateCards(null, false);
+    const comparedCards = [];
+
+    shuffle(result.cards);
+    shuffle(result.cards);
+
+    croupier = selectedRules.pattern == Pattern.Spider ? new SpiderCroupier({ mainCardColumn: result.mainCardColumn, playableCardColumns: result.playableCardColumns }) : new SpiderLadyCroupier({ mainCardColumn: result.mainCardColumn, playableCardColumns: result.playableCardColumns });
+
+    function specialShuffle(cards, distributions) {
+
+        const cardCopy = [].concat(cards);
+
+        const more = selectedRules.pattern == Pattern.Spider && selectedRules.suitMode == SuitMode.OneSuit;
+
+        function fillComparedCards(mainList, cardList, templateList) {
+            for (let i = 0; i < mainList.length; i++) {
+                const card = mainList[i];
+
+                if (cardList.includes(card) || templateList.includes(card)) continue;
+
+                if (isCardAtRankLower(card, templateList[cardList.length])) {
+                    cardList.push(card);
+                    if (cardList.length == templateList.length) break;
+                }
+            }
+
+            if (cardList.length != templateList.length) fillComparedCards(mainList, cardList, templateList);
+        }
+
+        function fillRandomNCount(count, list, exceptions, allDifferent = false) {
+            const selectedCard = cardCopy[getRandomInt(cardCopy.length - 1)];
+
+            if (list.includes(selectedCard) ||
+                (allDifferent && isCardHasRange(list, selectedCard, 1, more ? 3 : 1))) {
+                fillRandomNCount(count, list, exceptions, allDifferent);
+                return;
+            }
+
+            for (let i = 0; i < exceptions.length; i++) {
+                const compared = compareCardsFull(exceptions[i].rank, exceptions[i].suit, selectedCard.rank, selectedCard.suit);
+                if (compared) {
+                    fillRandomNCount(count, list, exceptions, allDifferent);
+                    return;
+                }
+            }
+
+            list.push(selectedCard);
+            if (list.length != count) fillRandomNCount(count, list, exceptions, allDifferent);
+        }
+
+        function indexOf(array, card) {
+            for (let i = 0; i < array.length; i++)
+                if (isSameCard(array[i], card))
+                    return i;
+
+            return -1;
+        }
+
+        function setupCardsToDeckEnd(cardList) {
+            let completeCount = 0;
+            let offset = 0;
+
+            while (completeCount < cardList.length) {
+                const card = cardList[completeCount];
+                const index = indexOf(cards, card);
+
+                const lastIndex = cards.length - 1 - offset;
+                const lastCard = cards[lastIndex];
+
+                if (cardList.includes(lastCard)) {
+                    offset++;
+                    continue;
+                }
+
+                cards[index] = lastCard;
+                cards[lastIndex] = card;
+                completeCount++;
+            }
+        }
+
+        const randomCards = [];
+
+        const allRandom = selectedRules.pattern == Pattern.Spider;
+
+        fillRandomNCount(result.playableCardColumns.length, randomCards, [
+            { rank: Rank.Ace, suit: Suit.Hearts },
+            { rank: Rank.Ace, suit: Suit.Spades },
+            { rank: Rank.Ace, suit: Suit.Diamonds },
+            { rank: Rank.Ace, suit: Suit.Clubs }
+        ], allRandom);
+
+        fillComparedCards(cards, comparedCards, randomCards);
+
+        setupCardsToDeckEnd(comparedCards);
+
+        console.log(randomCards.map(i => i.rank));
+        console.log(comparedCards.map(i => i.rank));
+
+        let counter = 0;
+        for (let i = 0; i < distributions.length; i++) {
+            if (distributions[i].opened) {
+                const currentCardIndex = i;
+                const currentCard = cards[currentCardIndex];
+
+                const selected = randomCards[counter];
+
+                const index = indexOf(cards, selected);
+
+                cards[index] = currentCard;
+                cards[currentCardIndex] = selected;
+
+                counter++;
+            }
+        }
+    }
+
+    specialShuffle(result.cards, croupier.firstDistribution);
+
+    for (let i = result.cards.length - 1; i >= 0; i--) {
+        const cardModel = result.cards[i];
+
+        result.mainCardColumn.addCard(cardModel);
+        cardModel.setClosed();
+    }
+
+    croupier.initialDistribution();
+
+    return { croupier: croupier, playableCardColumns: result.playableCardColumns, mainCardColumn: result.mainCardColumn, solitaireCards: comparedCards }
+}
+
+export { createLevel, createSolitaireLevel }
