@@ -3,6 +3,14 @@ import { createButton, createElement, createHSpace, createImage, createTextH3, c
 import { Items } from "../scripts/statics/staticValues.js";
 
 const levelButtonsContainer = document.getElementsByClassName('story-map-container')[0]
+const tabSize = {
+  width: window.innerWidth,
+  height: window.innerHeight,
+  orientation: window.innerHeight > window.innerWidth ? 'portrait' : 'landscape'
+}
+const mainTab = document.getElementsByTagName('main')[0]
+const scrollXCoef = tabSize.orientation === 'landscape' ? 6 : 2.3
+mainTab.scrollTo(mainTab.scrollWidth/ scrollXCoef, mainTab.scrollHeight/4)
 
 window.addEventListener('resize', () => {
   popup.style.width = window.innerWidth;
@@ -222,7 +230,6 @@ levelButtonsContainer.addEventListener('click', (event) => {
 
     popupParent.classList.remove('hidden-popup');
     popupParent.classList.add('showed-popup');
-    // levelBtn.scrollIntoView({ behavior: 'smooth', block: 'center' });
   }
 })
 
