@@ -9,8 +9,8 @@ const tabSize = {
   orientation: window.innerHeight > window.innerWidth ? 'portrait' : 'landscape'
 }
 const mainTab = document.getElementsByTagName('main')[0]
-const scrollXCoef = tabSize.orientation === 'landscape' ? 6 : 2.3
-mainTab.scrollTo(mainTab.scrollWidth/ scrollXCoef, mainTab.scrollHeight/4)
+const scrollXCoef = tabSize.orientation === 'landscape' ? 6 : 2.3;
+
 
 window.addEventListener('resize', () => {
   popup.style.width = window.innerWidth;
@@ -19,6 +19,7 @@ window.addEventListener('resize', () => {
 
 
 const currentLevelIndex = storyLevelDatabase.currentLevel;
+
 const currentLevel = storyLevelDatabase.levels[currentLevelIndex];
 
 const popupParent = document.getElementById('popup');
@@ -38,16 +39,26 @@ while (levelViews.length < views.length) {
   }
 }
 
+let offset = { x: 0, y: 0 };
+
 for (let i = 0; i < levelViews.length; i++) {
   const element = levelViews[i];
   if (i == currentLevelIndex) {
     element.classList.remove('closed')
     element.innerText = `${i + 1}`;
+
+    const box = element.getBoundingClientRect();
+    offset.x = box.left + box.width / 2;
+    offset.y = box.top + box.height / 2;
+
   } else if (!element.classList.contains('closed')) {
     element.classList.add('closed')
     element.innerText = '';
   }
 }
+
+const targetPosition = { x: offset.x - tabSize.width / 2, y: offset.y - tabSize.height / 2 }
+mainTab.scrollTo(targetPosition.x, targetPosition.y);
 
 let lastCreatedLevelPreview = null;
 
@@ -185,8 +196,7 @@ function createLevelPreview(data) {
           if (user.getItemCount(Items.Energy) >= requiredPass) {
             user.removeItem(Items.Energy, requiredPass);
           }
-
-          // TODO: level scene starting with ID parameter 
+          window.location.href = `../playground/playground.html?levelID=level_story_${currentLevelIndex}`;
         });
         startButton.id = 'play-btn';
         {

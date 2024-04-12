@@ -5,21 +5,31 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <link rel="stylesheet" href="storyMode.css" />
+  <link rel="stylesheet" href="../loader/loader.css" />
   <meta name=”viewport” content=”user-scalable=no” />
   <title>Story Mode</title>
 </head>
 
 <body>
+  <div class="mask">
+    <div class="banter-loader">
+      <div class="banter-loader__box"></div>
+      <div class="banter-loader__box"></div>
+      <div class="banter-loader__box"></div>
+      <div class="banter-loader__box"></div>
+      <div class="banter-loader__box"></div>
+      <div class="banter-loader__box"></div>
+      <div class="banter-loader__box"></div>
+      <div class="banter-loader__box"></div>
+      <div class="banter-loader__box"></div>
+    </div>
+  </div>
   <header>
     <ul class="header-interface-list">
       <li class="header-ui-container">
         <a href="../../index.html" class="back-to">
           <button class="header-navigation-btn">
-            <img
-              src="../../Sprites/Icons/Icon_Arrow_Back.png"
-              alt="Profile"
-              class="header-navigation-list-icon"
-            />
+            <img src="../../Sprites/Icons/Icon_Arrow_Back.png" alt="Profile" class="header-navigation-list-icon" />
           </button>
         </a>
       </li>
@@ -80,7 +90,31 @@
       </div>
     </div>
   </main>
-  <script type="module" src="storyMode.js"></script>
+  <script>
+    let savesList = [];
+    let SDK = null;
+    let player = null;
+    let user = null;
+  </script>
+  <script type="module">
+    import { preload } from '../loader/loader.js';
+    import { initializeSDK } from '../scripts/sdk/sdk.js';
+    import { initialize } from '../scripts/save_system/SaveSystem.js'
+    import User from '../scripts/userData.js'
+
+    user = new User();
+
+
+    preload(async () => {
+      console.log('[storyMode.html]=> start initializeSDK');
+      await initializeSDK();
+      console.log('[storyMode.html]=> start initialize');
+      await initialize();
+      user.loadData();
+      console.log('[storyMode.html]=> start import("./storyMode.js")');
+      await import('./storyMode.js')
+    })
+  </script>
 </body>
 
 </html>
