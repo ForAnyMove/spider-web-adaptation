@@ -37,7 +37,6 @@ body::-webkit-scrollbar {
 
 header {
   width: 100%;
-  z-index: 100;
 }
 
 .header-interface-list {
@@ -65,6 +64,10 @@ header {
   align-items: start;
 }
 
+.header-navigation-btn{
+  z-index: 100;
+}
+
 .header-navigation-list-icon {
   width: 3vw;
   margin-top: 15%;
@@ -78,6 +81,7 @@ header {
   position: relative;
   margin: 1.5vw;
   width: 3vw;
+  z-index: 101;
 }
 
 .energy-text {
@@ -93,6 +97,39 @@ header {
   right: -1vw;
 }
 
+/* pop-up styling */
+
+.popup {
+  display: none;
+  position: absolute;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.84);
+  z-index: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.popup-content{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.bounty{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.bounty-icon{
+  width: 7vh;
+}
+
+.bounty-title{
+  color: #fff;
+}
 
 /* cards container */
 
@@ -162,7 +199,7 @@ main {
   scrollbar-width: none;
   -ms-overflow-style: none;
   width: 100%;
-  height: 78vh;
+  height: 80%;
 }
 
 .achievement {
@@ -350,4 +387,23 @@ main {
 
 .hidden {
   display: none;
+}
+
+.hidden-popup{
+  opacity: 0;
+}
+.hidden-popup>.popup-content{
+  scale: 0;
+}
+.visible {
+  opacity: 1;
+}
+.visible>.popup-content{
+  scale: 1;
+}
+#bounty-popup{
+  transition: opacity 0.5s ease;
+}
+.popup-content{
+  transition: scale 0.5s ease;
 }
