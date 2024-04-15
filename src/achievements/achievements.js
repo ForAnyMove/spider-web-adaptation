@@ -8,6 +8,7 @@ import {
 } from '../scripts/helpers.js';
 import { LevelType } from '../scripts/statics/enums.js';
 import { IconsByItem } from '../scripts/statics/staticValues.js';
+import('../scripts/rewardReceiverView.js');
 
 function getIconByItem(itemType) {
   for (let i = 0; i < IconsByItem.length; i++) {
@@ -36,8 +37,8 @@ function setupStatistics() {
     (statistics.gameCount.overall == 0
       ? 0
       : Math.floor(
-          (statistics.winCount.overall / statistics.gameCount.overall) * 100
-        )) + '%';
+        (statistics.winCount.overall / statistics.gameCount.overall) * 100
+      )) + '%';
   fastestWinText.innerText =
     statistics.leastTime == 9999999 ? '∞' : secondsToTime(statistics.leastTime);
   leastStepsText.innerText =
@@ -126,7 +127,7 @@ function createAchievementInstance(data) {
     const claimButton = createButton(['get-btn'], null, status, () => {
       const reward = data.tryCompleteCurrentTrial();
       if (reward) {
-        user.addItem(reward.type, reward.count);
+        user.addItem(reward.type, reward.count, { isTrue: true, isMonetized: false });
 
         achievementsParent.insertBefore(createAchievementInstance(data), plane);
         plane.remove();

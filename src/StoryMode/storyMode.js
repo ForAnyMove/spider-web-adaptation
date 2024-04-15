@@ -1,6 +1,7 @@
 import { storyLevelDatabase } from "../scripts/data/level_databases.js";
 import { createButton, createElement, createHSpace, createImage, createTextH3, createTextSpan, createVSpace, getIconByContent, getIconByItem, getIconByPattern, getIconBySuit, getPatternName, getSuitName } from "../scripts/helpers.js";
 import { Items } from "../scripts/statics/staticValues.js";
+import('../scripts/rewardReceiverView.js');
 
 const levelButtonsContainer = document.getElementsByClassName('story-map-container')[0]
 const tabSize = {
@@ -78,7 +79,7 @@ function createLevelPreview(data) {
           backgroundImage: 'url(../../Sprites/Buttons/Used_plus.png)',
           backgroundSize: '100% 100%',
         }, div, () => {
-          user.addItem(itemType);
+          user.addItem(itemType, 1, { isTrue: true, isMonetized: false });
         });
         createImage(['booster-icon'], null, div, getIconByItem(itemType));
         const count = createTextSpan(['booster-counter'], null, div, user.getItemCount(itemType));
@@ -179,7 +180,7 @@ function createLevelPreview(data) {
       const levelStartContainer = createElement('div', ['start-btn-container'], null, levelInfo);
       {
         const adsButton = createButton(['start-level-btn'], null, levelStartContainer, () => {
-          user.addItem(Items.Energy, 5);
+          user.addItem(Items.Energy, 5, { isTrue: true });
         });
         adsButton.id = 'ads-btn';
         {

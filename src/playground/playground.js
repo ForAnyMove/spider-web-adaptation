@@ -17,7 +17,7 @@ import { completeLevel, completeMode, failLevel, failMode, startLevel } from "..
 
 let timer = 0;
 
-const screenParameters = { rules: oneSuitSpider, decksToWin: 8, onWinCallback: null, onLoseCallback: null, isSolitaire: false };
+const screenParameters = { rules: oneSuitSpider, decksToWin: 8, onWinCallback: null, onLoseCallback: null, isSolitaire: false, onRestart: null };
 
 function trySelectLevel() {
   const levelTypesList = [
@@ -163,11 +163,11 @@ function trySelectLevel() {
         failLevel();
       }
       startLevel(trialLevelDatabase);
+      screenParameters.onRestart = () => startTimer(trialLevel.time);
       break
   }
 }
 
-createTweener();
 trySelectLevel();
 
 function startTimer(seconds) {
@@ -234,7 +234,34 @@ function checkAndMakeSpiderLadyPatternView() {
 
 checkAndMakeSpiderLadyPatternView();
 
-let result = screenParameters.isSolitaire ? createSolitaireLevel({ rules: screenParameters.rules }) : createLevel({ rules: screenParameters.rules });
+let result = null;
+
+function startCurrentLevel() {
+  const cards = document.getElementsByClassName('card-element');
+
+  for (let i = cards.length - 1; i >= 0; i--) {
+    const element = cards[i];
+    if (element.classList.contains('sol-slot')) continue;
+    element.remove();
+  }
+
+  createTweener();
+  animator.reset();
+  stepRecorder.reset();
+  result = screenParameters.isSolitaire ? createSolitaireLevel({ rules: screenParameters.rules }) : createLevel({ rules: screenParameters.rules });
+  screenParameters.onRestart?.();
+
+  stepRecorder.stepRecordedEvent.addListener(updateStepText);
+  updateStepText(0);
+
+  if (screenParameters.isSolitaire) {
+    setupSolitaireLevel();
+  } else {
+    setupDefaultLevel();
+  }
+}
+
+startCurrentLevel();
 
 function setupDistribution() {
   function distributeDefault() {
@@ -303,21 +330,7 @@ function setupButtons() {
   document.getElementById('restart-button').onclick = function () {
     if (!CanInteract) return;
 
-    const cards = document.getElementsByClassName('card-element');
-
-    for (let i = cards.length - 1; i >= 0; i--) {
-      const element = cards[i];
-      element.remove();
-    }
-
-    createTweener();
-    animator.reset();
-    stepRecorder.reset();
-    result = createLevel({ rules: screenParameters.rules });
-    startTimer(600);
-
-    stepRecorder.stepRecordedEvent.addListener(updateStepText);
-    updateStepText(0);
+    startCurrentLevel();
   }
 }
 
@@ -461,9 +474,3 @@ function setupFastFinish() {
 updateStepText(0);
 setupBackgroundChange();
 cardCollector.onCollected.addListener(checkIfLevelWon);
-
-if (screenParameters.isSolitaire) {
-  setupSolitaireLevel();
-} else {
-  setupDefaultLevel();
-}
