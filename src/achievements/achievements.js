@@ -6,6 +6,7 @@ import {
   createTextSpan,
   secondsToTime,
 } from '../scripts/helpers.js';
+import { showRewarded } from '../scripts/sdk/sdk.js';
 import { LevelType } from '../scripts/statics/enums.js';
 import { IconsByItem } from '../scripts/statics/staticValues.js';
 import('../scripts/rewardReceiverView.js');

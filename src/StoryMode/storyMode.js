@@ -1,5 +1,6 @@
 import { storyLevelDatabase } from "../scripts/data/level_databases.js";
 import { createButton, createElement, createHSpace, createImage, createTextH3, createTextSpan, createVSpace, getIconByContent, getIconByItem, getIconByPattern, getIconBySuit, getPatternName, getSuitName } from "../scripts/helpers.js";
+import { showRewarded } from "../scripts/sdk/sdk.js";
 import { Items } from "../scripts/statics/staticValues.js";
 import('../scripts/rewardReceiverView.js');
 
@@ -79,7 +80,7 @@ function createLevelPreview(data) {
           backgroundImage: 'url(../../Sprites/Buttons/Used_plus.png)',
           backgroundSize: '100% 100%',
         }, div, () => {
-          user.addItem(itemType, 1, { isTrue: true, isMonetized: false });
+          showRewarded(null, null, () => user.addItem(itemType, 1, { isTrue: true, isMonetized: false }), null);
         });
         createImage(['booster-icon'], null, div, getIconByItem(itemType));
         const count = createTextSpan(['booster-counter'], null, div, user.getItemCount(itemType));

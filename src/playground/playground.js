@@ -33,6 +33,12 @@ function trySelectLevel() {
   const type = levelID.substring(0, levelID.lastIndexOf('_') + 1);
   const number = parseInt(levelID.substring(type.length, levelID.length));
 
+  function removeBoosters() {
+    document.getElementById('mage-button')?.remove();
+    document.getElementById('undo-button')?.remove();
+    document.getElementById('time-button')?.remove();
+  }
+
   switch (type) {
     case levelTypesList[0]:
       console.log("Selected [Spider]");
@@ -54,6 +60,7 @@ function trySelectLevel() {
       screenParameters.onLoseCallback = () => {
         failMode(screenParameters.rules.rule);
       }
+      removeBoosters();
       break
     case levelTypesList[1]:
       console.log("Selected [Spider Lady]");
@@ -75,6 +82,7 @@ function trySelectLevel() {
       screenParameters.onLoseCallback = () => {
         failMode(screenParameters.rules.rule);
       }
+      removeBoosters();
       break
     case levelTypesList[2]:
       console.log("Selected [Story]");
@@ -295,37 +303,65 @@ function setupBackgroundChange() {
 }
 
 function setupButtons() {
-  document.getElementById('hint-button').onclick = function () {
-    if (user.hasItems(Items.BoosterHint)) {
-      if (useHintBooster(result.playableCardColumns, screenParameters.rules).isTrue) {
-        user.removeItem(Items.BoosterHint, 1);
+  const hintButton = document.getElementById('hint-button');
+  if (hintButton) {
+    const hintCounter = hintButton.getElementsByTagName('span')[0];
+    hintButton.onclick = function () {
+      if (user.hasItems(Items.BoosterHint)) {
+        if (useHintBooster(result.playableCardColumns, screenParameters.rules).isTrue) {
+          user.removeItem(Items.BoosterHint, 1);
+        }
       }
     }
+    hintCounter.innerText = `x${user.getItemCount(Items.BoosterHint)}`;
   }
 
-  document.getElementById('mage-button').onclick = function () {
-    if (user.hasItems(Items.BoosterMage)) {
-      if (useMageBooster(result.mainCardColumn, result.playableCardColumns, screenParameters.rules).isTrue) {
-        user.removeItem(Items.BoosterMage, 1);
+
+  const mageButton = document.getElementById('mage-button');
+  if (mageButton) {
+    const mageCounter = mageButton.getElementsByTagName('span')[0];
+    mageButton.onclick = function () {
+      if (user.hasItems(Items.BoosterMage)) {
+        if (useMageBooster(result.mainCardColumn, result.playableCardColumns, screenParameters.rules).isTrue) {
+          user.removeItem(Items.BoosterMage, 1);
+        }
       }
     }
+    mageCounter.innerText = `x${user.getItemCount(Items.BoosterMage)}`;
   }
 
-  document.getElementById('time-button').onclick = function () {
-    if (user.hasItems(Items.BoosterTime)) {
-      timer += 60;
+  const timeButton = document.getElementById('time-button');
+  if (timeButton) {
+    const timeCounter = timeButton.getElementsByTagName('span')[0];
+    timeButton.onclick = function () {
+      if (user.hasItems(Items.BoosterTime)) {
+        timer += 60;
 
-      user.removeItem(Items.BoosterTime, 1);
-    }
-  }
-
-  document.getElementById('undo-button').onclick = function () {
-    if (user.hasItems(Items.BoosterUndo)) {
-      if (useUndoBooster()) {
-        user.removeItem(Items.BoosterUndo, 1);
+        user.removeItem(Items.BoosterTime, 1);
       }
     }
+    timeCounter.innerText = `x${user.getItemCount(Items.BoosterTime)}`;
   }
+
+  const undoButton = document.getElementById('undo-button');
+  if (undoButton) {
+    const undoCounter = undoButton.getElementsByTagName('span')[0];
+    undoButton.onclick = function () {
+      if (user.hasItems(Items.BoosterUndo)) {
+        if (useUndoBooster()) {
+          user.removeItem(Items.BoosterUndo, 1);
+        }
+      }
+    }
+    undoCounter.innerText = `x${user.getItemCount(Items.BoosterUndo)}`;
+  }
+
+  user.itemListUpdateEvent.addListener(() => {
+    if (hintCounter) hintCounter.innerText = `x${user.getItemCount(Items.BoosterHint)}`;
+    if (mageCounter) mageCounter.innerText = `x${user.getItemCount(Items.BoosterMage)}`;
+    if (timeCounter) timeCounter.innerText = `x${user.getItemCount(Items.BoosterTime)}`;
+    if (undoCounter) undoCounter.innerText = `x${user.getItemCount(Items.BoosterUndo)}`;
+  })
 
   document.getElementById('restart-button').onclick = function () {
     if (!CanInteract) return;
@@ -380,9 +416,21 @@ function setupDefaultLevel() {
   setupDistribution();
   setupButtons();
   stepRecorder.stepRecordedEvent.addListener(updateStepText);
+
+  const buttonContainer = document.getElementsByClassName('footer-control-panel')[0];
+  if (buttonContainer != null) {
+    buttonContainer.classList.remove('hidden');
+  }
 }
 
 function setupSolitaireLevel() {
+  const buttonContainer = document.getElementsByClassName('footer-control-panel')[0];
+  if (buttonContainer != null) {
+    if (!buttonContainer.classList.contains('hidden')) {
+      buttonContainer.classList.add('hidden');
+    }
+  }
+
   const solitaireSlots = document.getElementsByClassName('sol-slot');
 
   const cardColumns = [];
