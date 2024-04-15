@@ -1,8 +1,14 @@
 import { storyLevelDatabase } from "../scripts/data/level_databases.js";
+import DirectionalInput from "../scripts/directionInput.js";
 import { createButton, createElement, createHSpace, createImage, createTextH3, createTextSpan, createVSpace, getIconByContent, getIconByItem, getIconByPattern, getIconBySuit, getPatternName, getSuitName } from "../scripts/helpers.js";
 import { showRewarded } from "../scripts/sdk/sdk.js";
 import { Items } from "../scripts/statics/staticValues.js";
 import('../scripts/rewardReceiverView.js');
+
+const returnButton = document.getElementById('close-button');
+input ??= new DirectionalInput({ element: returnButton });
+
+input.selectableElements = [{ element: returnButton }];
 
 const levelButtonsContainer = document.getElementsByClassName('story-map-container')[0]
 const tabSize = {
@@ -53,6 +59,8 @@ for (let i = 0; i < levelViews.length; i++) {
     offset.x = box.left + box.width / 2;
     offset.y = box.top + box.height / 2;
 
+    input.selectableElements.push({ element: element });
+
   } else if (!element.classList.contains('closed')) {
     element.classList.add('closed')
     element.innerText = '';
@@ -74,7 +82,7 @@ function createLevelPreview(data) {
     {
       const div = createElement('div', ['booster'], null, plane);
       {
-        createButton(['add-booster-icon'], {
+        const button = createButton(['add-booster-icon'], {
           border: 'none',
           background: 'no-repeat',
           backgroundImage: 'url(../../Sprites/Buttons/Used_plus.png)',
@@ -82,6 +90,8 @@ function createLevelPreview(data) {
         }, div, () => {
           showRewarded(null, null, () => user.addItem(itemType, 1, { isTrue: true, isMonetized: false }), null);
         });
+
+        input.selectableElements.push({ element: button });
         createImage(['booster-icon'], null, div, getIconByItem(itemType));
         const count = createTextSpan(['booster-counter'], null, div, user.getItemCount(itemType));
 
@@ -116,6 +126,7 @@ function createLevelPreview(data) {
         popupParent.classList.remove('showed-popup');
         popupParent.classList.add('hidden-popup');
       });
+      input.selectableElements.push({ element: closeButton });
       closeButton.id = 'close-popup'
     }
     const rules = createElement('div', ['rules-container'], null, plane);
@@ -183,6 +194,7 @@ function createLevelPreview(data) {
         const adsButton = createButton(['start-level-btn'], null, levelStartContainer, () => {
           user.addItem(Items.Energy, 5, { isTrue: true });
         });
+        input.selectableElements.push({ element: adsButton });
         adsButton.id = 'ads-btn';
         {
           createImage(['watch-add-icon'], null, adsButton, '../../Sprites/Icons/Icon_Ads.png');
@@ -200,6 +212,7 @@ function createLevelPreview(data) {
           }
           window.location.href = `../playground/playground.html?levelID=level_story_${currentLevelIndex}`;
         });
+        input.selectableElements.push({ element: startButton });
         startButton.id = 'play-btn';
         {
           createTextSpan(['start-level-btn-title'], null, startButton, 'Играть');

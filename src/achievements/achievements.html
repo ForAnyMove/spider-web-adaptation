@@ -10,7 +10,7 @@
   <meta name="”viewport”" content="”user-scalable"="no”" />
   <title>Achievements</title>
 
-  <script src="https://yandex.ru/games/sdk/v2"></script>
+  <!-- <script src="https://yandex.ru/games/sdk/v2"></script> -->
 </head>
 
 <body>
@@ -46,7 +46,7 @@
   <header>
     <ul class="header-interface-list">
       <li class="header-ui-container">
-        <a href="../../index.html" class="back-to">
+        <a href="../../index.html" class="back-to" id="close-button">
           <button class="header-navigation-btn">
             <img src="../../Sprites/Icons/Icon_Arrow_Back.png" alt="Profile" class="header-navigation-list-icon" />
           </button>
@@ -79,7 +79,8 @@
         </li>
       </ul>
     </nav>
-    <div class="achievements" id="achievements"></div>
+    <div class="achievements" id="achievements">
+    </div>
     <div class="achievements hidden" id="statistics">
       <div class="achievement">
         <div class="achievement-lable">
@@ -138,6 +139,7 @@
     let player = null;
     let user = null;
     let platform;
+    let input;
   </script>
   <script type="module">
     import { preload } from '../loader/loader.js';

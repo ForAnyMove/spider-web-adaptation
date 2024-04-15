@@ -7,6 +7,13 @@
   -ms-user-select: none;
 }
 
+button.selected,
+div.selected,
+img.selected,
+a.selected>button {
+  box-shadow: inset 0vw 0vw 0vw 0.3vw chartreuse;
+}
+
 @viewport {
   user-zoom: fixed;
 }
@@ -104,7 +111,7 @@ header {
   display: flex;
   justify-content: space-evenly;
   align-items: center;
-  scroll-snap-type: x proximity;
+  /* scroll-snap-type: x proximity; */
   overflow-x: scroll;
   scrollbar-width: none;
   -ms-overflow-style: none;

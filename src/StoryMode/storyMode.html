@@ -44,7 +44,7 @@
   <header>
     <ul class="header-interface-list">
       <li class="header-ui-container">
-        <a href="../../index.html" class="back-to">
+        <a href="../../index.html" class="back-to" id="close-button">
           <button class="header-navigation-btn">
             <img src="../../Sprites/Icons/Icon_Arrow_Back.png" alt="Profile" class="header-navigation-list-icon" />
           </button>
@@ -112,6 +112,7 @@
     let SDK = null;
     let player = null;
     let user = null;
+    let input;
   </script>
   <script type="module">
     import { preload } from '../loader/loader.js';

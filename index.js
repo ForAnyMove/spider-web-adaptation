@@ -8,16 +8,27 @@ import {
 import { showRewarded } from './src/scripts/sdk/sdk.js';
 import('./src/scripts/rewardReceiverView.js');
 
+import DirectionalInput from './src/scripts/directionInput.js';
+import { getInputElements } from './src/scripts/helpers.js';
+
+const defaultSelectedButton = document.getElementsByClassName('main-panel-btn-1')[0];
+input ??= new DirectionalInput({ element: defaultSelectedButton });
+
 const closeDailyPopupButton = document.getElementById('close-popup-daily');
 const dailyBonuses = document.getElementById('daily-bonuses');
 const dailyBtn = document.getElementById('daily-btn');
 
 dailyBtn.addEventListener('click', () => {
   dailyBonuses.style.display = 'flex';
+
+  input.updateQueryCustom(getInputElements(dailyBonuses, { classNames: ['booster', 'close-popup', 'special-booster'], tags: ['button'] }), { element: closeDailyPopupButton });
 });
 
 closeDailyPopupButton.addEventListener('click', function () {
   dailyBonuses.style.display = 'none';
+
+  input.updateQuery();
+  input.select({ element: defaultSelectedButton });
 });
 
 const closeRegularPopupButton = document.getElementById('close-popup-regular');
@@ -26,10 +37,15 @@ const regularBtn = document.getElementById('regular-btn');
 
 regularBtn.addEventListener('click', () => {
   regularBonuses.style.display = 'flex';
+
+  input.updateQueryCustom(getInputElements(regularBonuses, { classNames: ['close-popup'], tags: ['button'] }), { element: closeRegularPopupButton });
 });
 
 closeRegularPopupButton.addEventListener('click', function () {
   regularBonuses.style.display = 'none';
+
+  input.updateQuery();
+  input.select({ element: defaultSelectedButton });
 });
 
 const closeSettingsPopupButton = document.getElementById(
@@ -40,10 +56,15 @@ const settingsBtn = document.getElementById('settings-btn');
 
 settingsBtn.addEventListener('click', () => {
   settingsBonuses.style.display = 'flex';
+
+  input.updateQueryCustom(getInputElements(settingsBonuses, { classNames: ['close-popup'], tags: ['button'] }), { element: closeSettingsPopupButton });
 });
 
 closeSettingsPopupButton.addEventListener('click', function () {
   settingsBonuses.style.display = 'none';
+
+  input.updateQuery();
+  input.select({ element: defaultSelectedButton });
 });
 
 function setupReqularBonusesButtons() {
@@ -119,5 +140,6 @@ function setupDailyRewards() {
     }
   }
 }
+
 
 setupDailyRewards();

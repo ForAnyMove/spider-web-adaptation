@@ -14,8 +14,11 @@ import { getBackgroundImage } from "../scripts/data/card_skin_database.js";
 import { trialLevelDatabase, storyLevelDatabase } from "../scripts/data/level_databases.js";
 import { SolitaireCardColumn } from "../scripts/cardModel.js";
 import { completeLevel, completeMode, failLevel, failMode, startLevel } from "../scripts/levelStarter.js";
+import { showInterstitial } from "../scripts/sdk/sdk.js";
 
 let timer = 0;
+
+showInterstitial();
 
 const screenParameters = { rules: oneSuitSpider, decksToWin: 8, onWinCallback: null, onLoseCallback: null, isSolitaire: false, onRestart: null };
 

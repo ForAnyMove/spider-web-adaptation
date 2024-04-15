@@ -1,4 +1,4 @@
-import { statistics } from '../scripts/gameStatistics.js';
+import { statistics, updateStatistics } from '../scripts/gameStatistics.js';
 import {
   createButton,
   createElement,
@@ -6,10 +6,11 @@ import {
   createTextSpan,
   secondsToTime,
 } from '../scripts/helpers.js';
-import { showRewarded } from '../scripts/sdk/sdk.js';
 import { LevelType } from '../scripts/statics/enums.js';
 import { IconsByItem } from '../scripts/statics/staticValues.js';
 import('../scripts/rewardReceiverView.js');
+
+import DirectionalInput from '../scripts/directionInput.js';
 
 function getIconByItem(itemType) {
   for (let i = 0; i < IconsByItem.length; i++) {
@@ -18,10 +19,19 @@ function getIconByItem(itemType) {
   }
 }
 
+const returnButton = document.getElementById('close-button');
+input ??= new DirectionalInput({ element: returnButton });
+
+
 const achievementsParent = document.getElementById('achievements');
 const statisticsParent = document.getElementById('statistics');
 
 const tabScreens = [achievementsParent, statisticsParent];
+let tabs = [];
+let startSelectables;
+
+statistics.winCount.overall = 5;
+updateStatistics();
 
 function setupStatistics() {
   const gameCountText = document.getElementById('st-game-count');
@@ -62,7 +72,7 @@ function setupStatistics() {
   }
 }
 
-function createAchievementInstance(data) {
+function createAchievementInstance(data, onInserted) {
   const completed = data.completed;
 
   const plane = createElement('div', ['achievement']);
@@ -128,10 +138,12 @@ function createAchievementInstance(data) {
     const claimButton = createButton(['get-btn'], null, status, () => {
       const reward = data.tryCompleteCurrentTrial();
       if (reward) {
-        user.addItem(reward.type, reward.count, { isTrue: true, isMonetized: false });
-
-        achievementsParent.insertBefore(createAchievementInstance(data), plane);
+        const newPlane = createAchievementInstance(data, onInserted);
+        achievementsParent.insertBefore(newPlane, plane);
+        onInserted?.(newPlane);
         plane.remove();
+
+        setTimeout(() => user.addItem(reward.type, reward.count, { isTrue: true, isMonetized: false }), 15)
       }
     });
     createTextSpan(['get-btn-title'], null, claimButton, 'Получить');
@@ -141,10 +153,70 @@ function createAchievementInstance(data) {
 }
 
 function createAchievementInstances() {
+  const selectables = [];
+  const activementsViews = [];
+
   for (let i = 0; i < user.achievements.length; i++) {
     const achievement = user.achievements[i];
-    achievementsParent.appendChild(createAchievementInstance(achievement));
+
+    const element = createAchievementInstance(achievement, (newElement) => {
+      setTimeout(() => {
+        const newSelectable = {
+          element: newElement,
+          onSelect: () => {
+            const box = newElement.getBoundingClientRect();
+            const height = box.height;
+            const yCenter = box.top + height / 2;
+
+            if (yCenter + height / 2 >= achievementsParent.getBoundingClientRect().bottom) {
+              achievementsParent.scrollBy(0, height)
+            } else if (yCenter - height / 2 <= achievementsParent.getBoundingClientRect().top) {
+              achievementsParent.scrollBy(0, -height)
+            }
+          }, onSubmit: () => {
+            if (achievement.completed) {
+              input.updateQueryCustom([], {
+                element: newElement.getElementsByClassName('get-btn')[0], onBack: () => input.updateQueryCustom(startSelectables, newSelectable)
+              });
+            }
+          }
+        }
+        startSelectables.push(newSelectable);
+        for (let i = startSelectables.length - 1; i >= 0; i--) {
+          if (startSelectables[i].element == element) {
+            startSelectables.splice(i, 1);
+          }
+        }
+
+        input.updateQueryCustom(startSelectables, newSelectable);
+      }, 10)
+    });
+    activementsViews.push(element);
+
+    const selectable = {
+      element: element, onSelect: () => {
+        const box = element.getBoundingClientRect();
+        const height = box.height;
+        const yCenter = box.top + height / 2;
+
+        if (yCenter + height / 2 >= achievementsParent.getBoundingClientRect().bottom) {
+          achievementsParent.scrollBy(0, height)
+        } else if (yCenter - height / 2 <= achievementsParent.getBoundingClientRect().top) {
+          achievementsParent.scrollBy(0, -height)
+        }
+      }, onSubmit: () => {
+        if (achievement.completed) {
+          input.updateQueryCustom([], { element: element.getElementsByClassName('get-btn')[0], onBack: () => input.updateQueryCustom(startSelectables, selectable) });
+        }
+      }
+    }
+
+    selectables.push(selectable);
+
+    achievementsParent.appendChild(element);
   }
+
+  return selectables;
 }
 
 function setupTabSwitch() {
@@ -165,7 +237,7 @@ function setupTabSwitch() {
     return true;
   }
   const tabClass = 'categories-btn';
-  const tabs = document.getElementsByClassName(tabClass);
+  tabs = document.getElementsByClassName(tabClass);
 
   for (let i = 0; i < tabs.length; i++) {
     const element = tabs[i];
@@ -185,5 +257,14 @@ function setupTabSwitch() {
 }
 
 setupTabSwitch();
-createAchievementInstances();
 setupStatistics();
+
+function timeout(ms) {
+  return new Promise(resolve => setTimeout(resolve, ms));
+}
+
+const selectables = createAchievementInstances();
+
+startSelectables = [{ element: tabs[0] }, { element: tabs[1] }, { element: returnButton }].concat(selectables);
+
+input.updateQueryCustom(startSelectables, startSelectables[2]);

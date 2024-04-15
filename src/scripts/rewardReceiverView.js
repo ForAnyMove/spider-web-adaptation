@@ -36,6 +36,11 @@ if (popupElement != null) {
         popupElement.onclick = null;
         clearItems();
 
+        input?.updateQueryCustom(input.backup.selectableElements, input.backup.selected);
+        if (input) {
+            input.backup = null;
+        }
+
         if (popupElement.classList.contains('fade-visible')) {
             popupElement.classList.replace('fade-visible', 'fade-hidden');
             return;
@@ -77,6 +82,7 @@ if (popupElement != null) {
 
     const receiveReward = (data) => {
         showPopup();
+        input?.backupCurrentState();
 
         for (let i = 0; i < data.items.length; i++) {
             const item = data.items[i];
@@ -91,12 +97,16 @@ if (popupElement != null) {
                 data.monetized = false;
                 showRewarded(null, null, () => receiveReward(data), null);
             }
+
+            input?.updateQueryCustom([{ element: adsButton }, { element: closeButton }], { element: adsButton });
         } else {
             startDefaultCase();
 
             setTimeout(() => {
                 popupElement.onclick = hidePopup;
             }, 400);
+
+            input?.updateQueryCustom([], { element: popupElement, onBack: () => popupElement?.click() });
         }
     }
 

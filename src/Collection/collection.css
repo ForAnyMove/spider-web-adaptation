@@ -7,6 +7,13 @@
   -ms-user-select: none;
 }
 
+button.selected,
+div.selected,
+img.selected,
+a.selected>button {
+  box-shadow: inset 0vw 0vw 0vw 0.3vw chartreuse;
+}
+
 @viewport {
   user-zoom: fixed;
 }

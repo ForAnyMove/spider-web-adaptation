@@ -729,6 +729,13 @@ a {
 
 /* pop-up */
 
+div.selected,
+img.selected,
+button.selected {
+  border-radius: 3vw;
+  box-shadow: inset 0vw 0vw 0vw 0.3vw chartreuse;
+}
+
 .popup {
   display: none;
   position: absolute;

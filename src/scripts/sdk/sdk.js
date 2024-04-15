@@ -52,15 +52,36 @@ async function showInterstitial(closeCallback, errorCallback) {
         return;
     }
 
-    SDK.adv.showFullscreenAdv({
-        callbacks: {
-            onClose: function (wasShown) {
-                closeCallback?.(wasShown);
-            }, onError: function (error) {
-                errorCallback?.(error);
-            }
+    const lastTime = localStorage.getItem('inter_delay');
+    let canShowInterstitial = true;
+    if (lastTime != null) {
+        let currentTime = Date.now();
+
+        let difference = currentTime - lastTime;
+
+        let secs = difference / 1000;
+
+        if (secs > 30) {
+            localStorage.setItem('inter_delay', currentTime);
+            canShowInterstitial = true;
+        } else {
+            canShowInterstitial = false;
         }
-    });
+    } else {
+        localStorage.setItem('inter_delay', Date.now());
+    }
+
+    if (canShowInterstitial) {
+        SDK.adv.showFullscreenAdv({
+            callbacks: {
+                onClose: function (wasShown) {
+                    closeCallback?.(wasShown);
+                }, onError: function (error) {
+                    errorCallback?.(error);
+                }
+            }
+        });
+    }
 }
 
 function processExit() {
