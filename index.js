@@ -117,9 +117,10 @@ function setupDailyRewards() {
   }
 }
 
-const bountyPopupTriggerBtnList = document.getElementsByClassName('booster');
+const bountyPopupTriggerBtnListContainer = document.getElementById('daily-bonuses');
+const dailyBountyPopupTriggerBtnList = bountyPopupTriggerBtnListContainer.getElementsByClassName('booster');
 const bountyPopup = document.getElementById('bounty-popup');
-Array.from(bountyPopupTriggerBtnList).forEach((triggerBtn) => {
+Array.from(dailyBountyPopupTriggerBtnList).forEach((triggerBtn) => {
   triggerBtn.addEventListener('click', () => {
     bountyPopup.style.display = 'flex';
 

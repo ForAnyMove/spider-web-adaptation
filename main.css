@@ -1029,6 +1029,31 @@ a {
   width: 8vw;
 }
 
+.booster-type {
+  position: relative;
+}
+
+.booster-type:hover::before {
+  content: attr(data-text);
+  display: block;
+  position: absolute;
+  background: #61AC59;
+  background: -moz-linear-gradient(-45deg, #61AC59 0%, #0B7909 69%, #005003 100%);
+  background: -webkit-linear-gradient(-45deg, #61AC59 0%, #0B7909 69%, #005003 100%);
+  background: linear-gradient(135deg, #61AC59 0%, #0B7909 69%, #005003 100%);
+  box-shadow: 0px 3px 2px 0px #00000034;
+  color: white;
+  font-size: 1.8vh;
+  text-align: center;
+  width: 22vh;
+  padding: 1vh;
+  border-radius: 2vh;
+  top: -15vh;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 999;
+}
+
 .booster-type>.booster-icon {
   width: 6vw;
   margin-top: -2vw;
@@ -1045,7 +1070,7 @@ a {
   justify-content: center;
   align-items: center;
   padding-bottom: 0.5vw;
-  background-image: url('../../Sprites/Buttons/Used_Button_03.png');
+  background-image: url('./Sprites/Buttons/Used_Button_03.png');
 }
 
 .start-level-btn-title {
@@ -1212,7 +1237,10 @@ a {
     padding-bottom: 0.2vw;
     border-radius: 2.5vw;
   }
-
+  
+  .booster-type:hover::before {
+    top: -10vh;
+  }
   .booster-type>.booster-icon {
     width: 14vw;
     margin-top: -3vw;
