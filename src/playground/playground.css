@@ -13,22 +13,31 @@ body {
   visibility: hidden;
 }
 
-.hidden-popup{
+.hidden-popup {
   opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.2s ease, visibility 0.2s ease;
 }
-.hidden-popup>.popup-content{
+
+.hidden-popup>.popup-content {
   scale: 0;
 }
+
 .visible {
   opacity: 1;
+  visibility: visible;
+  transition: opacity 0.2s ease, visibility 0.2s ease;
 }
-.visible>.popup-content{
+
+.visible>.popup-content {
   scale: 1;
 }
-#bounty-popup{
+
+#bounty-popup {
   transition: opacity 0.5s ease;
 }
-.popup-content{
+
+.popup-content {
   transition: scale 0.5s ease;
 }
 
@@ -131,40 +140,49 @@ header {
   font-weight: bold;
   text-align: center;
 }
-.lose-screen-popup{
+
+.lose-screen-popup {
   justify-content: center;
 }
-.end-level{
+
+.end-level {
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
   margin-top: 20vh;
 }
-.end-level-title{
+
+.end-level-title {
   margin-bottom: 4vh;
   font-size: 3.5vh;
 }
-.lose-level{
+
+.lose-level {
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
   margin-bottom: 25vh;
 }
-.lose-level-title{
+
+.lose-level-title {
   font-size: 4.5vh;
   color: #d64646;
 }
-.lose-btns-container{
+
+.lose-btns-container {
   display: flex;
-  align-items:center;
+  align-items: center;
   justify-content: center;
 }
-.lose-screen-ads-icon{
+
+.lose-screen-ads-icon {
   width: 4vh;
 }
-.refresh-btn, .home-page-btn{
+
+.refresh-btn,
+.home-page-btn {
   width: 7vh;
   height: 7vh;
   margin: 0.5vw;
@@ -176,32 +194,46 @@ header {
   justify-content: center;
   align-items: start;
 }
-.refresh-btn{
+
+.refresh-btn {
   margin-right: 3vw;
 }
-.popup_back-to{
+
+.popup_back-to {
   position: absolute;
   top: 2vh;
   right: 2vh;
 }
-.new-achievements{
+
+.new-achievements {
   font-size: 2.5vh;
 }
-.bounty-list{
+
+.bounty-list {
   height: 20vh;
   display: flex;
   align-items: center;
   justify-content: center;
+  margin-top: 7vh;
+  margin-bottom: -7vh;
 }
-.custom-line{
+
+#win-screen-rewards {
+  display: flex;
+  justify-content: center;
+}
+
+.custom-line {
   width: 6vw;
   height: 1px;
   background-color: #fff;
 }
-.bounty-title{
+
+.bounty-title {
   font-size: 2vh;
   margin: 0 1vw;
 }
+
 .next-btn {
   border-radius: 2vw;
   width: 23vh;
@@ -216,6 +248,7 @@ header {
   background-image: url('../../Sprites/Buttons/Used_Button_03.png');
   margin-bottom: 5vh;
 }
+
 .next-ads-btn {
   border-radius: 2vw;
   width: 23vh;
@@ -410,9 +443,38 @@ footer {
   position: relative;
 }
 
+.home-page-btn>.control-button-list-icon {
+  width: 4vh;
+}
+
+.refresh-btn>.control-button-list-icon {
+  width: 4.2vh;
+}
+
 .control-button-list-icon {
-  width: 4.5vh;
+  width: 2.5vw;
   margin-top: 15%;
+}
+
+.playable-card-column.selected>.card-element.selected-card,
+.extra-cards-container.selected>.card-element:last-child,
+.playable-card-column.selected>.card-element.opened:last-child {
+  box-shadow: inset 0 0 2vw 0.2vw rgb(0, 157, 255);
+  border-radius: 0.5vw;
+}
+
+.bounty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.bounty-icon {
+  width: 7vh;
+}
+
+.bounty-title {
+  color: #fff;
 }
 
 @media only screen and (orientation: portrait) {

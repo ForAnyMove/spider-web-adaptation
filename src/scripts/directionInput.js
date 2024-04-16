@@ -7,7 +7,29 @@ export default class DirectionalInput {
         document.addEventListener('keydown', this.handleKeyDown);
 
         this.backup = null;
+        this.ignoredAxis = [];
+
+        // todo: need to make root class [Input] and put basics there
+        this.globalKeyHandlers = [];
     }
+
+    preventAxis = function (ignoreList) {
+        this.ignoredAxis = ignoreList;
+    }
+
+    addGlobalKeyHandle = function (key, handle) {
+        this.globalKeyHandlers.push({ key: key, handle: handle });
+    }
+
+    tryInvokeGlobalHandle = function (key) {
+        for (let i = 0; i < this.globalKeyHandlers.length; i++) {
+            const element = this.globalKeyHandlers[i];
+            if (element.key == key) {
+                element.handle?.();
+            }
+        }
+    }
+
     isVisible = (element) => {
         function isElementHidden(element) {
             var computedStyle = window.getComputedStyle(element);
@@ -54,6 +76,8 @@ export default class DirectionalInput {
     }
 
     select = function (element) {
+        if (element == null || element.element == null) return;
+
         if (this.selected != null) {
             this.selected.element.classList.remove('selected');
         }
@@ -143,27 +167,50 @@ export default class DirectionalInput {
     handleKeyDown = (event) => {
 
         let direction = { x: 0, y: 0 };
+
+        this.tryInvokeGlobalHandle(event.key);
+
         switch (event.key) {
             case "ArrowLeft":
+                if (this.ignoredAxis.includes('ArrowLeft')) return;
                 direction = { x: -1, y: 0 };
+                if (this.selected != null) {
+                    const result = this.selected.onLeft?.();
+                    if (result != null && result.preventDefault) return;
+                }
                 break;
             case "ArrowRight":
+                if (this.ignoredAxis.includes('ArrowRight')) return;
                 direction = { x: 1, y: 0 };
+                if (this.selected != null) {
+                    const result = this.selected.onRight?.();
+                    if (result != null && result.preventDefault) return;
+                }
                 break;
             case "ArrowUp":
+                if (this.ignoredAxis.includes('ArrowUp')) return;
                 direction = { x: 0, y: 1 };
+                if (this.selected != null) {
+                    const result = this.selected.onUp?.();
+                    if (result != null && result.preventDefault) return;
+                }
                 break;
             case "ArrowDown":
+                if (this.ignoredAxis.includes('ArrowDown')) return;
                 direction = { x: 0, y: -1 };
+                if (this.selected != null) {
+                    const result = this.selected.onDown?.();
+                    if (result != null && result.preventDefault) return;
+                }
                 break;
             case "Enter":
-                if (this.selected.element != null) {
-                    this.selected.element.click();
+                if (this.selected != null) {
+                    this.selected.element?.click();
                     this.selected.onSubmit?.();
                 }
                 break;
             case "Escape":
-                if (this.selected.element != null) {
+                if (this.selected != null) {
                     this.selected.onBack?.();
                 }
                 break;

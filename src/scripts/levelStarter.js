@@ -1,4 +1,4 @@
-import { statistics } from "./gameStatistics.js";
+import { statistics, updateStatistics } from "./gameStatistics.js";
 import { levelManagement } from "./levelManagement.js";
 import { log } from "./logger.js";
 import { LevelType } from "./statics/enums.js";
@@ -150,7 +150,7 @@ function completeLevel() {
     log(message, "levelStarter");
 
     if (rewards != null) {
-        user.addItems(rewards.items);
+        user.addItems(rewards.items, { isTrue: true });
         user.addContents(rewards.content);
     }
     // save("story_level", database.currentLevel);

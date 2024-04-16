@@ -52,38 +52,41 @@
       </li>
     </ul>
   </header>
-  <div class="popup hidden-popup" style="display: none" id="win-screen-popup">
-  <!-- <div class="popup" id="win-screen-popup"> -->
+  <div class="popup hidden-popup" id="win-screen-popup">
+    <!-- <div class="popup" id="win-screen-popup"> -->
     <div class="end-level">
-        <h2 class="end-level-title">Уровень завершен!</h2>
-        <!-- <span class="new-achievements">Новые достижения!</span> -->
+      <h2 class="end-level-title">Уровень завершен!</h2>
+      <!-- <span class="new-achievements">Новые достижения!</span> -->
     </div>
-    <div class="bounty-list">
+    <div>
+      <div class="bounty-list">
         <div class="custom-line"></div>
         <span class="bounty-title">Награды</span>
         <div class="custom-line"></div>
+      </div>
+      <div id="win-screen-rewards"></div>
     </div>
     <div class="next-btn-container">
-      <button class="next-btn" id="play-btn">
-        <span class="next-btn-title">Продолжить</span>
-      </button>
+      <a href="../../index.html">
+        <button class="next-btn" id="play-btn">
+          <span class="next-btn-title">Продолжить</span>
+        </button>
+      </a>
     </div>
   </div>
-  <div class="popup lose-screen-popup hidden-popup" style="display: none" id="lose-screen-popup">
-  <!-- <div class="popup lose-screen-popup" id="lose-screen-popup"> -->
+  <div class="popup lose-screen-popup hidden-popup" id="lose-screen-popup">
+    <!-- <div class="popup lose-screen-popup" id="lose-screen-popup"> -->
     <a href="../../index.html" class="popup_back-to">
       <button class="home-page-btn">
-        <img src="../../Sprites/Icons/Icon_Home.png" alt="Home" class="control-button-list-icon"
-          id="go-home-button" />
+        <img src="../../Sprites/Icons/Icon_Home.png" alt="Home" class="control-button-list-icon" id="go-home-button" />
       </button>
     </a>
     <div class="lose-level">
-        <h2 class="lose-level-title">Вы проиграли</h2>
+      <h2 class="lose-level-title">Вы проиграли</h2>
     </div>
     <div class="lose-btns-container">
-      <button class="refresh-btn">
-        <img src="../../Sprites/Icons/Icon_Restart.png" alt="Icon_Skins" class="control-button-list-icon"
-          id="restart-button" />
+      <button class="refresh-btn reset-level-button">
+        <img src="../../Sprites/Icons/Icon_Restart.png" alt="Icon_Skins" class="control-button-list-icon" />
       </button>
       <button class="next-ads-btn" id="play-btn">
         <span class="next-btn-title">Продолжить?</span>
@@ -226,18 +229,17 @@
   </main>
   <footer>
     <nav>
-      <!-- <button class="control-btn" style="position: absolute; left: 0vw;" id="fast-win">
+      <button class="control-btn" style="position: absolute; left: 0vw;" id="fast-win">
         <img src="../../Sprites/Icons/Icon_Trophy.png" alt="Icon_Skins" class="control-button-list-icon" />
       </button>
       <button class="control-btn" style="position: absolute; left: 5vw;" id="fast-lose">
         <img src="../../Sprites/Icons/Icon_Stopwatch.png" alt="Icon_Skins" class="control-button-list-icon" />
-      </button> -->
+      </button>
 
       <ul class="footer-control-panel">
         <li>
-          <button class="control-btn">
-            <img src="../../Sprites/Icons/Icon_Restart.png" alt="Icon_Skins" class="control-button-list-icon"
-              id="restart-button" />
+          <button class="control-btn reset-level-button">
+            <img src="../../Sprites/Icons/Icon_Restart.png" alt="Icon_Skins" class="control-button-list-icon" />
           </button>
         </li>
         <li>
@@ -274,6 +276,7 @@
     let player = null;
     let user = null;
     let platform;
+    let input;
   </script>
   <script type="module">
     import { preload } from '../loader/loader.js';

@@ -11,431 +11,307 @@
   <!-- <script src="https://yandex.ru/games/sdk/v2"></script> -->
 </head>
 
-  <body>
-    <div class="mask">
-      <div class="banter-loader">
-        <div class="banter-loader__box"></div>
-        <div class="banter-loader__box"></div>
-        <div class="banter-loader__box"></div>
-        <div class="banter-loader__box"></div>
-        <div class="banter-loader__box"></div>
-        <div class="banter-loader__box"></div>
-        <div class="banter-loader__box"></div>
-        <div class="banter-loader__box"></div>
-        <div class="banter-loader__box"></div>
-      </div>
+<body>
+  <div class="mask">
+    <div class="banter-loader">
+      <div class="banter-loader__box"></div>
+      <div class="banter-loader__box"></div>
+      <div class="banter-loader__box"></div>
+      <div class="banter-loader__box"></div>
+      <div class="banter-loader__box"></div>
+      <div class="banter-loader__box"></div>
+      <div class="banter-loader__box"></div>
+      <div class="banter-loader__box"></div>
+      <div class="banter-loader__box"></div>
     </div>
-    <header>
-      <nav class="header-navigation">
-        <ul class="header-navigation-list">
-          <li class="nav-btn">
-            <a href="./src/achievements/achievements.html">
-              <button class="header-navigation-btn">
-                <div class="header-navigation-icon-container">
-                  <img
-                    src="./Sprites/Icons/Icon_Profile.png"
-                    alt="Profile"
-                    class="header-navigation-list-icon"
-                  />
-                </div>
-              </button>
-            </a>
-            <button class="header-navigation-btn" id="daily-btn">
+  </div>
+  <header>
+    <nav class="header-navigation">
+      <ul class="header-navigation-list">
+        <li class="nav-btn">
+          <a href="./src/achievements/achievements.html">
+            <button class="header-navigation-btn">
               <div class="header-navigation-icon-container">
-                <img
-                  src="./Sprites/Icons/Icon_Chest.png"
-                  alt="Profile"
-                  class="header-navigation-list-icon"
-                />
+                <img src="./Sprites/Icons/Icon_Profile.png" alt="Profile" class="header-navigation-list-icon" />
               </div>
             </button>
-          </li>
-          <li class="nav-btn">
-            <button class="header-navigation-btn" id="settings-btn">
-              <div class="header-navigation-icon-container">
-                <img
-                  src="./Sprites/Icons/Icon_Settings.png"
-                  alt="Settings"
-                  class="header-navigation-list-icon"
-                />
-              </div>
-            </button>
-          </li>
-        </ul>
-      </nav>
-    </header>
-    <section class="logo">
-      <img src="./Sprites/Logos/Logo_RU.png" alt="Logo" class="logo-icon" />
-    </section>
-    <div class="popup daily-bonuses hidden" id="daily-bonuses">
-      <div class="popup-content">
-        <div class="popup-header">
-          <h3>Ежедневные бонусы</h3>
-          <img
-            src="./Sprites/Icons/Icon_Close.png"
-            alt="close"
-            id="close-popup-daily"
-            class="close-popup"
-          />
-        </div>
-        <div class="daily-boosters-container">
-          <div class="regular-daily">
-            <div class="booster">
-              <span class="completed-flag">Готово</span>
-              <span class="booster-title">День 1</span>
-              <img
-                src="./Sprites/Icons/Icon_Energy.png"
-                alt="hint"
-                class="booster-icon"
-              />
-              <span class="booster-counter">2</span>
-              <div class="complete-overlay">Выполнено</div>
+          </a>
+          <button class="header-navigation-btn" id="daily-btn">
+            <div class="header-navigation-icon-container">
+              <img src="./Sprites/Icons/Icon_Chest.png" alt="Profile" class="header-navigation-list-icon" />
             </div>
-            <div class="booster">
-              <span class="completed-flag">Готово</span>
-              <span class="booster-title">День 2</span>
-              <img
-                src="./Sprites/Icons/Icon_Hint.png"
-                alt="hint"
-                class="booster-icon"
-              />
-              <span class="booster-counter">3</span>
-              <div class="complete-overlay">Выполнено</div>
+          </button>
+        </li>
+        <li class="nav-btn">
+          <button class="header-navigation-btn" id="settings-btn">
+            <div class="header-navigation-icon-container">
+              <img src="./Sprites/Icons/Icon_Settings.png" alt="Settings" class="header-navigation-list-icon" />
             </div>
-            <div class="booster">
-              <span class="completed-flag">Готово</span>
-              <span class="booster-title">День 3</span>
-              <img
-                src="./Sprites/Icons/Icon_Energy.png"
-                alt="hint"
-                class="booster-icon"
-              />
-              <span class="booster-counter">5</span>
-              <div class="complete-overlay">Выполнено</div>
-            </div>
-            <div class="booster">
-              <span class="completed-flag">Готово</span>
-              <span class="booster-title">День 4</span>
-              <img
-                src="./Sprites/Icons/Icon_Mage.png"
-                alt="hint"
-                class="booster-icon"
-              />
-              <span class="booster-counter">3</span>
-              <div class="complete-overlay">Выполнено</div>
-            </div>
-            <div class="booster">
-              <span class="completed-flag">Готово</span>
-              <span class="booster-title">День 5</span>
-              <img
-                src="./Sprites/Icons/Icon_Energy.png"
-                alt="hint"
-                class="booster-icon"
-              />
-              <span class="booster-counter">10</span>
-              <div class="complete-overlay">Выполнено</div>
-            </div>
-            <div class="booster">
-              <span class="completed-flag">Готово</span>
-              <span class="booster-title">День 3</span>
-              <img
-                src="./Sprites/Icons/Icon_Undo.png"
-                alt="hint"
-                class="booster-icon"
-              />
-              <span class="booster-counter">5</span>
-              <div class="complete-overlay">Выполнено</div>
-            </div>
-          </div>
-          <div class="special-booster">
+          </button>
+        </li>
+      </ul>
+    </nav>
+  </header>
+  <section class="logo">
+    <img src="./Sprites/Logos/Logo_RU.png" alt="Logo" class="logo-icon" />
+  </section>
+  <div class="popup daily-bonuses hidden" id="daily-bonuses">
+    <div class="popup-content">
+      <div class="popup-header">
+        <h3>Ежедневные бонусы</h3>
+        <img src="./Sprites/Icons/Icon_Close.png" alt="close" id="close-popup-daily" class="close-popup" />
+      </div>
+      <div class="daily-boosters-container">
+        <div class="regular-daily">
+          <div class="booster">
             <span class="completed-flag">Готово</span>
-            <span class="special-booster-title">День 7</span>
-            <img
-              src="./Sprites/Icons/Icon_Chest.png"
-              alt="hint"
-              class="special-booster-icon"
-            />
-            <span class="booster-counter">Специальная награда</span>
+            <span class="booster-title">День 1</span>
+            <img src="./Sprites/Icons/Icon_Energy.png" alt="hint" class="booster-icon" />
+            <span class="booster-counter">2</span>
+            <div class="complete-overlay">Выполнено</div>
+          </div>
+          <div class="booster">
+            <span class="completed-flag">Готово</span>
+            <span class="booster-title">День 2</span>
+            <img src="./Sprites/Icons/Icon_Hint.png" alt="hint" class="booster-icon" />
+            <span class="booster-counter">3</span>
+            <div class="complete-overlay">Выполнено</div>
+          </div>
+          <div class="booster">
+            <span class="completed-flag">Готово</span>
+            <span class="booster-title">День 3</span>
+            <img src="./Sprites/Icons/Icon_Energy.png" alt="hint" class="booster-icon" />
+            <span class="booster-counter">5</span>
+            <div class="complete-overlay">Выполнено</div>
+          </div>
+          <div class="booster">
+            <span class="completed-flag">Готово</span>
+            <span class="booster-title">День 4</span>
+            <img src="./Sprites/Icons/Icon_Mage.png" alt="hint" class="booster-icon" />
+            <span class="booster-counter">3</span>
+            <div class="complete-overlay">Выполнено</div>
+          </div>
+          <div class="booster">
+            <span class="completed-flag">Готово</span>
+            <span class="booster-title">День 5</span>
+            <img src="./Sprites/Icons/Icon_Energy.png" alt="hint" class="booster-icon" />
+            <span class="booster-counter">10</span>
+            <div class="complete-overlay">Выполнено</div>
+          </div>
+          <div class="booster">
+            <span class="completed-flag">Готово</span>
+            <span class="booster-title">День 3</span>
+            <img src="./Sprites/Icons/Icon_Undo.png" alt="hint" class="booster-icon" />
+            <span class="booster-counter">5</span>
             <div class="complete-overlay">Выполнено</div>
           </div>
         </div>
-      </div>
-    </div>
-    <div class="popup regular-bonuses hidden" id="regular-bonuses">
-      <div class="popup-content">
-        <div class="web-mask"></div>
-        <div class="popup-header">
-          <h3>Бонусы</h3>
-          <img
-            src="./Sprites/Icons/Icon_Close.png"
-            alt="close"
-            id="close-popup-regular"
-            class="close-popup"
-          />
-        </div>
-        <div class="regular-boosters-container">
-          <div class="booster">
-            <div class="booster-type" data-text="Энергия необходима для прохождения уровней в режиме 'История'">
-              <img
-                src="./Sprites/Icons/Icon_Energy.png"
-                alt="arrow"
-                class="booster-icon"
-              />
-              <span class="booster-counter">5</span>
-            </div>
-            <button class="start-level-btn" id="play-btn">
-              <span class="start-level-btn-title">Бесплатно</span>
-              <img
-                src="./Sprites/Icons/Icon_Ads.png"
-                alt="Ads"
-                class="btn-info-icon"
-              />
-            </button>
-          </div>
-          <div class="booster">
-            <div class="booster-type" data-text="Бустер 'Подсказка' - используйте его, если не можете найти правильный ход">
-              <img
-                src="./Sprites/Icons/Icon_Hint.png"
-                alt="arrow"
-                class="booster-icon"
-              />
-              <span class="booster-counter">4</span>
-            </div>
-            <button class="start-level-btn" id="play-btn">
-              <span class="start-level-btn-title">Бесплатно</span>
-              <img
-                src="./Sprites/Icons/Icon_Ads.png"
-                alt="Ads"
-                class="btn-info-icon"
-              />
-            </button>
-          </div>
-          <div class="booster">
-            <div class="booster-type" data-text="Бустер 'Маг' >- используйте его, чтобы добавить на стол 2 подходящие карты">
-              <img
-                src="./Sprites/Icons/Icon_Mage.png"
-                alt="arrow"
-                class="booster-icon"
-              />
-              <span class="booster-counter">2</span>
-            </div>
-            <button class="start-level-btn" id="play-btn">
-              <span class="start-level-btn-title">Бесплатно</span>
-              <img
-                src="./Sprites/Icons/Icon_Ads.png"
-                alt="Ads"
-                class="btn-info-icon"
-              />
-            </button>
-          </div>
-          <div class="booster">
-            <div class="booster-type" data-text="Бустер 'Отмена хода' - используйте его, чтобы отменить ход">
-              <img
-                src="./Sprites/Icons/Icon_Undo.png"
-                alt="arrow"
-                class="booster-icon"
-              />
-              <span class="booster-counter">5</span>
-            </div>
-            <button class="start-level-btn" id="play-btn">
-              <span class="start-level-btn-title">Бесплатно</span>
-              <img
-                src="./Sprites/Icons/Icon_Ads.png"
-                alt="Ads"
-                class="btn-info-icon"
-              />
-            </button>
-          </div>
-          <div class="booster">
-            <div class="booster-type" data-text="Бустер 'Таймер' - используйте его, чтобы добавить 1 минуту времени в режиме 'Испытание'">
-              <img
-                src="./Sprites/Icons/Icon_Time.png"
-                alt="arrow"
-                class="booster-icon"
-              />
-              <span class="booster-counter">1</span>
-            </div>
-            <button class="start-level-btn" id="play-btn">
-              <span class="start-level-btn-title">Бесплатно</span>
-              <img
-                src="./Sprites/Icons/Icon_Ads.png"
-                alt="Ads"
-                class="btn-info-icon"
-              />
-            </button>
-          </div>
+        <div class="special-booster">
+          <span class="completed-flag">Готово</span>
+          <span class="special-booster-title">День 7</span>
+          <img src="./Sprites/Icons/Icon_Chest.png" alt="hint" class="special-booster-icon" />
+          <span class="booster-counter">Специальная награда</span>
+          <div class="complete-overlay">Выполнено</div>
         </div>
       </div>
     </div>
-    <div class="popup settings hidden" id="settings">
-      <div class="popup-content">
-        <div class="popup-header">
-          <h3>Настройки</h3>
-          <img
-            src="./Sprites/Icons/Icon_Close.png"
-            alt="close"
-            id="close-popup-settings"
-            class="close-popup"
-          />
+  </div>
+  <div class="popup regular-bonuses hidden" id="regular-bonuses">
+    <div class="popup-content">
+      <div class="web-mask"></div>
+      <div class="popup-header">
+        <h3>Бонусы</h3>
+        <img src="./Sprites/Icons/Icon_Close.png" alt="close" id="close-popup-regular" class="close-popup" />
+      </div>
+      <div class="regular-boosters-container">
+        <div class="booster">
+          <div class="booster-type" data-text="Энергия необходима для прохождения уровней в режиме 'История'">
+            <img src="./Sprites/Icons/Icon_Energy.png" alt="arrow" class="booster-icon" />
+            <span class="booster-counter">5</span>
+          </div>
+          <button class="start-level-btn" id="play-btn">
+            <span class="start-level-btn-title">Бесплатно</span>
+            <img src="./Sprites/Icons/Icon_Ads.png" alt="Ads" class="btn-info-icon" />
+          </button>
         </div>
-        <div class="settings-panel">
-          <div class="setting-btn-container">
-            <button class="header-navigation-btn">
-              <img
-                src="./Sprites/Icons/Icon_Music_Off.png"
-                alt="Icon_Music_Off"
-                class="header-navigation-list-icon"
-              />
-            </button>
-            <span class="settings-btn-title">Музыка</span>
+        <div class="booster">
+          <div class="booster-type"
+            data-text="Бустер 'Подсказка' - используйте его, если не можете найти правильный ход">
+            <img src="./Sprites/Icons/Icon_Hint.png" alt="arrow" class="booster-icon" />
+            <span class="booster-counter">4</span>
           </div>
-          <div class="setting-btn-container">
-            <button class="header-navigation-btn">
-              <img
-                src="./Sprites/Icons/Icon_Sound_Off.png"
-                alt="Icon_Sound_Off"
-                class="header-navigation-list-icon"
-              />
-            </button>
-            <span class="settings-btn-title">Звук</span>
-          </div>
-          <div class="setting-btn-container">
-            <button class="header-navigation-btn">
-              <img
-                src="./Sprites/Icons/Icon_Tutorial.png "
-                alt="Tutorial"
-                class="header-navigation-list-icon"
-              />
-            </button>
-            <span class="settings-btn-title">Обучение</span>
-          </div>
-          <div class="setting-btn-container">
-            <button
-              class="special-language-btn header-navigation-btn"
-              id="lang-btn"
-            >
-              <img
-                src="./Sprites/Lang/ru.png "
-                alt="Lang"
-                class="header-navigation-list-icon"
-                id="languages-btn"
-              />
-            </button>
-            <span class="settings-btn-title">Язык</span>
-          </div>
+          <button class="start-level-btn" id="play-btn">
+            <span class="start-level-btn-title">Бесплатно</span>
+            <img src="./Sprites/Icons/Icon_Ads.png" alt="Ads" class="btn-info-icon" />
+          </button>
         </div>
-        <div class="version">
-          <span class="version-title">v0.0.2.19</span>
+        <div class="booster">
+          <div class="booster-type"
+            data-text="Бустер 'Маг' >- используйте его, чтобы добавить на стол 2 подходящие карты">
+            <img src="./Sprites/Icons/Icon_Mage.png" alt="arrow" class="booster-icon" />
+            <span class="booster-counter">2</span>
+          </div>
+          <button class="start-level-btn" id="play-btn">
+            <span class="start-level-btn-title">Бесплатно</span>
+            <img src="./Sprites/Icons/Icon_Ads.png" alt="Ads" class="btn-info-icon" />
+          </button>
+        </div>
+        <div class="booster">
+          <div class="booster-type" data-text="Бустер 'Отмена хода' - используйте его, чтобы отменить ход">
+            <img src="./Sprites/Icons/Icon_Undo.png" alt="arrow" class="booster-icon" />
+            <span class="booster-counter">5</span>
+          </div>
+          <button class="start-level-btn" id="play-btn">
+            <span class="start-level-btn-title">Бесплатно</span>
+            <img src="./Sprites/Icons/Icon_Ads.png" alt="Ads" class="btn-info-icon" />
+          </button>
+        </div>
+        <div class="booster">
+          <div class="booster-type"
+            data-text="Бустер 'Таймер' - используйте его, чтобы добавить 1 минуту времени в режиме 'Испытание'">
+            <img src="./Sprites/Icons/Icon_Time.png" alt="arrow" class="booster-icon" />
+            <span class="booster-counter">1</span>
+          </div>
+          <button class="start-level-btn" id="play-btn">
+            <span class="start-level-btn-title">Бесплатно</span>
+            <img src="./Sprites/Icons/Icon_Ads.png" alt="Ads" class="btn-info-icon" />
+          </button>
         </div>
       </div>
     </div>
-    <div class="popup languages hidden" id="languages">
-      <div class="popup-content">
-        <div class="popup-header">
-          <h3>Язык</h3>
-          <img
-            src="./Sprites/Icons/Icon_Close.png"
-            alt="close"
-            id="close-popup-languages"
-            class="close-popup"
-          />
+  </div>
+  <div class="popup settings hidden" id="settings">
+    <div class="popup-content">
+      <div class="popup-header">
+        <h3>Настройки</h3>
+        <img src="./Sprites/Icons/Icon_Close.png" alt="close" id="close-popup-settings" class="close-popup" />
+      </div>
+      <div class="settings-panel">
+        <div class="setting-btn-container">
+          <button class="header-navigation-btn">
+            <img src="./Sprites/Icons/Icon_Music_Off.png" alt="Icon_Music_Off" class="header-navigation-list-icon" />
+          </button>
+          <span class="settings-btn-title">Музыка</span>
         </div>
-        <div class="languages-list">
-          <div class="language-container">
-            <div class="language">
-              <img src="./Sprites/Lang/ru.png" alt="RU" class="language-icon">
-              <span class="language-title">Русский</span>
-            </div>
-            <div class="custom-checkbox">
-              <img src="./Sprites/Icons/Icon_Check.png" alt="Check" class="accept-checkbox-icon">
-            </div>
+        <div class="setting-btn-container">
+          <button class="header-navigation-btn">
+            <img src="./Sprites/Icons/Icon_Sound_Off.png" alt="Icon_Sound_Off" class="header-navigation-list-icon" />
+          </button>
+          <span class="settings-btn-title">Звук</span>
+        </div>
+        <div class="setting-btn-container">
+          <button class="header-navigation-btn">
+            <img src="./Sprites/Icons/Icon_Tutorial.png " alt="Tutorial" class="header-navigation-list-icon" />
+          </button>
+          <span class="settings-btn-title">Обучение</span>
+        </div>
+        <div class="setting-btn-container">
+          <button class="special-language-btn header-navigation-btn" id="lang-btn">
+            <img src="./Sprites/Lang/ru.png " alt="Lang" class="header-navigation-list-icon" id="languages-btn" />
+          </button>
+          <span class="settings-btn-title">Язык</span>
+        </div>
+      </div>
+      <div class="version">
+        <span class="version-title">v0.0.2.19</span>
+      </div>
+    </div>
+  </div>
+  <div class="popup languages hidden" id="languages">
+    <div class="popup-content">
+      <div class="popup-header">
+        <h3>Язык</h3>
+        <img src="./Sprites/Icons/Icon_Close.png" alt="close" id="close-popup-languages" class="close-popup" />
+      </div>
+      <div class="languages-list">
+        <div class="language-container">
+          <div class="language">
+            <img src="./Sprites/Lang/ru.png" alt="RU" class="language-icon">
+            <span class="language-title">Русский</span>
           </div>
-          <div class="language-container">
-            <div class="language">
-              <img src="./Sprites/Lang/en.png" alt="EN" class="language-icon">
-              <span class="language-title">English</span>
-            </div>
-            <div class="custom-checkbox">
-              <img src="./Sprites/Icons/Icon_Check.png" alt="Check" class="accept-checkbox-icon hidden">
-            </div>
+          <div class="custom-checkbox">
+            <img src="./Sprites/Icons/Icon_Check.png" alt="Check" class="accept-checkbox-icon">
           </div>
-          <div class="language-container">
-            <div class="language">
-              <img src="./Sprites/Lang/ger.png" alt="GER" class="language-icon">
-              <span class="language-title">German</span>
-            </div>
-            <div class="custom-checkbox">
-              <img src="./Sprites/Icons/Icon_Check.png" alt="Check" class="accept-checkbox-icon hidden">
-            </div>
+        </div>
+        <div class="language-container">
+          <div class="language">
+            <img src="./Sprites/Lang/en.png" alt="EN" class="language-icon">
+            <span class="language-title">English</span>
           </div>
-          <div class="language-container">
-            <div class="language">
-              <img src="./Sprites/Lang/jap.png" alt="JAP" class="language-icon">
-              <span class="language-title">Japanese</span>
-            </div>
-            <div class="custom-checkbox">
-              <img src="./Sprites/Icons/Icon_Check.png" alt="Check" class="accept-checkbox-icon hidden">
-            </div>
+          <div class="custom-checkbox">
+            <img src="./Sprites/Icons/Icon_Check.png" alt="Check" class="accept-checkbox-icon hidden">
           </div>
-          <div class="language-container">
-            <div class="language">
-              <img src="./Sprites/Lang/ind.png" alt="IND" class="language-icon">
-              <span class="language-title">Hindi</span>
-            </div>
-            <div class="custom-checkbox">
-              <img src="./Sprites/Icons/Icon_Check.png" alt="Check" class="accept-checkbox-icon hidden">
-            </div>
+        </div>
+        <div class="language-container">
+          <div class="language">
+            <img src="./Sprites/Lang/ger.png" alt="GER" class="language-icon">
+            <span class="language-title">German</span>
           </div>
-          <div class="language-container">
-            <div class="language">
-              <img src="./Sprites/Lang/portu.png" alt="PORTU" class="language-icon">
-              <span class="language-title">Portuguese</span>
-            </div>
-            <div class="custom-checkbox">
-              <img src="./Sprites/Icons/Icon_Check.png" alt="Check" class="accept-checkbox-icon hidden">
-            </div>
+          <div class="custom-checkbox">
+            <img src="./Sprites/Icons/Icon_Check.png" alt="Check" class="accept-checkbox-icon hidden">
           </div>
-          <div class="language-container">
-            <div class="language">
-              <img src="./Sprites/Lang/esp.png" alt="ESP" class="language-icon">
-              <span class="language-title">Spanish</span>
-            </div>
-            <div class="custom-checkbox">
-              <img src="./Sprites/Icons/Icon_Check.png" alt="Check" class="accept-checkbox-icon hidden">
-            </div>
+        </div>
+        <div class="language-container">
+          <div class="language">
+            <img src="./Sprites/Lang/jap.png" alt="JAP" class="language-icon">
+            <span class="language-title">Japanese</span>
           </div>
-          <div class="language-container">
-            <div class="language">
-              <img src="./Sprites/Lang/turk.png" alt="TURK" class="language-icon">
-              <span class="language-title">Turkish</span>
-            </div>
-            <div class="custom-checkbox">
-              <img src="./Sprites/Icons/Icon_Check.png" alt="Check" class="accept-checkbox-icon hidden">
-            </div>
+          <div class="custom-checkbox">
+            <img src="./Sprites/Icons/Icon_Check.png" alt="Check" class="accept-checkbox-icon hidden">
+          </div>
+        </div>
+        <div class="language-container">
+          <div class="language">
+            <img src="./Sprites/Lang/ind.png" alt="IND" class="language-icon">
+            <span class="language-title">Hindi</span>
+          </div>
+          <div class="custom-checkbox">
+            <img src="./Sprites/Icons/Icon_Check.png" alt="Check" class="accept-checkbox-icon hidden">
+          </div>
+        </div>
+        <div class="language-container">
+          <div class="language">
+            <img src="./Sprites/Lang/portu.png" alt="PORTU" class="language-icon">
+            <span class="language-title">Portuguese</span>
+          </div>
+          <div class="custom-checkbox">
+            <img src="./Sprites/Icons/Icon_Check.png" alt="Check" class="accept-checkbox-icon hidden">
+          </div>
+        </div>
+        <div class="language-container">
+          <div class="language">
+            <img src="./Sprites/Lang/esp.png" alt="ESP" class="language-icon">
+            <span class="language-title">Spanish</span>
+          </div>
+          <div class="custom-checkbox">
+            <img src="./Sprites/Icons/Icon_Check.png" alt="Check" class="accept-checkbox-icon hidden">
+          </div>
+        </div>
+        <div class="language-container">
+          <div class="language">
+            <img src="./Sprites/Lang/turk.png" alt="TURK" class="language-icon">
+            <span class="language-title">Turkish</span>
+          </div>
+          <div class="custom-checkbox">
+            <img src="./Sprites/Icons/Icon_Check.png" alt="Check" class="accept-checkbox-icon hidden">
           </div>
         </div>
       </div>
     </div>
-    <div class="popup hidden-popup" style="display: none" id="bounty-popup">
-      <div class="bounty-popup-content bounty-tab">
-        <div class="bounty">
-          <img
-            src="./Sprites/Icons/Icon_Energy.png"
-            alt="Energy"
-            class="bounty-icon"
-          /><span class="bounty-title">x2</span>
+  </div>
+  <!-- rewards popup begin -->
+  <div class="popup-b fade-hidden" id="bounty-popup">
+    <div class="bounty-popup-content bounty-tab" id="bounty-container">
+    </div>
+    <div class="double-bounty-by-ads-container">
+      <button class="get-double-bounty-btn fade-hidden" id="play-btn">
+        <span class="get-double-bounty-btn-title">Получить</span>
+        <div class="interactive-btn-info">
+          <img class="get-double-bounty-icon" src="../../Sprites/Icons/Icon_Ads.png" />
+          <span class="get-double-bounty-value">x2</span>
         </div>
-      </div>
-      <div class="double-bounty-by-ads-container">
-        <button class="get-double-bounty-btn" id="play-btn">
-          <span class="get-double-bounty-btn-title">Получить</span>
-          <div class="interactive-btn-info">
-            <img class="get-double-bounty-icon" src="./Sprites/Icons/Icon_Ads.png" />
-            <span class="get-double-bounty-value">x2</span>
-          </div>
-        </button>
-        <span class="cancel-bounty-btn">Нет, спасибо</span>
-      </div>
+      </button>
+      <span class="cancel-bounty-btn fade-hidden">Нет, спасибо</span>
     </div>
   </div>
   <!-- rewards popup end -->
@@ -444,7 +320,7 @@
       <div class="main-panel-btn-container-1">
         <a href="./src/playground/playground.html?levelID=level_def_s_1">
           <button class="main-panel-btn main-panel-btn-1">
-            <span class="main-panel-btn-title">Одна масть</span>
+            <span class="main-panel-btn-title one_suit">Одна масть</span>
             <span class="main-panel-btn-level">Паук</span>
           </button>
         </a>
