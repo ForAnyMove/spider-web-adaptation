@@ -7,6 +7,13 @@
   user-zoom: fixed;
 }
 
+button.selected,
+div.selected,
+img.selected,
+a.selected>button {
+  box-shadow: inset 0vw 0vw 0vw 0.3vw chartreuse;
+}
+
 html,
 body {
   height: 100%;
@@ -115,12 +122,13 @@ main {
   position: relative;
   overflow: scroll;
   scrollbar-width: none;
-  -ms-overflow-style: none; 
+  -ms-overflow-style: none;
 }
 
 main::-webkit-scrollbar {
   display: none;
 }
+
 .story-map-container {
   aspect-ratio: 5 / 5;
   width: 130vw;

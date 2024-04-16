@@ -1,5 +1,6 @@
 import { backSkinDatabase, backgroundDatabase, skinDatabase } from "../scripts/data/card_skin_database.js"
 import { trophyDatabase } from "../scripts/data/trophy_database.js";
+import DirectionalInput from "../scripts/directionInput.js";
 import { createButton, createElement, createImage, createTextP, createTextSpan } from "../scripts/helpers.js";
 import { Statefull } from "../scripts/statics/enums.js"
 
@@ -12,6 +13,9 @@ const backgroundParent = document.getElementById('pick-area-3');
 const trophyParent = document.getElementById('pick-area-4');
 
 const tabScreens = [skinParent, skinBackParent, backgroundParent, trophyParent];
+
+const returnButton = document.getElementById('close-button');
+input ??= new DirectionalInput({ element: returnButton });
 
 function createCardSkins() {
   for (let i = 0; i < skinDatabase.skinList.length; i++) {
@@ -62,6 +66,12 @@ function createBackgroundInstance(data) {
     const useButton = createButton(['start-level-btn'], null, plane, () => {
       user.useContent(data.id);
     });
+
+    input.selectableElements.push({
+      element: useButton, onSubmit: () => {
+        input.select(input.selectableElements[3]);
+      }
+    });
     useButton.id = 'play-btn';
     createTextSpan(['start-level-btn-title'], null, useButton, 'Использовать');
     if (state != Statefull.AvailableToEquip) {
@@ -107,6 +117,13 @@ function createSkinInstance(data) {
     const useButton = createButton(['start-level-btn'], null, plane, () => {
       user.useContent(data.id);
     });
+
+    input.selectableElements.push({
+      element: useButton, onSubmit: () => {
+        input.select(input.selectableElements[1]);
+      }
+    });
+
     useButton.id = 'play-btn';
     createTextSpan(['start-level-btn-title'], null, useButton, 'Использовать');
     if (state != Statefull.AvailableToEquip) {
@@ -157,6 +174,13 @@ function createSkinBackInstance(data) {
     if (state != Statefull.AvailableToEquip) {
       useButton.classList.add('hidden');
     }
+
+    input.selectableElements.push({
+      element: useButton, onSubmit: () => {
+        input.select(input.selectableElements[2]);
+      }
+    });
+
     const usedIcon = createImage(['check-icon'], null, plane, checkIconPath);
     if (state != Statefull.Equipped) {
       usedIcon.classList.add('hidden');

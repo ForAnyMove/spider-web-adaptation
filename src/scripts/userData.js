@@ -176,6 +176,7 @@ export default class User {
         this.contentListUpdateEvent = new Action();
         this.itemListUpdateEvent = new Action();
         this.contentUsageChanged = new Action();
+        this.onItemsPublicReceive = new Action();
     }
 
     useContent = function (content) {
@@ -299,33 +300,45 @@ export default class User {
         }
     }
 
-    addItem = function (type, count = 1) {
-        if (type == null || count == null) return;
+    addItem = function (type, count = 1, withView = { isTrue: false, isMonetized: false }) {
+        if (type == null || count == null) return false;
 
         for (let i = 0; i < this.items.length; i++) {
             if (this.items[i].type == type) {
                 this.items[i].count += count;
+                if (withView.isTrue) { this.onItemsPublicReceive.invoke({ items: [{ type: type, count: count }], monetized: withView.isMonetized }); }
 
                 log(`Update user items [${type} (${count})]: ${this.items[i].type} (${this.items[i].count})`, "user", "details");
                 this.itemListUpdateEvent.invoke(this.items);
 
                 this.saveData();
-                return;
+                return true;
             }
         }
 
         this.items.push({ type: type, count: count });
+        if (withView.isTrue) { this.onItemsPublicReceive.invoke({ items: [{ type: type, count: count }], monetized: withView.isMonetized }); }
         this.itemListUpdateEvent.invoke(this.items);
 
         this.saveData();
+        return true;
     }
 
-    addItems = function (items) {
+    addItems = function (items, withView = { isTrue: false, isMonetized: false }) {
         if (items == null) return;
 
         for (let i = 0; i < items.length; i++) {
             const element = items[i];
+            if (element.type == null || element.count <= 0) items.splice(i, 1);
+        }
+
+        for (let i = 0; i < items.length; i++) {
+            const element = items[i];
             this.addItem(element.type, element.count);
+        }
+
+        if (withView.isTrue) {
+            this.onItemsPublicReceive.invoke({ items: items, monetized: withView.isMonetized });
         }
     }
 

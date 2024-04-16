@@ -5,7 +5,14 @@ import {
   isCompleted,
   tryCompleteDailyReward,
 } from './src/scripts/dailyRewards.js';
-import { showInterstitial, showRewarded } from './src/scripts/sdk/sdk.js';
+import { showRewarded } from './src/scripts/sdk/sdk.js';
+import('./src/scripts/rewardReceiverView.js');
+
+import DirectionalInput from './src/scripts/directionInput.js';
+import { getInputElements } from './src/scripts/helpers.js';
+
+const defaultSelectedButton = document.getElementsByClassName('main-panel-btn-1')[0];
+input ??= new DirectionalInput({ element: defaultSelectedButton });
 
 const closeDailyPopupButton = document.getElementById('close-popup-daily');
 const dailyBonuses = document.getElementById('daily-bonuses');
@@ -13,10 +20,15 @@ const dailyBtn = document.getElementById('daily-btn');
 
 dailyBtn.addEventListener('click', () => {
   dailyBonuses.style.display = 'flex';
+
+  input.updateQueryCustom(getInputElements(dailyBonuses, { classNames: ['booster', 'close-popup', 'special-booster'], tags: ['button'] }), { element: closeDailyPopupButton });
 });
 
 closeDailyPopupButton.addEventListener('click', function () {
   dailyBonuses.style.display = 'none';
+
+  input.updateQuery();
+  input.select({ element: defaultSelectedButton });
 });
 
 const closeRegularPopupButton = document.getElementById('close-popup-regular');
@@ -25,10 +37,15 @@ const regularBtn = document.getElementById('regular-btn');
 
 regularBtn.addEventListener('click', () => {
   regularBonuses.style.display = 'flex';
+
+  input.updateQueryCustom(getInputElements(regularBonuses, { classNames: ['close-popup'], tags: ['button'] }), { element: closeRegularPopupButton });
 });
 
 closeRegularPopupButton.addEventListener('click', function () {
   regularBonuses.style.display = 'none';
+
+  input.updateQuery();
+  input.select({ element: defaultSelectedButton });
 });
 
 const closeLanguagesPopupButton = document.getElementById('close-popup-languages');
@@ -51,10 +68,15 @@ const settingsBtn = document.getElementById('settings-btn');
 
 settingsBtn.addEventListener('click', () => {
   settingsBonuses.style.display = 'flex';
+
+  input.updateQueryCustom(getInputElements(settingsBonuses, { classNames: ['close-popup'], tags: ['button'] }), { element: closeSettingsPopupButton });
 });
 
 closeSettingsPopupButton.addEventListener('click', function () {
   settingsBonuses.style.display = 'none';
+
+  input.updateQuery();
+  input.select({ element: defaultSelectedButton });
 });
 
 function setupReqularBonusesButtons() {
@@ -76,7 +98,7 @@ function setupReqularBonusesButtons() {
       showRewarded(
         null,
         null,
-        () => user.addItem(itemCountPairs[i].item, itemCountPairs[i].count),
+        () => user.addItem(itemCountPairs[i].item, itemCountPairs[i].count, { isTrue: true, isMonetized: false }),
         null
       );
     };
@@ -116,12 +138,14 @@ function setupDailyRewards() {
           element.classList.add('completed');
 
           if (typeof dailyRewards[i].item == 'object') {
+            const items = [];
             for (let j = 0; j < dailyRewards[i].item.length; j++) {
               const element = dailyRewards[i].item[j];
-              user.addItem(element.item, element.count);
+              items.push({ type: element.item, count: element.count })
             }
+            user.addItems(items, { isTrue: true, isMonetized: true });
           } else {
-            user.addItem(dailyRewards[i].item, dailyRewards[i].count);
+            user.addItem(dailyRewards[i].item, dailyRewards[i].count, { isTrue: true, isMonetized: true });
           }
         }
       };
@@ -129,27 +153,5 @@ function setupDailyRewards() {
   }
 }
 
-const bountyPopupTriggerBtnListContainer = document.getElementById('daily-bonuses');
-const dailyBountyPopupTriggerBtnList = bountyPopupTriggerBtnListContainer.getElementsByClassName('booster');
-const bountyPopup = document.getElementById('bounty-popup');
-Array.from(dailyBountyPopupTriggerBtnList).forEach((triggerBtn) => {
-  triggerBtn.addEventListener('click', () => {
-    bountyPopup.style.display = 'flex';
-
-    setTimeout(function () {
-      bountyPopup.classList.remove('hidden-popup');
-      bountyPopup.classList.add('visible');
-    }, 0);
-  });
-});
-
-const bountyPopupCloseBtn = document.getElementsByClassName('cancel-bounty-btn')[0]
-bountyPopupCloseBtn.addEventListener('click', () => {
-  bountyPopup.classList.remove('visible');
-  bountyPopup.classList.add('hidden-popup');
-  setTimeout(() => {
-    bountyPopup.style.display = 'none';
-  }, 500); // It have to be thee same delay as in CSS transition rules
-})
 
 setupDailyRewards();

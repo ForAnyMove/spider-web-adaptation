@@ -72,8 +72,6 @@ function completeMode(rule) {
         }
     }
 
-    this.selectedDatabase.currentLevel++;
-
     updateStatistics();
 
     return true;

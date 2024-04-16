@@ -1,24 +1,36 @@
 import { trialLevelDatabase } from "../scripts/data/level_databases.js";
+import DirectionalInput from "../scripts/directionInput.js";
 import { createButton, createElement, createHSpace, createImage, createTextH3, createTextP, createTextSpan, createVSpace, getIconByContent, getIconByItem, getIconByPattern, getIconBySuit, getPatternName, getSuitName } from "../scripts/helpers.js";
 import { showRewarded } from "../scripts/sdk/sdk.js";
 import { Items } from "../scripts/statics/staticValues.js";
+import('../scripts/rewardReceiverView.js');
+
+const vh = window.innerHeight / 100;
+const vw = window.innerWidth / 100;
+
+const returnButton = document.getElementById('close-button');
+input ??= new DirectionalInput({ element: returnButton });
 
 const parent = document.getElementsByClassName('challenges')[0];
 
 const currentLevel = trialLevelDatabase.currentLevel;
+let viewWidth = 0;
 
 function createBooster(itemType, title, user, parent) {
     const plane = createElement('div', ['booster-container'], null, parent);
     {
         const div = createElement('div', ['booster'], null, plane);
         {
-            createButton(['add-booster-icon'], {
+            const button = createButton(['add-booster-icon'], {
                 background: 'no-repeat',
                 backgroundImage: 'url(../../Sprites/Buttons/Used_plus.png)',
                 backgroundSize: '100% 100%',
             }, div, () => {
-                showRewarded(null, null, () => user.addItem(itemType), null);
+                showRewarded(null, null, () => user.addItem(itemType, 1, { isTrue: true, isMonetized: false }), null);
             });
+
+            input.selectableElements.push({ element: button });
+
             createImage(['booster-icon'], null, div, getIconByItem(itemType));
             const count = createTextSpan(['booster-counter'], null, div, user.getItemCount(itemType));
 
@@ -35,6 +47,8 @@ function createCompletedLevelInstance() {
     const plane = createElement('div', ['challenge-card', 'completed-card']);
     createImage(['check-icon'], null, plane, '../../Sprites/Icons/Icon_Check.png');
     createTextH3(['check-info'], null, plane, 'Уровень завершен');
+
+    viewWidth += 42.15 * vh + 4 * vh;
 
     return plane;
 }
@@ -130,6 +144,7 @@ function createUnlockedLevelInstance(data) {
                     window.location.href = `../playground/playground.html?levelID=level_trial_${currentLevel}`;
                     // TODO: level scene starting with ID parameter
                 });
+                input.selectableElements.push({ element: startButton });
                 startButton.id = 'play-btn';
                 {
                     createTextSpan(['start-level-btn-title'], null, startButton, 'Играть');
@@ -137,6 +152,8 @@ function createUnlockedLevelInstance(data) {
             }
         }
     }
+
+    viewWidth += (42 * vh + 4 * vh) / 2;
 
     return plane;
 }
@@ -171,5 +188,9 @@ function setupEnergyView() {
     }
 }
 
+
 createLevelsList();
 setupEnergyView();
+
+const xPos = viewWidth - window.innerWidth / 2;
+parent.scrollTo(xPos, 0);

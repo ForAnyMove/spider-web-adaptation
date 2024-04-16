@@ -249,6 +249,102 @@ function isCardAtRankLower(card, template) {
     return card.suit == template.suit && card.rank == template.rank - 1;
 }
 
+function getElementsByClass(root, classNames = []) {
+    const elements = [];
+
+    for (let i = 0; i < classNames.length; i++) {
+        const className = classNames[i];
+        const rootElements = root.getElementsByClassName(className);
+
+        for (let i = 0; i < rootElements.length; i++) {
+            const element = rootElements[i];
+            elements.push(element);
+        }
+    }
+
+    return elements;
+}
+
+function getElements(root, options = { classNames, tags, ids }) {
+    const elements = [];
+
+    if (options.classNames) {
+        for (let i = 0; i < options.classNames.length; i++) {
+            const name = options.classNames[i];
+            const rootElements = root.getElementsByClassName(name);
+
+            for (let i = 0; i < rootElements.length; i++) {
+                const element = rootElements[i];
+                elements.push(element);
+            }
+        }
+    }
+    if (options.tags) {
+        for (let i = 0; i < options.tags.length; i++) {
+            const name = options.tags[i];
+            const rootElements = root.getElementsByTagName(name);
+
+            for (let i = 0; i < rootElements.length; i++) {
+                const element = rootElements[i];
+                elements.push(element);
+            }
+        }
+    }
+    if (options.ids) {
+        for (let i = 0; i < options.ids.length; i++) {
+            const name = options.ids[i];
+            const rootElements = root.getElementById(name);
+
+            for (let i = 0; i < rootElements.length; i++) {
+                const element = rootElements[i];
+                elements.push(element);
+            }
+        }
+    }
+
+    return elements;
+}
+
+function getInputElements(root, options = { classNames, tags, ids }) {
+    const elements = [];
+
+    if (options.classNames) {
+        for (let i = 0; i < options.classNames.length; i++) {
+            const name = options.classNames[i];
+            const rootElements = root.getElementsByClassName(name);
+
+            for (let i = 0; i < rootElements.length; i++) {
+                const element = rootElements[i];
+                elements.push({ element: element, onSelect: null, onSubmit: null });
+            }
+        }
+    }
+    if (options.tags) {
+        for (let i = 0; i < options.tags.length; i++) {
+            const name = options.tags[i];
+            const rootElements = root.getElementsByTagName(name);
+
+            for (let i = 0; i < rootElements.length; i++) {
+                const element = rootElements[i];
+                elements.push({ element: element, onSelect: null, onSubmit: null });
+            }
+        }
+    }
+    if (options.ids) {
+        for (let i = 0; i < options.ids.length; i++) {
+            const name = options.ids[i];
+            const rootElements = root.getElementById(name);
+
+            for (let i = 0; i < rootElements.length; i++) {
+                const element = rootElements[i];
+                elements.push({ element: element, onSelect: null, onSubmit: null });
+            }
+        }
+    }
+
+    return elements;
+}
+
 
 
 export {
@@ -277,5 +373,8 @@ export {
     isSameCard,
     compareCards,
     compareCardsFull,
-    isCardAtRankLower
+    isCardAtRankLower,
+    getElementsByClass,
+    getElements,
+    getInputElements
 }
