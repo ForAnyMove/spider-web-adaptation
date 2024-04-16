@@ -52,6 +52,45 @@
       </li>
     </ul>
   </header>
+  <div class="popup hidden-popup" style="display: none" id="win-screen-popup">
+  <!-- <div class="popup" id="win-screen-popup"> -->
+    <div class="end-level">
+        <h2 class="end-level-title">Уровень завершен!</h2>
+        <!-- <span class="new-achievements">Новые достижения!</span> -->
+    </div>
+    <div class="bounty-list">
+        <div class="custom-line"></div>
+        <span class="bounty-title">Награды</span>
+        <div class="custom-line"></div>
+    </div>
+    <div class="next-btn-container">
+      <button class="next-btn" id="play-btn">
+        <span class="next-btn-title">Продолжить</span>
+      </button>
+    </div>
+  </div>
+  <div class="popup lose-screen-popup hidden-popup" style="display: none" id="lose-screen-popup">
+  <!-- <div class="popup lose-screen-popup" id="lose-screen-popup"> -->
+    <a href="../../index.html" class="popup_back-to">
+      <button class="home-page-btn">
+        <img src="../../Sprites/Icons/Icon_Home.png" alt="Home" class="control-button-list-icon"
+          id="go-home-button" />
+      </button>
+    </a>
+    <div class="lose-level">
+        <h2 class="lose-level-title">Вы проиграли</h2>
+    </div>
+    <div class="lose-btns-container">
+      <button class="refresh-btn">
+        <img src="../../Sprites/Icons/Icon_Restart.png" alt="Icon_Skins" class="control-button-list-icon"
+          id="restart-button" />
+      </button>
+      <button class="next-ads-btn" id="play-btn">
+        <span class="next-btn-title">Продолжить?</span>
+        <img class="lose-screen-ads-icon" src="../../Sprites/Icons/Icon_Ads.png" />
+      </button>
+    </div>
+  </div>
   <main id="main">
     <div class="main-container">
       <div class="active-cards-zone">
@@ -227,8 +266,6 @@
         </li>
       </ul>
     </nav>
-  </footer>
-  </nav>
   </footer>
   <script type="module" src="../scripts/animator.js"></script>
   <script>

@@ -31,6 +31,18 @@ closeRegularPopupButton.addEventListener('click', function () {
   regularBonuses.style.display = 'none';
 });
 
+const closeLanguagesPopupButton = document.getElementById('close-popup-languages');
+const languagesPopup = document.getElementById('languages');
+const languagesBtn = document.getElementById('languages-btn');
+
+languagesBtn.addEventListener('click', () => {
+  languagesPopup.style.display = 'flex';
+});
+
+closeLanguagesPopupButton.addEventListener('click', function () {
+  languagesPopup.style.display = 'none';
+});
+
 const closeSettingsPopupButton = document.getElementById(
   'close-popup-settings'
 );
