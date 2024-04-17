@@ -3,6 +3,7 @@ import { trophyDatabase } from "../scripts/data/trophy_database.js";
 import DirectionalInput from "../scripts/directionInput.js";
 import { createButton, createElement, createImage, createTextP, createTextSpan } from "../scripts/helpers.js";
 import { Statefull } from "../scripts/statics/enums.js"
+import { initialLocale } from '../localization/translator.js';
 
 const checkIconPath = '../../Sprites/Icons/Icon_Check.png'
 const lockIconPath = '../../Sprites/Icons/Icon_Lock.png'
@@ -61,7 +62,8 @@ function createBackgroundInstance(data) {
   if (state == Statefull.Locked) {
     createImage(['lock-icon'], null, plane, lockIconPath);
     const requirementTextContainer = createElement('div', ['lock-mask'], null, plane);
-    createTextP(['mask-title'], null, requirementTextContainer, data.unlockDescription);
+    const unlockDescription = createTextP(['mask-title'], null, requirementTextContainer, '');
+    unlockDescription.lang = data.unlockDescription;
   } else {
     const useButton = createButton(['start-level-btn'], null, plane, () => {
       user.useContent(data.id);
@@ -73,7 +75,8 @@ function createBackgroundInstance(data) {
       }
     });
     useButton.id = 'play-btn';
-    createTextSpan(['start-level-btn-title'], null, useButton, 'Использовать');
+    const useText = createTextSpan(['start-level-btn-title'], null, useButton, 'Использовать');
+    useText.lang = 'use'
     if (state != Statefull.AvailableToEquip) {
       useButton.classList.add('hidden');
     }
@@ -112,7 +115,8 @@ function createSkinInstance(data) {
 
     createImage(['lock-icon'], null, plane, lockIconPath);
     const requirementTextContainer = createElement('div', ['lock-mask'], null, plane);
-    createTextP(['mask-title'], null, requirementTextContainer, data.unlockDescription);
+    const unlockDescription = createTextP(['mask-title'], null, requirementTextContainer, '');
+    unlockDescription.lang = data.unlockDescription;
   } else {
     const useButton = createButton(['start-level-btn'], null, plane, () => {
       user.useContent(data.id);
@@ -125,7 +129,8 @@ function createSkinInstance(data) {
     });
 
     useButton.id = 'play-btn';
-    createTextSpan(['start-level-btn-title'], null, useButton, 'Использовать');
+    const useText = createTextSpan(['start-level-btn-title'], null, useButton, 'Использовать');
+    useText.lang = 'use';
     if (state != Statefull.AvailableToEquip) {
       useButton.classList.add('hidden');
     }
@@ -164,13 +169,15 @@ function createSkinBackInstance(data) {
   if (state == Statefull.Locked) {
     createImage(['lock-icon'], null, plane, lockIconPath);
     const requirementTextContainer = createElement('div', ['lock-mask'], null, plane);
-    createTextP(['mask-title'], null, requirementTextContainer, data.unlockDescription);
+    const unlockDescription = createTextP(['mask-title'], null, requirementTextContainer, '');
+    unlockDescription.lang = data.unlockDescription;
   } else {
     const useButton = createButton(['start-level-btn'], null, plane, () => {
       user.useContent(data.id);
     });
     useButton.id = 'play-btn';
-    createTextSpan(['start-level-btn-title'], null, useButton, 'Использовать');
+    const useText = createTextSpan(['start-level-btn-title'], null, useButton, 'Использовать');
+    useText.lang = 'use';
     if (state != Statefull.AvailableToEquip) {
       useButton.classList.add('hidden');
     }
@@ -207,7 +214,8 @@ function createTrophyInstance(data) {
   if (!hasTrophy) {
     createElement('div', ['space'], null, plane);
     const requirementTextContainer = createElement('div', null, null, plane);
-    createTextP(['mask-title'], null, requirementTextContainer, data.unlockDescription);
+    const unlockDescription = createTextP(['mask-title'], null, requirementTextContainer, '');
+    unlockDescription.lang = data.unlockDescription;
   }
 
   return plane;
@@ -257,3 +265,5 @@ createBackgrounds();
 createTrophies();
 
 setupTabSwitch();
+
+languageChangeEvent.invoke(initialLocale);

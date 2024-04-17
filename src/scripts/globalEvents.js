@@ -39,8 +39,6 @@ class Action {
     }
 }
 
-let levelWinEvent = new Action();
-
 function generateLevelResult({ result: res, levelType: lt }) {
     return { result: res, levelType: lt }
 }
@@ -55,4 +53,4 @@ function enableInteractions() {
     CanInteract = true;
 }
 
-export { Action, levelWinEvent, generateLevelResult, CanInteract, disableInteractions, enableInteractions }
+export { Action, generateLevelResult, CanInteract, disableInteractions, enableInteractions }

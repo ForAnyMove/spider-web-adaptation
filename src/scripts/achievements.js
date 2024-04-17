@@ -7,6 +7,7 @@ class Achievement {
     constructor(options) {
         this.title = options.title;
         this.icon = options.icon;
+        this.langID = options.langID;
 
         this.currentValue = options.loadData.currentValue;
         this.completedIndex = options.loadData.completedIndex;

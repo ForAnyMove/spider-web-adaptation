@@ -197,7 +197,7 @@ async function loadUserData(key) {
 async function getDefaultLanguage() {
     if (isLocalHost()) {
         error("[getDefaultLanguage] local host usage", "sdk", "sdk");
-        return 'ru';
+        return 'en';
     }
 
     SDK = await getSDK();
@@ -253,4 +253,4 @@ async function initializeSDK() {
     player = await getPlayer(SDK);
 }
 
-export { saveUserData, loadUserData, getPlatform, showRewarded, showInterstitial, initializeSDK }
+export { saveUserData, loadUserData, getPlatform, showRewarded, showInterstitial, initializeSDK, getDefaultLanguage }

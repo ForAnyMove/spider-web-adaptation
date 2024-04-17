@@ -24,20 +24,34 @@ export default class User {
             count: 0
         }]
 
+        // this.availableContent = [
+        //     Content.CardSkin01, Content.CardBackSkin01, Content.Background01,
+        //     Content.CardSkin02, Content.CardBackSkin02, Content.Background02];
+
+        //test data
         this.availableContent = [
             Content.CardSkin01, Content.CardBackSkin01, Content.Background01,
-            Content.CardSkin02, Content.CardBackSkin02, Content.Background02];
+            Content.CardSkin02, Content.CardBackSkin02, Content.Background02,
+            Content.CardSkin03, Content.CardBackSkin03, Content.Background03,
+            Content.CardSkin04, Content.CardBackSkin04, Content.Background04,
+            Content.CardSkin05, Content.CardBackSkin05, Content.Background05,
+            Content.CardSkin06, Content.CardBackSkin06, Content.Background06,
+            Content.CardSkin07, Content.CardBackSkin07, Content.Background07,
+            Content.CardSkin08, Content.CardBackSkin08, Content.Background08,
+            Content.CardSkin09, Content.CardBackSkin09, Content.Background09];
 
         this.usedContent = [Content.CardSkin01, Content.CardBackSkin01, Content.Background01];
 
         this.achievements = [];
         this.achievements.push(new InGameDayCount({
             title: 'Дней в игре',
+            langID: 'day_in_game_a',
             icon: '../../Sprites/Icons/Icon_Calendar.png',
             loadData: { currentValue: 0, completedIndex: 0 }
         }));
         this.achievements.push(new WinCount({
             title: 'Количество побед',
+            langID: 'win_count_a',
             icon: '../../Sprites/Icons/Icon_Trophy.png',
             trials: [
                 generateTrial(3, Items.BoosterHint, 1),
@@ -50,6 +64,7 @@ export default class User {
         }));
         this.achievements.push(new WinInARow({
             title: 'Побед подряд',
+            langID: 'win_in_row_a',
             icon: '../../Sprites/Icons/Icon_Trophy.png',
             trials: [
                 generateTrial(3, Items.Energy, 2),
@@ -62,16 +77,19 @@ export default class User {
         }));
         this.achievements.push(new WinWithSomeStepCount({
             title: 'Выиграть с заданным количеством шагов',
+            langID: 'win_step_a',
             icon: '../../Sprites/Icons/Icon_Step.png',
             loadData: { currentValue: 0, completedIndex: 0 }
         }));
         this.achievements.push(new UsedBoostersCount({
             title: 'Использование бустеров',
+            langID: 'booster_use_a',
             icon: '../../Sprites/Icons/Icon_Booster.png',
             loadData: { currentValue: 0, completedIndex: 0 }
         }));
         this.achievements.push(new WinCount({
-            title: 'Количетво побед в "Испытании"',
+            title: 'Количество пройденных испытаний',
+            langID: 'twial_win_count_a',
             icon: '../../Sprites/Icons/Icon_Trial.png',
             trials: [
                 generateTrial(3, Items.Energy, 2),
@@ -82,7 +100,8 @@ export default class User {
             ], levelType: LevelType.Trial, loadData: { currentValue: 0, completedIndex: 0 }
         }));
         this.achievements.push(new GameCount({
-            title: 'Количество игр в "Истории"',
+            title: 'Количество игр в Испытании',
+            langID: 'story_game_count_a',
             icon: '../../Sprites/Icons/Icon_Story.png',
             trials: [
                 generateTrial(3, Items.Energy, 2),
@@ -94,11 +113,13 @@ export default class User {
         }));
         this.achievements.push(new WinWithSomeTime({
             title: 'Выиграть за время',
+            langID: 'win_time_a',
             icon: '../../Sprites/Icons/Icon_Stopwatch.png',
             loadData: { currentValue: 0, completedIndex: 0 }
         }));
         this.achievements.push(new WinInARow({
             title: 'Победы в Пауке одна масть',
+            langID: 'win_s_o_a',
             icon: '../../Sprites/Icons/Icon_WS1.png',
             trials: [
                 generateTrial(3, Items.Energy, 2),
@@ -110,6 +131,7 @@ export default class User {
         }));
         this.achievements.push(new WinInARow({
             title: 'Победы в Пауке две масти',
+            langID: 'win_s_t_a',
             icon: '../../Sprites/Icons/Icon_WS2.png',
             trials: [
                 generateTrial(3, Items.Energy, 2),
@@ -121,6 +143,7 @@ export default class User {
         }));
         this.achievements.push(new WinInARow({
             title: 'Победы в Пауке четыре масти',
+            langID: 'win_s_f_a',
             icon: '../../Sprites/Icons/Icon_WS4.png',
             trials: [
                 generateTrial(3, Items.Energy, 2),
@@ -132,6 +155,7 @@ export default class User {
         }));
         this.achievements.push(new WinInARow({
             title: 'Победы в Паучихе одна масть',
+            langID: 'win_sl_o_a',
             icon: '../../Sprites/Icons/Icon_WSL1.png',
             trials: [
                 generateTrial(3, Items.Energy, 2),
@@ -143,6 +167,7 @@ export default class User {
         }));
         this.achievements.push(new WinInARow({
             title: 'Победы в Паучихе две масти',
+            langID: 'win_sl_t_a',
             icon: '../../Sprites/Icons/Icon_WSL2.png',
             trials: [
                 generateTrial(3, Items.Energy, 2),
@@ -154,6 +179,7 @@ export default class User {
         }));
         this.achievements.push(new WinInARow({
             title: 'Победы в Паучихе четыре масти',
+            langID: 'win_sl_f_a',
             icon: '../../Sprites/Icons/Icon_WSL4.png',
             trials: [
                 generateTrial(3, Items.Energy, 2),

@@ -1,4 +1,4 @@
-import { Items } from './src/scripts/statics/staticValues.js';
+import { Items, locales } from './src/scripts/statics/staticValues.js';
 import { inDayGameCount } from './src/scripts/ingameDayCounter.js';
 import {
   dailyRewards,
@@ -50,34 +50,35 @@ closeRegularPopupButton.addEventListener('click', function () {
 
 const closeLanguagesPopupButton = document.getElementById('close-popup-languages');
 const languagesPopup = document.getElementById('languages');
-const languagesBtn = document.getElementById('languages-btn');
-
-languagesBtn.addEventListener('click', () => {
-  languagesPopup.style.display = 'flex';
-});
-
-closeLanguagesPopupButton.addEventListener('click', function () {
-  languagesPopup.style.display = 'none';
-});
-
-const closeSettingsPopupButton = document.getElementById(
-  'close-popup-settings'
-);
+const languagesBtn = document.getElementById('lang-btn');
 const settingsBonuses = document.getElementById('settings');
 const settingsBtn = document.getElementById('settings-btn');
+const closeSettingsPopupButton = document.getElementById('close-popup-settings');
 
-settingsBtn.addEventListener('click', () => {
+languagesBtn.onclick = function () {
+  languagesPopup.style.display = 'flex';
+
+  input.updateQueryCustom(getInputElements(languagesPopup, { classNames: ['close-popup', 'language-container'] }), { element: closeLanguagesPopupButton })
+}
+
+closeLanguagesPopupButton.onclick = function () {
+  languagesPopup.style.display = 'none';
+
+  input.updateQueryCustom(getInputElements(settingsBonuses, { classNames: ['close-popup'], tags: ['button'] }), { element: closeSettingsPopupButton });
+}
+
+settingsBtn.onclick = function () {
   settingsBonuses.style.display = 'flex';
 
   input.updateQueryCustom(getInputElements(settingsBonuses, { classNames: ['close-popup'], tags: ['button'] }), { element: closeSettingsPopupButton });
-});
+}
 
-closeSettingsPopupButton.addEventListener('click', function () {
+closeSettingsPopupButton.onclick = function () {
   settingsBonuses.style.display = 'none';
 
   input.updateQuery();
   input.select({ element: defaultSelectedButton });
-});
+}
 
 function setupReqularBonusesButtons() {
   const itemCountPairs = [
@@ -153,5 +154,53 @@ function setupDailyRewards() {
   }
 }
 
+function setupLanguageSelector(initialLocale) {
+  const selectors = document.getElementsByClassName('language-container');
+
+  const languageSelectorStructs = [];
+
+  for (let i = 0; i < selectors.length; i++) {
+    const selector = selectors[i];
+    const check = selector.getElementsByClassName('accept-checkbox-icon')[0];
+
+    const selectorStruct = {
+      locale: locales[i],
+      selector: selector,
+      check: check,
+      select: () => {
+        for (let j = 0; j < languageSelectorStructs.length; j++) {
+          const element = languageSelectorStructs[j];
+          if (element == selectorStruct) {
+            element.check.classList.remove('hidden');
+          } else if (!element.check.classList.contains('hidden')) {
+            element.check.classList.add('hidden');
+          }
+        }
+
+        languageChangeEvent.invoke(selectorStruct.locale);
+      }
+    };
+
+    selector.onclick = () => {
+      selectorStruct.select();
+    };
+
+    languageSelectorStructs.push(selectorStruct)
+  }
+
+  for (let i = 0; i < languageSelectorStructs.length; i++) {
+    const element = languageSelectorStructs[i];
+    if (element.locale == initialLocale) {
+      element.select();
+      break;
+    }
+  }
+
+  console.log(selectors);
+}
+
+// setupLanguageSelector();
 
 setupDailyRewards();
+
+export { setupLanguageSelector }

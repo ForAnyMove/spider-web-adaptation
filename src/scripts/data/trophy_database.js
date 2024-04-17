@@ -5,23 +5,23 @@ const trophyDatabase = {
         {
             id: Items.Trophy01,
             previewPath: '../../Sprites/Trophies/Trophy_01.png',
-            unlockDescription: 'Пройдите уровень "История" #3',
+            unlockDescription: 'trophy_unlock_descr{3}',
         }, {
             id: Items.Trophy02,
             previewPath: '../../Sprites/Trophies/Trophy_02.png',
-            unlockDescription: 'Пройдите уровень "История" #6',
+            unlockDescription: 'trophy_unlock_descr{6}',
         }, {
             id: Items.Trophy03,
             previewPath: '../../Sprites/Trophies/Trophy_03.png',
-            unlockDescription: 'Пройдите уровень "История" #9',
+            unlockDescription: 'trophy_unlock_descr{9}',
         }, {
             id: Items.Trophy04,
             previewPath: '../../Sprites/Trophies/Trophy_04.png',
-            unlockDescription: 'Пройдите уровень "История" #12',
+            unlockDescription: 'trophy_unlock_descr{12}',
         }, {
             id: Items.Trophy05,
             previewPath: '../../Sprites/Trophies/Trophy_05.png',
-            unlockDescription: 'Пройдите уровень "История" #15',
+            unlockDescription: 'trophy_unlock_descr{15}',
         }
     ]
 }

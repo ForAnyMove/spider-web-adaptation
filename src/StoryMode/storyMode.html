@@ -113,14 +113,17 @@
     let player = null;
     let user = null;
     let input;
+    let languageChangeEvent;
   </script>
   <script type="module">
     import { preload } from '../loader/loader.js';
     import { initializeSDK } from '../scripts/sdk/sdk.js';
     import { initialize } from '../scripts/save_system/SaveSystem.js'
     import User from '../scripts/userData.js'
+    import { Action } from '../scripts/globalEvents.js';
 
     user = new User();
+    languageChangeEvent = new Action();
 
 
     preload(async () => {

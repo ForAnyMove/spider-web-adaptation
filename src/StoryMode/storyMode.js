@@ -1,6 +1,7 @@
+import { initialLocale, updateInContainer } from "../localization/translator.js";
 import { storyLevelDatabase } from "../scripts/data/level_databases.js";
 import DirectionalInput from "../scripts/directionInput.js";
-import { createButton, createElement, createHSpace, createImage, createTextH3, createTextSpan, createVSpace, getIconByContent, getIconByItem, getIconByPattern, getIconBySuit, getPatternName, getSuitName } from "../scripts/helpers.js";
+import { createButton, createElement, createHSpace, createImage, createTextH3, createTextSpan, createVSpace, getIconByContent, getIconByItem, getIconByPattern, getIconBySuit, getPatternLang, getPatternName, getSuitLang, getSuitName } from "../scripts/helpers.js";
 import { showRewarded } from "../scripts/sdk/sdk.js";
 import { Items } from "../scripts/statics/staticValues.js";
 import('../scripts/rewardReceiverView.js');
@@ -77,7 +78,7 @@ function createLevelPreview(data) {
     lastCreatedLevelPreview.remove();
   }
 
-  function createBooster(itemType, title, user, parent) {
+  function createBooster(itemType, title, langID, user, parent) {
     const plane = createElement('div', ['booster-container'], null, parent);
     {
       const div = createElement('div', ['booster'], null, plane);
@@ -100,7 +101,7 @@ function createLevelPreview(data) {
         });
 
       }
-      createTextSpan(['booster-title'], null, plane, title);
+      createTextSpan(['booster-title'], null, plane, title, langID);
     }
   }
   // data
@@ -116,7 +117,7 @@ function createLevelPreview(data) {
   {
     const header = createElement('div', ['popup-header'], null, plane);
     {
-      createTextH3(null, null, header, `Уровень №${currentLevelIndex + 1}`);
+      createTextH3(null, null, header, `Уровень №${currentLevelIndex + 1}`, `level {№${currentLevelIndex + 1}}`);
       const closeButton = createButton(null, {
         // border: 'none',
         background: 'no-repeat',
@@ -131,43 +132,43 @@ function createLevelPreview(data) {
     }
     const rules = createElement('div', ['rules-container'], null, plane);
     {
-      createTextSpan(null, null, rules, 'Правила');
+      createTextSpan(null, null, rules, 'Правила', 'rules');
       const rulesContainer = createElement('div', ['rules-cards-container'], null, rules);
       {
         const suitContainer = createElement('div', ['rules-card'], { position: 'relative' }, rulesContainer);
         {
-          createTextSpan(null, { position: 'absolute', top: '-3%' }, suitContainer, 'Масть');
+          createTextSpan(null, { position: 'absolute', top: '-3%' }, suitContainer, 'Масть', 'suit');
           createElement('div', null, { height: '4vw' }, suitContainer);
           createImage(['rules-icon'], null, suitContainer, suitIcon);
           createElement('div', null, { height: '4vw' }, suitContainer);
-          createTextSpan(null, { position: 'absolute', bottom: '12%', height: '0.5vh', textWrap: 'nowrap' }, suitContainer, suitName);
+          createTextSpan(null, { position: 'absolute', bottom: '12%', height: '0.5vh', textWrap: 'nowrap' }, suitContainer, suitName, getSuitLang(data.gameRule.SuitMode));
         }
         const patternContainer = createElement('div', ['rules-card'], { position: 'relative' }, rulesContainer);
         {
-          createTextSpan(null, { position: 'absolute', top: '-3%' }, patternContainer, 'Режим');
+          createTextSpan(null, { position: 'absolute', top: '-3%' }, patternContainer, 'Режим', 'game_mode');
           createElement('div', null, { height: '4vw' }, patternContainer);
           createImage(['rules-icon'], null, patternContainer, patternIcon);
           createElement('div', null, { height: '4vw' }, patternContainer);
-          createTextSpan(null, { position: 'absolute', bottom: '12%', height: '0.5vh', textWrap: 'nowrap' }, patternContainer, patternName);
+          createTextSpan(null, { position: 'absolute', bottom: '12%', height: '0.5vh', textWrap: 'nowrap' }, patternContainer, patternName, getPatternLang(data.gameRule.Pattern));
         }
       }
     }
     const levelInfo = createElement('div', ['level-info'], null, plane);
     {
-      createTextH3(['level-info-header'], null, levelInfo, 'Бустеры на уровне');
+      createTextH3(['level-info-header'], null, levelInfo, 'Бустеры на уровне', 'boost_in_lvl');
       const boostersContainer = createElement('div', ['boosters-container'], null, levelInfo);
       {
-        createBooster(Items.BoosterHint, 'Подсказка', user, boostersContainer);
-        createBooster(Items.BoosterUndo, 'Отмена хода', user, boostersContainer);
-        createBooster(Items.BoosterMage, 'Маг', user, boostersContainer);
-        createBooster(Items.BoosterTime, 'Доп. время', user, boostersContainer);
+        createBooster(Items.BoosterHint, 'Подсказка', 'hint_b', user, boostersContainer);
+        createBooster(Items.BoosterUndo, 'Отмена хода', 'undo_b', user, boostersContainer);
+        createBooster(Items.BoosterMage, 'Маг', 'mage_b', user, boostersContainer);
+        createBooster(Items.BoosterTime, 'Доп. время', 'timer_b', user, boostersContainer);
       }
 
       if (rewards == null || rewards.length == 0) {
         createVSpace('8vh', levelInfo);
       }
       else {
-        createTextH3(['rewards-title'], null, levelInfo, 'Награда');
+        createTextH3(['rewards-title'], null, levelInfo, 'Награда', 'rewards');
         const rewardsContainer = createElement('div', ['rewards-container'], null, levelInfo);
         {
           const maxViewCount = Math.min(rewards.length, 4);
@@ -198,7 +199,7 @@ function createLevelPreview(data) {
         adsButton.id = 'ads-btn';
         {
           createImage(['watch-add-icon'], null, adsButton, '../../Sprites/Icons/Icon_Ads.png');
-          createTextSpan(['start-level-btn-title'], null, adsButton, 'Бесплатно');
+          createTextSpan(['start-level-btn-title'], null, adsButton, 'Бесплатно', 'free');
           const priceContainer = createElement('div', ['interactive-btn-info'], null, adsButton);
           {
             createTextSpan(['btn-info-value'], null, priceContainer, '5');
@@ -215,7 +216,7 @@ function createLevelPreview(data) {
         input.selectableElements.push({ element: startButton });
         startButton.id = 'play-btn';
         {
-          createTextSpan(['start-level-btn-title'], null, startButton, 'Играть');
+          createTextSpan(['start-level-btn-title'], null, startButton, 'Играть', 'play');
           const priceContainer = createElement('div', ['interactive-btn-info'], null, startButton);
           {
             createTextSpan(['btn-info-value'], null, priceContainer, requiredPass);
@@ -253,6 +254,8 @@ levelButtonsContainer.addEventListener('click', (event) => {
     lastCreatedLevelPreview = createLevelPreview(currentLevel);
     popupParent.appendChild(lastCreatedLevelPreview);
 
+    updateInContainer(lastCreatedLevelPreview, initialLocale);
+
     popupParent.classList.remove('hidden-popup');
     popupParent.classList.add('showed-popup');
   }
@@ -271,3 +274,5 @@ function setupEnergyView() {
 }
 
 setupEnergyView();
+
+languageChangeEvent.invoke(initialLocale);
