@@ -6,7 +6,7 @@ import { CanInteract, disableInteractions, enableInteractions } from "../scripts
 import { createElement, createImage, createTextSpan, getIconByItem, secondsToTime } from "../scripts/helpers.js";
 import { createLevel, createSolitaireLevel } from "../scripts/levelCreator.js";
 import { ContentType, Pattern, SuitMode } from "../scripts/statics/enums.js";
-import { Content, Items } from "../scripts/statics/staticValues.js";
+import { Content, Items, locales } from "../scripts/statics/staticValues.js";
 import { stepRecorder } from "../scripts/stepRecorder.js";
 
 import { fourSuitSpider, fourSuitSpiderLady, oneSuitSpider, oneSuitSpiderLady, selectedRules, twoSuitSpider, twoSuitSpiderLady } from "../scripts/rules/gameRules.js";
@@ -714,3 +714,49 @@ result.croupier.onDistributionFinished.addListener(() => {
 
   input.updateQueryCustom(selectables, selectables[0])
 });
+
+
+function setupLanguageSelector(initialLocale) {
+  const selectors = document.getElementsByClassName('language-container');
+
+  const languageSelectorStructs = [];
+
+  for (let i = 0; i < selectors.length; i++) {
+    const selector = selectors[i];
+    const check = selector.getElementsByClassName('accept-checkbox-icon')[0];
+
+    const selectorStruct = {
+      locale: locales[i],
+      selector: selector,
+      check: check,
+      select: () => {
+        for (let j = 0; j < languageSelectorStructs.length; j++) {
+          const element = languageSelectorStructs[j];
+          if (element == selectorStruct) {
+            element.check.classList.remove('hidden');
+          } else if (!element.check.classList.contains('hidden')) {
+            element.check.classList.add('hidden');
+          }
+        }
+
+        languageChangeEvent.invoke(selectorStruct.locale);
+      }
+    };
+
+    selector.onclick = () => {
+      selectorStruct.select();
+    };
+
+    languageSelectorStructs.push(selectorStruct)
+  }
+
+  for (let i = 0; i < languageSelectorStructs.length; i++) {
+    const element = languageSelectorStructs[i];
+    if (element.locale == initialLocale) {
+      element.select();
+      break;
+    }
+  }
+}
+
+export { setupLanguageSelector }

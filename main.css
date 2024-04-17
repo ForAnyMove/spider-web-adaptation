@@ -13,7 +13,7 @@ body {
   align-items: center;
   justify-content: space-between;
   background-color: #009e00;
-  background-image: url('./Sprites/Backgrounds/Background_MainMenu.jpg');
+  background-image: url('./Sprites/Backgrounds/Background_MainMenu.png');
   background-size: cover;
   background-position: center;
   -ms-overflow-style: none;

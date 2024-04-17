@@ -11,7 +11,7 @@ import { IconsByItem } from '../scripts/statics/staticValues.js';
 import('../scripts/rewardReceiverView.js');
 
 import DirectionalInput from '../scripts/directionInput.js';
-import { initialLocale } from '../localization/translator.js';
+import { initialLocale, updateInContainer } from '../localization/translator.js';
 
 function getIconByItem(itemType) {
   for (let i = 0; i < IconsByItem.length; i++) {
@@ -163,6 +163,8 @@ function createAchievementInstances() {
     const achievement = user.achievements[i];
 
     const element = createAchievementInstance(achievement, (newElement) => {
+      updateInContainer(newElement, initialLocale);
+
       setTimeout(() => {
         const newSelectable = {
           element: newElement,

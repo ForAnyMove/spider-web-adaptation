@@ -195,11 +195,7 @@ function setupLanguageSelector(initialLocale) {
       break;
     }
   }
-
-  console.log(selectors);
 }
-
-// setupLanguageSelector();
 
 setupDailyRewards();
 
