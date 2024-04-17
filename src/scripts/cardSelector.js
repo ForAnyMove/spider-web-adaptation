@@ -21,6 +21,10 @@ class CardSelector {
                 card.domElement.classList.add('selected');
             }
 
+            if (input != null) {
+                input.preventAxis(['ArrowDown', 'ArrowUp']);
+            }
+
             return;
         }
 
@@ -42,6 +46,9 @@ class CardSelector {
             this.selectedColumn = null;
         }
 
+        if (input != null) {
+            input.preventAxis([]);
+        }
     }
 }
 

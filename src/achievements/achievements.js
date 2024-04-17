@@ -11,6 +11,7 @@ import { IconsByItem } from '../scripts/statics/staticValues.js';
 import('../scripts/rewardReceiverView.js');
 
 import DirectionalInput from '../scripts/directionInput.js';
+import { initialLocale, updateInContainer } from '../localization/translator.js';
 
 function getIconByItem(itemType) {
   for (let i = 0; i < IconsByItem.length; i++) {
@@ -79,7 +80,8 @@ function createAchievementInstance(data, onInserted) {
 
   const lable = createElement('div', ['achievement-lable'], null, plane);
   createImage(['achievement-icon'], null, lable, data.icon);
-  createTextSpan(['achievement-title'], null, lable, data.title);
+  const title = createTextSpan(['achievement-title'], null, lable, data.title);
+  title.lang = data.langID;
 
   if (data.allTrialsCompleted) return plane;
 
@@ -146,7 +148,8 @@ function createAchievementInstance(data, onInserted) {
         setTimeout(() => user.addItem(reward.type, reward.count, { isTrue: true, isMonetized: false }), 15)
       }
     });
-    createTextSpan(['get-btn-title'], null, claimButton, 'Получить');
+    const buttonTitle = createTextSpan(['get-btn-title'], null, claimButton, 'Получить');
+    buttonTitle.lang = 'claim';
   }
 
   return plane;
@@ -160,6 +163,8 @@ function createAchievementInstances() {
     const achievement = user.achievements[i];
 
     const element = createAchievementInstance(achievement, (newElement) => {
+      updateInContainer(newElement, initialLocale);
+
       setTimeout(() => {
         const newSelectable = {
           element: newElement,
@@ -268,3 +273,5 @@ const selectables = createAchievementInstances();
 startSelectables = [{ element: tabs[0] }, { element: tabs[1] }, { element: returnButton }].concat(selectables);
 
 input.updateQueryCustom(startSelectables, startSelectables[2]);
+
+languageChangeEvent.invoke(initialLocale);

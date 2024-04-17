@@ -13,7 +13,7 @@ body {
   align-items: center;
   justify-content: space-between;
   background-color: #009e00;
-  background-image: url('./Sprites/Backgrounds/Background_MainMenu.jpg');
+  background-image: url('./Sprites/Backgrounds/Background_MainMenu.png');
   background-size: cover;
   background-position: center;
   -ms-overflow-style: none;
@@ -760,15 +760,19 @@ button.selected {
   box-shadow: 0px 3px 2px 0px #003605;
   position: relative;
 }
-.languages>.popup-content{
-  width: 25vw;
+
+.languages>.popup-content {
+  width: 40vh;
+  max-width: 90%;
 }
-.languages-list{
+
+.languages-list {
   display: flex;
   flex-direction: column;
   align-items: center;
 }
-.language-container{
+
+.language-container {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -776,38 +780,45 @@ button.selected {
   padding: 0.5vh;
   margin-bottom: 1vh;
 }
-.language-container:hover{
+
+.language-container:hover {
   background-color: #00bcbf81;
   border-radius: 1vh;
 }
-.language{
+
+.language {
   display: flex;
   align-items: center;
 }
-.language-icon{
+
+.language-icon {
   width: 4vh;
 }
-.language-title{
+
+.language-title {
   color: #fff;
   font-weight: bold;
   font-size: 2.5vh;
   padding-left: 1vw;
 }
-.custom-checkbox{
+
+.custom-checkbox {
   display: flex;
   justify-content: center;
   align-items: center;
   width: 4vh;
   height: 4vh;
   border-radius: 1vh;
-  -webkit-box-shadow: 0px 0px 2px 1px #00000049; 
+  -webkit-box-shadow: 0px 0px 2px 1px #00000049;
   box-shadow: 0px 0px 2px 1px #00000047;
   background-color: #003605;
 }
-.accept-checkbox-icon{
+
+.accept-checkbox-icon {
   width: 4vh;
 }
-.bounty-popup-content{
+
+.bounty-popup-content {
   display: flex;
   align-items: center;
   justify-content: center;

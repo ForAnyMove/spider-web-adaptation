@@ -13,10 +13,10 @@ function createItem(type, count) {
     }
 }
 
-function createDeckTrial(count) {
+function createDeckTrial(count, description) {
     return {
         decksToComplete: count,
-        description: `Соберите ${count} колоды, чтобы завершить испытание`,
+        description: description,
     }
 }
 
@@ -111,6 +111,13 @@ function getSuitName(suit) {
         case SuitMode.FourSuits: return 'Четыре масти'
     }
 }
+function getSuitLang(suit) {
+    switch (suit) {
+        case SuitMode.OneSuit: return 'one_suit'
+        case SuitMode.TwoSuits: return 'two_suit'
+        case SuitMode.FourSuits: return 'four_suit'
+    }
+}
 
 function getIconBySuit(suit) {
     switch (suit) {
@@ -124,6 +131,13 @@ function getPatternName(pattern) {
     switch (pattern) {
         case Pattern.Spider: return 'Паук'
         case Pattern.SpiderLady: return 'Паучиха'
+    }
+}
+
+function getPatternLang(pattern) {
+    switch (pattern) {
+        case Pattern.Spider: return 'spider'
+        case Pattern.SpiderLady: return 'spider_w'
     }
 }
 
@@ -178,21 +192,30 @@ function createButton(classList, styleList, parent, onClick) {
     return element;
 }
 
-function createTextP(classList, styleList, parent, text) {
+function createTextP(classList, styleList, parent, text, lang) {
     const element = createElement('p', classList, styleList, parent);
     element.innerText = text;
+    if (lang != null) {
+        element.lang = lang;
+    }
     return element;
 }
 
-function createTextSpan(classList, styleList, parent, text) {
+function createTextSpan(classList, styleList, parent, text, lang) {
     const element = createElement('span', classList, styleList, parent);
     element.innerText = text;
+    if (lang != null) {
+        element.lang = lang;
+    }
     return element;
 }
 
-function createTextH3(classList, styleList, parent, text) {
+function createTextH3(classList, styleList, parent, text, lang) {
     const element = createElement('h3', classList, styleList, parent);
     element.innerText = text;
+    if (lang != null) {
+        element.lang = lang;
+    }
     return element;
 }
 
@@ -345,6 +368,17 @@ function getInputElements(root, options = { classNames, tags, ids }) {
     return elements;
 }
 
+function getValueByKeyInArray(key, array) {
+    for (let i = 0; i < array.length; i++) {
+        const element = array[i];
+        const elementKey = Object.keys(element)[0];
+        if (elementKey == key) {
+            return element[elementKey];
+        }
+    }
+
+    return null;
+}
 
 
 export {
@@ -376,5 +410,8 @@ export {
     isCardAtRankLower,
     getElementsByClass,
     getElements,
-    getInputElements
+    getInputElements,
+    getValueByKeyInArray,
+    getSuitLang,
+    getPatternLang
 }

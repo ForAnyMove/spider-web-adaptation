@@ -2,25 +2,36 @@ import { animator } from "../scripts/animator.js";
 import { useHintBooster, useMageBooster, useUndoBooster } from "../scripts/boosters.js";
 import { cardCollector } from "../scripts/cardsCollector.js";
 import { createTweener } from "../scripts/dotween/dotween.js";
-import { CanInteract, disableInteractions } from "../scripts/globalEvents.js";
-import { secondsToTime } from "../scripts/helpers.js";
+import { CanInteract, disableInteractions, enableInteractions } from "../scripts/globalEvents.js";
+import { createElement, createImage, createTextSpan, getIconByItem, secondsToTime } from "../scripts/helpers.js";
 import { createLevel, createSolitaireLevel } from "../scripts/levelCreator.js";
 import { ContentType, Pattern, SuitMode } from "../scripts/statics/enums.js";
-import { Content, Items } from "../scripts/statics/staticValues.js";
+import { Content, Items, locales } from "../scripts/statics/staticValues.js";
 import { stepRecorder } from "../scripts/stepRecorder.js";
 
-import { fourSuitSpider, fourSuitSpiderLady, oneSuitSpider, oneSuitSpiderLady, twoSuitSpider, twoSuitSpiderLady } from "../scripts/rules/gameRules.js";
+import { fourSuitSpider, fourSuitSpiderLady, oneSuitSpider, oneSuitSpiderLady, selectedRules, twoSuitSpider, twoSuitSpiderLady } from "../scripts/rules/gameRules.js";
 import { getBackgroundImage } from "../scripts/data/card_skin_database.js";
 import { trialLevelDatabase, storyLevelDatabase } from "../scripts/data/level_databases.js";
 import { SolitaireCardColumn } from "../scripts/cardModel.js";
 import { completeLevel, completeMode, failLevel, failMode, startLevel } from "../scripts/levelStarter.js";
-import { showInterstitial } from "../scripts/sdk/sdk.js";
+import { showInterstitial, showRewarded } from "../scripts/sdk/sdk.js";
+import DirectionalInput from "../scripts/directionInput.js";
+
+input = new DirectionalInput({ element: null });
+
+input.addGlobalKeyHandle('Escape', () => {
+  console.log("Try invoke menu");
+
+
+  // input.backupCurrentState();
+
+});
 
 let timer = 0;
 
 showInterstitial();
 
-const screenParameters = { rules: oneSuitSpider, decksToWin: 8, onWinCallback: null, onLoseCallback: null, isSolitaire: false, onRestart: null };
+const screenParameters = { rules: oneSuitSpider, decksToWin: 8, onWinCallback: null, onLoseCallback: null, isSolitaire: false, onRestart: null, time: -1 };
 
 function trySelectLevel() {
   const levelTypesList = [
@@ -165,6 +176,8 @@ function trySelectLevel() {
       }
 
       screenParameters.decksToWin = trialLevel.trial.decksToComplete;
+      screenParameters.time = trialLevel.time;
+
       startTimer(trialLevel.time);
 
       screenParameters.onWinCallback = () => {
@@ -243,8 +256,9 @@ function checkAndMakeSpiderLadyPatternView() {
     setSpiderLadyStyles()
   }
 }
-function setSpiderLadyStyles() {const styleElement = document.createElement('style');
-styleElement.textContent = `
+function setSpiderLadyStyles() {
+  const styleElement = document.createElement('style');
+  styleElement.textContent = `
   @media only screen and (orientation: portrait) {
     .active-cards-container,
     .cards-container,
@@ -283,7 +297,7 @@ styleElement.textContent = `
     }
   }
 `;
-document.head.appendChild(styleElement);
+  document.head.appendChild(styleElement);
 }
 checkAndMakeSpiderLadyPatternView();
 
@@ -312,6 +326,8 @@ function startCurrentLevel() {
   } else {
     setupDefaultLevel();
   }
+
+  tryCloseLoseScreen();
 }
 
 startCurrentLevel();
@@ -349,8 +365,9 @@ function setupBackgroundChange() {
 
 function setupButtons() {
   const hintButton = document.getElementById('hint-button');
+  let hintCounter = null;
   if (hintButton) {
-    const hintCounter = hintButton.getElementsByTagName('span')[0];
+    hintCounter = hintButton.getElementsByTagName('span')[0];
     hintButton.onclick = function () {
       if (user.hasItems(Items.BoosterHint)) {
         if (useHintBooster(result.playableCardColumns, screenParameters.rules).isTrue) {
@@ -363,8 +380,9 @@ function setupButtons() {
 
 
   const mageButton = document.getElementById('mage-button');
+  let mageCounter = null;
   if (mageButton) {
-    const mageCounter = mageButton.getElementsByTagName('span')[0];
+    mageCounter = mageButton.getElementsByTagName('span')[0];
     mageButton.onclick = function () {
       if (user.hasItems(Items.BoosterMage)) {
         if (useMageBooster(result.mainCardColumn, result.playableCardColumns, screenParameters.rules).isTrue) {
@@ -376,8 +394,9 @@ function setupButtons() {
   }
 
   const timeButton = document.getElementById('time-button');
+  let timeCounter = null;
   if (timeButton) {
-    const timeCounter = timeButton.getElementsByTagName('span')[0];
+    timeCounter = timeButton.getElementsByTagName('span')[0];
     timeButton.onclick = function () {
       if (user.hasItems(Items.BoosterTime)) {
         timer += 60;
@@ -389,8 +408,9 @@ function setupButtons() {
   }
 
   const undoButton = document.getElementById('undo-button');
+  let undoCounter = null;
   if (undoButton) {
-    const undoCounter = undoButton.getElementsByTagName('span')[0];
+    undoCounter = undoButton.getElementsByTagName('span')[0];
     undoButton.onclick = function () {
       if (user.hasItems(Items.BoosterUndo)) {
         if (useUndoBooster()) {
@@ -402,55 +422,67 @@ function setupButtons() {
   }
 
   user.itemListUpdateEvent.addListener(() => {
-    if (hintCounter) hintCounter.innerText = `x${user.getItemCount(Items.BoosterHint)}`;
-    if (mageCounter) mageCounter.innerText = `x${user.getItemCount(Items.BoosterMage)}`;
-    if (timeCounter) timeCounter.innerText = `x${user.getItemCount(Items.BoosterTime)}`;
-    if (undoCounter) undoCounter.innerText = `x${user.getItemCount(Items.BoosterUndo)}`;
+    if (hintCounter != null) hintCounter.innerText = `x${user.getItemCount(Items.BoosterHint)}`;
+    if (mageCounter != null) mageCounter.innerText = `x${user.getItemCount(Items.BoosterMage)}`;
+    if (timeCounter != null) timeCounter.innerText = `x${user.getItemCount(Items.BoosterTime)}`;
+    if (undoCounter != null) undoCounter.innerText = `x${user.getItemCount(Items.BoosterUndo)}`;
   })
 
-  document.getElementById('restart-button').onclick = function () {
-    if (!CanInteract) return;
+  const restartButtons = document.getElementsByClassName('reset-level-button');
+  for (let i = 0; i < restartButtons.length; i++) {
+    const element = restartButtons[i];
 
-    startCurrentLevel();
+    element.onclick = function () {
+      if (!CanInteract) return;
+
+      startCurrentLevel();
+    }
+  }
+
+  const continueButton = document.getElementsByClassName('next-ads-btn')[0];
+
+  if (continueButton != null) {
+    continueButton.onclick = function () {
+      showRewarded(null, null, () => {
+        tryCloseLoseScreen();
+        startTimer(screenParameters.time);
+
+        enableInteractions();
+      }, null);
+    }
   }
 }
 
 function checkIfLevelWon(options) {
-  console.log(`${options.columnCount}, ${options.collectedCount}`);
 
-  if (options.collectedCount == screenParameters.decksToWin) {
-    screenParameters.onWinCallback?.();
-    disableInteractions();
+  if (options.collectedCount >= screenParameters.decksToWin) {
+    const winScreen = document.getElementById('win-screen-popup');
 
-    // open win screen with rewards
-    const el = document.createElement('span');
-    el.innerHTML = "Level completed";
+    winScreen.classList.add('visible');
+    winScreen.classList.remove('hidden-popup');
+  }
+}
 
-    el.style.fontSize = '50px'
-    el.style.textAlign = 'center'
-    el.style.color = '#0f0'
-    el.style.position = 'absolute';
-    el.style.left = window.innerWidth / 2 - 25 * 8 + 'px';
-    el.style.top = window.innerHeight / 2 - 10 + 'px';
-    document.getElementsByTagName('main')[0].appendChild(el);
+function showLoseScreen() {
+  const loseScreen = document.getElementById('lose-screen-popup');
 
+  loseScreen.classList.add('visible');
+  loseScreen.classList.remove('hidden-popup');
+}
+
+function tryCloseLoseScreen() {
+  const loseScreen = document.getElementById('lose-screen-popup');
+
+  loseScreen.classList.remove('visible');
+  if (!loseScreen.classList.contains('hidden-popup')) {
+    loseScreen.classList.add('hidden-popup');
   }
 }
 
 function levelLostFlow() {
   disableInteractions();
 
-  // open lose screen
-  const el = document.createElement('span');
-  el.innerHTML = "Level lost";
-
-  el.style.fontSize = '50px'
-  el.style.textAlign = 'center'
-  el.style.color = '#f00'
-  el.style.position = 'absolute';
-  el.style.left = window.innerWidth / 2 - 25 * 8 + 'px';
-  el.style.top = window.innerHeight / 2 - 10 + 'px';
-  document.getElementsByTagName('main')[0].appendChild(el);
+  showLoseScreen();
 }
 
 function updateStepText(stepCount) {
@@ -555,13 +587,36 @@ function setupSolitaireLevel() {
 function setupFastFinish() {
   document.getElementById('fast-win').onclick = function () {
     screenParameters.onWinCallback?.();
+    checkIfLevelWon({ collectedCount: 10 });
   }
 
   document.getElementById('fast-lose').onclick = function () {
     screenParameters.onLoseCallback?.();
+    showLoseScreen();
   }
 }
 
+function createRewardView(data) {
+  const container = createElement('div', ['bounty'], { scale: 1, marginLeft: '1vh', marginRight: '1vh' });
+  {
+    createImage(['bounty-icon'], null, container, getIconByItem(data.type));
+    if (data.count > 1) createTextSpan(['bounty-title'], null, container, `x${data.count}`);
+  }
+
+  return container;
+}
+
+user.onItemsPublicReceive.addListener((data) => {
+  const { items } = data;
+  const parent = document.getElementById('win-screen-rewards');
+
+  for (let i = 0; i < items.length; i++) {
+    const element = items[i];
+    parent.appendChild(createRewardView(element));
+  }
+});
+
+setupFastFinish();
 
 const closeSettingsFullPopupButton = document.getElementById('close-popup-settings');
 const settingsFullPopup = document.getElementById('settings');
@@ -592,3 +647,116 @@ closeLanguagesPopupButton.addEventListener('click', function () {
 updateStepText(0);
 setupBackgroundChange();
 cardCollector.onCollected.addListener(checkIfLevelWon);
+
+result.croupier.onDistributionFinished.addListener(() => {
+  const selectables = [];
+
+  for (let i = 0; i < result.playableCardColumns.length; i++) {
+    const element = result.playableCardColumns[i];
+    const selectable = {
+      customData: {
+        selectedLevel: 1, clearAllSelection: () => {
+          const cards = element.getRangeFromEnd(selectable.customData.selectedLevel, false).reverse();
+          for (let i = 0; i < cards.length - 1; i++) {
+            const element = cards[i];
+            element.domElement.classList.remove('selected-card');
+
+          }
+          selectable.customData.selectedLevel = 1;
+        }
+      },
+      element: element.domElement,
+      onLeft: () => {
+        selectable.customData.clearAllSelection();
+      },
+      onRight: () => {
+        selectable.customData.clearAllSelection();
+      },
+      onSubmit: () => {
+        const cards = element.getRangeFromEnd(selectable.customData.selectedLevel, false).reverse();
+        if (cards != null && cards.length > 0) {
+          cards[0].domElement.click();
+        }
+      },
+      onUp: () => {
+        const cards = element.getRangeFromEnd(selectable.customData.selectedLevel + 1, false).reverse();
+        if (selectedRules.isCanRemove(cards)) {
+          cards[0].domElement.classList.add('selected-card');
+          selectable.customData.selectedLevel++;
+
+          return { preventDefault: true }
+        }
+      },
+      onDown: () => {
+        if (selectable.customData.selectedLevel > 1) {
+          const cards = element.getRangeFromEnd(selectable.customData.selectedLevel, false).reverse();
+          cards[0].domElement.classList.remove('selected-card');
+          selectable.customData.selectedLevel--;
+
+          return { preventDefault: true }
+        }
+      },
+    };
+
+    selectables.push(selectable);
+  }
+
+  selectables.push({
+    element: result.mainCardColumn.domElement, onSubmit: () => {
+      for (let i = 0; i < input.selectableElements.length; i++) {
+        const element = input.selectableElements[i];
+        if (element.customData != null) {
+          element.customData.clearAllSelection();
+        }
+      }
+    }
+  })
+
+  input.updateQueryCustom(selectables, selectables[0])
+});
+
+
+function setupLanguageSelector(initialLocale) {
+  const selectors = document.getElementsByClassName('language-container');
+
+  const languageSelectorStructs = [];
+
+  for (let i = 0; i < selectors.length; i++) {
+    const selector = selectors[i];
+    const check = selector.getElementsByClassName('accept-checkbox-icon')[0];
+
+    const selectorStruct = {
+      locale: locales[i],
+      selector: selector,
+      check: check,
+      select: () => {
+        for (let j = 0; j < languageSelectorStructs.length; j++) {
+          const element = languageSelectorStructs[j];
+          if (element == selectorStruct) {
+            element.check.classList.remove('hidden');
+          } else if (!element.check.classList.contains('hidden')) {
+            element.check.classList.add('hidden');
+          }
+        }
+
+        languageChangeEvent.invoke(selectorStruct.locale);
+      }
+    };
+
+    selector.onclick = () => {
+      selectorStruct.select();
+    };
+
+    languageSelectorStructs.push(selectorStruct)
+  }
+
+  for (let i = 0; i < languageSelectorStructs.length; i++) {
+    const element = languageSelectorStructs[i];
+    if (element.locale == initialLocale) {
+      element.select();
+      break;
+    }
+  }
+}
+
+export { setupLanguageSelector }

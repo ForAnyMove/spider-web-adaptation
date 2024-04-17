@@ -35,22 +35,22 @@
     <nav class="collection-navigation">
       <ul class="collection-nav-list">
         <li class="categories-btn-container">
-          <button class="categories-btn active-btn" id="skin-sw-button">
+          <button class="categories-btn active-btn" id="skin-sw-button" lang="skins">
             Скины
           </button>
         </li>
         <li class="categories-btn-container">
-          <button class="categories-btn" id="skin-back-sw-button">
+          <button class="categories-btn" id="skin-back-sw-button" lang="card_back">
             Рубашка
           </button>
         </li>
         <li class="categories-btn-container">
-          <button class="categories-btn" id="background-sw-button">
+          <button class="categories-btn" id="background-sw-button" lang="backgrounds">
             Фоны
           </button>
         </li>
         <li class="categories-btn-container">
-          <button class="categories-btn" id="trophy-sw-button">Кубки</button>
+          <button class="categories-btn" id="trophy-sw-button" lang="trophies">Кубки</button>
         </li>
       </ul>
     </nav>
@@ -65,22 +65,22 @@
     let player = null;
     let user = null;
     let input;
+    let languageChangeEvent;
   </script>
   <script type="module">
     import { preload } from '../loader/loader.js';
     import { initializeSDK } from '../scripts/sdk/sdk.js';
     import { initialize } from '../scripts/save_system/SaveSystem.js'
     import User from '../scripts/userData.js'
+    import { Action } from '../scripts/globalEvents.js';
 
     user = new User();
+    languageChangeEvent = new Action();
 
     preload(async () => {
-      console.log('[collection.html]=> start initializeSDK');
       await initializeSDK();
-      console.log('[collection.html]=> start initialize');
       await initialize();
       user.loadData();
-      console.log('[collection.html]=> start import("./collection.js")');
       await import('./collection.js');
     })
   </script>

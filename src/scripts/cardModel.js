@@ -106,7 +106,7 @@ export default class Card {
     applyTVInput = function () {
         const domElement = this.domElement;
 
-        domElement.onmousedown = (e) => {
+        domElement.onclick = () => {
             cardSelector.select(this.cardColumn, this.cardColumn.getCardsFrom(this));
         }
     }
@@ -228,7 +228,7 @@ export default class Card {
     }
 
     subscribeDragAndDrop = () => {
-
+        platform = Platform.TV;
         switch (platform) {
             case Platform.Desktop:
                 this.applyDesktopInput();
@@ -583,6 +583,33 @@ class CardColumn {
         if (this.cards == null || this.cards.length == 0) return null;
 
         return this.cards[this.cards.length - 1];
+    }
+
+    getRange = function (from, count) {
+        if (from < 0 || from > this.cards.length - 1 || count == 0) return null;
+        const cards = [];
+
+        for (let i = from; i < from + count; i++) {
+            if (i > this.cards.length - 1) break;
+            const element = this.cards[i];
+            cards.push(element);
+        }
+
+        return cards;
+    }
+
+    getRangeFromEnd = function (count, includesClosed = true) {
+        if (count == 0) return null;
+        const cards = [];
+
+        for (let i = this.cards.length - 1; i >= this.cards.length - count; i--) {
+            if (i < 0) break;
+            const element = this.cards[i];
+            if (!includesClosed && element.side == CardSide.Back) continue;
+            cards.push(element);
+        }
+
+        return cards;
     }
 }
 

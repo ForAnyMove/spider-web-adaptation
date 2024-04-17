@@ -8,7 +8,7 @@
   <link rel="stylesheet" href="../loader/loader.css" />
   <title>Playground</title>
 
-  <script src="https://yandex.ru/games/sdk/v2"></script>
+  <!-- <script src="https://yandex.ru/games/sdk/v2"></script> -->
 </head>
 
 <body id="background">
@@ -47,46 +47,50 @@
       </li>
       <li class="header-ui-container">
         <button class="header-navigation-btn">
-          <img src="../../Sprites/Icons/Icon_Settings.png" alt="Profile" class="header-navigation-list-icon" id="settings-btn-full"/>
+          <img src="../../Sprites/Icons/Icon_Settings.png" alt="Profile" class="header-navigation-list-icon"
+            id="settings-btn-full" />
         </button>
       </li>
     </ul>
   </header>
-  <div class="popup hidden-popup" style="display: none" id="win-screen-popup">
-  <!-- <div class="popup" id="win-screen-popup"> -->
+  <div class="popup hidden-popup" id="win-screen-popup">
+    <!-- <div class="popup" id="win-screen-popup"> -->
     <div class="end-level">
-        <h2 class="end-level-title">Уровень завершен!</h2>
-        <!-- <span class="new-achievements">Новые достижения!</span> -->
+      <h2 class="end-level-title" lang="lvl_completed">Уровень завершен!</h2>
+      <!-- <span class="new-achievements">Новые достижения!</span> -->
     </div>
-    <div class="bounty-list">
+    <div>
+      <div class="bounty-list">
         <div class="custom-line"></div>
         <span class="bounty-title">Награды</span>
         <div class="custom-line"></div>
+      </div>
+      <div id="win-screen-rewards"></div>
     </div>
     <div class="next-btn-container">
-      <button class="next-btn" id="play-btn">
-        <span class="next-btn-title">Продолжить</span>
-      </button>
+      <a href="../../index.html">
+        <button class="next-btn" id="play-btn">
+          <span class="next-btn-title" lang="continue_q">Продолжить</span>
+        </button>
+      </a>
     </div>
   </div>
-  <div class="popup lose-screen-popup hidden-popup" style="display: none" id="lose-screen-popup">
-  <!-- <div class="popup lose-screen-popup" id="lose-screen-popup"> -->
+  <div class="popup lose-screen-popup hidden-popup" id="lose-screen-popup">
+    <!-- <div class="popup lose-screen-popup" id="lose-screen-popup"> -->
     <a href="../../index.html" class="popup_back-to">
       <button class="home-page-btn">
-        <img src="../../Sprites/Icons/Icon_Home.png" alt="Home" class="control-button-list-icon"
-          id="go-home-button" />
+        <img src="../../Sprites/Icons/Icon_Home.png" alt="Home" class="control-button-list-icon" id="go-home-button" />
       </button>
     </a>
     <div class="lose-level">
-        <h2 class="lose-level-title">Вы проиграли</h2>
+      <h2 class="lose-level-title" lang="you_lose">Вы проиграли</h2>
     </div>
     <div class="lose-btns-container">
-      <button class="refresh-btn">
-        <img src="../../Sprites/Icons/Icon_Restart.png" alt="Icon_Skins" class="control-button-list-icon"
-          id="restart-button" />
+      <button class="refresh-btn reset-level-button">
+        <img src="../../Sprites/Icons/Icon_Restart.png" alt="Icon_Skins" class="control-button-list-icon" />
       </button>
       <button class="next-ads-btn" id="play-btn">
-        <span class="next-btn-title">Продолжить?</span>
+        <span class="next-btn-title" lang="continue_q">Продолжить?</span>
         <img class="lose-screen-ads-icon" src="../../Sprites/Icons/Icon_Ads.png" />
       </button>
     </div>
@@ -94,78 +98,60 @@
   <div class="popup settings" style="display: none" id="settings">
     <div class="popup-content">
       <div class="popup-header">
-        <h3>Настройки</h3>
-        <img
-          src="../../Sprites/Icons/Icon_Close.png"
-          alt="close"
-          id="close-popup-settings"
-          class="close-popup"
-        />
+        <h3 lang="setttings">Настройки</h3>
+        <img src="../../Sprites/Icons/Icon_Close.png" alt="close" id="close-popup-settings" class="close-popup" />
       </div>
       <div class="settings-panel">
         <div class="setting-btn-container">
           <button class="settings-navigation-btn">
-            <img
-              src="../../Sprites/Icons/Icon_Music_Off.png"
-              alt="Icon_Music_Off"
-              class="settings-navigation-list-icon"
-            />
+            <img src="../../Sprites/Icons/Icon_Music_Off.png" alt="Icon_Music_Off"
+              class="settings-navigation-list-icon" />
           </button>
-          <span class="settings-btn-title">Музыка</span>
+          <span class="settings-btn-title" lang="music">Музыка</span>
         </div>
         <div class="setting-btn-container">
           <button class="settings-navigation-btn">
-            <img
-              src="../../Sprites/Icons/Icon_Sound_Off.png"
-              alt="Icon_Sound_Off"
-              class="settings-navigation-list-icon"
-            />
+            <img src="../../Sprites/Icons/Icon_Sound_Off.png" alt="Icon_Sound_Off"
+              class="settings-navigation-list-icon" />
           </button>
-          <span class="settings-btn-title">Звук</span>
+          <span class="settings-btn-title" lang="sound">Звук</span>
         </div>
         <div class="setting-btn-container">
-          <button
-            class="special-language-btn settings-navigation-btn"
-            id="lang-btn"
-          >
-            <img
-              src="../../Sprites/Lang/ru.png "
-              alt="Lang"
-              class="settings-navigation-list-icon"
-              id="languages-btn"
-            />
+          <button class="special-language-btn settings-navigation-btn" id="lang-btn">
+            <img src="../../Sprites/Lang/ru.png " alt="Lang" class="settings-navigation-list-icon" id="languages-btn"
+              lang="[img]flag_img" />
           </button>
-          <span class="settings-btn-title">Язык</span>
+          <span class="settings-btn-title" lang="lang">Язык</span>
         </div>
       </div>
       <div class="visual-changing-panel">
         <div class="first-skins-line">
           <div class="front-side-skins-container">
-            <span class="skins-title">Скин</span>
+            <span class="skins-title" lang="skin">Скин</span>
             <div class="skin-card">
               <img class="card-skin" src="../../Sprites/Card Skins/Preview/Skin_01.png">
               <button class="skin-change-btn">
-                <span class="skin-change-btn-title">Выбрать</span>
+                <span class="skin-change-btn-title" lang="select">Выбрать</span>
               </button>
             </div>
           </div>
           <div class="back-side-skins-container">
-            <span class="skins-title">Рубашка</span>
+            <span class="skins-title" lang="card_bac">Рубашка</span>
             <div class="skin-card-back">
               <img class="card-skin" src="../../Sprites/CardBacks/Card_Back_01.png">
               <button class="skin-change-btn">
-                <span class="skin-change-btn-title">Выбрать</span>
+                <span class="skin-change-btn-title" lang="select">Выбрать</span>
               </button>
             </div>
           </div>
         </div>
         <div class="second-skins-line">
           <div class="background-card-skin-container">
-            <span class="skins-title">Фон</span>
+            <span class="skins-title" lang="background">Фон</span>
             <div class="background-card">
-                <img class="card-skin" src="../../Sprites/BackgroundPreview/Used_Background_01.png">
+              <img class="card-skin" src="../../Sprites/BackgroundPreview/Used_Background_01.png">
               <button class="skin-change-btn">
-                <span class="skin-change-btn-title">Выбрать</span>
+                <span class="skin-change-btn-title" lang="select">Выбрать</span>
               </button>
             </div>
           </div>
@@ -241,12 +227,7 @@
     <div class="popup-content">
       <div class="popup-header">
         <h3>Язык</h3>
-        <img
-          src="../../Sprites/Icons/Icon_Close.png"
-          alt="close"
-          id="close-popup-languages"
-          class="close-popup"
-        />
+        <img src="../../Sprites/Icons/Icon_Close.png" alt="close" id="close-popup-languages" class="close-popup" />
       </div>
       <div class="languages-list">
         <div class="language-container">
@@ -269,7 +250,7 @@
         </div>
         <div class="language-container">
           <div class="language">
-            <img src="../../Sprites/Lang/ger.png" alt="GER" class="language-icon">
+            <img src="../../Sprites/Lang/de.png" alt="GER" class="language-icon">
             <span class="language-title">German</span>
           </div>
           <div class="custom-checkbox">
@@ -278,7 +259,7 @@
         </div>
         <div class="language-container">
           <div class="language">
-            <img src="../../Sprites/Lang/jap.png" alt="JAP" class="language-icon">
+            <img src="../../Sprites/Lang/ja.png" alt="JAP" class="language-icon">
             <span class="language-title">Japanese</span>
           </div>
           <div class="custom-checkbox">
@@ -287,7 +268,7 @@
         </div>
         <div class="language-container">
           <div class="language">
-            <img src="../../Sprites/Lang/ind.png" alt="IND" class="language-icon">
+            <img src="../../Sprites/Lang/hi.png" alt="IND" class="language-icon">
             <span class="language-title">Hindi</span>
           </div>
           <div class="custom-checkbox">
@@ -296,7 +277,7 @@
         </div>
         <div class="language-container">
           <div class="language">
-            <img src="../../Sprites/Lang/portu.png" alt="PORTU" class="language-icon">
+            <img src="../../Sprites/Lang/pt.png" alt="PORTU" class="language-icon">
             <span class="language-title">Portuguese</span>
           </div>
           <div class="custom-checkbox">
@@ -305,7 +286,7 @@
         </div>
         <div class="language-container">
           <div class="language">
-            <img src="../../Sprites/Lang/esp.png" alt="ESP" class="language-icon">
+            <img src="../../Sprites/Lang/es.png" alt="ESP" class="language-icon">
             <span class="language-title">Spanish</span>
           </div>
           <div class="custom-checkbox">
@@ -314,7 +295,7 @@
         </div>
         <div class="language-container">
           <div class="language">
-            <img src="../../Sprites/Lang/turk.png" alt="TURK" class="language-icon">
+            <img src="../../Sprites/Lang/tr.png" alt="TURK" class="language-icon">
             <span class="language-title">Turkish</span>
           </div>
           <div class="custom-checkbox">
@@ -945,26 +926,32 @@
             .story-mode-cards-container>.card-element:not(:first-child) {
               margin-bottom: 0.3vw;
             }
-            .first-column{
+
+            .first-column {
               position: absolute;
               transform: rotate(45deg);
             }
+
             .first-column>.card-element:nth-child(2),
             .second-column>.card-element:nth-child(2) {
               margin-bottom: 6vw;
             }
-            .second-column{
+
+            .second-column {
               position: absolute;
               transform: rotate(-45deg);
             }
-            .third-column{
+
+            .third-column {
               margin-top: -2vw;
             }
+
             @media screen and (orientation: portrait) {
-            .first-column>.card-element:nth-child(2),
-            .second-column>.card-element:nth-child(2) {
-              margin-bottom: 10vw;
-            }
+
+              .first-column>.card-element:nth-child(2),
+              .second-column>.card-element:nth-child(2) {
+                margin-bottom: 10vw;
+              }
             }
           </style>
         </div>
@@ -985,18 +972,17 @@
   </main>
   <footer>
     <nav>
-      <!-- <button class="control-btn" style="position: absolute; left: 0vw;" id="fast-win">
+      <button class="control-btn" style="position: absolute; left: 0vw;" id="fast-win">
         <img src="../../Sprites/Icons/Icon_Trophy.png" alt="Icon_Skins" class="control-button-list-icon" />
       </button>
       <button class="control-btn" style="position: absolute; left: 5vw;" id="fast-lose">
         <img src="../../Sprites/Icons/Icon_Stopwatch.png" alt="Icon_Skins" class="control-button-list-icon" />
-      </button> -->
+      </button>
 
       <ul class="footer-control-panel">
         <li>
-          <button class="control-btn">
-            <img src="../../Sprites/Icons/Icon_Restart.png" alt="Icon_Skins" class="control-button-list-icon"
-              id="restart-button" />
+          <button class="control-btn reset-level-button">
+            <img src="../../Sprites/Icons/Icon_Restart.png" alt="Icon_Skins" class="control-button-list-icon" />
           </button>
         </li>
         <li>
@@ -1033,46 +1019,29 @@
     let player = null;
     let user = null;
     let platform;
+    let input;
+    let languageChangeEvent;
   </script>
   <script type="module">
     import { preload } from '../loader/loader.js';
     import { initializeSDK, getPlatform } from '../scripts/sdk/sdk.js';
     import { initialize } from '../scripts/save_system/SaveSystem.js'
     import User from '../scripts/userData.js'
+    import { Action } from '../scripts/globalEvents.js';
 
     user = new User();
-    // const data = {
-    //   "user_01": {
-    //     "items": [
-    //       { "type": "energy", "count": 0 },
-    //       { "type": "booster_hint", "count": 0 },
-    //       { "type": "booster_undo", "count": 0 },
-    //       { "type": "booster_mage", "count": 0 },
-    //       { "type": "booster_time", "count": 0 }],
-    //     "availableContent": [
-    //       { "id": "card_skin_01", "type": "cardSkin" },
-    //       { "id": "card_back_skin_01", "type": "cardBack" },
-    //       { "id": "background_01", "type": "background" },
-    //       { "id": "card_skin_02", "type": "cardSkin" },
-    //       { "id": "card_back_skin_02", "type": "cardBack" },
-    //       { "id": "background_02", "type": "background" }],
-    //     "usedContent": [
-    //       { "id": "card_skin_02", "type": "cardSkin" },
-    //       { "id": "card_back_skin_01", "type": "cardBack" },
-    //       { "id": "background_02", "type": "background" }],
-    //     "achievements": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
-    //   }
-    // }['user_01'];
+    languageChangeEvent = new Action();
+
     preload(async () => {
-      console.log('[playground.html]=> start initializeSDK');
       await initializeSDK();
       platform = await getPlatform();
-      console.log('[playground.html]=> start initialize');
       await initialize();
       user.loadData();
-      // user.loadTestData(data);
-      console.log('[playground.html]=> start import("../../playground.js")');
-      await import('./playground.js')
+      await import('../localization/translator.js').then(async (translatorItem) => {
+        await import('./playground.js').then((playgroundItem) => {
+          playgroundItem.setupLanguageSelector(translatorItem.initialLocale);
+        });
+      });
     })
   </script>
 </body>

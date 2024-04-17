@@ -1,5 +1,7 @@
 import { ContentType } from "./enums.js"
 
+const locales = ['ru', 'en', 'de', 'ja', 'hi', 'pt', 'es', 'tr'];
+
 const AccessibilityFlags = {
     CanPlace: 1,
     CanRemove: 2
@@ -70,4 +72,4 @@ const Content = {
     Background09: { type: ContentType.Background, id: "background_09" },
 }
 
-export { Items, Content, Platform, IconsByItem }
+export { Items, Content, Platform, IconsByItem, locales }
