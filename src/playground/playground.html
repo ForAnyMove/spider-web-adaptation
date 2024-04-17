@@ -47,7 +47,7 @@
       </li>
       <li class="header-ui-container">
         <button class="header-navigation-btn">
-          <img src="../../Sprites/Icons/Icon_Settings.png" alt="Profile" class="header-navigation-list-icon" />
+          <img src="../../Sprites/Icons/Icon_Settings.png" alt="Profile" class="header-navigation-list-icon" id="settings-btn-full"/>
         </button>
       </li>
     </ul>
@@ -91,6 +91,178 @@
       </button>
     </div>
   </div>
+  <div class="popup settings" style="display: none" id="settings">
+    <div class="popup-content">
+      <div class="popup-header">
+        <h3>Настройки</h3>
+        <img
+          src="../../Sprites/Icons/Icon_Close.png"
+          alt="close"
+          id="close-popup-settings"
+          class="close-popup"
+        />
+      </div>
+      <div class="settings-panel">
+        <div class="setting-btn-container">
+          <button class="settings-navigation-btn">
+            <img
+              src="../../Sprites/Icons/Icon_Music_Off.png"
+              alt="Icon_Music_Off"
+              class="settings-navigation-list-icon"
+            />
+          </button>
+          <span class="settings-btn-title">Музыка</span>
+        </div>
+        <div class="setting-btn-container">
+          <button class="settings-navigation-btn">
+            <img
+              src="../../Sprites/Icons/Icon_Sound_Off.png"
+              alt="Icon_Sound_Off"
+              class="settings-navigation-list-icon"
+            />
+          </button>
+          <span class="settings-btn-title">Звук</span>
+        </div>
+        <div class="setting-btn-container">
+          <button
+            class="special-language-btn settings-navigation-btn"
+            id="lang-btn"
+          >
+            <img
+              src="../../Sprites/Lang/ru.png "
+              alt="Lang"
+              class="settings-navigation-list-icon"
+              id="languages-btn"
+            />
+          </button>
+          <span class="settings-btn-title">Язык</span>
+        </div>
+      </div>
+      <div class="visual-changing-panel">
+        <div class="first-skins-line">
+          <div class="front-side-skins-container">
+            <span class="skins-title">Скин</span>
+            <div class="skin-card">
+              <img class="card-skin" src="../../Sprites/Card Skins/Preview/Skin_01.png">
+              <button class="skin-change-btn">
+                <span class="skin-change-btn-title">Выбрать</span>
+              </button>
+            </div>
+          </div>
+          <div class="back-side-skins-container">
+            <span class="skins-title">Рубашка</span>
+            <div class="skin-card-back">
+              <img class="card-skin" src="../../Sprites/CardBacks/Card_Back_01.png">
+              <button class="skin-change-btn">
+                <span class="skin-change-btn-title">Выбрать</span>
+              </button>
+            </div>
+          </div>
+        </div>
+        <div class="second-skins-line">
+          <div class="background-card-skin-container">
+            <span class="skins-title">Фон</span>
+            <div class="background-card">
+                <img class="card-skin" src="../../Sprites/BackgroundPreview/Used_Background_01.png">
+              <button class="skin-change-btn">
+                <span class="skin-change-btn-title">Выбрать</span>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="version">
+        <span class="version-title">v0.0.2.19</span>
+      </div>
+    </div>
+  </div>
+  <div class="popup languages" style="display: none" id="languages">
+    <div class="popup-content">
+      <div class="popup-header">
+        <h3>Язык</h3>
+        <img
+          src="../../Sprites/Icons/Icon_Close.png"
+          alt="close"
+          id="close-popup-languages"
+          class="close-popup"
+        />
+      </div>
+      <div class="languages-list">
+        <div class="language-container">
+          <div class="language">
+            <img src="../../Sprites/Lang/ru.png" alt="RU" class="language-icon">
+            <span class="language-title">Русский</span>
+          </div>
+          <div class="custom-checkbox">
+            <img src="../../Sprites/Icons/Icon_Check.png" alt="Check" class="accept-checkbox-icon">
+          </div>
+        </div>
+        <div class="language-container">
+          <div class="language">
+            <img src="../../Sprites/Lang/en.png" alt="EN" class="language-icon">
+            <span class="language-title">English</span>
+          </div>
+          <div class="custom-checkbox">
+            <img src="../../Sprites/Icons/Icon_Check.png" alt="Check" class="accept-checkbox-icon hidden">
+          </div>
+        </div>
+        <div class="language-container">
+          <div class="language">
+            <img src="../../Sprites/Lang/ger.png" alt="GER" class="language-icon">
+            <span class="language-title">German</span>
+          </div>
+          <div class="custom-checkbox">
+            <img src="../../Sprites/Icons/Icon_Check.png" alt="Check" class="accept-checkbox-icon hidden">
+          </div>
+        </div>
+        <div class="language-container">
+          <div class="language">
+            <img src="../../Sprites/Lang/jap.png" alt="JAP" class="language-icon">
+            <span class="language-title">Japanese</span>
+          </div>
+          <div class="custom-checkbox">
+            <img src="../../Sprites/Icons/Icon_Check.png" alt="Check" class="accept-checkbox-icon hidden">
+          </div>
+        </div>
+        <div class="language-container">
+          <div class="language">
+            <img src="../../Sprites/Lang/ind.png" alt="IND" class="language-icon">
+            <span class="language-title">Hindi</span>
+          </div>
+          <div class="custom-checkbox">
+            <img src="../../Sprites/Icons/Icon_Check.png" alt="Check" class="accept-checkbox-icon hidden">
+          </div>
+        </div>
+        <div class="language-container">
+          <div class="language">
+            <img src="../../Sprites/Lang/portu.png" alt="PORTU" class="language-icon">
+            <span class="language-title">Portuguese</span>
+          </div>
+          <div class="custom-checkbox">
+            <img src="../../Sprites/Icons/Icon_Check.png" alt="Check" class="accept-checkbox-icon hidden">
+          </div>
+        </div>
+        <div class="language-container">
+          <div class="language">
+            <img src="../../Sprites/Lang/esp.png" alt="ESP" class="language-icon">
+            <span class="language-title">Spanish</span>
+          </div>
+          <div class="custom-checkbox">
+            <img src="../../Sprites/Icons/Icon_Check.png" alt="Check" class="accept-checkbox-icon hidden">
+          </div>
+        </div>
+        <div class="language-container">
+          <div class="language">
+            <img src="../../Sprites/Lang/turk.png" alt="TURK" class="language-icon">
+            <span class="language-title">Turkish</span>
+          </div>
+          <div class="custom-checkbox">
+            <img src="../../Sprites/Icons/Icon_Check.png" alt="Check" class="accept-checkbox-icon hidden">
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
   <main id="main">
     <div class="main-container">
       <div class="active-cards-zone">
@@ -106,7 +278,7 @@
         <div class="active-cards-container playable-card-column"></div>
       </div>
       <div class="story-mode-card-zone">
-        <div class="story-mode-level-container" id="story-mode-level-1">
+        <!-- <div class="story-mode-level-container" id="story-mode-level-1">
           <div class="story-mode-cards-container first-column first-column">
             <div id="sol-slot-01<[06]" class="sol-slot card-element closed removed" style="
                   position: relative;
@@ -208,7 +380,534 @@
               transform: translate(-30%);
             }
           </style>
+        </div> -->
+        <!-- <div class="story-mode-level-container" id="story-mode-level-2">
+          <div class="story-mode-cards-container first-column">
+            <div id="sol-slot-01<[06]" class="sol-slot card-element closed removed" style="
+                  position: relative;
+                  left: 0px;
+                  top: 0px;
+                "></div>
+            <div id="sol-slot-01<[06]" class="sol-slot card-element closed removed" style="
+                  position: relative;
+                  left: 0px;
+                  top: 0px;
+                "></div>
+            <div id="sol-slot-06" class="sol-slot card-element opened removed" style="
+                  position: relative;
+                  left: 0px;
+                  top: 0px;
+                  scale: 0.983337 1;
+                "></div>
+          </div>
+          <div class="story-mode-cards-container second-column">
+            <div id="sol-slot-07" class="sol-slot card-element opened removed" style="
+                  position: relative;
+                  left: 0px;
+                  top: 0px;
+                  scale: 0.983337 1;
+                "></div>
+          </div>
+          <div class="story-mode-cards-container third-column">
+            <div id="sol-slot-08" class="sol-slot card-element opened removed" style="
+                  position: relative;
+                  left: 0px;
+                  top: 0px;
+                  scale: 0.983337 1;
+                "></div>
+          </div>
+          <div class="story-mode-cards-container fourth-column">
+            <div id="sol-slot-09" class="sol-slot card-element opened removed" style="
+                  position: relative;
+                  left: 0px;
+                  top: 0px;
+                  scale: 0.983337 1;
+                "></div>
+          </div>
+          <div class="story-mode-cards-container fifth-column">
+            <div id="sol-slot-09" class="sol-slot card-element opened removed" style="
+                  position: relative;
+                  left: 0px;
+                  top: 0px;
+                  scale: 0.983337 1;
+                "></div>
+          </div>
+          <div class="story-mode-cards-container sixth-column">
+            <div id="sol-slot-05<[10]" class="sol-slot card-element closed removed" style="
+                  position: relative;
+                  left: 0px;
+                  top: 0px;
+                "></div>
+            <div id="sol-slot-05<[10]" class="sol-slot card-element closed removed" style="
+                  position: relative;
+                  left: 0px;
+                  top: 0px;
+                "></div>
+            <div id="sol-slot-10" class="sol-slot card-element opened removed" style="
+                  position: relative;
+                  left: 0px;
+                  top: 0px;
+                  scale: 0.983337 1;
+                "></div>
+          </div>
+          <style>
+            .story-mode-level-container {
+              display: flex;
+              justify-content: space-between;
+              width: 80%;
+              margin-bottom: 11vh;
+            }
+
+            .story-mode-cards-container {
+              display: flex;
+              flex-direction: column-reverse;
+            }
+
+            .story-mode-cards-container>.card-element:not(:first-child) {
+              margin-bottom: -6vw;
+            }
+            .first-column, .sixth-column{
+              margin-bottom: -7vh;
+            }
+            .first-column>.card-element:not(:first-child) {
+              transform: translate(30%);
+            }
+            .first-column>.card-element:last-child {
+              transform: translate(60%);
+            }
+
+            .second-column {
+              transform: translate(30%);
+            }
+
+            .third-column {
+              transform: translate(10%);
+            }
+
+            .fourth-column {
+              transform: translate(-10%);
+            }
+
+            .fifth-column {
+              transform: translate(-30%);
+            }
+
+            .sixth-column>.card-element:not(:first-child) {
+              transform: translate(-30%);
+            }
+            .sixth-column>.card-element:last-child {
+              transform: translate(-60%);
+            }
+            @media screen and (orientation: portrait) {
+              .story-mode-level-container {
+                margin-bottom: 5vh;
+              }
+
+              .story-mode-cards-container>.card-element:not(:first-child) {
+                margin-bottom: -10vw;
+              }
+              .first-column, .sixth-column{
+                margin-bottom: -4vw;
+              }
+            }
+          </style>
+        </div> -->
+        <!-- <div class="story-mode-level-container" id="story-mode-level-3">
+          <div class="story-mode-cards-container first-column">
+            <div id="sol-slot-01<[06]" class="sol-slot card-element closed removed" style="
+                  position: relative;
+                  left: 0px;
+                  top: 0px;
+                "></div>
+            <div id="sol-slot-06" class="sol-slot card-element opened removed" style="
+                  position: relative;
+                  left: 0px;
+                  top: 0px;
+                  scale: 0.983337 1;
+                "></div>
+          </div>
+          <div class="story-mode-cards-container second-column">
+            <div id="sol-slot-01<[06]" class="sol-slot card-element closed removed" style="
+                  position: relative;
+                  left: 0px;
+                  top: 0px;
+                "></div>
+            <div id="sol-slot-01<[06]" class="sol-slot card-element closed removed" style="
+                  position: relative;
+                  left: 0px;
+                  top: 0px;
+                "></div>
+            <div id="sol-slot-06" class="sol-slot card-element opened removed" style="
+                  position: relative;
+                  left: 0px;
+                  top: 0px;
+                  scale: 0.983337 1;
+                "></div>
+          </div>
+          <div class="story-mode-cards-container third-column">
+            <div id="sol-slot-01<[06]" class="sol-slot card-element closed removed" style="
+                  position: relative;
+                  left: 0px;
+                  top: 0px;
+                "></div>
+            <div id="sol-slot-01<[06]" class="sol-slot card-element closed removed" style="
+                  position: relative;
+                  left: 0px;
+                  top: 0px;
+                "></div>
+            <div id="sol-slot-06" class="sol-slot card-element opened removed" style="
+                  position: relative;
+                  left: 0px;
+                  top: 0px;
+                  scale: 0.983337 1;
+                "></div>
+          </div>
+          <div class="story-mode-cards-container fourth-column">
+            <div id="sol-slot-01<[06]" class="sol-slot card-element closed removed" style="
+                  position: relative;
+                  left: 0px;
+                  top: 0px;
+                "></div>
+            <div id="sol-slot-06" class="sol-slot card-element opened removed" style="
+                  position: relative;
+                  left: 0px;
+                  top: 0px;
+                  scale: 0.983337 1;
+                "></div>
+          </div>
+          <style>
+            .story-mode-level-container {
+              display: flex;
+              justify-content: space-between;
+              width: 80%;
+              margin-bottom: 11vh;
+            }
+
+            .story-mode-cards-container {
+              display: flex;
+              flex-direction: column-reverse;
+            }
+
+            .story-mode-cards-container>.card-element:not(:first-child) {
+              margin-bottom: -4vw;
+            }
+            .first-column>.card-element:not(:first-child) {
+              transform: translate(50%);
+            }
+            .second-column{
+              margin-right: -8vw;
+            }
+            .second-column>.card-element:not(:first-child) {
+              transform: translate(-100%);
+              margin-bottom: 0;
+            }
+            .second-column>.card-element:last-child {
+              transform: translate(-50%);
+              margin-bottom: -12vw;
+            }
+            .third-column>.card-element:not(:first-child) {
+              transform: translate(100%);
+              margin-bottom: 0;
+            }
+            .third-column>.card-element:last-child {
+              transform: translate(50%);
+              margin-bottom: -12vw;
+            }
+            .fourth-column>.card-element:not(:first-child) {
+              transform: translate(-50%);
+            }
+            @media screen and (orientation: portrait) {
+              .first-column>.card-element:not(:first-child),
+              .fourth-column>.card-element:not(:first-child) {
+                margin-bottom: -6vw;
+              }
+              .second-column>.card-element:last-child {
+                margin-bottom: -17vw;
+              }
+              .third-column>.card-element:last-child {
+                margin-bottom: -17vw;
+              }
+            }
+          </style>
+        </div> -->
+        <!-- <div class="story-mode-level-container" id="story-mode-level-4">
+          <div class="story-mode-cards-container first-column">
+            <div id="sol-slot-01<[06]" class="sol-slot card-element closed removed" style="
+                  position: relative;
+                  left: 0px;
+                  top: 0px;
+                "></div>
+            <div id="sol-slot-01<[06]" class="sol-slot card-element closed removed" style="
+                  position: relative;
+                  left: 0px;
+                  top: 0px;
+                "></div>
+            <div id="sol-slot-01<[06]" class="sol-slot card-element closed removed" style="
+                  position: relative;
+                  left: 0px;
+                  top: 0px;
+                "></div>
+            <div id="sol-slot-06" class="sol-slot card-element opened removed" style="
+                  position: relative;
+                  left: 0px;
+                  top: 0px;
+                  scale: 0.983337 1;
+                "></div>
+          </div>
+          <div class="story-mode-cards-container second-column">
+            <div id="sol-slot-01<[06]" class="sol-slot card-element closed removed" style="
+                  position: relative;
+                  left: 0px;
+                  top: 0px;
+                "></div>
+            <div id="sol-slot-06" class="sol-slot card-element opened removed" style="
+                  position: relative;
+                  left: 0px;
+                  top: 0px;
+                  scale: 0.983337 1;
+                "></div>
+          </div>
+          <div class="story-mode-cards-container third-column">
+            <div id="sol-slot-01<[06]" class="sol-slot card-element closed removed" style="
+                  position: relative;
+                  left: 0px;
+                  top: 0px;
+                "></div>
+            <div id="sol-slot-01<[06]" class="sol-slot card-element closed removed" style="
+                  position: relative;
+                  left: 0px;
+                  top: 0px;
+                "></div>
+            <div id="sol-slot-01<[06]" class="sol-slot card-element closed removed" style="
+                  position: relative;
+                  left: 0px;
+                  top: 0px;
+                "></div>
+            <div id="sol-slot-06" class="sol-slot card-element opened removed" style="
+                  position: relative;
+                  left: 0px;
+                  top: 0px;
+                  scale: 0.983337 1;
+                "></div>
+          </div>
+          <style>
+            .story-mode-level-container {
+              display: flex;
+              justify-content: space-between;
+              width: 80%;
+              margin-bottom: 11vh;
+            }
+
+            .story-mode-cards-container {
+              display: flex;
+              flex-direction: column-reverse;
+            }
+
+            .story-mode-cards-container>.card-element:not(:first-child) {
+              margin-bottom: -6.3vw;
+            }
+            .first-column>.card-element:nth-child(2) {
+              transform: translate(50%);
+            }
+            .first-column>.card-element:nth-child(3) {
+              transform: translate(100%);
+            }
+            .first-column>.card-element:nth-child(4) {
+              transform: translate(150%);
+            }
+            .second-column>.card-element:nth-child(2) {
+              margin-bottom: -4vw;
+            }
+            .third-column>.card-element:nth-child(2) {
+              transform: translate(-50%);
+            }
+            .third-column>.card-element:nth-child(3) {
+              transform: translate(-100%);
+            }
+            .third-column>.card-element:nth-child(4) {
+              transform: translate(-150%);
+            }
+            @media screen and (orientation: portrait) {
+              .story-mode-cards-container>.card-element:not(:first-child) {
+                margin-bottom: -9.5vw;
+              }
+              .second-column>.card-element:nth-child(2) {
+                margin-bottom: -5vw;
+              }
+            }
+          </style>
+        </div> -->
+        <!-- <div class="story-mode-level-container" id="story-mode-level-5">
+          <div class="story-mode-cards-container first-column">
+            <div id="sol-slot-01<[06]" class="sol-slot card-element closed removed" style="
+                  position: relative;
+                  left: 0px;
+                  top: 0px;
+                "></div>
+            <div id="sol-slot-01<[06]" class="sol-slot card-element closed removed" style="
+                  position: relative;
+                  left: 0px;
+                  top: 0px;
+                "></div>
+          </div>
+          <div class="story-mode-cards-container second-column">
+            <div id="sol-slot-01<[06]" class="sol-slot card-element closed removed" style="
+                  position: relative;
+                  left: 0px;
+                  top: 0px;
+                "></div>
+            <div id="sol-slot-01<[06]" class="sol-slot card-element closed removed" style="
+                  position: relative;
+                  left: 0px;
+                  top: 0px;
+                "></div>
+          </div>
+          <div class="story-mode-cards-container third-column">
+            <div id="sol-slot-06" class="sol-slot card-element opened removed" style="
+                  position: relative;
+                  left: 0px;
+                  top: 0px;
+                  scale: 0.983337 1;
+                "></div>
+            <div id="sol-slot-06" class="sol-slot card-element opened removed" style="
+                  position: relative;
+                  left: 0px;
+                  top: 0px;
+                  scale: 0.983337 1;
+                "></div>
+            <div id="sol-slot-06" class="sol-slot card-element opened removed" style="
+                  position: relative;
+                  left: 0px;
+                  top: 0px;
+                  scale: 0.983337 1;
+                "></div>
+          </div>
+          <style>
+            .story-mode-level-container {
+              display: flex;
+              justify-content: center;
+              width: 80%;
+              margin-bottom: 11vh;
+              position: relative;
+            }
+
+            .story-mode-cards-container {
+              display: flex;
+              flex-direction: column-reverse;
+            }
+
+            .story-mode-cards-container>.card-element:not(:first-child) {
+              margin-bottom: 0.3vw;
+            }
+            .first-column{
+              position: absolute;
+              transform: rotate(45deg);
+            }
+            .first-column>.card-element:nth-child(2),
+            .second-column>.card-element:nth-child(2) {
+              margin-bottom: 6vw;
+            }
+            .second-column{
+              position: absolute;
+              transform: rotate(-45deg);
+            }
+            .third-column{
+              margin-top: -2vw;
+            }
+            @media screen and (orientation: portrait) {
+            .first-column>.card-element:nth-child(2),
+            .second-column>.card-element:nth-child(2) {
+              margin-bottom: 10vw;
+            }
+            }
+          </style>
+        </div> -->
+        <div class="story-mode-level-container" id="story-mode-level-1">
+          <div class="story-mode-cards-container first-column">
+            <div id="sol-slot-01<[06]" class="sol-slot card-element closed removed" style="
+                  position: relative;
+                  left: 0px;
+                  top: 0px;
+                "></div>
+            <div id="sol-slot-01<[06]" class="sol-slot card-element closed removed" style="
+                  position: relative;
+                  left: 0px;
+                  top: 0px;
+                "></div>
+          </div>
+          <div class="story-mode-cards-container second-column">
+            <div id="sol-slot-01<[06]" class="sol-slot card-element closed removed" style="
+                  position: relative;
+                  left: 0px;
+                  top: 0px;
+                "></div>
+            <div id="sol-slot-01<[06]" class="sol-slot card-element closed removed" style="
+                  position: relative;
+                  left: 0px;
+                  top: 0px;
+                "></div>
+          </div>
+          <div class="story-mode-cards-container third-column">
+            <div id="sol-slot-06" class="sol-slot card-element opened removed" style="
+                  position: relative;
+                  left: 0px;
+                  top: 0px;
+                  scale: 0.983337 1;
+                "></div>
+            <div id="sol-slot-06" class="sol-slot card-element opened removed" style="
+                  position: relative;
+                  left: 0px;
+                  top: 0px;
+                  scale: 0.983337 1;
+                "></div>
+            <div id="sol-slot-06" class="sol-slot card-element opened removed" style="
+                  position: relative;
+                  left: 0px;
+                  top: 0px;
+                  scale: 0.983337 1;
+                "></div>
+          </div>
+          <style>
+            .story-mode-level-container {
+              display: flex;
+              justify-content: center;
+              width: 80%;
+              margin-bottom: 11vh;
+              position: relative;
+            }
+
+            .story-mode-cards-container {
+              display: flex;
+              flex-direction: column-reverse;
+            }
+
+            .story-mode-cards-container>.card-element:not(:first-child) {
+              margin-bottom: 0.3vw;
+            }
+            .first-column{
+              position: absolute;
+              transform: rotate(45deg);
+            }
+            .first-column>.card-element:nth-child(2),
+            .second-column>.card-element:nth-child(2) {
+              margin-bottom: 6vw;
+            }
+            .second-column{
+              position: absolute;
+              transform: rotate(-45deg);
+            }
+            .third-column{
+              margin-top: -2vw;
+            }
+            @media screen and (orientation: portrait) {
+            .first-column>.card-element:nth-child(2),
+            .second-column>.card-element:nth-child(2) {
+              margin-bottom: 10vw;
+            }
+            }
+          </style>
         </div>
+      </div>
       </div>
       <div class="bottom-cards-zone">
         <div class="cards-container"></div>
@@ -312,7 +1011,7 @@
       await initialize();
       user.loadData();
       // user.loadTestData(data);
-      console.log('[playground.html]=> start import("./playground.js")');
+      console.log('[playground.html]=> start import("../../playground.js")');
       await import('./playground.js')
     })
   </script>

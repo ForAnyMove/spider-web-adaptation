@@ -240,9 +240,51 @@ function checkAndMakeSpiderLadyPatternView() {
     if (main) {
       // main.style.width = '48vw';
     }
+    setSpiderLadyStyles()
   }
 }
-
+function setSpiderLadyStyles() {const styleElement = document.createElement('style');
+styleElement.textContent = `
+  @media only screen and (orientation: portrait) {
+    .active-cards-container,
+    .cards-container,
+    .extra-cards-container,
+    .card-element,
+    .test-card {
+      width: 13.5vw;
+      height: 18vw;
+    }
+    .active-cards-zone,
+    .bottom-cards-zone {
+      column-gap: 0;
+    }
+    .bottom-cards-zone:last-child {
+      transform: translate(-3%);
+    }
+    .active-cards-container > .card-element.closed:not(:first-child),
+    .active-cards-container > .card-element.first:not(:first-child),
+    .active-cards-container > .card-element.opened:not(:first-child),
+    .active-cards-container > .card-element.locked:not(:first-child) {
+      margin-top: -11.5vw;
+    }
+    .active-cards-container > .card-element.opened:not(:first-child),
+    .active-cards-container > .card-element.first:not(:first-child),
+    .active-cards-container > .card-element.locked:not(:first-child) {
+      margin-top: -10vw;
+    }
+    .active-cards-container > .card-element.locked:not(:first-child) {
+      margin-top: -12.6vw;
+    }
+    .bottom-cards-zone>.cards-container {
+      transform: translate(15%);
+    }
+    .bottom-cards-zone>.extra-cards-container {
+      transform: translate(200%);
+    }
+  }
+`;
+document.head.appendChild(styleElement);
+}
 checkAndMakeSpiderLadyPatternView();
 
 let result = null;
@@ -519,6 +561,31 @@ function setupFastFinish() {
     screenParameters.onLoseCallback?.();
   }
 }
+
+
+const closeSettingsFullPopupButton = document.getElementById('close-popup-settings');
+const settingsFullPopup = document.getElementById('settings');
+const settingsBtnFull = document.getElementById('settings-btn-full');
+
+settingsBtnFull.addEventListener('click', () => {
+  settingsFullPopup.style.display = 'flex';
+});
+
+closeSettingsFullPopupButton.addEventListener('click', function () {
+  settingsFullPopup.style.display = 'none';
+});
+
+const closeLanguagesPopupButton = document.getElementById('close-popup-languages');
+const languagesPopup = document.getElementById('languages');
+const languagesBtn = document.getElementById('languages-btn');
+
+languagesBtn.addEventListener('click', () => {
+  languagesPopup.style.display = 'flex';
+});
+
+closeLanguagesPopupButton.addEventListener('click', function () {
+  languagesPopup.style.display = 'none';
+});
 
 // setupFastFinish();
 
