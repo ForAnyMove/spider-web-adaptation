@@ -1096,6 +1096,20 @@ button.selected {
   color: #fff;
   font-size: 1.2vw;
 }
+.exid-game>.popup-content{
+  width: 55vh;
+}
+
+.popup-header>.exid-tab-title{
+  font-size: 2.5vh;
+}
+
+.exid-btns-container{
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  margin: 3vh;
+}
 
 .version {
   display: flex;
@@ -1272,7 +1286,14 @@ button.selected {
     font-size: 3.2vw;
     margin-top: -2.5vw;
   }
-
+  
+  .exid-game>.popup-content{
+    width: 40vh;
+  }
+  
+  .popup-header>.exid-tab-title {
+    font-size: 1.8vh;
+  }
   .version-title {
     font-size: 2.1vw;
     margin-right: 2vw;
