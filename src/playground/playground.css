@@ -834,3 +834,15 @@ footer {
     width: 70vw;
   }
 }
+@media screen and (min-aspect-ratio: 16/8) {
+  main{
+    transform-origin: top center;
+    scale: 0.9;
+  }
+}
+@media screen and (min-aspect-ratio: 16/7) {
+  main{
+    transform-origin: top center;
+    scale: 0.8;
+  }
+}
