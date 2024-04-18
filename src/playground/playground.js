@@ -6,7 +6,7 @@ import { CanInteract, disableInteractions, enableInteractions } from "../scripts
 import { createElement, createImage, createTextSpan, getIconByItem, secondsToTime } from "../scripts/helpers.js";
 import { createLevel, createSolitaireLevel } from "../scripts/levelCreator.js";
 import { ContentType, Pattern, SuitMode } from "../scripts/statics/enums.js";
-import { Content, Items, locales } from "../scripts/statics/staticValues.js";
+import { Content, Items, Platform, locales } from "../scripts/statics/staticValues.js";
 import { stepRecorder } from "../scripts/stepRecorder.js";
 
 import { fourSuitSpider, fourSuitSpiderLady, oneSuitSpider, oneSuitSpiderLady, selectedRules, twoSuitSpider, twoSuitSpiderLady } from "../scripts/rules/gameRules.js";
@@ -16,15 +16,55 @@ import { SolitaireCardColumn } from "../scripts/cardModel.js";
 import { completeLevel, completeMode, failLevel, failMode, startLevel } from "../scripts/levelStarter.js";
 import { showInterstitial, showRewarded } from "../scripts/sdk/sdk.js";
 import DirectionalInput from "../scripts/directionInput.js";
+import { StackNavigation, Screen } from "../scripts/navigation/navigation.js";
+
+const navigation = new StackNavigation();
+
+const settingsScreen = new Screen({
+  element: document.getElementById('settings'),
+  openButton: document.getElementById('settings-btn-full'),
+  closeButton: document.getElementById('close-popup-settings'),
+  onOpen: () => { }, onClose: () => { }
+});
+
+const languageScreen = new Screen({
+  element: document.getElementById('languages'),
+  openButton: document.getElementById('lang-btn'),
+  closeButton: document.getElementById('close-popup-languages'),
+  onOpen: () => { }, onClose: () => { }
+});
+
+// const menuScreen = new Screen({
+//   element: document.getElementById('languages'),
+//   openButton: document.getElementById('lang-btn'),
+//   closeButton: document.getElementById('close-popup-languages'),
+//   onOpen: () => { }, onClose: () => { }
+// });
+
+// const exitScreen = new Screen({
+//   element: document.getElementById('languages'),
+//   openButton: document.getElementById('lang-btn'),
+//   closeButton: document.getElementById('close-popup-languages'),
+//   onOpen: () => { }, onClose: () => { }
+// });
+
+navigation.registerScreen(settingsScreen);
+navigation.registerScreen(languageScreen);
+
+if (platform == Platform.TV) {
+
+}
 
 input = new DirectionalInput({ element: null });
 
 input.addGlobalKeyHandle('Escape', () => {
   console.log("Try invoke menu");
 
-
-  // input.backupCurrentState();
-
+  if (navigation.openedScreens.length == 0) {
+    navigation.push(settingsScreen);
+  } else {
+    navigation.pop();
+  }
 });
 
 let timer = 0;
@@ -299,6 +339,7 @@ function setSpiderLadyStyles() {
 `;
   document.head.appendChild(styleElement);
 }
+
 checkAndMakeSpiderLadyPatternView();
 
 let result = null;
@@ -584,18 +625,6 @@ function setupSolitaireLevel() {
   })
 }
 
-function setupFastFinish() {
-  document.getElementById('fast-win').onclick = function () {
-    screenParameters.onWinCallback?.();
-    checkIfLevelWon({ collectedCount: 10 });
-  }
-
-  document.getElementById('fast-lose').onclick = function () {
-    screenParameters.onLoseCallback?.();
-    showLoseScreen();
-  }
-}
-
 function createRewardView(data) {
   const container = createElement('div', ['bounty'], { scale: 1, marginLeft: '1vh', marginRight: '1vh' });
   {
@@ -616,104 +645,78 @@ user.onItemsPublicReceive.addListener((data) => {
   }
 });
 
-setupFastFinish();
-
-const closeSettingsFullPopupButton = document.getElementById('close-popup-settings');
-const settingsFullPopup = document.getElementById('settings');
-const settingsBtnFull = document.getElementById('settings-btn-full');
-
-settingsBtnFull.addEventListener('click', () => {
-  settingsFullPopup.style.display = 'flex';
-});
-
-closeSettingsFullPopupButton.addEventListener('click', function () {
-  settingsFullPopup.style.display = 'none';
-});
-
-const closeLanguagesPopupButton = document.getElementById('close-popup-languages');
-const languagesPopup = document.getElementById('languages');
-const languagesBtn = document.getElementById('languages-btn');
-
-languagesBtn.addEventListener('click', () => {
-  languagesPopup.style.display = 'flex';
-});
-
-closeLanguagesPopupButton.addEventListener('click', function () {
-  languagesPopup.style.display = 'none';
-});
-
-// setupFastFinish();
-
 updateStepText(0);
 setupBackgroundChange();
 cardCollector.onCollected.addListener(checkIfLevelWon);
 
-result.croupier.onDistributionFinished.addListener(() => {
-  const selectables = [];
+if (platform == Platform.TV) {
+  result.croupier.onDistributionFinished.addListener(() => {
+    const selectables = [];
 
-  for (let i = 0; i < result.playableCardColumns.length; i++) {
-    const element = result.playableCardColumns[i];
-    const selectable = {
-      customData: {
-        selectedLevel: 1, clearAllSelection: () => {
-          const cards = element.getRangeFromEnd(selectable.customData.selectedLevel, false).reverse();
-          for (let i = 0; i < cards.length - 1; i++) {
-            const element = cards[i];
-            element.domElement.classList.remove('selected-card');
+    for (let i = 0; i < result.playableCardColumns.length; i++) {
+      const element = result.playableCardColumns[i];
+      const selectable = {
+        customData: {
+          selectedLevel: 1, clearAllSelection: () => {
+            const cards = element.getRangeFromEnd(selectable.customData.selectedLevel, false).reverse();
+            for (let i = 0; i < cards.length - 1; i++) {
+              const element = cards[i];
+              element.domElement.classList.remove('selected-card');
 
+            }
+            selectable.customData.selectedLevel = 1;
           }
-          selectable.customData.selectedLevel = 1;
-        }
-      },
-      element: element.domElement,
-      onLeft: () => {
-        selectable.customData.clearAllSelection();
-      },
-      onRight: () => {
-        selectable.customData.clearAllSelection();
-      },
-      onSubmit: () => {
-        const cards = element.getRangeFromEnd(selectable.customData.selectedLevel, false).reverse();
-        if (cards != null && cards.length > 0) {
-          cards[0].domElement.click();
-        }
-      },
-      onUp: () => {
-        const cards = element.getRangeFromEnd(selectable.customData.selectedLevel + 1, false).reverse();
-        if (selectedRules.isCanRemove(cards)) {
-          cards[0].domElement.classList.add('selected-card');
-          selectable.customData.selectedLevel++;
-
-          return { preventDefault: true }
-        }
-      },
-      onDown: () => {
-        if (selectable.customData.selectedLevel > 1) {
+        },
+        element: element.domElement,
+        onLeft: () => {
+          selectable.customData.clearAllSelection();
+        },
+        onRight: () => {
+          selectable.customData.clearAllSelection();
+        },
+        onSubmit: () => {
           const cards = element.getRangeFromEnd(selectable.customData.selectedLevel, false).reverse();
-          cards[0].domElement.classList.remove('selected-card');
-          selectable.customData.selectedLevel--;
+          if (cards != null && cards.length > 0) {
+            cards[0].domElement.click();
+          }
+        },
+        onUp: () => {
+          const cards = element.getRangeFromEnd(selectable.customData.selectedLevel + 1, false).reverse();
+          if (selectedRules.isCanRemove(cards)) {
+            cards[0].domElement.classList.add('selected-card');
+            selectable.customData.selectedLevel++;
 
-          return { preventDefault: true }
-        }
-      },
-    };
+            return { preventDefault: true }
+          }
+        },
+        onDown: () => {
+          if (selectable.customData.selectedLevel > 1) {
+            const cards = element.getRangeFromEnd(selectable.customData.selectedLevel, false).reverse();
+            cards[0].domElement.classList.remove('selected-card');
+            selectable.customData.selectedLevel--;
 
-    selectables.push(selectable);
-  }
+            return { preventDefault: true }
+          }
+        },
+      };
 
-  selectables.push({
-    element: result.mainCardColumn.domElement, onSubmit: () => {
-      for (let i = 0; i < input.selectableElements.length; i++) {
-        const element = input.selectableElements[i];
-        if (element.customData != null) {
-          element.customData.clearAllSelection();
+      selectables.push(selectable);
+    }
+
+    selectables.push({
+      element: result.mainCardColumn.domElement, onSubmit: () => {
+        for (let i = 0; i < input.selectableElements.length; i++) {
+          const element = input.selectableElements[i];
+          if (element.customData != null) {
+            element.customData.clearAllSelection();
+          }
         }
       }
-    }
-  })
+    })
 
-  input.updateQueryCustom(selectables, selectables[0])
-});
+    input.updateQueryCustom(selectables, selectables[0])
+  });
+}
 
 
 function setupLanguageSelector(initialLocale) {

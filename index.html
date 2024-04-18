@@ -8,7 +8,7 @@
   <link rel="stylesheet" href="./src/Rewards Receiver/rewardsReceiver.css">
   <title>Spider Web</title>
 
-  <!-- <script src="https://yandex.ru/games/sdk/v2"></script> -->
+  <script src="https://yandex.ru/games/sdk/v2"></script>
 </head>
 
 <body>
@@ -319,23 +319,23 @@
       </button>
       <span class="cancel-bounty-btn fade-hidden" lang="no_thanks">Нет, спасибо</span>
     </div>
-    <div class="popup exid-game" id="exid-game">
-      <div class="popup-content">
-        <div class="popup-header">
-          <h3 class="exid-tab-title">Вы уверены, что хотите выйти из игры?</h3>
-        </div>
-        <div class="exid-btns-container">
-          <button class="start-level-btn" id="play-btn">
-            <span class="start-level-btn-title">Да</span>
-          </button>
-          <button class="start-level-btn" id="play-btn">
-            <span class="start-level-btn-title">Нет</span>
-          </button>
-        </div>
+  </div>
+  <!-- rewards popup end -->
+  <div class="popup exid-game fade-hidden" id="exid-game">
+    <div class="popup-content">
+      <div class="popup-header">
+        <h3 class="exid-tab-title">Вы уверены, что хотите выйти из игры?</h3>
+      </div>
+      <div class="exid-btns-container">
+        <button class="start-level-btn" id="play-btn">
+          <span class="start-level-btn-title">Да</span>
+        </button>
+        <button class="start-level-btn" id="play-btn">
+          <span class="start-level-btn-title">Нет</span>
+        </button>
       </div>
     </div>
   </div>
-  <!-- rewards popup end -->
   <main class="main-content">
     <section class="btn-panel">
       <div class="main-panel-btn-container-1">
@@ -441,10 +441,11 @@
     let user = null;
     let input = null;
     let languageChangeEvent;
+    let platform;
   </script>
   <script type="module">
     import { preload } from './src/loader/loader.js';
-    import { initializeSDK } from './src/scripts/sdk/sdk.js';
+    import { initializeSDK, getPlatform } from './src/scripts/sdk/sdk.js';
     import { initialize } from './src/scripts/save_system/SaveSystem.js';
     import User from './src/scripts/userData.js';
     import { Action } from './src/scripts/globalEvents.js';
@@ -454,6 +455,7 @@
 
     preload(async () => {
       await initializeSDK();
+      platform = await getPlatform();
       await initialize();
       user.loadData();
       await import('./src/localization/translator.js').then(async (translatorItem) => {

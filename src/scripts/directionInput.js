@@ -1,3 +1,5 @@
+import { Platform } from "./statics/staticValues.js";
+
 export default class DirectionalInput {
     constructor(initialSelectedElement) {
         this.select(initialSelectedElement);
@@ -11,6 +13,12 @@ export default class DirectionalInput {
 
         // todo: need to make root class [Input] and put basics there
         this.globalKeyHandlers = [];
+
+        if (platform != null && platform == Platform.TV && SDK != null) {
+            SDK.onEvent(ysdk.EVENTS.HISTORY_BACK, () => {
+                this.handleKey('Escape');
+            });
+        }
     }
 
     preventAxis = function (ignoreList) {
@@ -164,13 +172,12 @@ export default class DirectionalInput {
         }
     }
 
-    handleKeyDown = (event) => {
-
+    handleKey = (key) => {
         let direction = { x: 0, y: 0 };
 
-        this.tryInvokeGlobalHandle(event.key);
+        this.tryInvokeGlobalHandle(key);
 
-        switch (event.key) {
+        switch (key) {
             case "ArrowLeft":
                 if (this.ignoredAxis.includes('ArrowLeft')) return;
                 direction = { x: -1, y: 0 };
@@ -216,8 +223,12 @@ export default class DirectionalInput {
                 break;
         }
 
-        if (direction.x == 0 && direction.y == 0) return;
+        if (direction.x == 0 && direction.y == 0 || this.selected == null) return;
 
         this.findClosestToDirection(direction);
+    }
+
+    handleKeyDown = (event) => {
+        this.handleKey(event.key)
     }
 }

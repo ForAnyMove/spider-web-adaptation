@@ -228,7 +228,6 @@ export default class Card {
     }
 
     subscribeDragAndDrop = () => {
-        platform = Platform.TV;
         switch (platform) {
             case Platform.Desktop:
                 this.applyDesktopInput();

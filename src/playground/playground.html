@@ -6,9 +6,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <link rel="stylesheet" href="playground.css" />
   <link rel="stylesheet" href="../loader/loader.css" />
+  <!-- <link rel="stylesheet" href="../scripts/screen addons/skinPreview.css"> -->
   <title>Playground</title>
 
-  <!-- <script src="https://yandex.ru/games/sdk/v2"></script> -->
+  <script src="https://yandex.ru/games/sdk/v2"></script>
 </head>
 
 <body id="background">
@@ -62,7 +63,7 @@
     <div>
       <div class="bounty-list">
         <div class="custom-line"></div>
-        <span class="bounty-title">Награды</span>
+        <span class="bounty-title" lang="rewards">Награды</span>
         <div class="custom-line"></div>
       </div>
       <div id="win-screen-rewards"></div>
@@ -95,7 +96,7 @@
       </button>
     </div>
   </div>
-  <div class="popup settings" style="display: none" id="settings">
+  <div class="popup settings fade-hidden" id="settings">
     <div class="popup-content">
       <div class="popup-header">
         <h3 lang="setttings">Настройки</h3>
@@ -162,7 +163,7 @@
       </div>
     </div>
   </div>
-  <div class="popup languages" style="display: none" id="languages">
+  <div class="popup languages fade-hidden" id="languages">
     <div class="popup-content">
       <div class="popup-header">
         <h3>Язык</h3>
@@ -242,6 +243,13 @@
           </div>
         </div>
       </div>
+    </div>
+  </div>
+  <div class="popup skin-content hidden">
+    <div style="position: absolute; left: 1vh; top: 2vh;">
+      <button class="header-navigation-btn" id="skin-content-back-button">
+        <img src="../../Sprites/Icons/Icon_Arrow_Back.png" alt="Profile" class="header-navigation-list-icon" />
+      </button>
     </div>
   </div>
   <main id="main">
@@ -911,13 +919,6 @@
   </main>
   <footer>
     <nav>
-      <button class="control-btn" style="position: absolute; left: 0vw;" id="fast-win">
-        <img src="../../Sprites/Icons/Icon_Trophy.png" alt="Icon_Skins" class="control-button-list-icon" />
-      </button>
-      <button class="control-btn" style="position: absolute; left: 5vw;" id="fast-lose">
-        <img src="../../Sprites/Icons/Icon_Stopwatch.png" alt="Icon_Skins" class="control-button-list-icon" />
-      </button>
-
       <ul class="footer-control-panel">
         <li>
           <button class="control-btn reset-level-button">
@@ -981,6 +982,7 @@
           playgroundItem.setupLanguageSelector(translatorItem.initialLocale);
         });
       });
+      // await import('../scripts/screen addons/ingameSkinSelector.js');
     })
   </script>
 </body>

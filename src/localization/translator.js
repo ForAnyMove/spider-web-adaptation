@@ -31,14 +31,15 @@ function updateLanguage(elements, locale) {
                 element.classList.backgroundImage = `url(${value})`
                 break
             case 'img':
-                element.src = value;
+                const copyImg = element.cloneNode(true);
+                copyImg.src = value;
+                element.parentNode.replaceChild(copyImg, element);
                 break;
             case 'data-text':
                 element.dataset.text = value;
                 break;
         }
     }
-
 
     for (let i = 0; i < elements.length; i++) {
         const element = elements[i];
