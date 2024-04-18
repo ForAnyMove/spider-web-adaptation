@@ -219,6 +219,23 @@
       </div>
     </div>
   </div>
+  <div class="skins-collection-slider-tab" id="skins-collection-slider-tab">
+    <button class="skins-collection-back-btn" id="skins-collection-back-btn">
+      <img src="../../Sprites/Icons/Icon_Arrow_Back.png" alt="Profile" class="header-navigation-list-icon" />
+    </button>
+    <div class="skins-collection-slider" id="skins-collection-slider">
+      <div class="background-card"
+        style="background-image: url(&quot;../../Sprites/BackgroundPreview/Used_Background_01.png&quot;);"><button
+          class="start-level-btn hidden" id="play-btn"><span class="start-level-btn-title"
+            lang="use">Использовать</span></button><img class="check-icon" src="../../Sprites/Icons/Icon_Check.png">
+      </div>
+      <div class="background-card"
+        style="background-image: url(&quot;../../Sprites/BackgroundPreview/Used_Background_02.png&quot;);"><button
+          class="start-level-btn" id="play-btn"><span class="start-level-btn-title"
+            lang="use">Использовать</span></button><img class="check-icon hidden"
+          src="../../Sprites/Icons/Icon_Check.png"></div>
+    </div>
+  </div>
   <div class="popup languages fade-hidden" id="languages">
     <div class="popup-content">
       <div class="popup-header">
@@ -316,74 +333,144 @@
       </div>
     </div>
   </div>
-  <div class="popup skin-content hidden">
-    <div style="position: absolute; left: 1vh; top: 2vh;">
-      <button class="header-navigation-btn" id="skin-content-back-button">
-        <img src="../../Sprites/Icons/Icon_Arrow_Back.png" alt="Profile" class="header-navigation-list-icon" />
-      </button>
-    </div>
-  </div>
-  <!-- <div class="popup tutorial-tab" id="tutorial"> -->
-  <!-- <div class="tutorial-screen" id="first-tutorial-screen">
-        <div class="tutorial-cards-column">
-          <div class="tutorial-card-element" style="background-size: 100% 100%; background-image: url('../../Sprites/Card Skins/Release/Skin_01/king_spades_01.png'); position: relative; left: 0px; top: 0px; scale: 1;"></div>
-          <div class="tutorial-card-element" style="background-size: 100% 100%; background-image: url('../../Sprites/Card Skins/Release/Skin_01/queen_spades_01.png'); position: relative; left: 0px; top: 0px; scale: 1;"></div>
-          <div class="tutorial-card-element" style="background-size: 100% 100%; background-image: url('../../Sprites/Card Skins/Release/Skin_01/jack_spades_01.png'); position: relative; left: 0px; top: 0px; scale: 1;"></div>
-          <div class="tutorial-card-element" style="background-size: 100% 100%; background-image: url('../../Sprites/Card Skins/Release/Skin_01/ten_spades_01.png'); position: relative; left: 0px; top: 0px; scale: 1;"></div>
-          <div class="tutorial-card-element" style="background-size: 100% 100%; background-image: url('../../Sprites/Card Skins/Release/Skin_01/nine_spades_01.png'); position: relative; left: 0px; top: 0px; scale: 1;"></div>
-          <div class="tutorial-card-element" style="background-size: 100% 100%; background-image: url('../../Sprites/Card Skins/Release/Skin_01/eight_spades_01.png'); position: relative; left: 0px; top: 0px; scale: 1;"></div>
-          <div class="tutorial-card-element" style="background-size: 100% 100%; background-image: url('../../Sprites/Card Skins/Release/Skin_01/seven_spades_01.png'); position: relative; left: 0px; top: 0px; scale: 1;"></div>
-          <div class="tutorial-card-element" style="background-size: 100% 100%; background-image: url('../../Sprites/Card Skins/Release/Skin_01/six_spades_01.png'); position: relative; left: 0px; top: 0px; scale: 1;"></div>
-          <div class="tutorial-card-element" style="background-size: 100% 100%; background-image: url('../../Sprites/Card Skins/Release/Skin_01/five_spades_01.png'); position: relative; left: 0px; top: 0px; scale: 1;"></div>
-          <div class="tutorial-card-element" style="background-size: 100% 100%; background-image: url('../../Sprites/Card Skins/Release/Skin_01/four_spades_01.png'); position: relative; left: 0px; top: 0px; scale: 1;"></div>
-          <div class="tutorial-card-element" style="background-size: 100% 100%; background-image: url('../../Sprites/Card Skins/Release/Skin_01/three_spades_01.png'); position: relative; left: 0px; top: 0px; scale: 1;"></div>
-          <div class="tutorial-card-element" style="background-size: 100% 100%; background-image: url('../../Sprites/Card Skins/Release/Skin_01/two_spades_01.png'); position: relative; left: 0px; top: 0px; scale: 1;"></div>
-          <div class="tutorial-card-element" style="background-size: 100% 100%; background-image: url('../../Sprites/Card Skins/Release/Skin_01/ace_spades_01.png'); position: relative; left: 0px; top: 0px; scale: 1;"></div>
+  <div class="popup tutorial-tab" style="display: none" id="tutorial">
+    <div class="tutorial-screen" id="first-tutorial-screen">
+      <div class="tutorial-cards-column">
+        <div class="tutorial-card-element"
+          style="background-size: 100% 100%; background-image: url('../../Sprites/Card Skins/Release/Skin_01/king_spades_01.png'); position: relative; left: 0px; top: 0px; scale: 1;">
         </div>
-        <div class="tutorial-cards-info" lang="tutorial_01"></div>      
-    </div> -->
-  <!-- <div class="tutorial-screen" id="second-tutorial-screen">
+        <div class="tutorial-card-element"
+          style="background-size: 100% 100%; background-image: url('../../Sprites/Card Skins/Release/Skin_01/queen_spades_01.png'); position: relative; left: 0px; top: 0px; scale: 1;">
+        </div>
+        <div class="tutorial-card-element"
+          style="background-size: 100% 100%; background-image: url('../../Sprites/Card Skins/Release/Skin_01/jack_spades_01.png'); position: relative; left: 0px; top: 0px; scale: 1;">
+        </div>
+        <div class="tutorial-card-element"
+          style="background-size: 100% 100%; background-image: url('../../Sprites/Card Skins/Release/Skin_01/ten_spades_01.png'); position: relative; left: 0px; top: 0px; scale: 1;">
+        </div>
+        <div class="tutorial-card-element"
+          style="background-size: 100% 100%; background-image: url('../../Sprites/Card Skins/Release/Skin_01/nine_spades_01.png'); position: relative; left: 0px; top: 0px; scale: 1;">
+        </div>
+        <div class="tutorial-card-element"
+          style="background-size: 100% 100%; background-image: url('../../Sprites/Card Skins/Release/Skin_01/eight_spades_01.png'); position: relative; left: 0px; top: 0px; scale: 1;">
+        </div>
+        <div class="tutorial-card-element"
+          style="background-size: 100% 100%; background-image: url('../../Sprites/Card Skins/Release/Skin_01/seven_spades_01.png'); position: relative; left: 0px; top: 0px; scale: 1;">
+        </div>
+        <div class="tutorial-card-element"
+          style="background-size: 100% 100%; background-image: url('../../Sprites/Card Skins/Release/Skin_01/six_spades_01.png'); position: relative; left: 0px; top: 0px; scale: 1;">
+        </div>
+        <div class="tutorial-card-element"
+          style="background-size: 100% 100%; background-image: url('../../Sprites/Card Skins/Release/Skin_01/five_spades_01.png'); position: relative; left: 0px; top: 0px; scale: 1;">
+        </div>
+        <div class="tutorial-card-element"
+          style="background-size: 100% 100%; background-image: url('../../Sprites/Card Skins/Release/Skin_01/four_spades_01.png'); position: relative; left: 0px; top: 0px; scale: 1;">
+        </div>
+        <div class="tutorial-card-element"
+          style="background-size: 100% 100%; background-image: url('../../Sprites/Card Skins/Release/Skin_01/three_spades_01.png'); position: relative; left: 0px; top: 0px; scale: 1;">
+        </div>
+        <div class="tutorial-card-element"
+          style="background-size: 100% 100%; background-image: url('../../Sprites/Card Skins/Release/Skin_01/two_spades_01.png'); position: relative; left: 0px; top: 0px; scale: 1;">
+        </div>
+        <div class="tutorial-card-element"
+          style="background-size: 100% 100%; background-image: url('../../Sprites/Card Skins/Release/Skin_01/ace_spades_01.png'); position: relative; left: 0px; top: 0px; scale: 1;">
+        </div>
+      </div>
+      <div class="tutorial-cards-info" lang="tutorial_01"></div>
+    </div>
+    <div class="tutorial-screen" style="display: none" id="second-tutorial-screen">
       <div class="tutorial-cards-column selected-tutorial-column">
-        <div class="tutorial-card-element" style="background-size: 100% 100%; background-image: url('../../Sprites/Card Skins/Release/Skin_01/king_spades_01.png'); position: relative; left: 0px; top: 0px; scale: 1;"></div>
-        <div class="tutorial-card-element" style="background-size: 100% 100%; background-image: url('../../Sprites/Card Skins/Release/Skin_01/queen_spades_01.png'); position: relative; left: 0px; top: 0px; scale: 1;"></div>
-        <div class="tutorial-card-element" style="background-size: 100% 100%; background-image: url('../../Sprites/Card Skins/Release/Skin_01/jack_spades_01.png'); position: relative; left: 0px; top: 0px; scale: 1;"></div>
-        <div class="tutorial-card-element" style="background-size: 100% 100%; background-image: url('../../Sprites/Card Skins/Release/Skin_01/ten_spades_01.png'); position: relative; left: 0px; top: 0px; scale: 1;"></div>
-        <div class="tutorial-card-element" style="background-size: 100% 100%; background-image: url('../../Sprites/Card Skins/Release/Skin_01/nine_spades_01.png'); position: relative; left: 0px; top: 0px; scale: 1;"></div>
-        <div class="tutorial-card-element" style="background-size: 100% 100%; background-image: url('../../Sprites/Card Skins/Release/Skin_01/eight_spades_01.png'); position: relative; left: 0px; top: 0px; scale: 1;"></div>
-        <div class="tutorial-card-element" style="background-size: 100% 100%; background-image: url('../../Sprites/Card Skins/Release/Skin_01/seven_spades_01.png'); position: relative; left: 0px; top: 0px; scale: 1;"></div>
+        <div class="tutorial-card-element"
+          style="background-size: 100% 100%; background-image: url('../../Sprites/Card Skins/Release/Skin_01/king_spades_01.png'); position: relative; left: 0px; top: 0px; scale: 1;">
+        </div>
+        <div class="tutorial-card-element"
+          style="background-size: 100% 100%; background-image: url('../../Sprites/Card Skins/Release/Skin_01/queen_spades_01.png'); position: relative; left: 0px; top: 0px; scale: 1;">
+        </div>
+        <div class="tutorial-card-element"
+          style="background-size: 100% 100%; background-image: url('../../Sprites/Card Skins/Release/Skin_01/jack_spades_01.png'); position: relative; left: 0px; top: 0px; scale: 1;">
+        </div>
+        <div class="tutorial-card-element"
+          style="background-size: 100% 100%; background-image: url('../../Sprites/Card Skins/Release/Skin_01/ten_spades_01.png'); position: relative; left: 0px; top: 0px; scale: 1;">
+        </div>
+        <div class="tutorial-card-element"
+          style="background-size: 100% 100%; background-image: url('../../Sprites/Card Skins/Release/Skin_01/nine_spades_01.png'); position: relative; left: 0px; top: 0px; scale: 1;">
+        </div>
+        <div class="tutorial-card-element"
+          style="background-size: 100% 100%; background-image: url('../../Sprites/Card Skins/Release/Skin_01/eight_spades_01.png'); position: relative; left: 0px; top: 0px; scale: 1;">
+        </div>
+        <div class="tutorial-card-element"
+          style="background-size: 100% 100%; background-image: url('../../Sprites/Card Skins/Release/Skin_01/seven_spades_01.png'); position: relative; left: 0px; top: 0px; scale: 1;">
+        </div>
       </div>
       <div class="tutorial-cards-column movable-cards-column">
-        <div class="tutorial-card-element" style="background-size: 100% 100%; background-image: url('../../Sprites/Card Skins/Release/Skin_01/six_spades_01.png'); position: relative; left: 0px; top: 0px; scale: 1;"></div>
-        <div class="tutorial-card-element" style="background-size: 100% 100%; background-image: url('../../Sprites/Card Skins/Release/Skin_01/five_spades_01.png'); position: relative; left: 0px; top: 0px; scale: 1;"></div>
-        <div class="tutorial-card-element" style="background-size: 100% 100%; background-image: url('../../Sprites/Card Skins/Release/Skin_01/four_spades_01.png'); position: relative; left: 0px; top: 0px; scale: 1;"></div>
-        <div class="tutorial-card-element" style="background-size: 100% 100%; background-image: url('../../Sprites/Card Skins/Release/Skin_01/three_spades_01.png'); position: relative; left: 0px; top: 0px; scale: 1;"></div>
-        <div class="tutorial-card-element" style="background-size: 100% 100%; background-image: url('../../Sprites/Card Skins/Release/Skin_01/two_spades_01.png'); position: relative; left: 0px; top: 0px; scale: 1;"></div>
-        <div class="tutorial-card-element" style="background-size: 100% 100%; background-image: url('../../Sprites/Card Skins/Release/Skin_01/ace_spades_01.png'); position: relative; left: 0px; top: 0px; scale: 1;"></div>
+        <div class="tutorial-card-element"
+          style="background-size: 100% 100%; background-image: url('../../Sprites/Card Skins/Release/Skin_01/six_spades_01.png'); position: relative; left: 0px; top: 0px; scale: 1;">
+        </div>
+        <div class="tutorial-card-element"
+          style="background-size: 100% 100%; background-image: url('../../Sprites/Card Skins/Release/Skin_01/five_spades_01.png'); position: relative; left: 0px; top: 0px; scale: 1;">
+        </div>
+        <div class="tutorial-card-element"
+          style="background-size: 100% 100%; background-image: url('../../Sprites/Card Skins/Release/Skin_01/four_spades_01.png'); position: relative; left: 0px; top: 0px; scale: 1;">
+        </div>
+        <div class="tutorial-card-element"
+          style="background-size: 100% 100%; background-image: url('../../Sprites/Card Skins/Release/Skin_01/three_spades_01.png'); position: relative; left: 0px; top: 0px; scale: 1;">
+        </div>
+        <div class="tutorial-card-element"
+          style="background-size: 100% 100%; background-image: url('../../Sprites/Card Skins/Release/Skin_01/two_spades_01.png'); position: relative; left: 0px; top: 0px; scale: 1;">
+        </div>
+        <div class="tutorial-card-element"
+          style="background-size: 100% 100%; background-image: url('../../Sprites/Card Skins/Release/Skin_01/ace_spades_01.png'); position: relative; left: 0px; top: 0px; scale: 1;">
+        </div>
       </div>
-      <div class="tutorial-cards-info" lang="tutorial_03"></div>      
-  </div> -->
-  <!-- <div class="tutorial-screen" id="third-tutorial-screen">
-    <div class="tutorial-cards-column selected-tutorial-column">
-      <div class="tutorial-card-element" style="background-size: 100% 100%; background-image: url('../../Sprites/Card Skins/Release/Skin_01/king_spades_01.png'); position: relative; left: 0px; top: 0px; scale: 1;"></div>
-      <div class="tutorial-card-element" style="background-size: 100% 100%; background-image: url('../../Sprites/Card Skins/Release/Skin_01/queen_spades_01.png'); position: relative; left: 0px; top: 0px; scale: 1;"></div>
-      <div class="tutorial-card-element" style="background-size: 100% 100%; background-image: url('../../Sprites/Card Skins/Release/Skin_01/jack_spades_01.png'); position: relative; left: 0px; top: 0px; scale: 1;"></div>
-      <div class="tutorial-card-element" style="background-size: 100% 100%; background-image: url('../../Sprites/Card Skins/Release/Skin_01/ten_spades_01.png'); position: relative; left: 0px; top: 0px; scale: 1;"></div>
-      <div class="tutorial-card-element" style="background-size: 100% 100%; background-image: url('../../Sprites/Card Skins/Release/Skin_01/nine_spades_01.png'); position: relative; left: 0px; top: 0px; scale: 1;"></div>
-      <div class="tutorial-card-element" style="background-size: 100% 100%; background-image: url('../../Sprites/Card Skins/Release/Skin_01/eight_spades_01.png'); position: relative; left: 0px; top: 0px; scale: 1;"></div>
-      <div class="tutorial-card-element" style="background-size: 100% 100%; background-image: url('../../Sprites/Card Skins/Release/Skin_01/seven_spades_01.png'); position: relative; left: 0px; top: 0px; scale: 1;"></div>
+      <div class="tutorial-cards-info" lang="tutorial_03"></div>
     </div>
-    <div class="movable-container-mask"></div>
-    <div class="tutorial-cards-column movable-cards-column">
-      <div class="tutorial-card-element" style="background-size: 100% 100%; background-image: url('../../Sprites/Card Skins/Release/Skin_01/six_spades_01.png'); position: relative; left: 0px; top: 0px; scale: 1;"></div>
-      <div class="tutorial-card-element" style="background-size: 100% 100%; background-image: url('../../Sprites/Card Skins/Release/Skin_01/five_spades_01.png'); position: relative; left: 0px; top: 0px; scale: 1;"></div>
-      <div class="tutorial-card-element" style="background-size: 100% 100%; background-image: url('../../Sprites/Card Skins/Release/Skin_01/four_spades_01.png'); position: relative; left: 0px; top: 0px; scale: 1;"></div>
-      <div class="tutorial-card-element" style="background-size: 100% 100%; background-image: url('../../Sprites/Card Skins/Release/Skin_01/three_spades_01.png'); position: relative; left: 0px; top: 0px; scale: 1;"></div>
-      <div class="tutorial-card-element" style="background-size: 100% 100%; background-image: url('../../Sprites/Card Skins/Release/Skin_01/two_spades_01.png'); position: relative; left: 0px; top: 0px; scale: 1;"></div>
-      <div class="tutorial-card-element" style="background-size: 100% 100%; background-image: url('../../Sprites/Card Skins/Release/Skin_01/ace_spades_01.png'); position: relative; left: 0px; top: 0px; scale: 1;"></div>
+    <div class="tutorial-screen" style="display: none" id="third-tutorial-screen">
+      <div class="tutorial-cards-column selected-tutorial-column">
+        <div class="tutorial-card-element"
+          style="background-size: 100% 100%; background-image: url('../../Sprites/Card Skins/Release/Skin_01/king_spades_01.png'); position: relative; left: 0px; top: 0px; scale: 1;">
+        </div>
+        <div class="tutorial-card-element"
+          style="background-size: 100% 100%; background-image: url('../../Sprites/Card Skins/Release/Skin_01/queen_spades_01.png'); position: relative; left: 0px; top: 0px; scale: 1;">
+        </div>
+        <div class="tutorial-card-element"
+          style="background-size: 100% 100%; background-image: url('../../Sprites/Card Skins/Release/Skin_01/jack_spades_01.png'); position: relative; left: 0px; top: 0px; scale: 1;">
+        </div>
+        <div class="tutorial-card-element"
+          style="background-size: 100% 100%; background-image: url('../../Sprites/Card Skins/Release/Skin_01/ten_spades_01.png'); position: relative; left: 0px; top: 0px; scale: 1;">
+        </div>
+        <div class="tutorial-card-element"
+          style="background-size: 100% 100%; background-image: url('../../Sprites/Card Skins/Release/Skin_01/nine_spades_01.png'); position: relative; left: 0px; top: 0px; scale: 1;">
+        </div>
+        <div class="tutorial-card-element"
+          style="background-size: 100% 100%; background-image: url('../../Sprites/Card Skins/Release/Skin_01/eight_spades_01.png'); position: relative; left: 0px; top: 0px; scale: 1;">
+        </div>
+        <div class="tutorial-card-element"
+          style="background-size: 100% 100%; background-image: url('../../Sprites/Card Skins/Release/Skin_01/seven_spades_01.png'); position: relative; left: 0px; top: 0px; scale: 1;">
+        </div>
+      </div>
+      <div class="tutorial-cards-column movable-cards-column">
+        <div class="tutorial-card-element"
+          style="background-size: 100% 100%; background-image: url('../../Sprites/Card Skins/Release/Skin_01/six_spades_01.png'); position: relative; left: 0px; top: 0px; scale: 1;">
+        </div>
+        <div class="tutorial-card-element"
+          style="background-size: 100% 100%; background-image: url('../../Sprites/Card Skins/Release/Skin_01/five_spades_01.png'); position: relative; left: 0px; top: 0px; scale: 1;">
+        </div>
+        <div class="tutorial-card-element"
+          style="background-size: 100% 100%; background-image: url('../../Sprites/Card Skins/Release/Skin_01/four_spades_01.png'); position: relative; left: 0px; top: 0px; scale: 1;">
+        </div>
+        <div class="tutorial-card-element"
+          style="background-size: 100% 100%; background-image: url('../../Sprites/Card Skins/Release/Skin_01/three_spades_01.png'); position: relative; left: 0px; top: 0px; scale: 1;">
+        </div>
+        <div class="tutorial-card-element"
+          style="background-size: 100% 100%; background-image: url('../../Sprites/Card Skins/Release/Skin_01/two_spades_01.png'); position: relative; left: 0px; top: 0px; scale: 1;">
+        </div>
+        <div class="tutorial-card-element"
+          style="background-size: 100% 100%; background-image: url('../../Sprites/Card Skins/Release/Skin_01/ace_spades_01.png'); position: relative; left: 0px; top: 0px; scale: 1;">
+        </div>
+      </div>
+      <div class="tutorial-cards-info" lang="tutorial_04"></div>
     </div>
-    <div class="tutorial-cards-info" lang="tutorial_04"></div>      
-</div> -->
-  <!-- <div class="tutorial-screen" id="fourth-tutorial-screen">
+    <div class="tutorial-screen" style="display: none" id="fourth-tutorial-screen">
       <div class="tutorial-cards-column selected-tutorial-column">
         <div class="tutorial-card-element"
           style="background-size: 100% 100%; background-image: url('../../Sprites/Card Skins/Release/Skin_01/king_spades_01.png'); position: relative; left: 0px; top: 0px; scale: 1;">
@@ -443,11 +530,28 @@
         </div>
       </div>
       <div class="tutorial-cards-info" lang="tutorial_05"></div>
-    </div> -->
-  <!-- <button class="next-tutorial-screen-btn">
+    </div>
+    <div class="tutorial-screen" style="display: none" id="fifth-tutorial-screen">
+      <div class="tutorial-cards-column">
+        <div class="full-tutorial-cards-column decline-column"></div>
+      </div>
+      <div class="tutorial-cards-column">
+        <div class="full-tutorial-cards-column accept-column"></div>
+      </div>
+      <div class="tutorial-cards-info" lang="tutorial_06"></div>
+    </div>
+    <div class="tutorial-screen column-direction-screen" style="display: none" id="sixth-tutorial-screen">
+      <img src="../../Sprites/Tutorial/Used_Tutorial_6.png" alt="Example" class="tutorial-cards-example">
+      <div class="tutorial-cards-info" lang="tutorial_06"></div>
+    </div>
+    <div class="tutorial-screen column-direction-screen" style="display: none" id="seventh-tutorial-screen">
+      <img src="../../Sprites/Tutorial/Used_Tutorial_7.png" alt="Example" class="tutorial-boosters-example">
+      <div class="tutorial-cards-info" lang="tutorial_08"></div>
+    </div>
+    <button class="next-tutorial-screen-btn" id="next-tutorial-screen-btn">
       <span class="next-tutorial-screen-btn-title" lang="continue_q">Продолжить</span>
-    </button> -->
-  <!-- </div> -->
+    </button>
+  </div>
   <main id="main">
     <div class="main-container">
       <div class="active-cards-zone">
