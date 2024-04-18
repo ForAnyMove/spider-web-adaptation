@@ -674,6 +674,82 @@ header {
 .skins-collection-slider::-webkit-scrollbar {
   width: 0;
 }
+.check-icon,
+.lock-icon {
+  width: 7vh;
+  z-index: 10;
+}
+.skin-card>.hidden,
+.skin-card-back>.hidden,
+.background-card>.hidden{
+  display: none;
+}
+#play-btn {
+  background-image: url('../../Sprites/Buttons/Used_Button_03.png');
+  font-size: 1.8vh;
+}
+
+.skins-collection-slider>.skin-card-back {
+  height: 25vh;
+  justify-content: flex-end;
+  background-image: url('../../Sprites/Card Backs/Card_Backs.png');
+}
+.lock-mask {
+  position: absolute;
+  width: calc(100% + 2px);
+  height: calc(100% + 2px);
+  background-color: #0000007b;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+  border-radius: 2vh;
+}
+
+.mask-title {
+  color: #fff6c6;
+  font-size: 1.6vh;
+  font-weight: bold;
+  text-align: center;
+}
+.skins-collection-back-btn {
+  width: 2.5vw;
+  height: 2.5vw;
+  margin: 0.2vw;
+  background: url('../../Sprites/Buttons/Used_Button_01.png');
+  background-size: cover;
+  border-radius: 50%;
+  border: none;
+  display: flex;
+  justify-content: center;
+  align-items: start;
+  position: absolute;
+  top: 2vh;
+  left: 2vh;
+}
+
+
+.start-level-btn {
+  border-radius: 1vh;
+  border: none;
+  background: no-repeat;
+  background-size: 100% 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0 2vh 0.7vh 2vh;
+}
+
+#pick-area-2>.start-level-btn {
+  width: 100%;
+}
+
+.start-level-btn-title {
+  font-weight: bold;
+  color: #00000049;
+  padding: 1.6vh 0;
+}
+
 main {
   flex: 1 1 auto;
 }

@@ -779,4 +779,10 @@ nextTutorialScreenBtn.addEventListener('click', () => {
   }
 })
 
+const skinsCollectionBackBtn = document.getElementById('skins-collection-back-btn')
+const skinsCollectionSliderTab = document.getElementById('skins-collection-slider-tab')
+skinsCollectionBackBtn.addEventListener('click', () => {
+  skinsCollectionSliderTab.style.display = 'none'
+})
+
 export { setupLanguageSelector }
