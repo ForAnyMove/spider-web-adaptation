@@ -121,6 +121,7 @@ header {
 .challenge-card {
   background-color: #fff;
   background-image: url('../../Sprites/Frames/Used_Trial_Frame.png');
+  border: 0.1vh solid rgba(0, 0, 0, 0.4);
   background-size: 120% 120%;
   background-position: center;
   min-width: 42vh;
@@ -165,7 +166,11 @@ header {
 }
 
 .challenge-header {
-  background-image: url('../../Sprites/Frames/Used_Frame_08.png');
+  background-image: linear-gradient(to bottom right, #E1579E, #A11EA2);
+  border-top-left-radius: 2vh;
+  border-top-right-radius: 2vh;
+  border: 0.1vh solid rgba(0, 0, 0, 0.4);
+  border-bottom: 0.45vh solid rgba(0, 0, 0, 0.4);
   background-size: 100% 100%;
   display: flex;
   width: 100%;

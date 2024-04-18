@@ -11,14 +11,36 @@ export default class DirectionalInput {
         this.backup = null;
         this.ignoredAxis = [];
 
+        this.saveSelectablePull = [];
+
         // todo: need to make root class [Input] and put basics there
         this.globalKeyHandlers = [];
 
         if (platform != null && platform == Platform.TV && SDK != null) {
-            SDK.onEvent(ysdk.EVENTS.HISTORY_BACK, () => {
+            SDK.onEvent(SDK.EVENTS.HISTORY_BACK, () => {
                 this.handleKey('Escape');
             });
         }
+    }
+
+    saveSelectableState = function (key, selectables, selected) {
+        this.saveSelectablePull.push({
+            key: key,
+            selectables: selectables,
+            selected: selected
+        })
+    }
+
+    loadFromSavedPull = function (key) {
+        for (let i = 0; i < this.saveSelectablePull.length; i++) {
+            const element = this.saveSelectablePull[i];
+            if (element.key == key) {
+                this.updateQueryCustom(element.selectables, element.selected);
+                return;
+            }
+        }
+
+        this.updateQueryCustom([], { element: null });
     }
 
     preventAxis = function (ignoreList) {

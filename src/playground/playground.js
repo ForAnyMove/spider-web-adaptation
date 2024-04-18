@@ -50,7 +50,7 @@ const menuScreen = new Screen({
   onFocus: () => {
     const elements = getInputElements(menuScreen.element, { tags: ['button'] });
     input.updateQueryCustom(elements, elements[0]);
-  }, onUnfocus: () => { input.updateQueryCustom([], { element: null }) }
+  }, onUnfocus: () => { input.loadFromSavedPull('ingame'); }
 });
 
 const exitScreen = new Screen({
@@ -61,7 +61,7 @@ const exitScreen = new Screen({
     input.updateQueryCustom(elements, elements[1]);
 
   }, onUnfocus: () => {
-    input.updateQueryCustom([], { element: null });
+    input.loadFromSavedPull('ingame');
   }
 });
 
@@ -330,6 +330,7 @@ function checkAndMakeSpiderLadyPatternView() {
     setSpiderLadyStyles()
   }
 }
+
 function setSpiderLadyStyles() {
   const styleElement = document.createElement('style');
   styleElement.textContent = `
@@ -601,17 +602,19 @@ function setupDefaultLevel() {
   setupButtons();
   stepRecorder.stepRecordedEvent.addListener(updateStepText);
 
-  const buttonContainer = document.getElementsByClassName('footer-control-panel')[0];
-  if (buttonContainer != null) {
-    buttonContainer.classList.remove('hidden');
+  const buttonContainers = document.getElementsByClassName('footer-control-panel');
+  for (let i = 0; i < buttonContainers.length; i++) {
+    const element = buttonContainers[i];
+    element.classList.remove('hidden');
   }
 }
 
 function setupSolitaireLevel() {
-  const buttonContainer = document.getElementsByClassName('footer-control-panel')[0];
-  if (buttonContainer != null) {
-    if (!buttonContainer.classList.contains('hidden')) {
-      buttonContainer.classList.add('hidden');
+  const buttonContainers = document.getElementsByClassName('footer-control-panel');
+  for (let i = 0; i < buttonContainers.length; i++) {
+    const element = buttonContainers[i];
+    if (!element.classList.contains('hidden')) {
+      element.classList.add('hidden');
     }
   }
 
@@ -780,10 +783,10 @@ if (platform == Platform.TV) {
       }
     })
 
+    input.saveSelectableState('ingame', selectables, selectables[0]);
     input.updateQueryCustom(selectables, selectables[0])
   });
 }
-
 
 function setupLanguageSelector(initialLocale) {
   const selectors = document.getElementsByClassName('language-container');

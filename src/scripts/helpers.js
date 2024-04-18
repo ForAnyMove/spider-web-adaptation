@@ -379,6 +379,35 @@ function getValueByKeyInArray(key, array) {
 
     return null;
 }
+function setDynamicFontSize(text, recursive = true) {
+    // function getTextWidth(text, font) {
+    //     const span = document.createElement('span');
+    //     span.style.visibility = 'hidden';
+    //     span.style.position = 'absolute';
+    //     span.style.whiteSpace = 'nowrap';
+    //     span.style.font = font;
+    //     span.textContent = text;
+    //     document.body.appendChild(span);
+    //     const width = span.offsetWidth;
+    //     document.body.removeChild(span);
+    //     return width;
+    // }
+    const textStyle = window.getComputedStyle(text);
+
+    const parentContainer = text.parentElement;
+    const containerWidth = parentContainer.offsetWidth;
+    const textWidth = text.offsetWidth;
+    const fontSize = parseFloat(textStyle.fontSize);
+    if (textWidth > containerWidth) {
+        const newFontSize = fontSize * (containerWidth / textWidth);
+        text.style.fontSize = newFontSize + 'px';
+    } else {
+        text.style.fontSize = textStyle.getPropertyValue('--target-font-size');
+        if (recursive) {
+            setDynamicFontSize(text, false);
+        }
+    }
+}
 
 
 export {
@@ -413,5 +442,6 @@ export {
     getInputElements,
     getValueByKeyInArray,
     getSuitLang,
-    getPatternLang
+    getPatternLang,
+    setDynamicFontSize
 }
