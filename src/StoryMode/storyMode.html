@@ -116,10 +116,11 @@
     let user = null;
     let input;
     let languageChangeEvent;
+    let platform;
   </script>
   <script type="module">
     import { preload } from '../loader/loader.js';
-    import { initializeSDK } from '../scripts/sdk/sdk.js';
+    import { initializeSDK, getPlatform } from '../scripts/sdk/sdk.js';
     import { initialize } from '../scripts/save_system/SaveSystem.js'
     import User from '../scripts/userData.js'
     import { Action } from '../scripts/globalEvents.js';
@@ -129,12 +130,10 @@
 
 
     preload(async () => {
-      console.log('[storyMode.html]=> start initializeSDK');
       await initializeSDK();
-      console.log('[storyMode.html]=> start initialize');
+      platform = await getPlatform();
       await initialize();
       user.loadData();
-      console.log('[storyMode.html]=> start import("./storyMode.js")');
       await import('./storyMode.js')
     })
   </script>
