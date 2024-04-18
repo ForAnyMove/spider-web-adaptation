@@ -486,8 +486,12 @@ header {
   display: flex;
   align-items: flex-start;
   justify-content: center;
-  height: 35vh;
+  /* height: 35vh; */
+  height: 50vh;
   position: relative;
+}
+#fifth-tutorial-screen{
+  align-items: center;
 }
 .tutorial-screen:first-child{
   height: 50vh;
@@ -522,24 +526,21 @@ header {
   background-image: url('../../Sprites/Buttons/Used_Button_03.png');
   font-size: 1.8vh;
   transform: translateY(200%);
+  position: absolute;
+  bottom: 15vh;
+  left: 50%;
+  transform: translate(-50%);
 }
 .next-tutorial-screen-btn-title {
   font-weight: bold;
   color: #00000049;
   padding: 1.6vh 0;
 }
-.movable-container-mask{
-  width: 10vh;
-  height: 14vh;
-  position: absolute;
+.movable-cards-column{
   background-color: #00970f51;
   border-radius: 1vh;
-  left: 13.5vh;
-  top: 15.5vh;
-}
-.movable-cards-column{
-  position: absolute;
-  left: 13vh;
+  width: 10vh;
+  min-height: 14vh;
 }
 .selected-tutorial-column{
   outline: 0.5vh solid #85ff6f;
@@ -548,10 +549,42 @@ header {
   width: 10vh;
   height: 14vh;
   position: absolute;
-  left: 0;
-  bottom: -14vh;
+  left: 1vh;
+  bottom: -18vh;
 }
-
+.full-tutorial-cards-column{
+  width: 16vh;
+  height: 60vh;
+  background-size: 100% 100%;
+}
+.column-direction-screen{
+  flex-direction: column;
+}
+.tutorial-cards-example{
+  width: 75vh;
+}
+.tutorial-boosters-example{
+  width: 65vh;
+}
+.decline-column{
+  background-image: url('../../Sprites/Tutorial/Used_Tutorial_05_2.png');
+}
+.accept-column{
+  margin-left: -4vh;
+  background-image: url('../../Sprites/Tutorial/Used_Tutorial_05_1.png');
+}
+#fifth-tutorial-screen>.tutorial-cards-info,
+#sixth-tutorial-screen>.tutorial-cards-info,
+#seventh-tutorial-screen>.tutorial-cards-info{
+  margin-left: 0;
+}
+#seventh-tutorial-screen>.tutorial-cards-info{
+  transform: translateY(10vh);
+}
+#sixth-tutorial-screen,
+#seventh-tutorial-screen{
+  align-items: center;
+}
 .cards-deck>.tutorial-card-element:not(:first-child){
   margin-top: -14.1vh;
 }
@@ -963,8 +996,9 @@ footer {
     width: 40vh;
   }
   .tutorial-screen{
-    justify-content: space-between;
+    justify-content: space-evenly;
     width: 95%;
+    height: 25vh;
   }
   .control-button-list-icon {
     width: 4.5vh;
@@ -984,19 +1018,52 @@ footer {
     margin-top: -7vh;
   }
   .cards-deck{
-    bottom: 0vh;
+    bottom: -20vh;
   }
   .cards-deck>.tutorial-card-element:not(:first-child){
     margin-top: -9.1vh;
   }
-  .next-tutorial-screen-btn{
-    transform: translateY(150%);
+  #fifth-tutorial-screen>.tutorial-screen,
+  #first-tutorial-screen>.tutorial-screen{
+    align-items: center;
   }
-  
+  .full-tutorial-cards-column{
+    width: 11vh;
+    height: 40vh;
+  }
+
+  .next-tutorial-screen-btn {
+    bottom: 10vh;
+  }
+  #sixth-tutorial-screen,
+  #seventh-tutorial-screen{
+    height: auto;
+    margin-bottom: 35vh;
+    transform: translateY(75%);
+  }
+  #seventh-tutorial-screen{
+    transform: translateY(115%);
+  }
+  .tutorial-cards-example{
+    width: 40vh;
+  }
+  .tutorial-boosters-example{
+    width: 35vh;
+  }
+  #seventh-tutorial-screen>.tutorial-cards-info{
+    transform: translateY(5vh);
+  }
   .movable-container-mask{
     width: 6.5vh;
     height: 9vh;
     top: 20vh;
+  }
+  .movable-cards-column{
+    width: 6.5vh;
+    min-height: 9vh;
+  }
+  .tutorial-screen:first-child{
+    height: 35vh;
   }
 }
 

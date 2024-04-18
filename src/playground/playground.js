@@ -758,5 +758,25 @@ function setupLanguageSelector(initialLocale) {
     }
   }
 }
+const queryString = window.location.search;
+const params = new URLSearchParams(queryString);
+const isTutorial = params.get('isTutorial');
+const tutorialTab = document.getElementById('tutorial')
+if (isTutorial) {
+  tutorialTab.style.display='flex'
+}
+const tutorialScreens = Array.from(document.getElementsByClassName('tutorial-screen'))
+const nextTutorialScreenBtn = document.getElementById('next-tutorial-screen-btn')
+let tutorialStep = 0;
+nextTutorialScreenBtn.addEventListener('click', () => {
+  if (tutorialStep < 6) {
+    tutorialScreens[tutorialStep].style.display = 'none'
+    tutorialStep++
+    tutorialScreens[tutorialStep].style.display = 'flex'
+  } else {
+    tutorialTab.style.display='none'
+    window.location.href = '../../index.html';
+  }
+})
 
 export { setupLanguageSelector }
