@@ -55,7 +55,7 @@
   <section class="logo">
     <img src="./Sprites/Logos/Logo_RU.png" alt="Logo" class="logo-icon" lang="[img]logo_img" />
   </section>
-  <div class="popup daily-bonuses hidden" id="daily-bonuses">
+  <div class="popup daily-bonuses fade-hidden" id="daily-bonuses">
     <div class="popup-content">
       <div class="popup-header">
         <h3 lang="daily_bonus">Ежедневные бонусы</h3>
@@ -116,7 +116,7 @@
       </div>
     </div>
   </div>
-  <div class="popup regular-bonuses hidden" id="regular-bonuses">
+  <div class="popup regular-bonuses fade-hidden" id="regular-bonuses">
     <div class="popup-content">
       <div class="web-mask"></div>
       <div class="popup-header">
@@ -185,7 +185,7 @@
       </div>
     </div>
   </div>
-  <div class="popup settings hidden" id="settings">
+  <div class="popup settings fade-hidden" id="settings">
     <div class="popup-content">
       <div class="popup-header">
         <h3 lang="setttings">Настройки</h3>
@@ -223,7 +223,7 @@
       </div>
     </div>
   </div>
-  <div class="popup languages hidden" id="languages">
+  <div class="popup languages fade-hidden" id="languages">
     <div class="popup-content">
       <div class="popup-header">
         <h3 lang="lang">Язык</h3>
@@ -320,16 +320,16 @@
       <span class="cancel-bounty-btn fade-hidden" lang="no_thanks">Нет, спасибо</span>
     </div>
   </div>
-  <div class="popup exid-game hidden" id="exid-game">
+  <div class="popup exid-game fade-hidden" id="exid-game">
     <div class="popup-content">
       <div class="popup-header">
         <h3 class="exid-tab-title">Вы уверены, что хотите выйти из игры?</h3>
       </div>
       <div class="exid-btns-container">
-        <button class="start-level-btn" id="play-btn">
+        <button class="start-level-btn exid-yes" id="play-btn">
           <span class="start-level-btn-title">Да</span>
         </button>
-        <button class="start-level-btn" id="play-btn">
+        <button class="start-level-btn exid-no" id="play-btn">
           <span class="start-level-btn-title">Нет</span>
         </button>
       </div>

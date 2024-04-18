@@ -10,75 +10,71 @@ import('./src/scripts/rewardReceiverView.js');
 
 import DirectionalInput from './src/scripts/directionInput.js';
 import { getInputElements } from './src/scripts/helpers.js';
+import { BackActionHandler, Screen, StackNavigation } from './src/scripts/navigation/navigation.js';
 
 const defaultSelectedButton = document.getElementsByClassName('main-panel-btn-1')[0];
 input ??= new DirectionalInput({ element: defaultSelectedButton });
 
-const closeDailyPopupButton = document.getElementById('close-popup-daily');
-const dailyBonuses = document.getElementById('daily-bonuses');
-const dailyBtn = document.getElementById('daily-btn');
+const navigation = new StackNavigation();
 
-dailyBtn.addEventListener('click', () => {
-  dailyBonuses.style.display = 'flex';
-
-  input.updateQueryCustom(getInputElements(dailyBonuses, { classNames: ['booster', 'close-popup', 'special-booster'], tags: ['button'] }), { element: closeDailyPopupButton });
+const dailyRewardsScreen = new Screen({
+  element: document.getElementById('daily-bonuses'),
+  openButtons: [document.getElementById('daily-btn')],
+  closeButtons: [document.getElementById('close-popup-daily')],
+  onFocus: () => { input.updateQueryCustom(getInputElements(dailyRewardsScreen.element, { classNames: ['booster', 'close-popup', 'special-booster'], tags: ['button'] }), { element: dailyRewardsScreen.closeButtons[0] }); },
+  onUnfocus: () => { input.updateQuery(); input.select({ element: dailyRewardsScreen.openButtons[0] }); }
 });
 
-closeDailyPopupButton.addEventListener('click', function () {
-  dailyBonuses.style.display = 'none';
-
-  input.updateQuery();
-  input.select({ element: defaultSelectedButton });
+const bonusesScreen = new Screen({
+  element: document.getElementById('regular-bonuses'),
+  openButtons: [document.getElementById('regular-btn')],
+  closeButtons: [document.getElementById('close-popup-regular')],
+  onFocus: () => { input.updateQueryCustom(getInputElements(bonusesScreen.element, { classNames: ['close-popup'], tags: ['button'] }), { element: bonusesScreen.closeButtons[0] }); },
+  onUnfocus: () => { input.updateQuery(); input.select({ element: bonusesScreen.openButtons[0] }); }
 });
 
-const closeRegularPopupButton = document.getElementById('close-popup-regular');
-const regularBonuses = document.getElementById('regular-bonuses');
-const regularBtn = document.getElementById('regular-btn');
-
-regularBtn.addEventListener('click', () => {
-  regularBonuses.style.display = 'flex';
-
-  input.updateQueryCustom(getInputElements(regularBonuses, { classNames: ['close-popup'], tags: ['button'] }), { element: closeRegularPopupButton });
+const settingsScreen = new Screen({
+  element: document.getElementById('settings'),
+  openButtons: [document.getElementById('settings-btn')],
+  closeButtons: [document.getElementById('close-popup-settings')],
+  onFocus: () => { input.updateQueryCustom(getInputElements(settingsScreen.element, { classNames: ['close-popup'], tags: ['button'] }), { element: settingsScreen.closeButtons[0] }) },
+  onUnfocus: () => { input.updateQuery(); input.select({ element: settingsScreen.openButtons[0] }); }
 });
 
-closeRegularPopupButton.addEventListener('click', function () {
-  regularBonuses.style.display = 'none';
-
-  input.updateQuery();
-  input.select({ element: defaultSelectedButton });
+const languageScreen = new Screen({
+  element: document.getElementById('languages'),
+  openButtons: [document.getElementById('lang-btn')],
+  closeButtons: [document.getElementById('close-popup-languages')],
+  onFocus: () => { input.updateQueryCustom(getInputElements(languageScreen.element, { classNames: ['close-popup', 'language-container'] }), { element: languageScreen.closeButtons[0] }) },
+  onUnfocus: () => { }
 });
 
-const closeLanguagesPopupButton = document.getElementById('close-popup-languages');
-const languagesPopup = document.getElementById('languages');
-const languagesBtn = document.getElementById('lang-btn');
-const settingsBonuses = document.getElementById('settings');
-const settingsBtn = document.getElementById('settings-btn');
-const closeSettingsPopupButton = document.getElementById('close-popup-settings');
+const exitScreen = new Screen({
+  element: document.getElementById('exid-game'),
+  closeButtons: [document.getElementById('exid-game').getElementsByClassName('exid-no')[0]],
+  onFocus: () => {
+    const elements = getInputElements(exitScreen.element, { tags: ['button'] });
+    input.updateQueryCustom(elements, elements[1]);
+  }, onUnfocus: () => { input.updateQuery(); input.select({ element: defaultSelectedButton }); }
+});
 
-languagesBtn.onclick = function () {
-  languagesPopup.style.display = 'flex';
-
-  input.updateQueryCustom(getInputElements(languagesPopup, { classNames: ['close-popup', 'language-container'] }), { element: closeLanguagesPopupButton })
+const exitButton = exitScreen.element.getElementsByClassName('exid-yes')[0];
+if (exitButton != null) {
+  exitButton.onclick = function () { SDK?.dispatchEvent(SDK.EVENTS.EXIT); }
 }
 
-closeLanguagesPopupButton.onclick = function () {
-  languagesPopup.style.display = 'none';
+navigation.registerScreen(dailyRewardsScreen);
+navigation.registerScreen(bonusesScreen);
+navigation.registerScreen(settingsScreen);
+navigation.registerScreen(languageScreen);
+navigation.registerScreen(exitScreen);
 
-  input.updateQueryCustom(getInputElements(settingsBonuses, { classNames: ['close-popup'], tags: ['button'] }), { element: closeSettingsPopupButton });
-}
+new BackActionHandler(input, () => {
+  navigation.pop();
+}, () => {
+  navigation.push(exitScreen);
+});
 
-settingsBtn.onclick = function () {
-  settingsBonuses.style.display = 'flex';
-
-  input.updateQueryCustom(getInputElements(settingsBonuses, { classNames: ['close-popup'], tags: ['button'] }), { element: closeSettingsPopupButton });
-}
-
-closeSettingsPopupButton.onclick = function () {
-  settingsBonuses.style.display = 'none';
-
-  input.updateQuery();
-  input.select({ element: defaultSelectedButton });
-}
 
 function setupReqularBonusesButtons() {
   const itemCountPairs = [

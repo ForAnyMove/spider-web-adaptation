@@ -3,7 +3,7 @@ import { useHintBooster, useMageBooster, useUndoBooster } from "../scripts/boost
 import { cardCollector } from "../scripts/cardsCollector.js";
 import { createTweener } from "../scripts/dotween/dotween.js";
 import { CanInteract, disableInteractions, enableInteractions } from "../scripts/globalEvents.js";
-import { createElement, createImage, createTextSpan, getIconByItem, secondsToTime } from "../scripts/helpers.js";
+import { createElement, createImage, createTextSpan, getElements, getIconByItem, getInputElements, secondsToTime } from "../scripts/helpers.js";
 import { createLevel, createSolitaireLevel } from "../scripts/levelCreator.js";
 import { ContentType, Pattern, SuitMode } from "../scripts/statics/enums.js";
 import { Content, Items, Platform, locales } from "../scripts/statics/staticValues.js";
@@ -16,60 +16,85 @@ import { SolitaireCardColumn } from "../scripts/cardModel.js";
 import { completeLevel, completeMode, failLevel, failMode, startLevel } from "../scripts/levelStarter.js";
 import { showInterstitial, showRewarded } from "../scripts/sdk/sdk.js";
 import DirectionalInput from "../scripts/directionInput.js";
-import { StackNavigation, Screen } from "../scripts/navigation/navigation.js";
+import { StackNavigation, Screen, BackActionHandler } from "../scripts/navigation/navigation.js";
+
+input = new DirectionalInput({ element: null });
 
 const navigation = new StackNavigation();
 
 const settingsScreen = new Screen({
   element: document.getElementById('settings'),
-  openButton: document.getElementById('settings-btn-full'),
-  closeButton: document.getElementById('close-popup-settings'),
-  onOpen: () => { }, onClose: () => { }
+  openButtons: getElements(document, { classNames: ['settings-button'] }),
+  closeButtons: [document.getElementById('close-popup-settings')],
+  onFocus: () => {
+    input.updateQueryCustom(getInputElements(settingsScreen.element, { tags: ['button'] }).concat({ element: settingsScreen.closeButtons[0] }), { element: settingsScreen.closeButtons[0] });
+  }, onUnfocus: () => {
+    const elements = getInputElements(menuScreen.element, { tags: ['button'] });
+    input.updateQueryCustom(elements, elements[0])
+  }
 });
 
 const languageScreen = new Screen({
   element: document.getElementById('languages'),
-  openButton: document.getElementById('lang-btn'),
-  closeButton: document.getElementById('close-popup-languages'),
-  onOpen: () => { }, onClose: () => { }
+  openButtons: [document.getElementById('lang-btn')],
+  closeButtons: [document.getElementById('close-popup-languages')],
+  onFocus: () => {
+    input.updateQueryCustom(getInputElements(languageScreen.element, { classNames: ['language'] }).concat({ element: languageScreen.closeButtons[0] }), { element: languageScreen.closeButtons[0] });
+  }, onUnfocus: () => {
+    input.updateQueryCustom(getInputElements(settingsScreen.element, { tags: ['button'] }).concat({ element: settingsScreen.closeButtons[0] }), { element: settingsScreen.closeButtons[0] });
+  }
 });
 
-// const menuScreen = new Screen({
-//   element: document.getElementById('languages'),
-//   openButton: document.getElementById('lang-btn'),
-//   closeButton: document.getElementById('close-popup-languages'),
-//   onOpen: () => { }, onClose: () => { }
-// });
+const menuScreen = new Screen({
+  element: document.getElementById('menu'),
+  onFocus: () => {
+    const elements = getInputElements(menuScreen.element, { tags: ['button'] });
+    input.updateQueryCustom(elements, elements[0]);
+  }, onUnfocus: () => { input.updateQueryCustom([], { element: null }) }
+});
 
-// const exitScreen = new Screen({
-//   element: document.getElementById('languages'),
-//   openButton: document.getElementById('lang-btn'),
-//   closeButton: document.getElementById('close-popup-languages'),
-//   onOpen: () => { }, onClose: () => { }
-// });
+const exitScreen = new Screen({
+  element: document.getElementById('exid-game'),
+  closeButtons: [document.getElementById('exid-game').getElementsByClassName('exid-no')[0]],
+  onFocus: () => {
+    const elements = getInputElements(exitScreen.element, { tags: ['button'] });
+    input.updateQueryCustom(elements, elements[1]);
+
+  }, onUnfocus: () => {
+    input.updateQueryCustom([], { element: null });
+  }
+});
+
+const exitButton = exitScreen.element.getElementsByClassName('exid-yes')[0];
+if (exitButton != null) {
+  exitButton.onclick = function () { SDK?.dispatchEvent(SDK.EVENTS.EXIT); }
+}
 
 navigation.registerScreen(settingsScreen);
 navigation.registerScreen(languageScreen);
+navigation.registerScreen(menuScreen);
+navigation.registerScreen(exitScreen);
 
-if (platform == Platform.TV) {
-
-}
-
-input = new DirectionalInput({ element: null });
-
-input.addGlobalKeyHandle('Escape', () => {
-  console.log("Try invoke menu");
-
-  if (navigation.openedScreens.length == 0) {
-    navigation.push(settingsScreen);
-  } else {
-    navigation.pop();
-  }
-});
+new BackActionHandler(input,
+  () => {
+    if (navigation.openedScreens.length == 0) {
+      navigation.push(menuScreen);
+    } else {
+      navigation.pop();
+    }
+  },
+  () => {
+    navigation.push(exitScreen);
+  });
 
 let timer = 0;
 
 showInterstitial();
+
+const hintButtons = document.getElementsByClassName('hint-button');
+const mageButtons = document.getElementsByClassName('mage-button');
+const undoButtons = document.getElementsByClassName('undo-button');
+const timeButtons = document.getElementsByClassName('time-button');
 
 const screenParameters = { rules: oneSuitSpider, decksToWin: 8, onWinCallback: null, onLoseCallback: null, isSolitaire: false, onRestart: null, time: -1 };
 
@@ -88,9 +113,18 @@ function trySelectLevel() {
   const number = parseInt(levelID.substring(type.length, levelID.length));
 
   function removeBoosters() {
-    document.getElementById('mage-button')?.remove();
-    document.getElementById('undo-button')?.remove();
-    document.getElementById('time-button')?.remove();
+    for (let i = mageButtons.length - 1; i >= 0; i--) {
+      const element = mageButtons[i];
+      if (element) { element.remove(); }
+    }
+    for (let i = undoButtons.length - 1; i >= 0; i--) {
+      const element = undoButtons[i];
+      if (element) { element.remove(); }
+    }
+    for (let i = timeButtons.length - 1; i >= 0; i--) {
+      const element = timeButtons[i];
+      if (element) { element.remove(); }
+    }
   }
 
   switch (type) {
@@ -405,68 +439,99 @@ function setupBackgroundChange() {
 }
 
 function setupButtons() {
-  const hintButton = document.getElementById('hint-button');
-  let hintCounter = null;
-  if (hintButton) {
-    hintCounter = hintButton.getElementsByTagName('span')[0];
-    hintButton.onclick = function () {
-      if (user.hasItems(Items.BoosterHint)) {
-        if (useHintBooster(result.playableCardColumns, screenParameters.rules).isTrue) {
-          user.removeItem(Items.BoosterHint, 1);
+  const hintCounters = [];
+  for (let i = 0; i < hintButtons.length; i++) {
+    const element = hintButtons[i];
+    if (element != null) {
+      hintCounters.push(element.getElementsByTagName('span')[0]);
+      element.onclick = function () {
+        if (user.hasItems(Items.BoosterHint)) {
+          if (useHintBooster(result.playableCardColumns, screenParameters.rules).isTrue) {
+            user.removeItem(Items.BoosterHint, 1);
+          }
         }
       }
     }
-    hintCounter.innerText = `x${user.getItemCount(Items.BoosterHint)}`;
   }
+  hintCounters.forEach(element => {
+    element.innerText = `x${user.getItemCount(Items.BoosterHint)}`
+  });
 
-
-  const mageButton = document.getElementById('mage-button');
-  let mageCounter = null;
-  if (mageButton) {
-    mageCounter = mageButton.getElementsByTagName('span')[0];
-    mageButton.onclick = function () {
-      if (user.hasItems(Items.BoosterMage)) {
-        if (useMageBooster(result.mainCardColumn, result.playableCardColumns, screenParameters.rules).isTrue) {
-          user.removeItem(Items.BoosterMage, 1);
+  const mageCounters = [];
+  for (let i = 0; i < mageButtons.length; i++) {
+    const element = mageButtons[i];
+    if (element != null) {
+      mageCounters.push(element.getElementsByTagName('span')[0]);
+      element.onclick = function () {
+        if (user.hasItems(Items.BoosterMage)) {
+          if (useMageBooster(result.mainCardColumn, result.playableCardColumns, screenParameters.rules).isTrue) {
+            user.removeItem(Items.BoosterMage, 1);
+          }
         }
       }
     }
-    mageCounter.innerText = `x${user.getItemCount(Items.BoosterMage)}`;
   }
+  mageCounters.forEach(element => {
+    element.innerText = `x${user.getItemCount(Items.BoosterMage)}`
+  });
 
-  const timeButton = document.getElementById('time-button');
-  let timeCounter = null;
-  if (timeButton) {
-    timeCounter = timeButton.getElementsByTagName('span')[0];
-    timeButton.onclick = function () {
-      if (user.hasItems(Items.BoosterTime)) {
-        timer += 60;
+  const timeCounters = [];
+  for (let i = 0; i < timeButtons.length; i++) {
+    const element = timeButtons[i];
+    if (element != null) {
+      timeCounters.push(element.getElementsByTagName('span')[0]);
+      element.onclick = function () {
+        if (user.hasItems(Items.BoosterTime)) {
+          timer += 60;
 
-        user.removeItem(Items.BoosterTime, 1);
-      }
-    }
-    timeCounter.innerText = `x${user.getItemCount(Items.BoosterTime)}`;
-  }
-
-  const undoButton = document.getElementById('undo-button');
-  let undoCounter = null;
-  if (undoButton) {
-    undoCounter = undoButton.getElementsByTagName('span')[0];
-    undoButton.onclick = function () {
-      if (user.hasItems(Items.BoosterUndo)) {
-        if (useUndoBooster()) {
-          user.removeItem(Items.BoosterUndo, 1);
+          user.removeItem(Items.BoosterTime, 1);
         }
       }
     }
-    undoCounter.innerText = `x${user.getItemCount(Items.BoosterUndo)}`;
   }
+  timeCounters.forEach(element => {
+    element.innerText = `x${user.getItemCount(Items.BoosterTime)}`
+  });
+
+  const undoCounters = [];
+  for (let i = 0; i < undoButtons.length; i++) {
+    const element = undoButtons[i];
+    if (element != null) {
+      undoCounters.push(element.getElementsByTagName('span')[0]);
+      element.onclick = function () {
+        if (user.hasItems(Items.BoosterUndo)) {
+          if (useUndoBooster()) {
+            user.removeItem(Items.BoosterUndo, 1);
+          }
+        }
+      }
+    }
+  }
+  undoCounters.forEach(element => {
+    element.innerText = `x${user.getItemCount(Items.BoosterTime)}`
+  });
 
   user.itemListUpdateEvent.addListener(() => {
-    if (hintCounter != null) hintCounter.innerText = `x${user.getItemCount(Items.BoosterHint)}`;
-    if (mageCounter != null) mageCounter.innerText = `x${user.getItemCount(Items.BoosterMage)}`;
-    if (timeCounter != null) timeCounter.innerText = `x${user.getItemCount(Items.BoosterTime)}`;
-    if (undoCounter != null) undoCounter.innerText = `x${user.getItemCount(Items.BoosterUndo)}`;
+    if (hintCounters.length > 0) {
+      hintCounters.forEach(element => {
+        element.innerText = `x${user.getItemCount(Items.BoosterHint)}`
+      });
+    }
+    if (mageCounters.length > 0) {
+      mageCounters.forEach(element => {
+        element.innerText = `x${user.getItemCount(Items.BoosterMage)}`
+      });
+    }
+    if (timeCounters.length > 0) {
+      timeCounters.forEach(element => {
+        element.innerText = `x${user.getItemCount(Items.BoosterTime)}`
+      });
+    }
+    if (undoCounters.length > 0) {
+      undoCounters.forEach(element => {
+        element.innerText = `x${user.getItemCount(Items.BoosterTime)}`
+      });
+    }
   })
 
   const restartButtons = document.getElementsByClassName('reset-level-button');
@@ -477,6 +542,7 @@ function setupButtons() {
       if (!CanInteract) return;
 
       startCurrentLevel();
+      navigation.pop();
     }
   }
 

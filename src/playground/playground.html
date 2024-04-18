@@ -96,6 +96,62 @@
       </button>
     </div>
   </div>
+  <div class="popup menu fade-hidden" id="menu">
+    <div class="popup-content">
+      <div class="popup-header">
+        <h3 lang="menu">Меню</h3>
+      </div>
+      <div class="menu-control-panel">
+        <div class="setting-btn-container">
+          <a href="../../index.html">
+            <button class="settings-navigation-btn">
+              <img src="../../Sprites/Icons/Icon_Home.png" alt="Icon_Music_Off" class="settings-navigation-list-icon" />
+            </button>
+          </a>
+        </div>
+        <div class="menu-btns-group">
+          <div class="setting-btn-container">
+            <button class="settings-navigation-btn settings-button">
+              <img src="../../Sprites/Icons/Icon_Settings.png" alt="Icon_Sound_Off"
+                class="settings-navigation-list-icon" />
+            </button>
+          </div>
+          <div class="setting-btn-container reset-level-button">
+            <button class="settings-navigation-btn">
+              <img src="../../Sprites/Icons/Icon_Restart.png" alt="Icon_Skins" class="settings-navigation-list-icon"
+                id="restart-button" />
+            </button>
+          </div>
+        </div>
+      </div>
+      <ul class="footer-control-panel">
+        <li>
+          <button class="control-btn hint-button">
+            <img src="../../Sprites/Icons/Icon_Hint.png" alt="Icon_Skins" class="control-button-list-icon" />
+            <span style="color:antiquewhite; font-size: 2vh; position: absolute; right:0; bottom:0">x5</span>
+          </button>
+        </li>
+        <li>
+          <button class="control-btn undo-button">
+            <img src="../../Sprites/Icons/Icon_Undo.png" alt="Icon_Skins" class="control-button-list-icon" />
+            <span style="color:antiquewhite; font-size: 2vh; position: absolute; right:0; bottom:0">x5</span>
+          </button>
+        </li>
+        <li>
+          <button class="control-btn mage-button">
+            <img src="../../Sprites/Icons/Icon_Mage.png" alt="Icon_Skins" class="control-button-list-icon" />
+            <span style="color:antiquewhite; font-size: 2vh; position: absolute; right:0; bottom:0">x5</span>
+          </button>
+        </li>
+        <li>
+          <button class="control-btn time-button">
+            <img src="../../Sprites/Icons/Icon_Time.png" alt="Icon_Skins" class="control-button-list-icon" />
+            <span style="color:antiquewhite; font-size: 2vh; position: absolute; right:0; bottom:0">x5</span>
+          </button>
+        </li>
+      </ul>
+    </div>
+  </div>
   <div class="popup settings fade-hidden" id="settings">
     <div class="popup-content">
       <div class="popup-header">
@@ -161,60 +217,6 @@
       <div class="version">
         <span class="version-title">v0.0.2.19</span>
       </div>
-    </div>
-  </div>
-  <div class="popup menu fade-hidden" id="menu">
-    <div class="popup-content">
-      <div class="popup-header">
-        <h3>Меню</h3>
-      </div>
-      <div class="menu-control-panel">
-        <div class="setting-btn-container">
-          <button class="settings-navigation-btn">
-            <img src="../../Sprites/Icons/Icon_Home.png" alt="Icon_Music_Off" class="settings-navigation-list-icon" />
-          </button>
-        </div>
-        <div class="menu-btns-group">
-          <div class="setting-btn-container">
-            <button class="settings-navigation-btn settings-button">
-              <img src="../../Sprites/Icons/Icon_Settings.png" alt="Icon_Sound_Off"
-                class="settings-navigation-list-icon" />
-            </button>
-          </div>
-          <div class="setting-btn-container">
-            <button class="control-btn">
-              <img src="../../Sprites/Icons/Icon_Restart.png" alt="Icon_Skins" class="control-button-list-icon"
-                id="restart-button" />
-            </button>
-          </div>
-        </div>
-      </div>
-      <ul class="footer-control-panel">
-        <li>
-          <button class="control-btn" id="hint-button">
-            <img src="../../Sprites/Icons/Icon_Hint.png" alt="Icon_Skins" class="control-button-list-icon" />
-            <span style="color:antiquewhite; font-size: 2vh; position: absolute; right:0; bottom:0">x5</span>
-          </button>
-        </li>
-        <li>
-          <button class="control-btn" id="undo-button">
-            <img src="../../Sprites/Icons/Icon_Undo.png" alt="Icon_Skins" class="control-button-list-icon" />
-            <span style="color:antiquewhite; font-size: 2vh; position: absolute; right:0; bottom:0">x5</span>
-          </button>
-        </li>
-        <li>
-          <button class="control-btn" id="mage-button">
-            <img src="../../Sprites/Icons/Icon_Mage.png" alt="Icon_Skins" class="control-button-list-icon" />
-            <span style="color:antiquewhite; font-size: 2vh; position: absolute; right:0; bottom:0">x5</span>
-          </button>
-        </li>
-        <li>
-          <button class="control-btn" id="time-button">
-            <img src="../../Sprites/Icons/Icon_Time.png" alt="Icon_Skins" class="control-button-list-icon" />
-            <span style="color:antiquewhite; font-size: 2vh; position: absolute; right:0; bottom:0">x5</span>
-          </button>
-        </li>
-      </ul>
     </div>
   </div>
   <div class="popup languages fade-hidden" id="languages">
@@ -296,6 +298,21 @@
             <img src="../../Sprites/Icons/Icon_Check.png" alt="Check" class="accept-checkbox-icon hidden">
           </div>
         </div>
+      </div>
+    </div>
+  </div>
+  <div class="popup exid-game fade-hidden" id="exid-game">
+    <div class="popup-content">
+      <div class="popup-header">
+        <h3 class="exid-tab-title" lang="exit_question">Вы уверены, что хотите выйти из игры?</h3>
+      </div>
+      <div class="exid-btns-container">
+        <button class="start-level-btn exid-yes" id="play-btn">
+          <span class="start-level-btn-title" lang="yes">Да</span>
+        </button>
+        <button class="start-level-btn exid-no" id="play-btn">
+          <span class="start-level-btn-title" lang="no">Нет</span>
+        </button>
       </div>
     </div>
   </div>
@@ -1105,25 +1122,25 @@
           </button>
         </li>
         <li>
-          <button class="control-btn" id="hint-button">
+          <button class="control-btn hint-button">
             <img src="../../Sprites/Icons/Icon_Hint.png" alt="Icon_Skins" class="control-button-list-icon" />
             <span style="color:antiquewhite; font-size: 2vh; position: absolute; right:0; bottom:0">x5</span>
           </button>
         </li>
         <li>
-          <button class="control-btn" id="undo-button">
+          <button class="control-btn undo-button">
             <img src="../../Sprites/Icons/Icon_Undo.png" alt="Icon_Skins" class="control-button-list-icon" />
             <span style="color:antiquewhite; font-size: 2vh; position: absolute; right:0; bottom:0">x5</span>
           </button>
         </li>
         <li>
-          <button class="control-btn" id="mage-button">
+          <button class="control-btn mage-button">
             <img src="../../Sprites/Icons/Icon_Mage.png" alt="Icon_Skins" class="control-button-list-icon" />
             <span style="color:antiquewhite; font-size: 2vh; position: absolute; right:0; bottom:0">x5</span>
           </button>
         </li>
         <li>
-          <button class="control-btn" id="time-button">
+          <button class="control-btn time-button">
             <img src="../../Sprites/Icons/Icon_Time.png" alt="Icon_Skins" class="control-button-list-icon" />
             <span style="color:antiquewhite; font-size: 2vh; position: absolute; right:0; bottom:0">x5</span>
           </button>
