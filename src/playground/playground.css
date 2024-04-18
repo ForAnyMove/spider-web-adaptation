@@ -479,8 +479,82 @@ header {
   justify-content: flex-end;
   background-image: url('../../Sprites/Card Backs/Card_Backs.png');
 }
+.tutorial-tab{
+  justify-content: center;
+}
+.tutorial-screen{
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  height: 35vh;
+  position: relative;
+}
+.tutorial-screen:first-child{
+  height: 50vh;
+}
+.tutorial-cards-column{
+  margin: 1vh;
+}
+.tutorial-cards-column>.tutorial-card-element,
+.cards-deck>.tutorial-card-element{
+  width: 10vh;
+  height: 14vh;
+}
+.tutorial-cards-column>.tutorial-card-element:not(:first-child){
+  margin-top: -11vh;
+}
+.tutorial-cards-info{
+  width: 40vh;
+  margin-left: 15vh;
+  font-size: 2.5vh;
+  align-self: center;
+}
+.next-tutorial-screen-btn {
+  border-radius: 1vh;
+  border: none;
+  width: 20vh;
+  background: no-repeat;
+  background-size: 100% 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0 2vh 0.7vh 2vh;
+  background-image: url('../../Sprites/Buttons/Used_Button_03.png');
+  font-size: 1.8vh;
+  transform: translateY(200%);
+}
+.next-tutorial-screen-btn-title {
+  font-weight: bold;
+  color: #00000049;
+  padding: 1.6vh 0;
+}
+.movable-container-mask{
+  width: 10vh;
+  height: 14vh;
+  position: absolute;
+  background-color: #00970f51;
+  border-radius: 1vh;
+  left: 13.5vh;
+  top: 15.5vh;
+}
+.movable-cards-column{
+  position: absolute;
+  left: 13vh;
+}
+.selected-tutorial-column{
+  outline: 0.5vh solid #85ff6f;
+}
+.cards-deck{
+  width: 10vh;
+  height: 14vh;
+  position: absolute;
+  left: 0;
+  bottom: -14vh;
+}
 
-
+.cards-deck>.tutorial-card-element:not(:first-child){
+  margin-top: -14.1vh;
+}
 .version {
   display: flex;
   justify-content: end;
@@ -887,11 +961,42 @@ footer {
   }
   .menu>.popup-content {
     width: 40vh;
-}
-
+  }
+  .tutorial-screen{
+    justify-content: space-between;
+    width: 95%;
+  }
   .control-button-list-icon {
     width: 4.5vh;
     margin-top: 10%;
+  }
+  .tutorial-cards-info{
+    width: 50vw;
+    margin-left: 2vh;
+    font-size: 1.2vh;
+  }
+  .tutorial-cards-column>.tutorial-card-element,
+  .cards-deck>.tutorial-card-element{
+    width: 6.5vh;
+    height: 9vh;
+  }
+  .tutorial-cards-column>.tutorial-card-element:not(:first-child){
+    margin-top: -7vh;
+  }
+  .cards-deck{
+    bottom: 0vh;
+  }
+  .cards-deck>.tutorial-card-element:not(:first-child){
+    margin-top: -9.1vh;
+  }
+  .next-tutorial-screen-btn{
+    transform: translateY(150%);
+  }
+  
+  .movable-container-mask{
+    width: 6.5vh;
+    height: 9vh;
+    top: 20vh;
   }
 }
 
