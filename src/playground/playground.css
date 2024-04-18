@@ -651,6 +651,29 @@ header {
   width: 4vh;
 }
 
+.skins-collection-slider-tab{
+  position: absolute;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.84);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 11;
+}
+.skins-collection-slider{
+  margin-left: 1vw;
+  width: 100%;
+  overflow: scroll;
+  display: flex;
+  column-gap: 2vw;
+}
+.skins-collection-slider>.skin-card{
+  margin-left: 3vh;
+}
+.skins-collection-slider::-webkit-scrollbar {
+  width: 0;
+}
 main {
   flex: 1 1 auto;
 }
