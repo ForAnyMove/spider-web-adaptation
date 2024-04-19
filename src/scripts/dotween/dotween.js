@@ -72,6 +72,92 @@ class Tweener {
     }
 }
 
+class Sequence {
+    constructor() {
+        this.tweens = [];
+        this.currentTweenIndex = 0;
+        this.isLaunched = false;
+
+        this.completedCallback = null;
+    }
+
+    clear = function () {
+        this.tweens = [];
+        this.currentTweenIndex = 0;
+        this.isLaunched = false;
+    }
+
+    append = function (tween) {
+        tween.isLaunched = false;
+        this.tweens.push([tween]);
+
+        if (this.tweens.length == 1) {
+            this.launch();
+        }
+    }
+
+    join = function (tween) {
+        tween.isLaunched = false;
+        if (this.tweens.length == 0) {
+            this.tweens.push([tween]);
+        } else {
+            console.log('join');
+            this.tweens[this.tweens.length - 1].push(tween);
+        }
+
+        if (this.tweens.length == 1) {
+            this.launch();
+        }
+    }
+
+    launch = function () {
+        if (this.isLaunched) return;
+        this.isLaunched = true;
+        this.currentTweenIndex = 0;
+
+        this.startTween(this.currentTweenIndex);
+    }
+
+    startTween = function (index) {
+        const tweens = this.tweens[index];
+
+        let maxDuration = 0;
+        let maxDurationTween = null;
+        for (let i = 0; i < tweens.length; i++) {
+            const tween = tweens[i];
+            if (tween.duration > maxDuration) {
+                maxDuration = tween.duration;
+                maxDurationTween = tween;
+            }
+
+            tween.isLaunched = true;
+        }
+
+        maxDurationTween.onComplete(() => {
+            if (index < this.tweens.length - 1) {
+                this.startTween(++index);
+            } else {
+                this.completedCallback?.();
+            }
+        })
+    }
+    onComplete = function (completedCallback) {
+        this.completedCallback = completedCallback;
+    }
+
+    kill = function () {
+        for (let i = 0; i < this.tweens.length; i++) {
+            const el1 = this.tweens[i];
+            for (let i = 0; i < el1.length; i++) {
+                const el2 = el1[i];
+                el2.destroy(false);
+            }
+        }
+
+        this.clear();
+    }
+}
+
 class Tween {
     constructor(dur, initVal, val, ease, onUpdate) {
         this.duration = dur;
@@ -80,23 +166,29 @@ class Tween {
         this.ease = ease;
         this.onUpdate = onUpdate;
         this.currentTime = 0;
+        this.completedCallback = [];
+        this.isLaunched = true;
     }
 
     update = (dt) => {
-        if (this.onUpdate != null) {
+        if (this.onUpdate != null && this.isLaunched) {
             this.onUpdate(this);
             this.currentTime += dt / 60;
         }
     }
 
-    destroy = function () {
+    destroy = function (withCallback = true) {
         tweener.removeTween(this);
 
-        this.completedCallback?.();
+        if (withCallback) {
+            for (let i = 0; i < this.completedCallback.length; i++) {
+                this.completedCallback[i]?.();
+            }
+        }
     }
 
     onComplete = function (completedCallback) {
-        this.completedCallback = completedCallback;
+        this.completedCallback.push(completedCallback);
     }
 }
 
@@ -153,7 +245,7 @@ function DelayedCall(duration, callback) {
         }
     });
 
-    tweener.tweens.push(tween);
+    tweener.addTween(tween);
     return tween;
 }
 
@@ -315,4 +407,4 @@ function DOEase(type, t, b, c, d) {
 }
 //#endregion
 
-export { createTweener, DOChangeXY, DOChangeValue, DelayedCall, Ease }
+export { createTweener, DOChangeXY, DOChangeValue, DelayedCall, Ease, Sequence }

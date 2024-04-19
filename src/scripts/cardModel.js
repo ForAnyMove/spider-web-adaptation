@@ -287,7 +287,7 @@ export default class Card {
 
         this.domElement.style.left = `${pos.x}px`;
         this.domElement.style.top = `${pos.y}px`;
-        this.domElement.style.zIndex = 1000;
+        this.domElement.style.zIndex = 2;
     }
 }
 

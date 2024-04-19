@@ -1,7 +1,7 @@
 import { animator } from "../scripts/animator.js";
 import { useHintBooster, useMageBooster, useUndoBooster } from "../scripts/boosters.js";
 import { cardCollector } from "../scripts/cardsCollector.js";
-import { createTweener } from "../scripts/dotween/dotween.js";
+import { DOChangeValue, DOChangeXY, DelayedCall, Ease, Sequence, createTweener } from "../scripts/dotween/dotween.js";
 import { CanInteract, disableInteractions, enableInteractions } from "../scripts/globalEvents.js";
 import { createElement, createImage, createTextSpan, getElements, getIconByItem, getInputElements, secondsToTime } from "../scripts/helpers.js";
 import { createLevel, createSolitaireLevel } from "../scripts/levelCreator.js";
@@ -18,6 +18,7 @@ import { showInterstitial, showRewarded } from "../scripts/sdk/sdk.js";
 import DirectionalInput from "../scripts/directionInput.js";
 import { StackNavigation, Screen, BackActionHandler } from "../scripts/navigation/navigation.js";
 import DynamicFontChanger from "../localization/dynamicFontChanger.js";
+import { initialLocale } from "../localization/translator.js";
 
 input = new DirectionalInput({ element: null });
 
@@ -831,32 +832,505 @@ function setupLanguageSelector(initialLocale) {
     }
   }
 }
-const queryString = window.location.search;
-const params = new URLSearchParams(queryString);
-const isTutorial = params.get('isTutorial');
-const tutorialTab = document.getElementById('tutorial')
-if (isTutorial) {
-  tutorialTab.style.display = 'flex'
-}
-const tutorialScreens = Array.from(document.getElementsByClassName('tutorial-screen'))
-const nextTutorialScreenBtn = document.getElementById('next-tutorial-screen-btn')
-let tutorialStep = 0;
-nextTutorialScreenBtn.addEventListener('click', () => {
-  if (tutorialStep < 6) {
-    tutorialScreens[tutorialStep].style.display = 'none'
-    tutorialStep++
-    tutorialScreens[tutorialStep].style.display = 'flex'
-  } else {
-    tutorialTab.style.display = 'none'
-    window.location.href = '../../index.html';
-  }
-})
 
-const skinsCollectionBackBtn = document.getElementById('skins-collection-back-btn')
-const skinsCollectionSliderTab = document.getElementById('skins-collection-slider-tab')
-skinsCollectionBackBtn.addEventListener('click', () => {
-  skinsCollectionSliderTab.style.display = 'none'
-})
+// const skinsCollectionBackBtn = document.getElementById('skins-collection-back-btn')
+// const skinsCollectionSliderTab = document.getElementById('skins-collection-slider-tab')
+
+// skinsCollectionBackBtn.addEventListener('click', () => {
+//   skinsCollectionSliderTab.style.display = 'none'
+// });
+
+function invokeTutorial() {
+  const queryString = window.location.search;
+  const params = new URLSearchParams(queryString);
+  const isTutorial = params.get('isTutorial');
+
+  const tutorialTab = document.getElementById('tutorial')
+  if (isTutorial) {
+    tutorialTab.style.display = 'flex'
+  }
+
+  const tutorialScreens = Array.from(document.getElementsByClassName('tutorial-screen'));
+
+  const tutorial_01 = {
+    customData: {}, screen: tutorialScreens[0],
+    open: () => {
+      tutorial_01.screen.style.display = 'flex';
+      const cards = tutorial_01.screen.getElementsByClassName('tutorial-card-element');
+      const sequenceOne = new Sequence();
+      const sequenceTwo = new Sequence();
+
+      function partOne() {
+        sequenceOne.clear();
+
+        for (let i = 1; i < cards.length; i++) {
+          const element = cards[i];
+          element.style.scale = 0;
+          element.style.opacity = 0;
+          sequenceOne.append(DOChangeValue(() => 0, (val) => {
+            element.style.scale = Math.min((val + .3), 1);
+            element.style.opacity = val;
+          }, 1, 0.1, Ease.SineOut));
+        }
+      }
+
+      function partTwo() {
+        sequenceTwo.clear();
+
+        for (let i = 1; i < cards.length; i++) {
+          const element = cards[i];
+          element.style.scale = 1;
+          element.style.opacity = 1;
+          sequenceTwo.append(DOChangeValue(() => 1, (val) => {
+            element.style.scale = (1 + (1 - val) * 0.2);
+            element.style.opacity = val;
+          }, 0, 0.02, Ease.Linear));
+        }
+      }
+
+      partOne();
+
+      sequenceOne.onComplete(() => { DelayedCall(0.25, () => { partTwo(); }) });
+      sequenceTwo.onComplete(() => { DelayedCall(0.2, () => { partOne(); }) });
+
+      tutorial_01.customData.kill = () => {
+        sequenceOne.kill();
+        sequenceTwo.kill();
+      }
+    },
+    close: () => {
+    }
+  }
+
+  const tutorial_02 = {
+    customData: {}, screen: tutorialScreens[0],
+    open: () => {
+      tutorial_02.screen.getElementsByClassName('tutorial-cards-info')[0].lang = 'tutorial_02';
+      languageChangeEvent.invoke(initialLocale);
+    },
+    close: () => {
+      tutorial_01.customData.kill?.();
+      tutorial_01.screen.style.display = 'none';
+    }
+  }
+
+  const tutorial_03 = {
+    customData: {}, screen: tutorialScreens[1],
+    open: () => {
+      tutorial_03.screen.style.display = 'flex';
+
+      const finger = tutorial_03.screen.getElementsByClassName('finger')[0];
+      finger.style.zIndex = 1001;
+      document.body.appendChild(finger);
+
+      const targetColumn = tutorial_03.screen.getElementsByClassName('movable-cards-column')[0];
+      const targetColumnCards = targetColumn.getElementsByClassName('tutorial-card-element');
+      const lastCardBox = targetColumnCards[targetColumnCards.length - 1].getBoundingClientRect();
+
+      const offset = lastCardBox.height + parseFloat(window.getComputedStyle(targetColumnCards[targetColumnCards.length - 1]).marginTop);
+
+      const movableCards = tutorial_03.screen.getElementsByClassName('movable-cards-column')[1].getElementsByClassName('tutorial-card-element');
+      const sequence = new Sequence();
+
+      const elements = [];
+      for (let i = 0; i < movableCards.length; i++) {
+        const element = movableCards[i];
+        elements.push(element)
+      }
+
+      function remove(element) {
+        const pos = { x: element.getBoundingClientRect().left, y: element.getBoundingClientRect().top };
+        element.style.position = 'absolute';
+        document.body.appendChild(element);
+
+        element.style.left = `${pos.x}px`;
+        element.style.top = `${pos.y}px`;
+        element.style.zIndex = 1000;
+      }
+
+      for (let i = 0; i < elements.length; i++) {
+        const element = elements[i];
+        remove(element);
+        move(element, { x: parseFloat(element.style.left), y: parseFloat(element.style.top) + offset * i });
+      }
+
+      function move(element, position) {
+        element.style.left = position.x + 'px';
+        element.style.top = position.y + 'px';
+      }
+
+      const startPosition = { x: parseFloat(elements[0].style.left), y: parseFloat(elements[0].style.top) }
+      const targetPosition = { x: lastCardBox.left, y: lastCardBox.top + offset };
+
+      function startAnimation() {
+        sequence.kill();
+
+
+        finger.style.left = startPosition.x + offset + 'px';
+        finger.style.top = startPosition.y + 'px';
+
+        sequence.append(DOChangeValue(() => 0, (val) => {
+          finger.style.opacity = val;
+          finger.style.scale = val;
+        }, 1, .2, Ease.BackOut));
+        sequence.append(DOChangeXY(() => startPosition, (val) => {
+          for (let i = 0; i < elements.length; i++) {
+            const element = elements[i];
+            move(element, { x: val.x, y: val.y + offset * i })
+          }
+
+          finger.style.left = val.x + offset + 'px';
+          finger.style.top = val.y + 'px';
+        }, targetPosition, .25, Ease.Linear));
+        sequence.append(DelayedCall(0.2, null));
+        sequence.append(DOChangeXY(() => targetPosition, (val) => {
+          for (let i = 0; i < elements.length; i++) {
+            const element = elements[i];
+            move(element, { x: val.x, y: val.y + offset * i })
+          }
+
+          finger.style.left = val.x + offset + 'px';
+          finger.style.top = val.y + 'px';
+        }, startPosition, .25, Ease.Linear));
+        sequence.append(DOChangeValue(() => 1, (val) => {
+          finger.style.opacity = val;
+          finger.style.scale = val;
+        }, 0, .1, Ease.Linear));
+        sequence.append(DelayedCall(0.2, null));
+      }
+
+      sequence.onComplete(() => startAnimation());
+      startAnimation();
+
+      tutorial_03.customData.kill = function () {
+        sequence.kill();
+
+        for (let i = 0; i < elements.length; i++) {
+          const element = elements[i];
+          element.remove();
+        }
+      }
+    },
+    close: () => {
+      tutorial_03.customData.kill?.();
+      tutorial_03.screen.style.display = 'none';
+    }
+  }
+
+  const tutorial_04 = {
+    customData: {}, screen: tutorialScreens[2],
+    open: () => {
+      tutorial_04.screen.style.display = 'flex';
+
+      const finger = document.getElementsByClassName('finger')[0];
+      finger.style.zIndex = 1001;
+      document.body.appendChild(finger);
+
+      const targetColumn = tutorial_04.screen.getElementsByClassName('tutorial-cards-column')[1];
+      const lastCardBox = targetColumn.getBoundingClientRect();
+
+      const movableCards = tutorial_04.screen.getElementsByClassName('tutorial-cards-column')[0].getElementsByClassName('tutorial-card-element');
+      const offset = lastCardBox.height + parseFloat(window.getComputedStyle(movableCards[movableCards.length - 1]).marginTop);
+
+      const sequence = new Sequence();
+
+      const elements = [];
+      for (let i = 0; i < movableCards.length; i++) {
+        const element = movableCards[i];
+        if (i > 3)
+          elements.push(element)
+      }
+
+      function remove(element) {
+        const pos = { x: element.getBoundingClientRect().left, y: element.getBoundingClientRect().top };
+        element.style.position = 'absolute';
+        document.body.appendChild(element);
+
+        element.style.left = `${pos.x}px`;
+        element.style.top = `${pos.y}px`;
+        element.style.zIndex = 1000;
+      }
+
+      for (let i = 0; i < elements.length; i++) {
+        const element = elements[i];
+        remove(element);
+        move(element, { x: parseFloat(element.style.left), y: parseFloat(element.style.top) + offset * i });
+      }
+
+      function move(element, position) {
+        element.style.left = position.x + 'px';
+        element.style.top = position.y + 'px';
+      }
+
+      const startPosition = { x: parseFloat(elements[0].style.left), y: parseFloat(elements[0].style.top) }
+      const targetPosition = { x: lastCardBox.left, y: lastCardBox.top };
+
+      function startAnimation() {
+        sequence.kill();
+
+
+        finger.style.left = startPosition.x + offset + 'px';
+        finger.style.top = startPosition.y + 'px';
+
+        sequence.append(DOChangeValue(() => 0, (val) => {
+          finger.style.opacity = val;
+          finger.style.scale = val;
+        }, 1, .2, Ease.BackOut));
+        sequence.append(DOChangeXY(() => startPosition, (val) => {
+          for (let i = 0; i < elements.length; i++) {
+            const element = elements[i];
+            move(element, { x: val.x, y: val.y + offset * i })
+          }
+
+          finger.style.left = val.x + offset + 'px';
+          finger.style.top = val.y + 'px';
+        }, targetPosition, .25, Ease.Linear));
+        sequence.append(DelayedCall(0.2, null));
+        sequence.append(DOChangeXY(() => targetPosition, (val) => {
+          for (let i = 0; i < elements.length; i++) {
+            const element = elements[i];
+            move(element, { x: val.x, y: val.y + offset * i })
+          }
+
+          finger.style.left = val.x + offset + 'px';
+          finger.style.top = val.y + 'px';
+        }, startPosition, .25, Ease.Linear));
+        sequence.append(DOChangeValue(() => 1, (val) => {
+          finger.style.opacity = val;
+          finger.style.scale = val;
+        }, 0, .1, Ease.Linear));
+        sequence.append(DelayedCall(0.2, null));
+      }
+
+      sequence.onComplete(() => startAnimation());
+      startAnimation();
+
+
+      tutorial_04.customData.kill = function () {
+        sequence.kill();
+
+        for (let i = 0; i < elements.length; i++) {
+          const element = elements[i];
+          element.remove();
+        }
+      }
+    },
+    close: () => {
+      tutorial_04.customData.kill?.();
+      tutorial_04.screen.style.display = 'none';
+    }
+  }
+
+  const tutorial_05 = {
+    customData: {},
+    screen: tutorialScreens[3],
+    open: () => {
+      tutorial_05.screen.style.display = 'flex';
+
+      const finger = document.getElementsByClassName('finger')[0];
+
+      const deck = tutorial_05.screen.getElementsByClassName('cards-deck')[0];
+      const deckCards = deck.children;
+      const deckBox = deck.getBoundingClientRect();
+
+      const targetColumns = tutorial_05.screen.getElementsByClassName('tutorial-cards-column');
+      const targetColumnsBoxes = [
+        targetColumns[0].getBoundingClientRect(),
+        targetColumns[1].getBoundingClientRect(),
+      ]
+      const offset = targetColumns[0].children[0].getBoundingClientRect().height + parseFloat(window.getComputedStyle(targetColumns[0].children[1]).marginTop);
+
+      const sequence = new Sequence();
+
+      const elements = [];
+      for (let i = 0; i < deckCards.length; i++) {
+        const element = deckCards[i];
+        elements.push(element);
+        remove(element);
+        if (i >= 1) break;
+      }
+
+      function remove(element) {
+        const pos = { x: element.getBoundingClientRect().left, y: element.getBoundingClientRect().top };
+        element.style.position = 'absolute';
+        document.body.appendChild(element);
+
+        element.style.left = `${pos.x}px`;
+        element.style.top = `${pos.y}px`;
+        element.style.zIndex = 1000;
+      }
+
+      remove(finger);
+
+
+      function move(element, position) {
+        element.style.left = position.x + 'px';
+        element.style.top = position.y + 'px';
+      }
+
+      const startPosition = { x: deckBox.left, y: deckBox.top };
+      const targetPositions = [
+        { x: targetColumnsBoxes[0].left, y: targetColumnsBoxes[0].top + targetColumns[0].childElementCount * offset },
+        { x: targetColumnsBoxes[1].left, y: targetColumnsBoxes[1].top + targetColumns[1].childElementCount * offset },
+      ]
+
+      function startAnimation() {
+        sequence.kill();
+
+        finger.style.left = startPosition.x + deckBox.width / 3 + 'px';
+        finger.style.top = startPosition.y + deckBox.height / 3 + 'px';
+
+        sequence.append(DOChangeValue(() => 0, (val) => {
+          finger.style.opacity = val;
+          finger.style.scale = val;
+        }, 1, .2, Ease.BackOut));
+
+        for (let i = 0; i < targetPositions.length; i++) {
+          const targetPosition = targetPositions[i];
+          if (i == 0) {
+            sequence.append(DOChangeXY(() => startPosition, (val) => {
+              move(elements[i], { x: val.x, y: val.y })
+            }, targetPosition, .1, Ease.SineInOut));
+          } else {
+            sequence.join(DOChangeXY(() => startPosition, (val) => {
+              move(elements[i], { x: val.x, y: val.y })
+            }, targetPosition, .1, Ease.SineInOut));
+          }
+        }
+
+        const cards = [
+          `url('../../Sprites/Card Skins/Release/Skin_01/seven_spades_01.png')`,
+          `url('../../Sprites/Card Skins/Release/Skin_01/ace_spades_01.png')`,
+        ];
+        for (let i = 0; i < elements.length; i++) {
+          const tween = DOChangeValue(() => 1, (value) => {
+            elements[i].style.scale = `${value} 1`;
+          }, 0, 0.05, Ease.SineInOut);
+          tween.onComplete(() => {
+            elements[i].style.backgroundImage = cards[i];
+            DOChangeValue(() => 0, (value) => {
+              elements[i].style.scale = `${value} 1`;
+            }, 1, 0.05, Ease.SineInOut).onComplete(() => {
+              elements[i].style.scale = `1 1`;
+            })
+          })
+          sequence.join(tween);
+        }
+        sequence.append(DelayedCall(0.3, null));
+        sequence.append(DOChangeValue(() => 1, (val) => {
+          finger.style.opacity = val;
+          finger.style.scale = val;
+        }, 0, .2, Ease.BackOut));
+
+        for (let i = 0; i < targetPositions.length; i++) {
+          const targetPosition = targetPositions[i];
+          if (i == 0) {
+            sequence.append(DOChangeXY(() => targetPosition, (val) => {
+              move(elements[i], { x: val.x, y: val.y })
+            }, startPosition, .1, Ease.SineInOut));
+          } else {
+            sequence.join(DOChangeXY(() => targetPosition, (val) => {
+              move(elements[i], { x: val.x, y: val.y })
+            }, startPosition, .1, Ease.SineInOut));
+          }
+        }
+        for (let i = 0; i < elements.length; i++) {
+          const tween = DOChangeValue(() => 1, (value) => {
+            elements[i].style.scale = `${value} 1`;
+          }, 0, 0.05, Ease.SineInOut);
+          tween.onComplete(() => {
+            elements[i].style.backgroundImage = `url(../../Sprites/CardBacks/Card_Back_01.png)`
+            DOChangeValue(() => 0, (value) => {
+              elements[i].style.scale = `${value} 1`;
+            }, 1, 0.05, Ease.SineInOut).onComplete(() => {
+              elements[i].style.scale = `1 1`;
+            })
+          })
+          sequence.join(tween);
+        }
+        sequence.append(DelayedCall(0.3, null));
+      }
+
+      sequence.onComplete(() => {
+        startAnimation();
+      })
+      startAnimation();
+
+
+      tutorial_05.customData.kill = function () {
+        sequence.kill();
+
+        for (let i = 0; i < elements.length; i++) {
+          const element = elements[i];
+          element.remove();
+        }
+
+        finger.remove();
+      }
+
+    }, close: () => {
+      tutorial_05.customData.kill?.();
+      tutorial_05.screen.style.display = 'none';
+    }
+  }
+
+  const tutorial_06 = {
+    screen: tutorialScreens[4],
+    open: () => {
+      tutorial_06.screen.style.display = 'flex';
+    },
+    close: () => {
+      tutorial_06.screen.style.display = 'none';
+    }
+  }
+
+  const tutorial_07 = {
+    screen: tutorialScreens[5],
+    open: () => {
+      tutorial_07.screen.style.display = 'flex';
+    },
+    close: () => {
+      tutorial_07.screen.style.display = 'none';
+    }
+  }
+
+  const tutorial_08 = {
+    screen: tutorialScreens[6],
+    open: () => {
+      tutorial_08.screen.style.display = 'flex';
+    },
+    close: () => {
+      tutorial_08.screen.style.display = 'none';
+    }
+  }
+
+
+  const tutorials = [tutorial_01, tutorial_02, tutorial_03, tutorial_04, tutorial_05, tutorial_06, tutorial_07, tutorial_08];
+
+  const nextTutorialScreenBtn = document.getElementById('next-tutorial-screen-btn')
+
+  let tutorialStep = 0;
+
+  function nextTutorial() {
+    tutorials[tutorialStep].close();
+    tutorialStep++;
+    if (tutorialStep == tutorials.length) {
+      tutorialTab.style.display = 'none'
+      window.location.href = '../../index.html';
+      return;
+    }
+
+    tutorials[tutorialStep].open();
+  }
+
+  nextTutorialScreenBtn.onclick = function () {
+    nextTutorial();
+  };
+
+  tutorials[tutorialStep].open();
+}
+
+invokeTutorial();
 
 export { setupLanguageSelector }
 import('../localization/testingLangChanger.js');
