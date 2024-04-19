@@ -125,6 +125,7 @@ main {
   margin: 1vh auto;
   box-sizing: border-box;
   position: relative;
+  height: 5vh;
 }
 
 .categories-btn:hover {
