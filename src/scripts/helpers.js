@@ -379,7 +379,66 @@ function getValueByKeyInArray(key, array) {
 
     return null;
 }
-function setDynamicFontSize(text, recursive = true) {
+
+function setDynamicContainerText(struct, recursive = true) {
+    struct.maxFontSizes = [];
+    struct.fontSizes = [];
+
+    const containerStyle = window.getComputedStyle(struct.container);
+    const containerPadding = {
+        width: parseFloat(containerStyle.paddingLeft) + parseFloat(containerStyle.paddingRight),
+        height: parseFloat(containerStyle.paddingTop) + parseFloat(containerStyle.paddingBottom)
+    }
+    const containerSize = {
+        width: struct.container.offsetWidth - containerPadding.width,
+        height: struct.container.offsetHeight - containerPadding.height
+    }
+
+    const textSize = { width: struct.elements[0].offsetWidth, height: 0 }
+    let overalFontSize = 0;
+
+    for (let i = 0; i < struct.elements.length; i++) {
+        const element = struct.elements[i];
+        textSize.height += element.offsetHeight;
+
+        const style = window.getComputedStyle(element);
+        const fontSize = parseFloat(style.fontSize);
+        struct.fontSizes.push(fontSize);
+
+        const maxFontSize = parseFloat(style.getPropertyValue('--target-font-size'));
+        struct.maxFontSizes.push(maxFontSize);
+
+        overalFontSize += maxFontSize;
+    }
+    let needToRecursive = false;
+
+    for (let i = 0; i < struct.elements.length; i++) {
+        const element = struct.elements[i];
+
+        const maxFontSize = struct.maxFontSizes[i];
+        const fs = struct.fontSizes[i];
+        const fontRatioCoefficient = maxFontSize / overalFontSize;
+
+        const textWidth = element.offsetWidth;
+        const textHeight = element.offsetHeight / fontRatioCoefficient;
+
+        const fontSize = fs;
+        if (textHeight > containerSize.height || textWidth > containerSize.width) {
+            const newFontSize = fontSize * Math.min((containerSize.height / textHeight), 1) * Math.min((containerSize.width / textWidth), 1);
+            element.style.fontSize = newFontSize + 'px';
+        } else {
+            needToRecursive = true;
+            element.style.fontSize = struct.maxFontSizes[i];
+        };
+    }
+
+    if (needToRecursive && recursive) {
+        setDynamicContainerText(struct, false);
+    }
+
+}
+
+function setDynamicFontSize(text, recursive = false) {
     // function getTextWidth(text, font) {
     //     const span = document.createElement('span');
     //     span.style.visibility = 'hidden';
@@ -393,13 +452,33 @@ function setDynamicFontSize(text, recursive = true) {
     //     return width;
     // }
     const textStyle = window.getComputedStyle(text);
-
     const parentContainer = text.parentElement;
-    const containerWidth = parentContainer.offsetWidth;
+
+    let height = 0;
+    {
+        const ptexts = getElements(parentContainer, { tags: ['span'] });
+        for (let i = 0; i < ptexts.length; i++) {
+            const element = ptexts[i];
+            height += element.offsetHeight;
+        }
+
+        // console.log(ptexts);
+        // console.log(height);
+    }
+
+    const parentStyle = window.getComputedStyle(parentContainer)
+    const parentHorizontalPadding = parseFloat(parentStyle.paddingLeft) + parseFloat(parentStyle.paddingRight);
+    const parentVerticalPadding = parseFloat(parentStyle.paddingTop) + parseFloat(parentStyle.paddingBottom);
+
+    const containerWidth = parentContainer.offsetWidth - parentHorizontalPadding;
+    const containerHeight = parentContainer.offsetHeight - parentVerticalPadding;
+
     const textWidth = text.offsetWidth;
+    const textHeight = height;
+
     const fontSize = parseFloat(textStyle.fontSize);
-    if (textWidth > containerWidth) {
-        const newFontSize = fontSize * (containerWidth / textWidth);
+    if (textHeight > containerHeight || textWidth > containerWidth) {
+        const newFontSize = fontSize * Math.min((containerHeight / textHeight), 1) * Math.min((containerWidth / textWidth), 1);
         text.style.fontSize = newFontSize + 'px';
     } else {
         text.style.fontSize = textStyle.getPropertyValue('--target-font-size');
@@ -443,5 +522,6 @@ export {
     getValueByKeyInArray,
     getSuitLang,
     getPatternLang,
-    setDynamicFontSize
+    setDynamicFontSize,
+    setDynamicContainerText
 }
