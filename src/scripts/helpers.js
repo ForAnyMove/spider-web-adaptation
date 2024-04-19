@@ -422,12 +422,15 @@ function setDynamicContainerText(struct, recursive = true) {
         const textWidth = element.offsetWidth;
         const textHeight = element.offsetHeight / fontRatioCoefficient;
 
-        const fontSize = fs;
+        // const fontSize = fs;
         if (textHeight > containerSize.height || textWidth > containerSize.width) {
-            const newFontSize = fontSize * Math.min((containerSize.height / textHeight), 1) * Math.min((containerSize.width / textWidth), 1);
+            const newFontSize = parseFloat(maxFontSize) * (maxFontSize.toString().includes('vh') ? (window.innerHeight / 100) : (window.innerWidth / 100)) * Math.min((containerSize.height / textHeight), 1) * Math.min((containerSize.width / textWidth), 1);
+            // const newFontSize = fontSize * Math.min((containerSize.height / textHeight), 1) * Math.min((containerSize.width / textWidth), 1);
+
             element.style.fontSize = newFontSize + 'px';
         } else {
             needToRecursive = true;
+
             element.style.fontSize = struct.maxFontSizes[i];
         };
     }
