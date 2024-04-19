@@ -120,6 +120,7 @@ main {
   background: none;
   border: none;
   font-size: 1.5vw;
+  --target-font-size: 1.5vw;
   padding: 1vh;
   margin: 1vh auto;
   box-sizing: border-box;
@@ -143,6 +144,7 @@ main {
   bottom: -1vh;
   left: 50%;
   font-size: 6vh;
+  --target-font-size: 6vh;
   transform: translate(-50%);
   color: #fff6c6;
 }
@@ -181,6 +183,7 @@ main {
 .mask-title {
   color: #fff6c6;
   font-size: 1.6vh;
+  --target-font-size: 1.6vh;
   font-weight: bold;
   text-align: center;
 }
@@ -307,6 +310,7 @@ main {
 #play-btn {
   background-image: url('../../Sprites/Buttons/Used_Button_03.png');
   font-size: 1.8vh;
+  --target-font-size: 1.8vh;
 }
 
 .interactive-btn-info {
@@ -339,10 +343,12 @@ main {
 
   .categories-btn {
     font-size: 4.5vw;
+    --target-font-size: 4.5vw;
   }
 
   .active-btn::after {
     font-size: 4vh;
+    --target-font-size: 4vh;
   }
 
   .collection-navigation {
@@ -372,10 +378,12 @@ main {
 
   #play-btn {
     font-size: 1.5vh;
+    --target-font-size: 1.5vh;
   }
 
   .mask-title {
     font-size: 1.4vh;
+    --target-font-size: 1.4vh;
   }
 }
 

@@ -95,6 +95,7 @@ header {
   color: #FFF6C6;
   font-weight: bold;
   font-size: 1.5vw;
+  --target-font-size: 1.5vw;
   padding-right: 1vw;
 }
 
@@ -160,6 +161,7 @@ header {
 .lock-screen-info,
 .check-info {
   font-size: 3vh;
+  --target-font-size: 3vh;
   text-align: center;
   color: #FFF6C6;
 }
@@ -179,6 +181,7 @@ header {
 .challenge-header>h3 {
   color: #FFF6C6;
   font-size: 2.5vh;
+  --target-font-size: 2.5vh;
   margin-top: 1vh;
 }
 
@@ -186,6 +189,7 @@ header {
   color: #FFF6C6;
   font-weight: 500;
   font-size: 1.5vh;
+  --target-font-size: 1.5vh;
   margin-bottom: 1.5vh;
 }
 
@@ -200,6 +204,7 @@ header {
   color: #FFF6C6;
   font-weight: bold;
   font-size: 2vh;
+  --target-font-size: 2vh;
 }
 
 .rules-cards-container {
@@ -222,6 +227,7 @@ header {
   color: #FFF6C6;
   font-weight: bold;
   font-size: 1.6vh;
+  --target-font-size: 1.6vh;
   padding: 1.8vh 0;
 }
 
@@ -241,6 +247,7 @@ header {
   color: #FFF6C6;
   font-weight: bold;
   font-size: 2.2vh;
+  --target-font-size: 2.2vh;
   padding-top: 2.5vh;
 }
 
@@ -289,6 +296,7 @@ header {
   color: #FFF6C6cc;
   font-weight: 600;
   font-size: 1.6vh;
+  --target-font-size: 1.6vh;
 }
 
 .booster-title {
@@ -303,6 +311,7 @@ header {
   color: #FFF6C6cc;
   font-weight: 500;
   font-size: 2vh;
+  --target-font-size: 2vh;
   margin-bottom: 3.2vh;
 }
 
@@ -354,6 +363,7 @@ header {
 #play-btn {
   background-image: url('../../Sprites/Buttons/Used_Button_03.png');
   font-size: 2.5vh;
+  --target-font-size: 2.5vh;
 }
 
 .interactive-btn-info {
@@ -386,6 +396,7 @@ header {
 
   .energy-text {
     font-size: 4vw;
+    --target-font-size: 4vw;
   }
 
   .energy-counter>img {

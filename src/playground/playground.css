@@ -115,6 +115,7 @@ header {
 .counter-text {
   color: #ffffff;
   font-size: 1.8vw;
+  --target-font-size: 1.8vw;
 }
 
 .step-icon {
@@ -156,6 +157,7 @@ header {
 .end-level-title {
   margin-bottom: 4vh;
   font-size: 3.5vh;
+  --target-font-size: 3.5vh;
 }
 
 .lose-level {
@@ -168,6 +170,7 @@ header {
 
 .lose-level-title {
   font-size: 4.5vh;
+  --target-font-size: 4.5vh;
   color: #d64646;
 }
 
@@ -207,6 +210,7 @@ header {
 
 .new-achievements {
   font-size: 2.5vh;
+  --target-font-size: 2.5vh;
 }
 
 .bounty-list {
@@ -231,6 +235,7 @@ header {
 
 .bounty-title {
   font-size: 2vh;
+  --target-font-size: 2vh;
   margin: 0 1vw;
 }
 
@@ -267,6 +272,7 @@ header {
   font-weight: bold;
   color: #0000005c;
   font-size: 2.1vh;
+  --target-font-size: 2.1vh;
 }
 
 .settings>.popup-content {
@@ -321,6 +327,7 @@ header {
 .popup-header>h3 {
   color: #fff6c6;
   font-size: 3vh;
+  --target-font-size: 3vh;
   margin: 1vw auto;
 }
 
@@ -359,6 +366,7 @@ header {
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
+  width: 12vh;
 }
 
 
@@ -388,6 +396,8 @@ header {
 .settings-btn-title {
   color: #fff;
   font-size: 1.2vw;
+  --target-font-size: 1.2vw;
+  height: 2vh;
 }
 
 .first-skins-line{
@@ -440,7 +450,11 @@ header {
 }
 .skins-title{
   font-size: 2.5vh;
+  --target-font-size: 2.5vh;
   color: #ffffff5c;
+  display: block;
+  height: 3vh;
+  width: 18vh;
 }
 .background-card>.card-skin{
   width: 90%;
@@ -452,6 +466,8 @@ header {
 .skin-change-btn {
   border-radius: 1vh;
   border: none;
+  width: 14vh;
+  height: 6vh;
   background: no-repeat;
   background-size: 100% 100%;
   display: flex;
@@ -460,6 +476,7 @@ header {
   padding: 0 2vh 0.7vh 2vh;
   background-image: url('../../Sprites/Buttons/Used_Button_03.png');
   font-size: 1.8vh;
+  --target-font-size: 1.8vh;
 }
 
 .skin-change-btn-title {
@@ -511,6 +528,7 @@ header {
   width: 40vh;
   margin-left: 15vh;
   font-size: 2.5vh;
+  --target-font-size: 2.5vh;
   align-self: center;
 }
 .next-tutorial-screen-btn {
@@ -525,6 +543,7 @@ header {
   padding: 0 2vh 0.7vh 2vh;
   background-image: url('../../Sprites/Buttons/Used_Button_03.png');
   font-size: 1.8vh;
+  --target-font-size: 1.8vh;
   transform: translateY(200%);
   position: absolute;
   bottom: 15vh;
@@ -597,6 +616,7 @@ header {
 .version-title {
   color: #fff;
   font-size: 0.8vw;
+  --target-font-size: 0.8vw;
   font-weight: bold;
 }
 
@@ -634,6 +654,7 @@ header {
   color: #fff;
   font-weight: bold;
   font-size: 2.5vh;
+  --target-font-size: 2.5vh;
   padding-left: 1vw;
 }
 .custom-checkbox{
@@ -687,6 +708,7 @@ header {
 #play-btn {
   background-image: url('../../Sprites/Buttons/Used_Button_03.png');
   font-size: 1.8vh;
+  --target-font-size: 1.8vh;
 }
 
 .skins-collection-slider>.skin-card-back {
@@ -709,6 +731,7 @@ header {
 .mask-title {
   color: #fff6c6;
   font-size: 1.6vh;
+  --target-font-size: 1.6vh;
   font-weight: bold;
   text-align: center;
 }
@@ -957,7 +980,12 @@ footer {
 .bounty-title {
   color: #fff;
 }
-
+.front-side-skins-container{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
 @media only screen and (orientation: portrait) {
   /* Cards sizes */
 
@@ -970,7 +998,41 @@ footer {
     height: 11.75vw;
   }
 
-
+  .settings>.popup-content {
+    width: 37vh;
+  }
+  .popup-header>h3 {
+    font-size: 2.5vh;
+    --target-font-size: 2.5vh;
+  }
+  .settings-btn-title {
+    font-size: 3.2vw;
+    --target-font-size: 3.2vw;
+  }
+  .close-popup {
+    width: 7vw;
+    right: 1.5vw;
+    top: 1.5vw;
+  }
+  .skins-title {
+    font-size: 2vh;
+    --target-font-size: 2vh;
+  }
+  .card-skin {
+    width: 19vh;
+  }
+  .skin-card, .skin-card-back{
+    width: 14vh;
+  }
+  .background-card {
+    height: 18vh;
+    width: 31vh;
+  }
+  .version-title {
+    font-size: 2.8vw;
+    --target-font-size: 2.8vw;
+    margin: 0 1vh 1vh 0;
+  }
   /* .active-cards-container,
   .cards-container,
   .extra-cards-container,
@@ -1044,6 +1106,7 @@ footer {
 
   .counter-text {
     font-size: 5vw;
+    --target-font-size: 5vw;
   }
 
   .step-icon {
@@ -1107,6 +1170,7 @@ footer {
     width: 50vw;
     margin-left: 2vh;
     font-size: 1.2vh;
+    --target-font-size: 1.2vh;
   }
   .tutorial-cards-column>.tutorial-card-element,
   .cards-deck>.tutorial-card-element{
