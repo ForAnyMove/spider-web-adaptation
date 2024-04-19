@@ -379,8 +379,11 @@ function getValueByKeyInArray(key, array) {
 
     return null;
 }
+function timeout(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms));
+}
 
-function setDynamicContainerText(struct, recursive = true) {
+async function setDynamicContainerText(struct, recursive = true) {
     struct.maxFontSizes = [];
     struct.fontSizes = [];
 
@@ -399,17 +402,23 @@ function setDynamicContainerText(struct, recursive = true) {
 
     for (let i = 0; i < struct.elements.length; i++) {
         const element = struct.elements[i];
+
         textSize.height += element.offsetHeight;
 
         const style = window.getComputedStyle(element);
-        const fontSize = parseFloat(style.fontSize);
-        struct.fontSizes.push(fontSize);
 
         const maxFontSize = style.getPropertyValue('--target-font-size');
+        const targetFontSize = parseFloat(maxFontSize) * (maxFontSize.toString().includes('vh') ? (window.innerHeight / 100) : (window.innerWidth / 100));
+
+        element.style.fontSize = targetFontSize + 'px';
+
+        struct.fontSizes.push(targetFontSize);
+
         struct.maxFontSizes.push(maxFontSize);
 
         overalFontSize += parseFloat(maxFontSize);
     }
+
     let needToRecursive = false;
 
     for (let i = 0; i < struct.elements.length; i++) {
@@ -422,11 +431,9 @@ function setDynamicContainerText(struct, recursive = true) {
         const textWidth = element.offsetWidth;
         const textHeight = element.offsetHeight / fontRatioCoefficient;
 
-        // const fontSize = fs;
+        const fontSize = fs;
         if (textHeight > containerSize.height || textWidth > containerSize.width) {
-            const newFontSize = parseFloat(maxFontSize) * (maxFontSize.toString().includes('vh') ? (window.innerHeight / 100) : (window.innerWidth / 100)) * Math.min((containerSize.height / textHeight), 1) * Math.min((containerSize.width / textWidth), 1);
-            // const newFontSize = fontSize * Math.min((containerSize.height / textHeight), 1) * Math.min((containerSize.width / textWidth), 1);
-
+            const newFontSize = fontSize * Math.min((containerSize.height / textHeight), 1) * Math.min((containerSize.width / textWidth), 1);
             element.style.fontSize = newFontSize + 'px';
         } else {
             needToRecursive = true;
