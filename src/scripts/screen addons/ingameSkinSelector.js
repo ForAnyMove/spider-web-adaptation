@@ -5,7 +5,7 @@ import { ContentType, Statefull } from "../statics/enums.js"
 const checkIconPath = '../../Sprites/Icons/Icon_Check.png'
 const lockIconPath = '../../Sprites/Icons/Icon_Lock.png'
 
-const skinParent = document.getElementsByClassName('skin-content')[0];
+const skinParent = document.getElementById('skins-collection-slider');
 
 let instances = [];
 
@@ -210,7 +210,7 @@ skinParent.addEventListener("wheel", function (e) {
     }
 });
 
-const backButton = document.getElementById('skin-content-back-button');
+const backButton = document.getElementById('skins-collection-back-btn');
 
 function closePopup() {
     for (let i = 0; i < instances.length; i++) {
@@ -219,7 +219,6 @@ function closePopup() {
     }
 
     instances = [];
-    skinParent.classList.add('hidden');
 }
 
 function openPopup(contentType) {
@@ -235,15 +234,9 @@ function openPopup(contentType) {
             break;
     }
 
-    input.updateQueryCustom(getInputElements(skinParent, { tags: ['button'] }), { element: backButton });
-
-    skinParent.classList.remove('hidden');
+    input.updateQueryCustom(getInputElements(skinParent, { tags: ['button'] }).concat({ element: backButton }), { element: backButton });
 }
 
-if (backButton != null) {
-    backButton.onclick = function () {
-        closePopup();
-    }
-}
+export { openPopup, closePopup }
 
-openPopup(ContentType.CardSkin);
+// openPopup(ContentType.CardSkin);

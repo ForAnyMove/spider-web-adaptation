@@ -19,6 +19,7 @@ import DirectionalInput from "../scripts/directionInput.js";
 import { StackNavigation, Screen, BackActionHandler } from "../scripts/navigation/navigation.js";
 import DynamicFontChanger from "../localization/dynamicFontChanger.js";
 import { initialLocale } from "../localization/translator.js";
+import { closePopup, openPopup } from "../scripts/screen addons/ingameSkinSelector.js";
 
 input = new DirectionalInput({ element: null });
 
@@ -833,12 +834,34 @@ function setupLanguageSelector(initialLocale) {
   }
 }
 
-// const skinsCollectionBackBtn = document.getElementById('skins-collection-back-btn')
-// const skinsCollectionSliderTab = document.getElementById('skins-collection-slider-tab')
+const skinSelectButton = document.getElementById('skin-change-btn');
+const skinBackSelectButton = document.getElementById('skin-back-change-btn');
+const backgroundSelectButton = document.getElementById('background-change-btn');
+const backSelectorButton = document.getElementById('skins-collection-back-btn');
 
-// skinsCollectionBackBtn.addEventListener('click', () => {
-//   skinsCollectionSliderTab.style.display = 'none'
-// });
+const skinSelectionScreen = new Screen({
+  element: document.getElementById('skins-collection-slider-tab'),
+  openButtons: [skinSelectButton, skinBackSelectButton, backgroundSelectButton],
+  closeButtons: [backSelectorButton],
+  onFocus: () => { },
+  onUnfocus: () => { }
+})
+
+skinSelectButton.addEventListener('click', () => {
+  openPopup(ContentType.CardSkin);
+});
+skinBackSelectButton.addEventListener('click', () => {
+  openPopup(ContentType.CardBack);
+});
+backgroundSelectButton.addEventListener('click', () => {
+  openPopup(ContentType.Background);
+});
+
+backSelectorButton.addEventListener('click', () => {
+  closePopup();
+});
+
+navigation.registerScreen(skinSelectionScreen);
 
 function invokeTutorial() {
   const queryString = window.location.search;
@@ -848,6 +871,8 @@ function invokeTutorial() {
   const tutorialTab = document.getElementById('tutorial')
   if (isTutorial) {
     tutorialTab.style.display = 'flex'
+  } else {
+    return;
   }
 
   const tutorialScreens = Array.from(document.getElementsByClassName('tutorial-screen'));
