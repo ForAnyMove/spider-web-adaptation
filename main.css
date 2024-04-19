@@ -172,6 +172,7 @@ a {
   color: #9b6d00;
   font-weight: bold;
   font-size: 1.2vw;
+  --target-font-size: 1.2vw;
   margin-top: -5%;
 }
 
@@ -179,6 +180,7 @@ a {
   color: #d3b927;
   font-weight: bold;
   font-size: 1.2vw;
+  --target-font-size: 1.2vw;
 }
 
 .footer-container {
@@ -208,6 +210,7 @@ a {
   justify-content: center;
   align-items: center;
   margin: 1vw;
+  width: 7vw;
 }
 
 .control-btn {
@@ -227,6 +230,8 @@ a {
 .control-button-title {
   color: #ffffff;
   font-size: 1.1vw;
+  --target-font-size: 1.1vw;
+  height: 2vh;
 }
 
 /* loader */
@@ -800,6 +805,7 @@ button.selected {
   color: #fff;
   font-weight: bold;
   font-size: 2.5vh;
+  --target-font-size: 2.5vh;
   padding-left: 1vw;
 }
 
@@ -849,6 +855,7 @@ button.selected {
 }
 
 .popup-header {
+  height: 8vh;
   background: #db4c9f;
   background: -moz-linear-gradient(top, #db4c9f 0%, #c637a2 50%, #ad24a5 100%);
   background: -webkit-linear-gradient(top,
@@ -877,6 +884,7 @@ button.selected {
 .popup-header>h3 {
   color: #fff6c6;
   font-size: 1.9vw;
+  --target-font-size: 1.9vw;
   margin: 1vw auto;
 }
 
@@ -912,13 +920,12 @@ button.selected {
   box-shadow: 0px 3px 2px 0px #00000054;
   z-index: 10;
 }
-
 .special-booster {
   height: inherit;
   width: 25vw;
 }
 
-.daily-boosters-container>.booster {
+.regular-daily>.booster {
   width: 7vw;
   height: 7vw;
 }
@@ -954,6 +961,8 @@ button.selected {
 }
 
 .completed-flag {
+  width: 4vw;
+  height: 3vh;
   visibility: hidden;
   background-color: #efcf05;
   border: 1px solid #000;
@@ -961,6 +970,7 @@ button.selected {
   margin-top: -2.3vw;
   color: #fff;
   font-size: 1.3vw;
+  --target-font-size: 1.3vw;
   font-weight: bold;
   padding: 0 1.6vw;
   box-shadow: 0px 3px 2px 0px #00000034;
@@ -993,6 +1003,7 @@ button.selected {
   justify-content: center;
   text-align: center;
   font-size: 1.2vw;
+  --target-font-size: 1.2vw;
   font-weight: bold;
   color: #ecff98;
 }
@@ -1000,6 +1011,7 @@ button.selected {
 .booster-title,
 .special-booster-title {
   font-size: 1.3vw;
+  --target-font-size: 1.3vw;
   align-self: start;
   color: #05e2d7;
   font-weight: bold;
@@ -1007,13 +1019,16 @@ button.selected {
 
 .special-booster-title {
   font-size: 1.8vw;
+  --target-font-size: 1.8vw;
   color: #efcf05;
 }
 
 .booster-counter {
+  height: 2vh;
   color: #fff6c6;
   font-weight: 700;
   font-size: 1.3vw;
+  --target-font-size: 1.3vw;
   /* margin-bottom: 1vw; */
   text-align: center;
 }
@@ -1039,6 +1054,7 @@ button.selected {
   background-size: 100% 100%;
   color: white;
   font-size: 1.8vh;
+  --target-font-size: 1.8vh;
   text-align: center;
   width: 22vh;
   padding: 1vh 1vh 2vh;
@@ -1072,6 +1088,7 @@ button.selected {
   font-weight: bold;
   color: #0000005c;
   font-size: 1.1vw;
+  --target-font-size: 1.1vw;
 }
 
 .btn-info-icon {
@@ -1097,6 +1114,8 @@ button.selected {
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
+  height: 12vh;
+  width: 5vw;
 }
 
 .special-language-btn {
@@ -1107,6 +1126,7 @@ button.selected {
 .settings-btn-title {
   color: #fff;
   font-size: 1.2vw;
+  --target-font-size: 1.2vw;
 }
 
 .exid-game>.popup-content {
@@ -1115,6 +1135,7 @@ button.selected {
 
 .popup-header>.exid-tab-title {
   font-size: 2.5vh;
+  --target-font-size: 2.5vh;
 }
 
 .exid-btns-container {
@@ -1133,6 +1154,7 @@ button.selected {
 .version-title {
   color: #fff;
   font-size: 0.8vw;
+  --target-font-size: 0.8vw;
   font-weight: bold;
 }
 
@@ -1154,6 +1176,7 @@ button.selected {
 
   .background-title {
     font-size: 4vw;
+    --target-font-size: 4vw;
   }
 
   .main-panel-btn {
@@ -1164,10 +1187,12 @@ button.selected {
 
   .main-panel-btn-title {
     font-size: 2.5vw;
+    --target-font-size: 2.5vw;
   }
 
   .main-panel-btn-level {
     font-size: 2.5vw;
+    --target-font-size: 2.5vw;
   }
 
   .footer-container {
@@ -1191,6 +1216,7 @@ button.selected {
 
   .control-button-title {
     font-size: 2.5vw;
+    --target-font-size: 2.5vw;
     padding-bottom: 2vw;
   }
 
@@ -1201,6 +1227,7 @@ button.selected {
 
   .popup-header {
     border-radius: 1vh 1vh 0 0;
+    height: 5vh;
   }
 
   .close-popup {
@@ -1211,6 +1238,7 @@ button.selected {
 
   .popup-header>h3 {
     font-size: 5vw;
+    --target-font-size: 5vw;
   }
 
   .booster {
@@ -1226,15 +1254,18 @@ button.selected {
 
   .special-booster-title {
     font-size: 3.4vw;
+    --target-font-size: 3.4vw;
   }
 
   .completed-flag {
     font-size: 2vw;
+    --target-font-size: 2vw;
   }
 
   .booster-title,
   .booster-counter {
     font-size: 3vw;
+    --target-font-size: 3vw;
   }
 
   .booster-icon {
@@ -1277,9 +1308,17 @@ button.selected {
     margin: 1vw 2vw;
     padding-bottom: 0;
   }
-
+  .regular-daily>.booster {
+    width: 17vw;
+    height: 17vw;
+  }
+  .completed-flag {
+    width: 10vw;
+    height: 2vh;
+  }
   .start-level-btn-title {
     font-size: 2.1vw;
+    --target-font-size: 2.1vw;
     font-weight: 800;
   }
 
@@ -1297,7 +1336,9 @@ button.selected {
 
   .settings-btn-title {
     font-size: 3.2vw;
+    --target-font-size: 3.2vw;
     margin-top: -2.5vw;
+    height: 2vh;
   }
 
   .exid-game>.popup-content {
@@ -1306,10 +1347,12 @@ button.selected {
 
   .popup-header>.exid-tab-title {
     font-size: 1.8vh;
+    --target-font-size: 1.8vh;
   }
 
   .version-title {
     font-size: 2.1vw;
+    --target-font-size: 2.1vw;
     margin-right: 2vw;
   }
 }
@@ -1337,6 +1380,7 @@ button.selected {
 
   .control-button-title {
     font-size: 1.5vh;
+    --target-font-size: 1.5vh;
   }
 }
 

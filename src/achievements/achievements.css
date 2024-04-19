@@ -95,6 +95,7 @@ header {
   color: #FFF6C6;
   font-weight: bold;
   font-size: 1.5vw;
+  --target-font-size: 1.5vw;
   padding-right: 1vw;
 }
 
@@ -172,6 +173,7 @@ main {
   background: none;
   border: none;
   font-size: 1.7vw;
+  --target-font-size: 1.7vw;
   padding: 1vh;
   margin: 1vh auto;
   position: relative;
@@ -194,6 +196,7 @@ main {
   bottom: -1vh;
   left: 50%;
   font-size: 6vh;
+  --target-font-size: 6vw;
   transform: translate(-50%);
   color: #FFF6C6;
 }
@@ -242,6 +245,7 @@ main {
 .achievement-title {
   color: #fff;
   font-size: 2.3vh;
+  --target-font-size: 2.3vh;
   text-wrap: nowrap;
   margin-right: 4vw;
 }
@@ -280,6 +284,7 @@ main {
   transform: translate(-50%, -50%);
   color: #fff;
   font-size: 2.2vh;
+  --target-font-size: 2.2vh;
 }
 
 .energy-btn {
@@ -304,17 +309,20 @@ main {
 .energy-btn-title {
   color: #fff;
   font-size: 2.5vh;
+  --target-font-size: 2.5vh;
 }
 
 .statistic-counter {
   color: #fff;
   font-size: 3.5vh;
+  --target-font-size: 3.5vh;
   margin-right: 2vw;
 }
 
 .get-btn {
   background: url('../../Sprites/Buttons/Used_Button_03.png');
   font-size: 1.8vh;
+  --target-font-size: 1.8vh;
   border-radius: 1vh;
   border: none;
   background-repeat: no-repeat;
@@ -360,6 +368,7 @@ main {
 
   .energy-text {
     font-size: 4vw;
+    --target-font-size: 4vw;
   }
 
   .energy-counter>img {
@@ -375,11 +384,13 @@ main {
 
   .categories-btn {
     font-size: 5.5vw;
+    --target-font-size: 5.5vw;
   }
 
   .achievement-title {
     text-wrap: wrap;
     font-size: 1.7vh;
+    --target-font-size: 1.7vh;
   }
 
   .energy-btn {
@@ -389,6 +400,7 @@ main {
 
   .statistic-counter {
     font-size: 2.5vh;
+    --target-font-size: 2.5vh;
   }
 }
 

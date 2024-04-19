@@ -104,6 +104,7 @@ header {
   color: #FFF6C6;
   font-weight: bold;
   font-size: 1.5vw;
+  --target-font-size: 1.5vw;
   padding-right: 1vw;
 }
 
@@ -198,6 +199,7 @@ main::-webkit-scrollbar {
   color: #A65200;
   font-weight: bold;
   font-size: 2vw;
+  --target-font-size: 2vw;
 }
 
 .closed {
@@ -408,6 +410,7 @@ main::-webkit-scrollbar {
 .popup-header>h3 {
   color: #FFF6C6;
   font-size: 1.5vw;
+  --target-font-size: 1.5vw;
   margin: 1vw auto;
 }
 
@@ -422,6 +425,7 @@ main::-webkit-scrollbar {
   color: #FFF6C6;
   font-weight: bold;
   font-size: 1.4vw;
+  --target-font-size: 1.4vw;
 }
 
 .rules-cards-container {
@@ -448,6 +452,7 @@ main::-webkit-scrollbar {
   color: #FFF6C6;
   font-weight: bold;
   font-size: 1.1vw;
+  --target-font-size: 1.1vw;
   padding: 0.8vw;
 }
 
@@ -467,6 +472,7 @@ main::-webkit-scrollbar {
   color: #FFF6C6;
   font-weight: bold;
   font-size: 1.4vw;
+  --target-font-size: 1.4vw;
   padding-top: 2.5vw;
 }
 
@@ -513,6 +519,7 @@ main::-webkit-scrollbar {
   color: #FFF6C6;
   font-weight: bold;
   font-size: 1vw;
+  --target-font-size: 1vw;
 }
 
 .booster-icon {
@@ -523,6 +530,7 @@ main::-webkit-scrollbar {
   color: #FFF6C6;
   font-weight: bold;
   font-size: 1.3vw;
+  --target-font-size: 1.3vw;
   margin-bottom: 2.5vw;
 }
 
@@ -574,12 +582,14 @@ main::-webkit-scrollbar {
 .btn-info-value {
   font-weight: bold;
   font-size: 1.6vw;
+  --target-font-size: 1.6vw;
   color: #0000005c;
 }
 
 #ads-btn {
   background-image: url('../../Sprites/Buttons/Used_Button_2.2.png');
   font-size: 1.1vw;
+  --target-font-size: 1.1vw;
   position: relative;
 }
 
@@ -593,6 +603,7 @@ main::-webkit-scrollbar {
 #play-btn {
   background-image: url('../../Sprites/Buttons/Used_Button_03.png');
   font-size: 1.6vw;
+  --target-font-size: 1.6vw;
 }
 
 .interactive-btn-info {
@@ -636,6 +647,7 @@ main::-webkit-scrollbar {
 
   .energy-text {
     font-size: 4vw;
+    --target-font-size: 4vw;
   }
 
   .energy-counter>img {
