@@ -376,7 +376,7 @@ main::-webkit-scrollbar {
   background-size: 120% 120%;
   background-position: center;
   width: 27vw;
-  border-radius: 20px;
+  border-radius: 2vh;
   margin-right: 1vw;
 }
 
@@ -390,12 +390,17 @@ main::-webkit-scrollbar {
 }
 
 .popup-header {
-  background-image: url('../../Sprites/Frames/Used_Frame_08.png');
+  background-image: linear-gradient(to bottom right, #E1579E, #A11EA2);
+  border-top-left-radius: 2vh;
+  border-top-right-radius: 2vh;
+  border: 0.1vh solid rgba(0, 0, 0, 0.4);
+  border-bottom: 0.45vh solid rgba(0, 0, 0, 0.4);
   background-size: 100% 100%;
   display: flex;
   justify-content: center;
   align-items: center;
   position: relative;
+  height: 7vh;
 }
 
 #close-popup {
@@ -419,6 +424,12 @@ main::-webkit-scrollbar {
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
+  background: #4fc044;
+  background: -moz-linear-gradient(-45deg, #4fc044 0%, #2d9e26 50%, #127a12 100%);
+  background: -webkit-linear-gradient(-45deg, #4fc044 0%, #2d9e26 50%, #127a12 100%);
+  background: linear-gradient(135deg, #4fc044 0%, #2d9e26 50%, #127a12 100%);
+  box-shadow: 0px 3px 2px 0px #00000054;
+  padding-bottom: 2vh;
 }
 
 .rules-container>span {
@@ -426,6 +437,8 @@ main::-webkit-scrollbar {
   font-weight: bold;
   font-size: 1.4vw;
   --target-font-size: 1.4vw;
+  height: 2vh;
+  margin-bottom: 1vh;
 }
 
 .rules-cards-container {
@@ -473,7 +486,9 @@ main::-webkit-scrollbar {
   font-weight: bold;
   font-size: 1.4vw;
   --target-font-size: 1.4vw;
-  padding-top: 2.5vw;
+  padding-top: 1.5vw;
+  height: 2vh;
+  padding-bottom: 1vh;
 }
 
 .boosters-container {
@@ -487,6 +502,7 @@ main::-webkit-scrollbar {
   align-items: center;
   justify-content: center;
   margin: 0.5vw;
+  width: 5vw;
 }
 
 .booster {
@@ -520,6 +536,8 @@ main::-webkit-scrollbar {
   font-weight: bold;
   font-size: 1vw;
   --target-font-size: 1vw;
+  height: 2vh;
+  text-align: center;
 }
 
 .booster-icon {
@@ -661,6 +679,30 @@ main::-webkit-scrollbar {
     scale: calc(1 - 0.1 + 12 / 10);
     transform: translate(-20%, 0);
     margin-right: 5vw;
+    border-radius: 0.5vh;
+  }
+  .popup-header {
+    height: 2vh;
+  }
+  .rules-container>span{
+    height: 1vh;
+    margin-bottom: 0;
+  }
+  .rules-container{
+    padding-bottom: 1vh;
+  }
+  .level-info-header {
+    height: 1vh;
+    padding-bottom: 0;
+  }
+  .booster-title {
+    height: 1vh;
+  }
+  .rewards-title {
+    margin-bottom: 0.5vh;
+  }
+  .start-btn-container {
+    margin: 0 0.5vh 0.5vh;
   }
 }
 

@@ -269,5 +269,11 @@ createTrophies();
 
 setupTabSwitch();
 
+const text = document.getElementsByClassName('categories-btn-title')[0]
+console.log(text);
+console.dir(text);
+console.log(text.parentElement);
+
+
 languageChangeEvent.invoke(initialLocale);
 import('../localization/testingLangChanger.js');
