@@ -362,8 +362,8 @@ header {
 
 .start-level-btn {
   border-radius: 2vw;
-  width: 10vw;
-  height: 4vw;
+  width: 17vh;
+  height: 7vh;
   border: none;
   background: no-repeat;
   background-size: 100% 100%;
@@ -787,7 +787,7 @@ header {
 .skins-collection-slider {
   margin-left: 1vw;
   width: 100%;
-  overflow: scroll;
+  overflow-x: scroll;
   display: flex;
   column-gap: 2vw;
 }
@@ -820,8 +820,13 @@ header {
 
 .skins-collection-slider>.skin-card-back {
   height: 25vh;
+  min-width: 18.75vh;
   justify-content: flex-end;
   background-image: url('../../Sprites/Card Backs/Card_Backs.png');
+}
+.skins-collection-slider>.background-card {
+  height: 20vh;
+  min-width: 36vh;
 }
 
 .lock-mask {
@@ -1102,6 +1107,10 @@ footer {
     width: 7vw;
     right: 1vw;
     top: 1vw;
+  }
+  .skins-collection-back-btn {
+    width: 7.5vw;
+    height: 7.5vw;
   }
 
   /*< for exit screen */
