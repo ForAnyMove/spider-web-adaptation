@@ -1361,6 +1361,10 @@ button.selected {
     --target-font-size: 2.1vw;
     margin-right: 2vw;
   }
+  
+  .absolute-footer>ul>li {
+    width: 14vw;
+  }
 }
 
 /* Custom full width rules */

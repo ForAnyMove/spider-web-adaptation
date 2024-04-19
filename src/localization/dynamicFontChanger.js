@@ -10,7 +10,7 @@ export default class DynamicFontChanger {
     }
 
     updateElementsPull = function () {
-        this.texts = getElements(document, { tags: ['span', 'p', 'h1', 'h2', 'h3'] });
+        this.texts = getElements(document, { tags: ['span', 'p', 'h1', 'h2', 'h3', 'button'] });
     }
 
     updateTextFont = () => {
