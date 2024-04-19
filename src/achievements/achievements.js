@@ -12,6 +12,9 @@ import('../scripts/rewardReceiverView.js');
 
 import DirectionalInput from '../scripts/directionInput.js';
 import { initialLocale, updateInContainer } from '../localization/translator.js';
+import DynamicFontChanger from '../localization/dynamicFontChanger.js';
+
+const dynamicFontChanger = new DynamicFontChanger();
 
 function getIconByItem(itemType) {
   for (let i = 0; i < IconsByItem.length; i++) {
@@ -275,3 +278,4 @@ startSelectables = [{ element: tabs[0] }, { element: tabs[1] }, { element: retur
 input.updateQueryCustom(startSelectables, startSelectables[2]);
 
 languageChangeEvent.invoke(initialLocale);
+import('../localization/testingLangChanger.js');

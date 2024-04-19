@@ -4,6 +4,9 @@ import DirectionalInput from "../scripts/directionInput.js";
 import { createButton, createElement, createImage, createTextP, createTextSpan } from "../scripts/helpers.js";
 import { Statefull } from "../scripts/statics/enums.js"
 import { initialLocale } from '../localization/translator.js';
+import DynamicFontChanger from "../localization/dynamicFontChanger.js";
+
+const dynamicFontChanger = new DynamicFontChanger();
 
 const checkIconPath = '../../Sprites/Icons/Icon_Check.png'
 const lockIconPath = '../../Sprites/Icons/Icon_Lock.png'
@@ -267,3 +270,4 @@ createTrophies();
 setupTabSwitch();
 
 languageChangeEvent.invoke(initialLocale);
+import('../localization/testingLangChanger.js');

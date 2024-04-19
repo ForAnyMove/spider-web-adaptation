@@ -1,3 +1,4 @@
+import DynamicFontChanger from "../localization/dynamicFontChanger.js";
 import { initialLocale, updateInContainer } from "../localization/translator.js";
 import { storyLevelDatabase } from "../scripts/data/level_databases.js";
 import DirectionalInput from "../scripts/directionInput.js";
@@ -5,6 +6,8 @@ import { createButton, createElement, createHSpace, createImage, createTextH3, c
 import { showRewarded } from "../scripts/sdk/sdk.js";
 import { Items } from "../scripts/statics/staticValues.js";
 import('../scripts/rewardReceiverView.js');
+
+const dynamicFontChanger = new DynamicFontChanger();
 
 const returnButton = document.getElementById('close-button');
 input ??= new DirectionalInput({ element: returnButton });
@@ -276,3 +279,4 @@ function setupEnergyView() {
 setupEnergyView();
 
 languageChangeEvent.invoke(initialLocale);
+import('../localization/testingLangChanger.js');

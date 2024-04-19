@@ -17,6 +17,9 @@ import { completeLevel, completeMode, failLevel, failMode, startLevel } from "..
 import { showInterstitial, showRewarded } from "../scripts/sdk/sdk.js";
 import DirectionalInput from "../scripts/directionInput.js";
 import { StackNavigation, Screen, BackActionHandler } from "../scripts/navigation/navigation.js";
+import DynamicFontChanger from "../localization/dynamicFontChanger.js";
+
+const dynamicFontChanger = new DynamicFontChanger();
 
 input = new DirectionalInput({ element: null });
 
@@ -835,7 +838,7 @@ const params = new URLSearchParams(queryString);
 const isTutorial = params.get('isTutorial');
 const tutorialTab = document.getElementById('tutorial')
 if (isTutorial) {
-  tutorialTab.style.display='flex'
+  tutorialTab.style.display = 'flex'
 }
 const tutorialScreens = Array.from(document.getElementsByClassName('tutorial-screen'))
 const nextTutorialScreenBtn = document.getElementById('next-tutorial-screen-btn')
@@ -846,7 +849,7 @@ nextTutorialScreenBtn.addEventListener('click', () => {
     tutorialStep++
     tutorialScreens[tutorialStep].style.display = 'flex'
   } else {
-    tutorialTab.style.display='none'
+    tutorialTab.style.display = 'none'
     window.location.href = '../../index.html';
   }
 })
@@ -858,3 +861,4 @@ skinsCollectionBackBtn.addEventListener('click', () => {
 })
 
 export { setupLanguageSelector }
+import('../localization/testingLangChanger.js');

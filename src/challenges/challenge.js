@@ -1,3 +1,4 @@
+import DynamicFontChanger from "../localization/dynamicFontChanger.js";
 import { initialLocale } from "../localization/translator.js";
 import { trialLevelDatabase } from "../scripts/data/level_databases.js";
 import DirectionalInput from "../scripts/directionInput.js";
@@ -5,6 +6,8 @@ import { createButton, createElement, createHSpace, createImage, createTextH3, c
 import { showRewarded } from "../scripts/sdk/sdk.js";
 import { Items } from "../scripts/statics/staticValues.js";
 import('../scripts/rewardReceiverView.js');
+
+const dynamicFontChanger = new DynamicFontChanger();
 
 const vh = window.innerHeight / 100;
 const vw = window.innerWidth / 100;
@@ -197,3 +200,4 @@ const xPos = viewWidth - window.innerWidth / 2;
 parent.scrollTo(xPos, 0);
 
 languageChangeEvent.invoke(initialLocale);
+import('../localization/testingLangChanger.js');

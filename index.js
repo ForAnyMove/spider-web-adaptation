@@ -9,11 +9,13 @@ import { showRewarded } from './src/scripts/sdk/sdk.js';
 import('./src/scripts/rewardReceiverView.js');
 
 import DirectionalInput from './src/scripts/directionInput.js';
+import DynamicFontChanger from './src/localization/dynamicFontChanger.js';
 import { getInputElements } from './src/scripts/helpers.js';
 import { BackActionHandler, Screen, StackNavigation } from './src/scripts/navigation/navigation.js';
 
 const defaultSelectedButton = document.getElementsByClassName('main-panel-btn-1')[0];
 input ??= new DirectionalInput({ element: defaultSelectedButton });
+const dynamicFontChanger = new DynamicFontChanger();
 
 const navigation = new StackNavigation();
 
@@ -196,3 +198,4 @@ function setupLanguageSelector(initialLocale) {
 setupDailyRewards();
 
 export { setupLanguageSelector }
+import('./src/localization/testingLangChanger.js');
