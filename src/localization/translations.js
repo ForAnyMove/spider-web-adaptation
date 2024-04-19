@@ -1,6 +1,6 @@
 const translations = {
     ru: {
-        logo_img: '../../Sprites/Logos/Logo_RU.png',
+        logo_img: './Sprites/Logos/Logo_RU.png',
         flag_img: '../../Sprites/Lang/ru.png',
         play: "Играть",
         daily_bonus: "Ежедневные бонусы",
@@ -105,7 +105,7 @@ const translations = {
         tutorial_10: "В правилах игры, где используются более одной масти, при необходимости, колонны с разными мастями можно смешивать, но завершенной считается та, что состоит только из одной масти."
     },
     en: {
-        logo_img: '../../Sprites/Logos/Logo_EN.png',
+        logo_img: './Sprites/Logos/Logo_EN.png',
         flag_img: '../../Sprites/Lang/en.png',
         play: "Play",
         daily_bonus: "Daily bonuses",
@@ -210,7 +210,7 @@ const translations = {
         tutorial_10: "In the rules of the game where more than one suit is used, if necessary, columns with different suits can be merged, but a completed one is considered to be the one consisting only of one suit."
     },
     de: {
-        logo_img: '../../Sprites/Logos/Logo_DE.png',
+        logo_img: './Sprites/Logos/Logo_DE.png',
         flag_img: '../../Sprites/Lang/de.png',
         play: "Spielen",
         daily_bonus: "Tägliche Boni",
@@ -315,7 +315,7 @@ const translations = {
         tutorial_10: "In den Regeln des Spiels, in denen mehr als ein Farbblatt verwendet wird, können bei Bedarf Säulen mit verschiedenen Farben gemischt werden, aber als abgeschlossen gilt diejenige, die nur aus einer Farbe besteht.",
     },
     ja: {
-        logo_img: '../../Sprites/Logos/Logo_JA.png',
+        logo_img: './Sprites/Logos/Logo_JA.png',
         flag_img: '../../Sprites/Lang/ja.png',
         play: "プレイする",
         daily_bonus: "デイリーボーナス",
@@ -420,7 +420,7 @@ const translations = {
         tutorial_10: "ユーザー 複数のスートが使用されるゲームのルールでは、必要に応じて異なるスートの列を混ぜることができますが、完成したものは単一のスートだけで構成されているものとみなされます。",
     },
     hi: {
-        logo_img: '../../Sprites/Logos/Logo_HI.png',
+        logo_img: './Sprites/Logos/Logo_HI.png',
         flag_img: '../../Sprites/Lang/hi.png',
         play: "खेलें",
         daily_bonus: "दैनिक बोनस",
@@ -525,7 +525,7 @@ const translations = {
         tutorial_10: "जहां एक से अधिक सूट का उपयोग होता है खेल के नियमों में, आवश्यकता होने पर, विभिन्न सूट के स्तंभों को मिला सकते हैं, लेकिन पूरा होने वाला वही माना जाता है, जो केवल एक सूट से मिलता है।",
     },
     pt: {
-        logo_img: '../../Sprites/Logos/Logo_PT.png',
+        logo_img: './Sprites/Logos/Logo_PT.png',
         flag_img: '../../Sprites/Lang/pt.png',
         play: "Jogar",
         daily_bonus: "Bónus diários",
@@ -630,7 +630,7 @@ const translations = {
         tutorial_10: "Nas regras do jogo, onde são utilizados mais de um naipe, se necessário, é possível misturar colunas com naipes diferentes, mas aquela que consiste apenas em um naipe é considerada completa.",
     },
     es: {
-        logo_img: '../../Sprites/Logos/Logo_ES.png',
+        logo_img: './Sprites/Logos/Logo_ES.png',
         flag_img: '../../Sprites/Lang/es.png',
         play: "Jugar",
         daily_bonus: "Bonos diarios",
@@ -735,7 +735,7 @@ const translations = {
         tutorial_10: "En las reglas del juego, donde se utilizan más de un palo, si es necesario, se pueden mezclar columnas con diferentes palos, pero se considera completada aquella que consiste solo en un palo.",
     },
     tr: {
-        logo_img: '../../Sprites/Logos/Logo_TR.png',
+        logo_img: './Sprites/Logos/Logo_TR.png',
         flag_img: '../../Sprites/Lang/tr.png',
         play: "Oyna",
         daily_bonus: "Günlük bonuslar",
