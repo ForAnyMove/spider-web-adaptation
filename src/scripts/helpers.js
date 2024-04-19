@@ -405,10 +405,10 @@ function setDynamicContainerText(struct, recursive = true) {
         const fontSize = parseFloat(style.fontSize);
         struct.fontSizes.push(fontSize);
 
-        const maxFontSize = parseFloat(style.getPropertyValue('--target-font-size'));
+        const maxFontSize = style.getPropertyValue('--target-font-size');
         struct.maxFontSizes.push(maxFontSize);
 
-        overalFontSize += maxFontSize;
+        overalFontSize += parseFloat(maxFontSize);
     }
     let needToRecursive = false;
 
@@ -417,7 +417,7 @@ function setDynamicContainerText(struct, recursive = true) {
 
         const maxFontSize = struct.maxFontSizes[i];
         const fs = struct.fontSizes[i];
-        const fontRatioCoefficient = maxFontSize / overalFontSize;
+        const fontRatioCoefficient = parseFloat(maxFontSize) / overalFontSize;
 
         const textWidth = element.offsetWidth;
         const textHeight = element.offsetHeight / fontRatioCoefficient;
