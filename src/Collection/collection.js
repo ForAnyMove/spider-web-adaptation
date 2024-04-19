@@ -6,8 +6,6 @@ import { Statefull } from "../scripts/statics/enums.js"
 import { initialLocale } from '../localization/translator.js';
 import DynamicFontChanger from "../localization/dynamicFontChanger.js";
 
-const dynamicFontChanger = new DynamicFontChanger();
-
 const checkIconPath = '../../Sprites/Icons/Icon_Check.png'
 const lockIconPath = '../../Sprites/Icons/Icon_Lock.png'
 
@@ -217,7 +215,7 @@ function createTrophyInstance(data) {
   if (!hasTrophy) {
     createElement('div', ['space'], null, plane);
     const requirementTextContainer = createElement('div', null, null, plane);
-    const unlockDescription = createTextP(['mask-title'], null, requirementTextContainer, '');
+    const unlockDescription = createTextP(['mask-title'], { height: '100%' }, requirementTextContainer, '');
     unlockDescription.lang = data.unlockDescription;
   }
 
@@ -277,3 +275,4 @@ console.log(text.parentElement);
 
 languageChangeEvent.invoke(initialLocale);
 import('../localization/testingLangChanger.js');
+const dynamicFontChanger = new DynamicFontChanger();

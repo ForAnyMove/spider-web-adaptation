@@ -178,6 +178,10 @@ main {
   margin: 1vh auto;
   position: relative;
 }
+.categories-btn-title {
+  font-size: 1.7vw;
+  --target-font-size: 1.7vw;
+}
 
 .categories-btn:hover {
   border: 1px solid #42e0e0;
@@ -236,6 +240,7 @@ main {
 
 .achievement-lable {
   max-width: 60%;
+  height: 9vh;
 }
 
 .achievement-icon {
@@ -331,19 +336,26 @@ main {
   justify-content: center;
   align-items: center;
   padding: 0 2.5vh 1.1vh;
+  width: 16vh;
+  height: 6vh;
 }
 
 .get-btn-title {
   font-weight: bold;
   color: #00000049;
   padding: 1.6vh 0;
+  font-size: 1.8vh;
+  --target-font-size: 1.8vh;
 }
 
 @media screen and (orientation: landscape) {
   .collection-navigation {
     margin-bottom: 2vh;
+    height: 7vh;
   }
-
+  .categories-btn{
+    height: 5vh;
+  }
 }
 
 @media screen and (orientation: portrait) {
@@ -380,9 +392,15 @@ main {
     border-radius: 1.5vh;
     margin-bottom: 2vh;
     box-shadow: 0px 3px 5px 2px #0000007d;
+    height: 7vh;
   }
 
   .categories-btn {
+    font-size: 5.5vw;
+    --target-font-size: 5.5vw;
+    margin: 0.5vh;
+  }
+  .categories-btn-title {
     font-size: 5.5vw;
     --target-font-size: 5.5vw;
   }
@@ -391,13 +409,19 @@ main {
     text-wrap: wrap;
     font-size: 1.7vh;
     --target-font-size: 1.7vh;
+    /* max-height: 8vh;
+    max-width: 13vw; */
   }
 
   .energy-btn {
-    width: 10vh;
-    margin: 0 1vw;
+    min-width: 7vh;
+    min-height: 7vh;
+    margin: 1vw;
   }
-
+  .get-btn{
+    width: 10vh;
+    height: 4vh;
+  }
   .statistic-counter {
     font-size: 2.5vh;
     --target-font-size: 2.5vh;

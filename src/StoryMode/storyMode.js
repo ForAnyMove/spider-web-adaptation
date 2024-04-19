@@ -7,8 +7,6 @@ import { showRewarded } from "../scripts/sdk/sdk.js";
 import { Items } from "../scripts/statics/staticValues.js";
 import('../scripts/rewardReceiverView.js');
 
-const dynamicFontChanger = new DynamicFontChanger();
-
 const returnButton = document.getElementById('close-button');
 input ??= new DirectionalInput({ element: returnButton });
 
@@ -280,3 +278,4 @@ setupEnergyView();
 
 languageChangeEvent.invoke(initialLocale);
 import('../localization/testingLangChanger.js');
+const dynamicFontChanger = new DynamicFontChanger();

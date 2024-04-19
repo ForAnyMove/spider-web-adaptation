@@ -19,8 +19,6 @@ import DirectionalInput from "../scripts/directionInput.js";
 import { StackNavigation, Screen, BackActionHandler } from "../scripts/navigation/navigation.js";
 import DynamicFontChanger from "../localization/dynamicFontChanger.js";
 
-const dynamicFontChanger = new DynamicFontChanger();
-
 input = new DirectionalInput({ element: null });
 
 const navigation = new StackNavigation();
@@ -862,3 +860,4 @@ skinsCollectionBackBtn.addEventListener('click', () => {
 
 export { setupLanguageSelector }
 import('../localization/testingLangChanger.js');
+const dynamicFontChanger = new DynamicFontChanger();

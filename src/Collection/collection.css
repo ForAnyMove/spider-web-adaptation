@@ -127,6 +127,10 @@ main {
   position: relative;
   height: 5vh;
 }
+.categories-btn-title{
+  font-size: 1.5vw;
+  --target-font-size: 1.5vw;
+}
 
 .categories-btn:hover {
   border: 1px solid #42e0e0;
@@ -356,8 +360,12 @@ main {
     height: 4vh;
     text-wrap: nowrap;
     width: 16vw;
+    padding: 0;
   }
-
+  .categories-btn-title{
+    font-size: 4.5vw;
+    --target-font-size: 4.5vw;
+  }
   .active-btn::after {
     font-size: 4vh;
     --target-font-size: 4vh;

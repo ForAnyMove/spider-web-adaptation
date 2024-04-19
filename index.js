@@ -15,7 +15,6 @@ import { BackActionHandler, Screen, StackNavigation } from './src/scripts/naviga
 
 const defaultSelectedButton = document.getElementsByClassName('main-panel-btn-1')[0];
 input ??= new DirectionalInput({ element: defaultSelectedButton });
-const dynamicFontChanger = new DynamicFontChanger();
 
 const navigation = new StackNavigation();
 
@@ -199,3 +198,4 @@ setupDailyRewards();
 
 export { setupLanguageSelector }
 import('./src/localization/testingLangChanger.js');
+const dynamicFontChanger = new DynamicFontChanger();
