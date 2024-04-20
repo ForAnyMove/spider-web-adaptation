@@ -4,8 +4,12 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link rel="stylesheet" href="main.css" />
-  <link rel="stylesheet" href="./src/StoryMode/storyMode.css">
+  <link rel="stylesheet" href="main.css" id="style-switcher"/>
+  <!-- <link rel="stylesheet" href="./src/StoryMode/storyMode.css"> -->
+  <!-- <link rel="stylesheet" href="./src/challenges/challenge.css"> -->
+  <!-- <link rel="stylesheet" href="./src/Collection/collection.css"> -->
+  <!-- <link rel="stylesheet" href="./src/achievements/achievements.css"> -->
+
   <link rel="stylesheet" href="./src/Rewards Receiver/rewardsReceiver.css">
   <title>Spider Web</title>
 
@@ -13,31 +17,31 @@
 </head>
 
 <body>
-  <div id="main-screen"  style="display: none;">
-    <div class="mask">
-      <div class="banter-loader">
-        <div class="banter-loader__box"></div>
-        <div class="banter-loader__box"></div>
-        <div class="banter-loader__box"></div>
-        <div class="banter-loader__box"></div>
-        <div class="banter-loader__box"></div>
-        <div class="banter-loader__box"></div>
-        <div class="banter-loader__box"></div>
-        <div class="banter-loader__box"></div>
-        <div class="banter-loader__box"></div>
-      </div>
+  <div class="mask">
+    <div class="banter-loader">
+      <div class="banter-loader__box"></div>
+      <div class="banter-loader__box"></div>
+      <div class="banter-loader__box"></div>
+      <div class="banter-loader__box"></div>
+      <div class="banter-loader__box"></div>
+      <div class="banter-loader__box"></div>
+      <div class="banter-loader__box"></div>
+      <div class="banter-loader__box"></div>
+      <div class="banter-loader__box"></div>
     </div>
+  </div>
+  <div id="main-screen">
     <header>
       <nav class="header-navigation">
         <ul class="header-navigation-list">
           <li class="nav-btn">
-            <a href="./src/achievements/achievements.html">
-              <button class="header-navigation-btn">
+            <!-- <a href="./src/achievements/achievements.html"> -->
+              <button class="header-navigation-btn" id="achievements-switch-btn">
                 <div class="header-navigation-icon-container">
                   <img src="./Sprites/Icons/Icon_Profile.png" alt="Profile" class="header-navigation-list-icon" />
                 </div>
               </button>
-            </a>
+            <!-- </a> -->
             <button class="header-navigation-btn" id="daily-btn">
               <div class="header-navigation-icon-container">
                 <img src="./Sprites/Icons/Icon_Chest.png" alt="Profile" class="header-navigation-list-icon" />
@@ -396,33 +400,33 @@
         <div class="absolute-footer">
           <ul style="text-wrap: nowrap;">
             <li>
-              <a href="./src/StoryMode/storyMode.html">
-                <button class="control-btn">
+              <!-- <a href="./src/StoryMode/storyMode.html"> -->
+                <button class="control-btn" id="story-mode-switch-btm">
                   <div class="header-navigation-icon-container">
                     <img src="./Sprites/Icons/Icon_Story.png" alt="StoryMode" class="control-button-list-icon" />
                   </div>
                 </button>
-              </a>
+              <!-- </a> -->
               <span class="control-button-title" lang="story_mode">Режим История</span>
             </li>
             <li>
-              <a href="./src/challenges/challenge.html">
-                <button class="control-btn">
+              <!-- <a href="./src/challenges/challenge.html"> -->
+                <button class="control-btn" id="challenges-switch-btn">
                   <div class="header-navigation-icon-container">
                     <img src="./Sprites/Icons/Icon_Trial.png" alt="Icon_Trial" class="control-button-list-icon" />
                   </div>
                 </button>
-              </a>
+              <!-- </a> -->
               <span class="control-button-title" lang="trial_mode">Испытания</span>
             </li>
             <li>
-              <a href="./src/Collection/collection.html">
-                <button class="control-btn">
+              <!-- <a href="./src/Collection/collection.html"> -->
+                <button class="control-btn" id="collection-switch-btn">
                   <div class="header-navigation-icon-container">
                     <img src="./Sprites/Icons/Icon_Skins.png" alt="Icon_Skins" class="control-button-list-icon" />
                   </div>
                 </button>
-              </a>
+              <!-- </a> -->
               <span class="control-button-title" lang="collection">Коллекция</span>
             </li>
             <li>
@@ -438,7 +442,7 @@
       </section>
     </footer>
   </div>
-  <div id="story-mode-screen">
+  <div id="story-mode-screen" style="display: none;">
     <!-- rewards popup-b begin -->
     <div class="popup-b fade-hidden" id="bounty-popup">
       <div class="bounty-popup-content bounty-tab" id="bounty-container">
@@ -447,40 +451,24 @@
         <button class="get-double-bounty-btn fade-hidden" id="play-btn">
           <span class="get-double-bounty-btn-title">Получить</span>
           <div class="interactive-btn-info">
-            <img class="get-double-bounty-icon" src="../../Sprites/Icons/Icon_Ads.png" />
+            <img class="get-double-bounty-icon" src="./Sprites/Icons/Icon_Ads.png" />
             <span class="get-double-bounty-value">x2</span>
           </div>
         </button>
         <span class="cancel-bounty-btn fade-hidden">Нет, спасибо</span>
       </div>
     </div>
-    <!-- rewards popup end -->
-    <div class="mask">
-      <div class="banter-loader">
-        <div class="banter-loader__box"></div>
-        <div class="banter-loader__box"></div>
-        <div class="banter-loader__box"></div>
-        <div class="banter-loader__box"></div>
-        <div class="banter-loader__box"></div>
-        <div class="banter-loader__box"></div>
-        <div class="banter-loader__box"></div>
-        <div class="banter-loader__box"></div>
-        <div class="banter-loader__box"></div>
-      </div>
-    </div>
     <header>
       <ul class="header-interface-list">
         <li class="header-ui-container">
-          <a href="../../index.html" class="back-to" id="close-button">
-            <button class="header-navigation-btn">
-              <img src="../../Sprites/Icons/Icon_Arrow_Back.png" alt="Profile" class="header-navigation-list-icon" />
+            <button class="header-navigation-btn main-screen-switch-btn">
+              <img src="./Sprites/Icons/Icon_Arrow_Back.png" alt="Profile" class="header-navigation-list-icon" />
             </button>
-          </a>
         </li>
         <li class="header-ui-container">
           <div class="energy-counter">
             <span class="energy-text" id="energy-text">8</span>
-            <img src="../../Sprites/Icons/Icon_Energy.png" alt="Energy">
+            <img src="./Sprites/Icons/Icon_Energy.png" alt="Energy">
           </div>
         </li>
       </ul>
@@ -535,6 +523,194 @@
       </div>
     </main>
   </div>
+  <div id="challenge-screen" style="display: none;">
+    <header>
+      <ul class="header-interface-list">
+        <li class="header-ui-container">
+          <!-- <a href="../../index.html" class="back-to" id="close-button"> -->
+            <button class="header-navigation-btn main-screen-switch-btn">
+              <img src="../../Sprites/Icons/Icon_Arrow_Back.png" alt="Profile" class="header-navigation-list-icon" />
+            </button>
+          <!-- </a> -->
+        </li>
+        <li class="header-ui-container">
+          <div class="energy-counter">
+            <span class="energy-text" id="energy-text">8</span>
+            <img src="../../Sprites/Icons/Icon_Energy.png" alt="Energy">
+          </div>
+        </li>
+      </ul>
+    </header>
+    <div class="challenges">
+    </div>
+    <!-- rewards popup-b begin -->
+    <div class="popup-b fade-hidden" id="bounty-popup">
+      <div class="bounty-popup-content bounty-tab" id="bounty-container">
+      </div>
+      <div class="double-bounty-by-ads-container">
+        <button class="get-double-bounty-btn fade-hidden" id="play-btn">
+          <span class="get-double-bounty-btn-title">Получить</span>
+          <div class="interactive-btn-info">
+            <img class="get-double-bounty-icon" src="../../Sprites/Icons/Icon_Ads.png" />
+            <span class="get-double-bounty-value">x2</span>
+          </div>
+        </button>
+        <span class="cancel-bounty-btn fade-hidden">Нет, спасибо</span>
+      </div>
+    </div>
+    <!-- rewards popup end -->
+  </div>
+  <div id="collection-screen" style="display: none;">
+    <header>
+      <!-- <a href="../../index.html" class="back-to" id="close-button"> -->
+        <button class="header-navigation-btn main-screen-switch-btn">
+          <img src="../../Sprites/Icons/Icon_Arrow_Back.png" alt="Profile" class="header-navigation-list-icon" />
+        </button>
+      <!-- </a> -->
+    </header>
+    <main>
+      <nav class="collection-navigation">
+        <ul class="collection-nav-list">
+          <li class="categories-btn-container">
+            <button class="categories-btn active-btn" id="skin-sw-button">
+              <span class="categories-btn-title" lang="skins">Скины</span>
+            </button>
+          </li>
+          <li class="categories-btn-container">
+            <button class="categories-btn" id="skin-back-sw-button">
+              <span class="categories-btn-title" lang="card_back">Рубашка</span>
+            </button>
+          </li>
+          <li class="categories-btn-container">
+            <button class="categories-btn" id="background-sw-button">
+              <span class="categories-btn-title" lang="backgrounds">Фоны</span>
+            </button>
+          </li>
+          <li class="categories-btn-container">
+            <button class="categories-btn" id="trophy-sw-button">
+              <span class="categories-btn-title" lang="trophies">Кубки</span>
+            </button>
+          </li>
+        </ul>
+      </nav>
+      <div class="collection-pick-area" id="pick-area-1"></div>
+      <div class="collection-pick-area hidden" id="pick-area-2"></div>
+      <div class="collection-pick-area hidden" id="pick-area-3"></div>
+      <div class="collection-pick-area hidden" id="pick-area-4"></div>
+    </main>
+  </div>
+  <div id="achievements-screen" style="display: none;">
+    <!-- rewards popup-b begin -->
+    <div class="popup-b fade-hidden" id="bounty-popup">
+      <div class="bounty-popup-content bounty-tab" id="bounty-container">
+      </div>
+      <div class="double-bounty-by-ads-container">
+        <button class="get-double-bounty-btn fade-hidden" id="play-btn">
+          <span class="get-double-bounty-btn-title" lang="claim">Получить</span>
+          <div class="interactive-btn-info">
+            <img class="get-double-bounty-icon" src="../../Sprites/Icons/Icon_Ads.png" />
+            <span class="get-double-bounty-value">x2</span>
+          </div>
+        </button>
+        <span class="cancel-bounty-btn fade-hidden" lang="no_thanks">Нет, спасибо</span>
+      </div>
+    </div>
+    <!-- rewards popup end -->
+    <header>
+      <ul class="header-interface-list">
+        <li class="header-ui-container">
+          <!-- <a href="../../index.html" class="back-to" id="close-button"> -->
+            <button class="header-navigation-btn main-screen-switch-btn">
+              <img src="../../Sprites/Icons/Icon_Arrow_Back.png" alt="Profile" class="header-navigation-list-icon" />
+            </button>
+          <!-- </a> -->
+        </li>
+        <li class="header-ui-container">
+          <div class="energy-counter">
+            <span class="energy-text">8</span>
+            <img src="../../Sprites/Icons/Icon_Energy.png" alt="Energy" />
+          </div>
+        </li>
+      </ul>
+    </header>
+    <div class="popup hidden-popup" style="display: none;" id="bounty-popup">
+      <div class="popup-content bounty-tab">
+        <div class="bounty">
+          <img src="../../Sprites/Icons/Icon_Energy.png" alt="Energy" class="bounty-icon" /><span
+            class="bounty-title">x2</span>
+        </div>
+      </div>
+    </div>
+    <main>
+      <nav class="collection-navigation">
+        <ul class="collection-nav-list">
+          <li class="categories-btn-container">
+            <button class="categories-btn active-btn">
+              <span class="categories-btn-title" lang="achivs">Достижения</span>
+            </button>
+          </li>
+          <li class="categories-btn-container">
+            <button class="categories-btn">
+              <span class="categories-btn-title" lang="stats">Статистика</span>
+            </button>
+          </li>
+        </ul>
+      </nav>
+      <div class="achievements" id="achievements">
+      </div>
+      <div class="achievements hidden" id="statistics">
+        <div class="achievement">
+          <div class="achievement-lable">
+            <img src="../../Sprites/Icons/Icon_Trophy.png" alt="Trophy" class="achievement-icon" />
+            <span class="achievement-title" lang="game_count_s">Количество игр</span>
+          </div>
+          <span class="statistic-counter" id="st-game-count">1</span>
+        </div>
+        <div class="achievement">
+          <div class="achievement-lable">
+            <img src="../../Sprites/Icons/Icon_Trophy.png" alt="Trophy" class="achievement-icon" />
+            <span class="achievement-title" lang="win_count_s">Количество побед</span>
+          </div>
+          <span class="statistic-counter" id="st-win-count">1</span>
+        </div>
+        <div class="achievement">
+          <div class="achievement-lable">
+            <img src="../../Sprites/Icons/Icon_Trophy.png" alt="Trophy" class="achievement-icon" />
+            <span class="achievement-title" lang="win_perc_s">Процент побед</span>
+          </div>
+          <span class="statistic-counter" id="st-win-percent">100%</span>
+        </div>
+        <div class="achievement">
+          <div class="achievement-lable">
+            <img src="../../Sprites/Icons/Icon_Time.png" alt="Time" class="achievement-icon" />
+            <span class="achievement-title" lang="most_speed_win_s">Самая быстрая победа</span>
+          </div>
+          <span class="statistic-counter" id="st-fastest-win">8</span>
+        </div>
+        <div class="achievement">
+          <div class="achievement-lable">
+            <img src="../../Sprites/Icons/Icon_Step.png" alt="Step" class="achievement-icon" />
+            <span class="achievement-title" lang="less_step_s">Меньше всего шагов для победы</span>
+          </div>
+          <span class="statistic-counter" id="st-least-steps">8</span>
+        </div>
+        <div class="achievement">
+          <div class="achievement-lable">
+            <img src="../../Sprites/Icons/Icon_Trial.png" alt="Triaд" class="achievement-icon" />
+            <span class="achievement-title" lang="comp_trial_s">Завершенных Испытаний</span>
+          </div>
+          <span class="statistic-counter" id="st-completed-trials">1</span>
+        </div>
+        <div class="achievement">
+          <div class="achievement-lable">
+            <img src="../../Sprites/Icons/Icon_Trial.png" alt="Trial" class="achievement-icon" />
+            <span class="achievement-title" lang="play_trial_s">Сыгранных Испытаний</span>
+          </div>
+          <span class="statistic-counter" id="st-played-trials">1</span>
+        </div>
+      </div>
+    </main>
+  </div>
   <script>
     let savesList = [];
     let SDK = null;
@@ -559,18 +735,22 @@
       platform = await getPlatform();
       await initialize();
       user.loadData();
-      // await import('./src/localization/translator.js').then(async (translatorItem) => {
-      //   await import('./index.js').then((indexItem) => {
-      //     indexItem.setupLanguageSelector(translatorItem.initialLocale);
-      //   });
-      // });
+      await import('./src/localization/translator.js').then(async (translatorItem) => {
+        await import('./index.js').then((indexItem) => {
+          indexItem.setupLanguageSelector(translatorItem.initialLocale);
+        });
+      });
       
       await import('./src/StoryMode/storyMode.js')
+      
+      await import('./src/challenges/challenge.js')
+      
+      await import('./src/Collection/collection.js');
+
+      await import('./src/achievements/achievements.js');
     });
 
   </script>
-  <!-- <script type="module" src="index.js"></script>
-  <script type="module" src="./src/StoryMode/storyMode.js"></script> -->
 </body>
 
 </html>
