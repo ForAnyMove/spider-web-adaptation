@@ -223,19 +223,19 @@ storyModeSwitchBtn.addEventListener('click', () => {
 const challengesSwitchBtn = document.getElementById('challenges-switch-btn')
 challengesSwitchBtn.addEventListener('click', () => {
   screensManager.main.style.display = 'none'
-  screensManager.challenges.style.display = 'block'
+  screensManager.challenges.style.display = 'flex'
   styleSwitcher.setAttribute('href', './src/challenges/challenge.css')
 })
 const collectionSwitchBtn = document.getElementById('collection-switch-btn')
 collectionSwitchBtn.addEventListener('click', () => {
   screensManager.main.style.display = 'none'
-  screensManager.collection.style.display = 'block'
+  screensManager.collection.style.display = 'flex'
   styleSwitcher.setAttribute('href', './src/collection/collection.css')
 })
 const achievementsSwitchBtn = document.getElementById('achievements-switch-btn')
 achievementsSwitchBtn.addEventListener('click', () => {
   screensManager.main.style.display = 'none'
-  screensManager.achievements.style.display = 'block'
+  screensManager.achievements.style.display = 'flex'
   styleSwitcher.setAttribute('href', './src/achievements/achievements.css')
 })
 setupDailyRewards();
