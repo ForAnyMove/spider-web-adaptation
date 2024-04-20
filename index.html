@@ -5,436 +5,536 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <link rel="stylesheet" href="main.css" />
+  <link rel="stylesheet" href="./src/StoryMode/storyMode.css">
   <link rel="stylesheet" href="./src/Rewards Receiver/rewardsReceiver.css">
   <title>Spider Web</title>
 
-  <script src="https://yandex.ru/games/sdk/v2"></script>
+  <!-- <script src="https://yandex.ru/games/sdk/v2"></script> -->
 </head>
 
 <body>
-  <div class="mask">
-    <div class="banter-loader">
-      <div class="banter-loader__box"></div>
-      <div class="banter-loader__box"></div>
-      <div class="banter-loader__box"></div>
-      <div class="banter-loader__box"></div>
-      <div class="banter-loader__box"></div>
-      <div class="banter-loader__box"></div>
-      <div class="banter-loader__box"></div>
-      <div class="banter-loader__box"></div>
-      <div class="banter-loader__box"></div>
+  <div id="main-screen"  style="display: none;">
+    <div class="mask">
+      <div class="banter-loader">
+        <div class="banter-loader__box"></div>
+        <div class="banter-loader__box"></div>
+        <div class="banter-loader__box"></div>
+        <div class="banter-loader__box"></div>
+        <div class="banter-loader__box"></div>
+        <div class="banter-loader__box"></div>
+        <div class="banter-loader__box"></div>
+        <div class="banter-loader__box"></div>
+        <div class="banter-loader__box"></div>
+      </div>
     </div>
-  </div>
-  <header>
-    <nav class="header-navigation">
-      <ul class="header-navigation-list">
-        <li class="nav-btn">
-          <a href="./src/achievements/achievements.html">
-            <button class="header-navigation-btn">
+    <header>
+      <nav class="header-navigation">
+        <ul class="header-navigation-list">
+          <li class="nav-btn">
+            <a href="./src/achievements/achievements.html">
+              <button class="header-navigation-btn">
+                <div class="header-navigation-icon-container">
+                  <img src="./Sprites/Icons/Icon_Profile.png" alt="Profile" class="header-navigation-list-icon" />
+                </div>
+              </button>
+            </a>
+            <button class="header-navigation-btn" id="daily-btn">
               <div class="header-navigation-icon-container">
-                <img src="./Sprites/Icons/Icon_Profile.png" alt="Profile" class="header-navigation-list-icon" />
+                <img src="./Sprites/Icons/Icon_Chest.png" alt="Profile" class="header-navigation-list-icon" />
               </div>
             </button>
-          </a>
-          <button class="header-navigation-btn" id="daily-btn">
-            <div class="header-navigation-icon-container">
-              <img src="./Sprites/Icons/Icon_Chest.png" alt="Profile" class="header-navigation-list-icon" />
-            </div>
-          </button>
-        </li>
-        <li class="nav-btn">
-          <button class="header-navigation-btn" id="settings-btn">
-            <div class="header-navigation-icon-container">
-              <img src="./Sprites/Icons/Icon_Settings.png" alt="Settings" class="header-navigation-list-icon" />
-            </div>
-          </button>
-        </li>
-      </ul>
-    </nav>
-  </header>
-  <section class="logo">
-    <img src="./Sprites/Logos/Logo_RU.png" alt="Logo" class="logo-icon" lang="[img]logo_img" />
-  </section>
-  <div class="popup daily-bonuses fade-hidden" id="daily-bonuses">
-    <div class="popup-content">
-      <div class="popup-header">
-        <h3 lang="daily_bonus">Ежедневные бонусы</h3>
-        <img src="./Sprites/Icons/Icon_Close.png" alt="close" id="close-popup-daily" class="close-popup" />
-      </div>
-      <div class="daily-boosters-container">
-        <div class="regular-daily">
-          <div class="booster">
-            <span class="completed-flag" lang="ready">Готово</span>
-            <span class="booster-title" lang="day {1}">День 1</span>
-            <img src="./Sprites/Icons/Icon_Energy.png" alt="hint" class="booster-icon" />
-            <span class="booster-counter">2</span>
-            <div class="complete-overlay">Выполнено</div>
-          </div>
-          <div class="booster">
-            <span class="completed-flag" lang="ready">Готово</span>
-            <span class="booster-title" lang="day {2}">День 2</span>
-            <img src="./Sprites/Icons/Icon_Hint.png" alt="hint" class="booster-icon" />
-            <span class="booster-counter">3</span>
-            <div class="complete-overlay">Выполнено</div>
-          </div>
-          <div class="booster">
-            <span class="completed-flag" lang="ready">Готово</span>
-            <span class="booster-title" lang="day {3}">День 3</span>
-            <img src="./Sprites/Icons/Icon_Energy.png" alt="hint" class="booster-icon" />
-            <span class="booster-counter">5</span>
-            <div class="complete-overlay">Выполнено</div>
-          </div>
-          <div class="booster">
-            <span class="completed-flag" lang="ready">Готово</span>
-            <span class="booster-title" lang="day {4}">День 4</span>
-            <img src="./Sprites/Icons/Icon_Mage.png" alt="hint" class="booster-icon" />
-            <span class="booster-counter">3</span>
-            <div class="complete-overlay">Выполнено</div>
-          </div>
-          <div class="booster">
-            <span class="completed-flag" lang="ready">Готово</span>
-            <span class="booster-title" lang="day {5}">День 5</span>
-            <img src="./Sprites/Icons/Icon_Energy.png" alt="hint" class="booster-icon" />
-            <span class="booster-counter">10</span>
-            <div class="complete-overlay">Выполнено</div>
-          </div>
-          <div class="booster">
-            <span class="completed-flag" lang="ready">Готово</span>
-            <span class="booster-title" lang="day {6}">День 3</span>
-            <img src="./Sprites/Icons/Icon_Undo.png" alt="hint" class="booster-icon" />
-            <span class="booster-counter">5</span>
-            <div class="complete-overlay">Выполнено</div>
-          </div>
-        </div>
-        <div class="special-booster">
-          <span class="completed-flag" lang="ready">Готово</span>
-          <span class="special-booster-title" lang="day {7}">День 7</span>
-          <img src="./Sprites/Icons/Icon_Chest.png" alt="hint" class="special-booster-icon" />
-          <span class="booster-counter" lang="spec_reward">Специальная награда</span>
-          <div class="complete-overlay">Выполнено</div>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="popup regular-bonuses fade-hidden" id="regular-bonuses">
-    <div class="popup-content">
-      <div class="web-mask"></div>
-      <div class="popup-header">
-        <h3 lang="bonuses">Бонусы</h3>
-        <img src="./Sprites/Icons/Icon_Close.png" alt="close" id="close-popup-regular" class="close-popup" />
-      </div>
-      <div class="regular-boosters-container">
-        <div class="booster">
-          <div class="booster-type" data-text="Энергия необходима для прохождения уровней в режиме 'История'"
-            lang="[data-text]energy_i">
-            <img src="./Sprites/Icons/Icon_Energy.png" alt="arrow" class="booster-icon" />
-            <span class="booster-counter">5</span>
-          </div>
-          <button class="start-level-btn" id="play-btn">
-            <span class="start-level-btn-title" lang="free">Бесплатно</span>
-            <img src="./Sprites/Icons/Icon_Ads.png" alt="Ads" class="btn-info-icon" />
-          </button>
-        </div>
-        <div class="booster">
-          <div class="booster-type"
-            data-text="Бустер 'Подсказка' - используйте его, если не можете найти правильный ход"
-            lang="[data-text]hint_i">
-            <img src="./Sprites/Icons/Icon_Hint.png" alt="arrow" class="booster-icon" />
-            <span class="booster-counter">4</span>
-          </div>
-          <button class="start-level-btn" id="play-btn">
-            <span class="start-level-btn-title" lang="free">Бесплатно</span>
-            <img src="./Sprites/Icons/Icon_Ads.png" alt="Ads" class="btn-info-icon" />
-          </button>
-        </div>
-        <div class="booster">
-          <div class="booster-type"
-            data-text="Бустер 'Маг' >- используйте его, чтобы добавить на стол 2 подходящие карты"
-            lang="[data-text]mage_i">
-            <img src="./Sprites/Icons/Icon_Mage.png" alt="arrow" class="booster-icon" />
-            <span class="booster-counter">2</span>
-          </div>
-          <button class="start-level-btn" id="play-btn">
-            <span class="start-level-btn-title" lang="free">Бесплатно</span>
-            <img src="./Sprites/Icons/Icon_Ads.png" alt="Ads" class="btn-info-icon" />
-          </button>
-        </div>
-        <div class="booster">
-          <div class="booster-type" data-text="Бустер 'Отмена хода' - используйте его, чтобы отменить ход"
-            lang="[data-text]undo_i">
-            <img src="./Sprites/Icons/Icon_Undo.png" alt="arrow" class="booster-icon" />
-            <span class="booster-counter">5</span>
-          </div>
-          <button class="start-level-btn" id="play-btn">
-            <span class="start-level-btn-title" lang="free">Бесплатно</span>
-            <img src="./Sprites/Icons/Icon_Ads.png" alt="Ads" class="btn-info-icon" />
-          </button>
-        </div>
-        <div class="booster">
-          <div class="booster-type"
-            data-text="Бустер 'Таймер' - используйте его, чтобы добавить 1 минуту времени в режиме 'Испытание'"
-            lang="[data-text]timer_i">
-            <img src="./Sprites/Icons/Icon_Time.png" alt="arrow" class="booster-icon" />
-            <span class="booster-counter">1</span>
-          </div>
-          <button class="start-level-btn" id="play-btn">
-            <span class="start-level-btn-title" lang="free">Бесплатно</span>
-            <img src="./Sprites/Icons/Icon_Ads.png" alt="Ads" class="btn-info-icon" />
-          </button>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="popup settings fade-hidden" id="settings">
-    <div class="popup-content">
-      <div class="popup-header">
-        <h3 lang="setttings">Настройки</h3>
-        <img src="./Sprites/Icons/Icon_Close.png" alt="close" id="close-popup-settings" class="close-popup" />
-      </div>
-      <div class="settings-panel">
-        <div class="setting-btn-container">
-          <button class="header-navigation-btn">
-            <img src="./Sprites/Icons/Icon_Music_Off.png" alt="Icon_Music_Off" class="header-navigation-list-icon" />
-          </button>
-          <span class="settings-btn-title" lang="music">Музыка</span>
-        </div>
-        <div class="setting-btn-container">
-          <button class="header-navigation-btn">
-            <img src="./Sprites/Icons/Icon_Sound_Off.png" alt="Icon_Sound_Off" class="header-navigation-list-icon" />
-          </button>
-          <span class="settings-btn-title" lang="sound">Звук</span>
-        </div>
-        <div class="setting-btn-container">
-          <a href="./src/playground/playground.html?levelID=level_def_s_1&isTutorial=true">
-            <button class="header-navigation-btn">
-              <img src="./Sprites/Icons/Icon_Tutorial.png " alt="Tutorial" class="header-navigation-list-icon" />
-            </button>
-          </a>
-          <span class="settings-btn-title" lang="tutorial">Обучение</span>
-        </div>
-        <div class="setting-btn-container">
-          <button class="special-language-btn header-navigation-btn" id="lang-btn">
-            <img src="./Sprites/Lang/ru.png " alt="Lang" class="header-navigation-list-icon" id="languages-btn"
-              lang="[img]flag_img" />
-          </button>
-          <span class="settings-btn-title" lang="lang">Язык</span>
-        </div>
-      </div>
-      <div class="version">
-        <span class="version-title">v0.0.2.19</span>
-      </div>
-    </div>
-  </div>
-  <div class="popup languages fade-hidden" id="languages">
-    <div class="popup-content">
-      <div class="popup-header">
-        <h3 lang="lang">Язык</h3>
-        <img src="./Sprites/Icons/Icon_Close.png" alt="close" id="close-popup-languages" class="close-popup" />
-      </div>
-      <div class="languages-list">
-        <div class="language-container">
-          <div class="language">
-            <img src="./Sprites/Lang/ru.png" alt="RU" class="language-icon">
-            <span class="language-title">Русский</span>
-          </div>
-          <div class="custom-checkbox">
-            <img src="./Sprites/Icons/Icon_Check.png" alt="Check" class="accept-checkbox-icon">
-          </div>
-        </div>
-        <div class="language-container">
-          <div class="language">
-            <img src="./Sprites/Lang/en.png" alt="EN" class="language-icon">
-            <span class="language-title">English</span>
-          </div>
-          <div class="custom-checkbox">
-            <img src="./Sprites/Icons/Icon_Check.png" alt="Check" class="accept-checkbox-icon hidden">
-          </div>
-        </div>
-        <div class="language-container">
-          <div class="language">
-            <img src="./Sprites/Lang/de.png" alt="GER" class="language-icon">
-            <span class="language-title">German</span>
-          </div>
-          <div class="custom-checkbox">
-            <img src="./Sprites/Icons/Icon_Check.png" alt="Check" class="accept-checkbox-icon hidden">
-          </div>
-        </div>
-        <div class="language-container">
-          <div class="language">
-            <img src="./Sprites/Lang/ja.png" alt="JAP" class="language-icon">
-            <span class="language-title">Japanese</span>
-          </div>
-          <div class="custom-checkbox">
-            <img src="./Sprites/Icons/Icon_Check.png" alt="Check" class="accept-checkbox-icon hidden">
-          </div>
-        </div>
-        <div class="language-container">
-          <div class="language">
-            <img src="./Sprites/Lang/hi.png" alt="IND" class="language-icon">
-            <span class="language-title">Hindi</span>
-          </div>
-          <div class="custom-checkbox">
-            <img src="./Sprites/Icons/Icon_Check.png" alt="Check" class="accept-checkbox-icon hidden">
-          </div>
-        </div>
-        <div class="language-container">
-          <div class="language">
-            <img src="./Sprites/Lang/pt.png" alt="PORTU" class="language-icon">
-            <span class="language-title">Portuguese</span>
-          </div>
-          <div class="custom-checkbox">
-            <img src="./Sprites/Icons/Icon_Check.png" alt="Check" class="accept-checkbox-icon hidden">
-          </div>
-        </div>
-        <div class="language-container">
-          <div class="language">
-            <img src="./Sprites/Lang/es.png" alt="ESP" class="language-icon">
-            <span class="language-title">Spanish</span>
-          </div>
-          <div class="custom-checkbox">
-            <img src="./Sprites/Icons/Icon_Check.png" alt="Check" class="accept-checkbox-icon hidden">
-          </div>
-        </div>
-        <div class="language-container">
-          <div class="language">
-            <img src="./Sprites/Lang/tr.png" alt="TURK" class="language-icon">
-            <span class="language-title">Turkish</span>
-          </div>
-          <div class="custom-checkbox">
-            <img src="./Sprites/Icons/Icon_Check.png" alt="Check" class="accept-checkbox-icon hidden">
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-  <!-- rewards popup begin -->
-  <div class="popup-b fade-hidden" id="bounty-popup">
-    <div class="bounty-popup-content bounty-tab" id="bounty-container">
-    </div>
-    <div class="double-bounty-by-ads-container">
-      <button class="get-double-bounty-btn fade-hidden" id="play-btn">
-        <span class="get-double-bounty-btn-title" lang="claim">Получить</span>
-        <div class="interactive-btn-info">
-          <img class="get-double-bounty-icon" src="./Sprites/Icons/Icon_Ads.png" />
-          <span class="get-double-bounty-value">x2</span>
-        </div>
-      </button>
-      <span class="cancel-bounty-btn fade-hidden" lang="no_thanks">Нет, спасибо</span>
-    </div>
-  </div>
-  <div class="popup exid-game fade-hidden" id="exid-game">
-    <div class="popup-content">
-      <div class="popup-header">
-        <h3 class="exid-tab-title">Вы уверены, что хотите выйти из игры?</h3>
-      </div>
-      <div class="exid-btns-container">
-        <button class="start-level-btn exid-yes" id="play-btn">
-          <span class="start-level-btn-title">Да</span>
-        </button>
-        <button class="start-level-btn exid-no" id="play-btn">
-          <span class="start-level-btn-title">Нет</span>
-        </button>
-      </div>
-    </div>
-  </div>
-  <main class="main-content">
-    <section class="btn-panel">
-      <div class="main-panel-btn-container-1">
-        <a href="./src/playground/playground.html?levelID=level_def_s_1">
-          <button class="main-panel-btn main-panel-btn-1">
-            <span class="main-panel-btn-title" lang="one_suit">Одна масть</span>
-            <span class="main-panel-btn-level" lang="spider">Паук</span>
-          </button>
-        </a>
-      </div>
-      <div class="main-panel-btn-container-2">
-        <a href="./src/playground/playground.html?levelID=level_def_s_2">
-          <button class="main-panel-btn main-panel-btn-2">
-            <span class="main-panel-btn-title" lang="two_suit">Две масти</span>
-            <span class="main-panel-btn-level" lang="spider">Паук</span>
-          </button>
-        </a>
-      </div>
-      <div class="main-panel-btn-container-3">
-        <a href="./src/playground/playground.html?levelID=level_def_s_4">
-          <button class="main-panel-btn main-panel-btn-3">
-            <span class="main-panel-btn-title" lang="four_suit">Четыре масти</span>
-            <span class="main-panel-btn-level" lang="spider">Паук</span>
-          </button>
-        </a>
-      </div>
-      <div class="main-panel-btn-container-4">
-        <a href="./src/playground/playground.html?levelID=level_def_sl_1">
-          <button class="main-panel-btn main-panel-btn-4">
-            <span class="main-panel-btn-title" lang="one_suit">Одна масть</span>
-            <span class="main-panel-btn-level" lang="spider_w">Паучиха</span>
-          </button>
-        </a>
-      </div>
-      <div class="main-panel-btn-container-5">
-        <a href="./src/playground/playground.html?levelID=level_def_sl_2">
-          <button class="main-panel-btn main-panel-btn-5">
-            <span class="main-panel-btn-title" lang="two_suit">Две масти</span>
-            <span class="main-panel-btn-level" lang="spider_w">Паучиха</span>
-          </button>
-        </a>
-      </div>
-      <div class="main-panel-btn-container-6">
-        <a href="./src/playground/playground.html?levelID=level_def_sl_4">
-          <button class="main-panel-btn main-panel-btn-6">
-            <span class="main-panel-btn-title" lang="four_suit">Четыре масти</span>
-            <span class="main-panel-btn-level" lang="spider_w">Паучиха</span>
-          </button>
-        </a>
-      </div>
-    </section>
-  </main>
-  <footer>
-    <section class="footer-container">
-      <div class="absolute-footer">
-        <ul style="text-wrap: nowrap;">
-          <li>
-            <a href="./src/StoryMode/storyMode.html">
-              <button class="control-btn">
-                <div class="header-navigation-icon-container">
-                  <img src="./Sprites/Icons/Icon_Story.png" alt="StoryMode" class="control-button-list-icon" />
-                </div>
-              </button>
-            </a>
-            <span class="control-button-title" lang="story_mode">Режим История</span>
           </li>
-          <li>
-            <a href="./src/challenges/challenge.html">
-              <button class="control-btn">
-                <div class="header-navigation-icon-container">
-                  <img src="./Sprites/Icons/Icon_Trial.png" alt="Icon_Trial" class="control-button-list-icon" />
-                </div>
-              </button>
-            </a>
-            <span class="control-button-title" lang="trial_mode">Испытания</span>
-          </li>
-          <li>
-            <a href="./src/Collection/collection.html">
-              <button class="control-btn">
-                <div class="header-navigation-icon-container">
-                  <img src="./Sprites/Icons/Icon_Skins.png" alt="Icon_Skins" class="control-button-list-icon" />
-                </div>
-              </button>
-            </a>
-            <span class="control-button-title" lang="collection">Коллекция</span>
-          </li>
-          <li>
-            <button class="control-btn" id="regular-btn">
+          <li class="nav-btn">
+            <button class="header-navigation-btn" id="settings-btn">
               <div class="header-navigation-icon-container">
-                <img src="./Sprites/Icons/Icon_Booster.png" alt="Bonuses" class="control-button-list-icon" />
+                <img src="./Sprites/Icons/Icon_Settings.png" alt="Settings" class="header-navigation-list-icon" />
               </div>
             </button>
-            <span class="control-button-title" lang="bonuses">Бонусы</span>
           </li>
         </ul>
-      </div>
+      </nav>
+    </header>
+    <section class="logo">
+      <img src="./Sprites/Logos/Logo_RU.png" alt="Logo" class="logo-icon" lang="[img]logo_img" />
     </section>
-  </footer>
+    <div class="popup daily-bonuses fade-hidden" id="daily-bonuses">
+      <div class="popup-content">
+        <div class="popup-header">
+          <h3 lang="daily_bonus">Ежедневные бонусы</h3>
+          <img src="./Sprites/Icons/Icon_Close.png" alt="close" id="close-popup-daily" class="close-popup" />
+        </div>
+        <div class="daily-boosters-container">
+          <div class="regular-daily">
+            <div class="booster">
+              <span class="completed-flag" lang="ready">Готово</span>
+              <span class="booster-title" lang="day {1}">День 1</span>
+              <img src="./Sprites/Icons/Icon_Energy.png" alt="hint" class="booster-icon" />
+              <span class="booster-counter">2</span>
+              <div class="complete-overlay">Выполнено</div>
+            </div>
+            <div class="booster">
+              <span class="completed-flag" lang="ready">Готово</span>
+              <span class="booster-title" lang="day {2}">День 2</span>
+              <img src="./Sprites/Icons/Icon_Hint.png" alt="hint" class="booster-icon" />
+              <span class="booster-counter">3</span>
+              <div class="complete-overlay">Выполнено</div>
+            </div>
+            <div class="booster">
+              <span class="completed-flag" lang="ready">Готово</span>
+              <span class="booster-title" lang="day {3}">День 3</span>
+              <img src="./Sprites/Icons/Icon_Energy.png" alt="hint" class="booster-icon" />
+              <span class="booster-counter">5</span>
+              <div class="complete-overlay">Выполнено</div>
+            </div>
+            <div class="booster">
+              <span class="completed-flag" lang="ready">Готово</span>
+              <span class="booster-title" lang="day {4}">День 4</span>
+              <img src="./Sprites/Icons/Icon_Mage.png" alt="hint" class="booster-icon" />
+              <span class="booster-counter">3</span>
+              <div class="complete-overlay">Выполнено</div>
+            </div>
+            <div class="booster">
+              <span class="completed-flag" lang="ready">Готово</span>
+              <span class="booster-title" lang="day {5}">День 5</span>
+              <img src="./Sprites/Icons/Icon_Energy.png" alt="hint" class="booster-icon" />
+              <span class="booster-counter">10</span>
+              <div class="complete-overlay">Выполнено</div>
+            </div>
+            <div class="booster">
+              <span class="completed-flag" lang="ready">Готово</span>
+              <span class="booster-title" lang="day {6}">День 3</span>
+              <img src="./Sprites/Icons/Icon_Undo.png" alt="hint" class="booster-icon" />
+              <span class="booster-counter">5</span>
+              <div class="complete-overlay">Выполнено</div>
+            </div>
+          </div>
+          <div class="special-booster">
+            <span class="completed-flag" lang="ready">Готово</span>
+            <span class="special-booster-title" lang="day {7}">День 7</span>
+            <img src="./Sprites/Icons/Icon_Chest.png" alt="hint" class="special-booster-icon" />
+            <span class="booster-counter" lang="spec_reward">Специальная награда</span>
+            <div class="complete-overlay">Выполнено</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="popup regular-bonuses fade-hidden" id="regular-bonuses">
+      <div class="popup-content">
+        <div class="web-mask"></div>
+        <div class="popup-header">
+          <h3 lang="bonuses">Бонусы</h3>
+          <img src="./Sprites/Icons/Icon_Close.png" alt="close" id="close-popup-regular" class="close-popup" />
+        </div>
+        <div class="regular-boosters-container">
+          <div class="booster">
+            <div class="booster-type" data-text="Энергия необходима для прохождения уровней в режиме 'История'"
+              lang="[data-text]energy_i">
+              <img src="./Sprites/Icons/Icon_Energy.png" alt="arrow" class="booster-icon" />
+              <span class="booster-counter">5</span>
+            </div>
+            <button class="start-level-btn" id="play-btn">
+              <span class="start-level-btn-title" lang="free">Бесплатно</span>
+              <img src="./Sprites/Icons/Icon_Ads.png" alt="Ads" class="btn-info-icon" />
+            </button>
+          </div>
+          <div class="booster">
+            <div class="booster-type"
+              data-text="Бустер 'Подсказка' - используйте его, если не можете найти правильный ход"
+              lang="[data-text]hint_i">
+              <img src="./Sprites/Icons/Icon_Hint.png" alt="arrow" class="booster-icon" />
+              <span class="booster-counter">4</span>
+            </div>
+            <button class="start-level-btn" id="play-btn">
+              <span class="start-level-btn-title" lang="free">Бесплатно</span>
+              <img src="./Sprites/Icons/Icon_Ads.png" alt="Ads" class="btn-info-icon" />
+            </button>
+          </div>
+          <div class="booster">
+            <div class="booster-type"
+              data-text="Бустер 'Маг' >- используйте его, чтобы добавить на стол 2 подходящие карты"
+              lang="[data-text]mage_i">
+              <img src="./Sprites/Icons/Icon_Mage.png" alt="arrow" class="booster-icon" />
+              <span class="booster-counter">2</span>
+            </div>
+            <button class="start-level-btn" id="play-btn">
+              <span class="start-level-btn-title" lang="free">Бесплатно</span>
+              <img src="./Sprites/Icons/Icon_Ads.png" alt="Ads" class="btn-info-icon" />
+            </button>
+          </div>
+          <div class="booster">
+            <div class="booster-type" data-text="Бустер 'Отмена хода' - используйте его, чтобы отменить ход"
+              lang="[data-text]undo_i">
+              <img src="./Sprites/Icons/Icon_Undo.png" alt="arrow" class="booster-icon" />
+              <span class="booster-counter">5</span>
+            </div>
+            <button class="start-level-btn" id="play-btn">
+              <span class="start-level-btn-title" lang="free">Бесплатно</span>
+              <img src="./Sprites/Icons/Icon_Ads.png" alt="Ads" class="btn-info-icon" />
+            </button>
+          </div>
+          <div class="booster">
+            <div class="booster-type"
+              data-text="Бустер 'Таймер' - используйте его, чтобы добавить 1 минуту времени в режиме 'Испытание'"
+              lang="[data-text]timer_i">
+              <img src="./Sprites/Icons/Icon_Time.png" alt="arrow" class="booster-icon" />
+              <span class="booster-counter">1</span>
+            </div>
+            <button class="start-level-btn" id="play-btn">
+              <span class="start-level-btn-title" lang="free">Бесплатно</span>
+              <img src="./Sprites/Icons/Icon_Ads.png" alt="Ads" class="btn-info-icon" />
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="popup settings fade-hidden" id="settings">
+      <div class="popup-content">
+        <div class="popup-header">
+          <h3 lang="setttings">Настройки</h3>
+          <img src="./Sprites/Icons/Icon_Close.png" alt="close" id="close-popup-settings" class="close-popup" />
+        </div>
+        <div class="settings-panel">
+          <div class="setting-btn-container">
+            <button class="header-navigation-btn">
+              <img src="./Sprites/Icons/Icon_Music_Off.png" alt="Icon_Music_Off" class="header-navigation-list-icon" />
+            </button>
+            <span class="settings-btn-title" lang="music">Музыка</span>
+          </div>
+          <div class="setting-btn-container">
+            <button class="header-navigation-btn">
+              <img src="./Sprites/Icons/Icon_Sound_Off.png" alt="Icon_Sound_Off" class="header-navigation-list-icon" />
+            </button>
+            <span class="settings-btn-title" lang="sound">Звук</span>
+          </div>
+          <div class="setting-btn-container">
+            <a href="./src/playground/playground.html?levelID=level_def_s_1&isTutorial=true">
+              <button class="header-navigation-btn">
+                <img src="./Sprites/Icons/Icon_Tutorial.png " alt="Tutorial" class="header-navigation-list-icon" />
+              </button>
+            </a>
+            <span class="settings-btn-title" lang="tutorial">Обучение</span>
+          </div>
+          <div class="setting-btn-container">
+            <button class="special-language-btn header-navigation-btn" id="lang-btn">
+              <img src="./Sprites/Lang/ru.png " alt="Lang" class="header-navigation-list-icon" id="languages-btn"
+                lang="[img]flag_img" />
+            </button>
+            <span class="settings-btn-title" lang="lang">Язык</span>
+          </div>
+        </div>
+        <div class="version">
+          <span class="version-title">v0.0.2.19</span>
+        </div>
+      </div>
+    </div>
+    <div class="popup languages fade-hidden" id="languages">
+      <div class="popup-content">
+        <div class="popup-header">
+          <h3 lang="lang">Язык</h3>
+          <img src="./Sprites/Icons/Icon_Close.png" alt="close" id="close-popup-languages" class="close-popup" />
+        </div>
+        <div class="languages-list">
+          <div class="language-container">
+            <div class="language">
+              <img src="./Sprites/Lang/ru.png" alt="RU" class="language-icon">
+              <span class="language-title">Русский</span>
+            </div>
+            <div class="custom-checkbox">
+              <img src="./Sprites/Icons/Icon_Check.png" alt="Check" class="accept-checkbox-icon">
+            </div>
+          </div>
+          <div class="language-container">
+            <div class="language">
+              <img src="./Sprites/Lang/en.png" alt="EN" class="language-icon">
+              <span class="language-title">English</span>
+            </div>
+            <div class="custom-checkbox">
+              <img src="./Sprites/Icons/Icon_Check.png" alt="Check" class="accept-checkbox-icon hidden">
+            </div>
+          </div>
+          <div class="language-container">
+            <div class="language">
+              <img src="./Sprites/Lang/de.png" alt="GER" class="language-icon">
+              <span class="language-title">German</span>
+            </div>
+            <div class="custom-checkbox">
+              <img src="./Sprites/Icons/Icon_Check.png" alt="Check" class="accept-checkbox-icon hidden">
+            </div>
+          </div>
+          <div class="language-container">
+            <div class="language">
+              <img src="./Sprites/Lang/ja.png" alt="JAP" class="language-icon">
+              <span class="language-title">Japanese</span>
+            </div>
+            <div class="custom-checkbox">
+              <img src="./Sprites/Icons/Icon_Check.png" alt="Check" class="accept-checkbox-icon hidden">
+            </div>
+          </div>
+          <div class="language-container">
+            <div class="language">
+              <img src="./Sprites/Lang/hi.png" alt="IND" class="language-icon">
+              <span class="language-title">Hindi</span>
+            </div>
+            <div class="custom-checkbox">
+              <img src="./Sprites/Icons/Icon_Check.png" alt="Check" class="accept-checkbox-icon hidden">
+            </div>
+          </div>
+          <div class="language-container">
+            <div class="language">
+              <img src="./Sprites/Lang/pt.png" alt="PORTU" class="language-icon">
+              <span class="language-title">Portuguese</span>
+            </div>
+            <div class="custom-checkbox">
+              <img src="./Sprites/Icons/Icon_Check.png" alt="Check" class="accept-checkbox-icon hidden">
+            </div>
+          </div>
+          <div class="language-container">
+            <div class="language">
+              <img src="./Sprites/Lang/es.png" alt="ESP" class="language-icon">
+              <span class="language-title">Spanish</span>
+            </div>
+            <div class="custom-checkbox">
+              <img src="./Sprites/Icons/Icon_Check.png" alt="Check" class="accept-checkbox-icon hidden">
+            </div>
+          </div>
+          <div class="language-container">
+            <div class="language">
+              <img src="./Sprites/Lang/tr.png" alt="TURK" class="language-icon">
+              <span class="language-title">Turkish</span>
+            </div>
+            <div class="custom-checkbox">
+              <img src="./Sprites/Icons/Icon_Check.png" alt="Check" class="accept-checkbox-icon hidden">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- rewards popup begin -->
+    <div class="popup-b fade-hidden" id="bounty-popup">
+      <div class="bounty-popup-content bounty-tab" id="bounty-container">
+      </div>
+      <div class="double-bounty-by-ads-container">
+        <button class="get-double-bounty-btn fade-hidden" id="play-btn">
+          <span class="get-double-bounty-btn-title" lang="claim">Получить</span>
+          <div class="interactive-btn-info">
+            <img class="get-double-bounty-icon" src="./Sprites/Icons/Icon_Ads.png" />
+            <span class="get-double-bounty-value">x2</span>
+          </div>
+        </button>
+        <span class="cancel-bounty-btn fade-hidden" lang="no_thanks">Нет, спасибо</span>
+      </div>
+    </div>
+    <div class="popup exid-game fade-hidden" id="exid-game">
+      <div class="popup-content">
+        <div class="popup-header">
+          <h3 class="exid-tab-title">Вы уверены, что хотите выйти из игры?</h3>
+        </div>
+        <div class="exid-btns-container">
+          <button class="start-level-btn exid-yes" id="play-btn">
+            <span class="start-level-btn-title">Да</span>
+          </button>
+          <button class="start-level-btn exid-no" id="play-btn">
+            <span class="start-level-btn-title">Нет</span>
+          </button>
+        </div>
+      </div>
+    </div>
+    <main class="main-content">
+      <section class="btn-panel">
+        <div class="main-panel-btn-container-1">
+          <a href="./src/playground/playground.html?levelID=level_def_s_1">
+            <button class="main-panel-btn main-panel-btn-1">
+              <span class="main-panel-btn-title" lang="one_suit">Одна масть</span>
+              <span class="main-panel-btn-level" lang="spider">Паук</span>
+            </button>
+          </a>
+        </div>
+        <div class="main-panel-btn-container-2">
+          <a href="./src/playground/playground.html?levelID=level_def_s_2">
+            <button class="main-panel-btn main-panel-btn-2">
+              <span class="main-panel-btn-title" lang="two_suit">Две масти</span>
+              <span class="main-panel-btn-level" lang="spider">Паук</span>
+            </button>
+          </a>
+        </div>
+        <div class="main-panel-btn-container-3">
+          <a href="./src/playground/playground.html?levelID=level_def_s_4">
+            <button class="main-panel-btn main-panel-btn-3">
+              <span class="main-panel-btn-title" lang="four_suit">Четыре масти</span>
+              <span class="main-panel-btn-level" lang="spider">Паук</span>
+            </button>
+          </a>
+        </div>
+        <div class="main-panel-btn-container-4">
+          <a href="./src/playground/playground.html?levelID=level_def_sl_1">
+            <button class="main-panel-btn main-panel-btn-4">
+              <span class="main-panel-btn-title" lang="one_suit">Одна масть</span>
+              <span class="main-panel-btn-level" lang="spider_w">Паучиха</span>
+            </button>
+          </a>
+        </div>
+        <div class="main-panel-btn-container-5">
+          <a href="./src/playground/playground.html?levelID=level_def_sl_2">
+            <button class="main-panel-btn main-panel-btn-5">
+              <span class="main-panel-btn-title" lang="two_suit">Две масти</span>
+              <span class="main-panel-btn-level" lang="spider_w">Паучиха</span>
+            </button>
+          </a>
+        </div>
+        <div class="main-panel-btn-container-6">
+          <a href="./src/playground/playground.html?levelID=level_def_sl_4">
+            <button class="main-panel-btn main-panel-btn-6">
+              <span class="main-panel-btn-title" lang="four_suit">Четыре масти</span>
+              <span class="main-panel-btn-level" lang="spider_w">Паучиха</span>
+            </button>
+          </a>
+        </div>
+      </section>
+    </main>
+    <footer>
+      <section class="footer-container">
+        <div class="absolute-footer">
+          <ul style="text-wrap: nowrap;">
+            <li>
+              <a href="./src/StoryMode/storyMode.html">
+                <button class="control-btn">
+                  <div class="header-navigation-icon-container">
+                    <img src="./Sprites/Icons/Icon_Story.png" alt="StoryMode" class="control-button-list-icon" />
+                  </div>
+                </button>
+              </a>
+              <span class="control-button-title" lang="story_mode">Режим История</span>
+            </li>
+            <li>
+              <a href="./src/challenges/challenge.html">
+                <button class="control-btn">
+                  <div class="header-navigation-icon-container">
+                    <img src="./Sprites/Icons/Icon_Trial.png" alt="Icon_Trial" class="control-button-list-icon" />
+                  </div>
+                </button>
+              </a>
+              <span class="control-button-title" lang="trial_mode">Испытания</span>
+            </li>
+            <li>
+              <a href="./src/Collection/collection.html">
+                <button class="control-btn">
+                  <div class="header-navigation-icon-container">
+                    <img src="./Sprites/Icons/Icon_Skins.png" alt="Icon_Skins" class="control-button-list-icon" />
+                  </div>
+                </button>
+              </a>
+              <span class="control-button-title" lang="collection">Коллекция</span>
+            </li>
+            <li>
+              <button class="control-btn" id="regular-btn">
+                <div class="header-navigation-icon-container">
+                  <img src="./Sprites/Icons/Icon_Booster.png" alt="Bonuses" class="control-button-list-icon" />
+                </div>
+              </button>
+              <span class="control-button-title" lang="bonuses">Бонусы</span>
+            </li>
+          </ul>
+        </div>
+      </section>
+    </footer>
+  </div>
+  <div id="story-mode-screen">
+    <!-- rewards popup-b begin -->
+    <div class="popup-b fade-hidden" id="bounty-popup">
+      <div class="bounty-popup-content bounty-tab" id="bounty-container">
+      </div>
+      <div class="double-bounty-by-ads-container">
+        <button class="get-double-bounty-btn fade-hidden" id="play-btn">
+          <span class="get-double-bounty-btn-title">Получить</span>
+          <div class="interactive-btn-info">
+            <img class="get-double-bounty-icon" src="../../Sprites/Icons/Icon_Ads.png" />
+            <span class="get-double-bounty-value">x2</span>
+          </div>
+        </button>
+        <span class="cancel-bounty-btn fade-hidden">Нет, спасибо</span>
+      </div>
+    </div>
+    <!-- rewards popup end -->
+    <div class="mask">
+      <div class="banter-loader">
+        <div class="banter-loader__box"></div>
+        <div class="banter-loader__box"></div>
+        <div class="banter-loader__box"></div>
+        <div class="banter-loader__box"></div>
+        <div class="banter-loader__box"></div>
+        <div class="banter-loader__box"></div>
+        <div class="banter-loader__box"></div>
+        <div class="banter-loader__box"></div>
+        <div class="banter-loader__box"></div>
+      </div>
+    </div>
+    <header>
+      <ul class="header-interface-list">
+        <li class="header-ui-container">
+          <a href="../../index.html" class="back-to" id="close-button">
+            <button class="header-navigation-btn">
+              <img src="../../Sprites/Icons/Icon_Arrow_Back.png" alt="Profile" class="header-navigation-list-icon" />
+            </button>
+          </a>
+        </li>
+        <li class="header-ui-container">
+          <div class="energy-counter">
+            <span class="energy-text" id="energy-text">8</span>
+            <img src="../../Sprites/Icons/Icon_Energy.png" alt="Energy">
+          </div>
+        </li>
+      </ul>
+    </header>
+    <div class="popup hidden-popup" id="popup">
+    </div>
+    <main>
+      <div class="story-map-container">
+        <div class="levels-axis first-axis">
+          <button class="level-btn closed" id="level-btn-29"></button>
+          <button class="level-btn closed" id="level-btn-21"></button>
+          <button class="level-btn closed" id="level-btn-13"></button>
+          <button class="level-btn closed" id="level-btn-5"></button>
+          <button class="level-btn" id="level-btn-1">1</button>
+          <button class="level-btn closed" id="level-btn-9"></button>
+          <button class="level-btn closed" id="level-btn-17"></button>
+          <button class="level-btn closed" id="level-btn-25"></button>
+          <button class="level-btn closed" id="level-btn-33"></button>
+        </div>
+        <div class="levels-axis second-axis">
+          <button class="level-btn closed" id="level-btn-30"></button>
+          <button class="level-btn closed" id="level-btn-22"></button>
+          <button class="level-btn closed" id="level-btn-14"></button>
+          <button class="level-btn closed" id="level-btn-6"></button>
+          <button class="level-btn closed" id="level-btn-2"></button>
+          <button class="level-btn closed" id="level-btn-10"></button>
+          <button class="level-btn closed" id="level-btn-18"></button>
+          <button class="level-btn closed" id="level-btn-26"></button>
+          <button class="level-btn closed" id="level-btn-34"></button>
+        </div>
+        <div class="levels-axis third-axis">
+          <button class="level-btn closed" id="level-btn-31"></button>
+          <button class="level-btn closed" id="level-btn-23"></button>
+          <button class="level-btn closed" id="level-btn-15"></button>
+          <button class="level-btn closed" id="level-btn-7"></button>
+          <button class="level-btn closed" id="level-btn-3"></button>
+          <button class="level-btn closed" id="level-btn-11"></button>
+          <button class="level-btn closed" id="level-btn-19"></button>
+          <button class="level-btn closed" id="level-btn-27"></button>
+          <button class="level-btn closed" id="level-btn-35"></button>
+        </div>
+        <div class="levels-axis fourth-axis">
+          <button class="level-btn closed" id="level-btn-32"></button>
+          <button class="level-btn closed" id="level-btn-24"></button>
+          <button class="level-btn closed" id="level-btn-16"></button>
+          <button class="level-btn closed" id="level-btn-8"></button>
+          <button class="level-btn closed" id="level-btn-4"></button>
+          <button class="level-btn closed" id="level-btn-12"></button>
+          <button class="level-btn closed" id="level-btn-20"></button>
+          <button class="level-btn closed" id="level-btn-28"></button>
+        </div>
+      </div>
+    </main>
+  </div>
   <script>
     let savesList = [];
     let SDK = null;
@@ -459,14 +559,18 @@
       platform = await getPlatform();
       await initialize();
       user.loadData();
-      await import('./src/localization/translator.js').then(async (translatorItem) => {
-        await import('./index.js').then((indexItem) => {
-          indexItem.setupLanguageSelector(translatorItem.initialLocale);
-        });
-      });
+      // await import('./src/localization/translator.js').then(async (translatorItem) => {
+      //   await import('./index.js').then((indexItem) => {
+      //     indexItem.setupLanguageSelector(translatorItem.initialLocale);
+      //   });
+      // });
+      
+      await import('./src/StoryMode/storyMode.js')
     });
 
   </script>
+  <!-- <script type="module" src="index.js"></script>
+  <script type="module" src="./src/StoryMode/storyMode.js"></script> -->
 </body>
 
 </html>
