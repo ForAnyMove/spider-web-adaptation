@@ -872,6 +872,7 @@ function invokeTutorial() {
   if (isTutorial) {
     tutorialTab.style.display = 'flex'
   } else {
+    tutorialTab.remove();
     return;
   }
 

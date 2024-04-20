@@ -1,3 +1,7 @@
+import { DelayedCall } from '../dotween/dotween.js';
+
+const navagationDuration = 0.1;
+
 class Screen {
     constructor(options = { element, openButtons, closeButtons, onFocus, onUnfocus }) {
         this.element = options.element;
@@ -8,26 +12,25 @@ class Screen {
         this.onUnfocus = options.onUnfocus;
 
         this.isOpened = false;
+        this.element.style.display = 'none';
+        this.element.style.opacity = 0;
+        this.element.style.transition = 'opacity 0.2s ease';
     }
 
     show = function () {
-        if (this.element.classList.contains('fade-hidden')) {
-            this.element.classList.remove('fade-hidden');
-        }
-
-        if (!this.element.classList.contains('fade-visible')) {
-            this.element.classList.add('fade-visible');
-        }
+        this.element.style.display = '';
+        DelayedCall(0.01, () => {
+            this.element.style.opacity = 1;
+        });
 
         this.isOpened = true;
     }
     hide = function () {
-        if (this.element.classList.contains('fade-visible')) {
-            this.element.classList.remove('fade-visible');
-        }
-
-        if (!this.element.classList.contains('fade-hidden')) {
-            this.element.classList.add('fade-hidden');
+        this.element.style.opacity = 0;
+        if (!this.element.classList.contains('hidden')) {
+            DelayedCall(navagationDuration, () => {
+                this.element.style.display = 'none';
+            });
         }
 
         this.isOpened = false;
