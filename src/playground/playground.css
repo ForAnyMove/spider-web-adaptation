@@ -803,7 +803,8 @@ header {
 
 .skin-card>.hidden,
 .skin-card-back>.hidden,
-.background-card>.hidden {
+.background-card>.hidden,
+.story-mode-card-zone>.hidden {
   display: none;
 }
 

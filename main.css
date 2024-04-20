@@ -1047,6 +1047,7 @@ button.selected {
 }
 
 .booster-counter {
+  transform: translateY(-2vh);
   height: 2vh;
   color: #fff6c6;
   font-weight: 700;
