@@ -7,8 +7,6 @@ import { showRewarded } from "../scripts/sdk/sdk.js";
 import { Items } from "../scripts/statics/staticValues.js";
 import('../scripts/rewardReceiverView.js');
 
-const dynamicFontChanger = new DynamicFontChanger();
-
 const vh = window.innerHeight / 100;
 const vw = window.innerWidth / 100;
 
@@ -201,3 +199,4 @@ parent.scrollTo(xPos, 0);
 
 languageChangeEvent.invoke(initialLocale);
 import('../localization/testingLangChanger.js');
+const dynamicFontChanger = new DynamicFontChanger();

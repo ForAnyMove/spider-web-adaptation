@@ -194,6 +194,50 @@ function setupLanguageSelector(initialLocale) {
   }
 }
 
+
+const screensManager = {
+  main: document.getElementById('main-screen'),
+  storyMode: document.getElementById('story-mode-screen'),
+  challenges: document.getElementById('challenge-screen'),
+  collection: document.getElementById('collection-screen'),
+  achievements: document.getElementById('achievements-screen'),
+}
+
+const mainScreenSwitchBtns = Array.from(document.getElementsByClassName('main-screen-switch-btn'))
+mainScreenSwitchBtns.forEach(arrowBackBtn => arrowBackBtn.addEventListener('click', () => {
+  screensManager.storyMode.style.display = 'none'
+  screensManager.challenges.style.display = 'none'
+  screensManager.collection.style.display = 'none'
+  screensManager.achievements.style.display = 'none'
+  screensManager.main.style.display = 'flex'
+  styleSwitcher.setAttribute('href', 'main.css')
+}))
+
+const styleSwitcher =  document.getElementById('style-switcher')
+const storyModeSwitchBtn = document.getElementById('story-mode-switch-btm')
+storyModeSwitchBtn.addEventListener('click', () => {
+  screensManager.main.style.display = 'none'
+  screensManager.storyMode.style.display = 'block'
+  styleSwitcher.setAttribute('href', './src/StoryMode/storyMode.css')
+})
+const challengesSwitchBtn = document.getElementById('challenges-switch-btn')
+challengesSwitchBtn.addEventListener('click', () => {
+  screensManager.main.style.display = 'none'
+  screensManager.challenges.style.display = 'flex'
+  styleSwitcher.setAttribute('href', './src/challenges/challenge.css')
+})
+const collectionSwitchBtn = document.getElementById('collection-switch-btn')
+collectionSwitchBtn.addEventListener('click', () => {
+  screensManager.main.style.display = 'none'
+  screensManager.collection.style.display = 'flex'
+  styleSwitcher.setAttribute('href', './src/collection/collection.css')
+})
+const achievementsSwitchBtn = document.getElementById('achievements-switch-btn')
+achievementsSwitchBtn.addEventListener('click', () => {
+  screensManager.main.style.display = 'none'
+  screensManager.achievements.style.display = 'flex'
+  styleSwitcher.setAttribute('href', './src/achievements/achievements.css')
+})
 setupDailyRewards();
 
 export { setupLanguageSelector }
