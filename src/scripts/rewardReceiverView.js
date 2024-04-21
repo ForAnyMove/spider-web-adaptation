@@ -1,14 +1,24 @@
 import { createElement, createImage, createTextSpan, getIconByItem } from "./helpers.js";
+import { Screen } from "./navigation/navigation.js";
 import { showRewarded } from "./sdk/sdk.js";
 
 const popupElement = document.getElementById('bounty-popup');
-if (popupElement != null) {
 
+if (popupElement != null) {
     const rewardsContainer = document.getElementById('bounty-container');
     const adsContainer = document.getElementsByClassName('double-bounty-by-ads-container')[0];
 
     const adsButton = document.getElementsByClassName('get-double-bounty-btn')[0];
     const closeButton = document.getElementsByClassName('cancel-bounty-btn')[0];
+
+    const rewardsReceiverScreen = new Screen({
+        isPopup: true,
+        element: popupElement,
+        closeButtons: [closeButton],
+        onFocus: () => { },
+        onUnfocus: () => { },
+        screenParameters: null
+    })
 
     const clearItems = () => {
         const items = rewardsContainer.getElementsByClassName('bounty');
@@ -19,6 +29,7 @@ if (popupElement != null) {
     }
 
     function showPopup() {
+        navigation.push(rewardsReceiverScreen);
         if (popupElement.classList.contains('fade-visible')) return;
 
         if (popupElement.classList.contains('fade-hidden')) {
@@ -30,16 +41,19 @@ if (popupElement != null) {
     }
 
     const hidePopup = () => {
+        navigation.pop();
         if (popupElement.classList.contains('fade-hidden')) return;
 
         adsButton.onclick = null;
         popupElement.onclick = null;
         clearItems();
 
-        input?.updateQueryCustom(input.backup.selectableElements, input.backup.selected);
-        if (input) {
-            input.backup = null;
-        }
+        setTimeout(() => {
+            input?.updateQueryCustom(input.backup.selectableElements, input.backup.selected);
+            if (input) {
+                input.backup = null;
+            }
+        }, 210);
 
         if (popupElement.classList.contains('fade-visible')) {
             popupElement.classList.replace('fade-visible', 'fade-hidden');
@@ -55,9 +69,13 @@ if (popupElement != null) {
 
     function startAdsCase() {
         adsContainer.classList.remove('hidden');
+        backActionHandler.stop();
 
         setTimeout(() => adsButton.classList.replace('fade-hidden', 'fade-visible'), 500);
-        setTimeout(() => closeButton.classList.replace('fade-hidden', 'fade-visible'), 2000);
+        setTimeout(() => {
+            closeButton.classList.replace('fade-hidden', 'fade-visible')
+            backActionHandler.start();
+        }, 2000);
     }
 
     function startDefaultCase() {
@@ -81,7 +99,6 @@ if (popupElement != null) {
     }
 
     const receiveReward = (data) => {
-        showPopup();
         input?.backupCurrentState();
 
         for (let i = 0; i < data.items.length; i++) {
@@ -91,6 +108,7 @@ if (popupElement != null) {
         }
 
         if (data.monetized) {
+            rewardsReceiverScreen.onFocus = () => input?.updateQueryCustom([{ element: adsButton }, { element: closeButton }], { element: adsButton });
             startAdsCase();
 
             adsButton.onclick = function () {
@@ -98,16 +116,16 @@ if (popupElement != null) {
                 showRewarded(null, null, () => receiveReward(data), null);
             }
 
-            input?.updateQueryCustom([{ element: adsButton }, { element: closeButton }], { element: adsButton });
         } else {
+            rewardsReceiverScreen.onFocus = () => input?.updateQueryCustom([], { element: popupElement, onBack: () => popupElement?.click() });
             startDefaultCase();
 
             setTimeout(() => {
                 popupElement.onclick = hidePopup;
             }, 400);
-
-            input?.updateQueryCustom([], { element: popupElement, onBack: () => popupElement?.click() });
         }
+
+        showPopup();
     }
 
     user.onItemsPublicReceive.addListener(receiveReward);

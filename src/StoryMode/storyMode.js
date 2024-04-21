@@ -1,42 +1,46 @@
 import DynamicFontChanger from "../localization/dynamicFontChanger.js";
 import { initialLocale, updateInContainer } from "../localization/translator.js";
 import { storyLevelDatabase } from "../scripts/data/level_databases.js";
-import DirectionalInput from "../scripts/directionInput.js";
 import { createButton, createElement, createHSpace, createImage, createTextH3, createTextSpan, createVSpace, getIconByContent, getIconByItem, getIconByPattern, getIconBySuit, getPatternLang, getPatternName, getSuitLang, getSuitName } from "../scripts/helpers.js";
+import { Screen, ScreenParameters } from "../scripts/navigation/navigation.js";
 import { showRewarded } from "../scripts/sdk/sdk.js";
 import { Items } from "../scripts/statics/staticValues.js";
 import('../scripts/rewardReceiverView.js');
 
-const returnButton = document.getElementById('close-button');
-input ??= new DirectionalInput({ element: returnButton });
+const root = document.getElementById('story-mode-screen');
 
-input.selectableElements = [{ element: returnButton }];
+const screenParameters = new ScreenParameters();
 
-const levelButtonsContainer = document.getElementsByClassName('story-map-container')[0]
+screenParameters.defaultSelectedElement = { element: root.querySelector('.main-screen-switch-btn') };
+screenParameters.selectableElements.push(screenParameters.defaultSelectedElement);
+
+const levelButtonsContainer = root.getElementsByClassName('story-map-container')[0]
 const tabSize = {
   width: window.innerWidth,
   height: window.innerHeight,
   orientation: window.innerHeight > window.innerWidth ? 'portrait' : 'landscape'
 }
-const mainTab = document.getElementsByTagName('main')[0]
-const scrollXCoef = tabSize.orientation === 'landscape' ? 6 : 2.3;
-
+const mainTab = root.getElementsByTagName('main')[0]
 
 window.addEventListener('resize', () => {
   popup.style.width = window.innerWidth;
   popup.style.height = window.innerHeight
 })
 
-
 const currentLevelIndex = storyLevelDatabase.currentLevel;
 
 const currentLevel = storyLevelDatabase.levels[currentLevelIndex];
 
-const popupParent = document.getElementById('popup');
+const popupParent = root.querySelector('#popup');
+
+const levelPreviewPopup = new Screen({
+  isPopup: true,
+  element: popupParent,
+})
 
 const levelViews = [];
 
-const views = document.getElementsByClassName('level-btn');
+const views = root.getElementsByClassName('level-btn');
 let levelOrder = 1;
 while (levelViews.length < views.length) {
   for (let i = 0; i < views.length; i++) {
@@ -61,7 +65,7 @@ for (let i = 0; i < levelViews.length; i++) {
     offset.x = box.left + box.width / 2;
     offset.y = box.top + box.height / 2;
 
-    input.selectableElements.push({ element: element });
+    screenParameters.selectableElements.push({ element: element });
 
   } else if (!element.classList.contains('closed')) {
     element.classList.add('closed')
@@ -69,8 +73,25 @@ for (let i = 0; i < levelViews.length; i++) {
   }
 }
 
-const targetPosition = { x: offset.x - tabSize.width / 2, y: offset.y - tabSize.height / 2 }
-mainTab.scrollTo(targetPosition.x, targetPosition.y);
+const focusOnCurrentLevel = () => {
+  setTimeout(() => {
+    let offset = { x: 0, y: 0 };
+    for (let i = 0; i < levelViews.length; i++) {
+      const element = levelViews[i];
+      if (i == currentLevelIndex) {
+
+        const box = element.getBoundingClientRect();
+        offset.x = box.left + box.width / 2;
+        offset.y = box.top + box.height / 2;
+      }
+    }
+
+    const targetPosition = { x: offset.x - window.innerWidth / 2, y: offset.y - window.innerHeight / 2 }
+    mainTab.scrollBy(targetPosition.x, targetPosition.y);
+  }, 10);
+}
+
+screenParameters.openCallback = () => focusOnCurrentLevel();
 
 let lastCreatedLevelPreview = null;
 
@@ -80,6 +101,8 @@ function createLevelPreview(data) {
   }
 
   function createBooster(itemType, title, langID, user, parent) {
+    const selectables = [];
+
     const plane = createElement('div', ['booster-container'], null, parent);
     {
       const div = createElement('div', ['booster'], null, plane);
@@ -93,7 +116,7 @@ function createLevelPreview(data) {
           showRewarded(null, null, () => user.addItem(itemType, 1, { isTrue: true, isMonetized: false }), null);
         });
 
-        input.selectableElements.push({ element: button });
+        selectables.push({ element: button });
         createImage(['booster-icon'], null, div, getIconByItem(itemType));
         const count = createTextSpan(['booster-counter'], null, div, user.getItemCount(itemType));
 
@@ -104,6 +127,8 @@ function createLevelPreview(data) {
       }
       createTextSpan(['booster-title'], null, plane, title, langID);
     }
+
+    return selectables;
   }
   // data
   const requiredPass = data.pass.count;
@@ -114,6 +139,9 @@ function createLevelPreview(data) {
   const patternIcon = getIconByPattern(data.gameRule.Pattern);
   const rewards = data.rewards?.items?.concat(data.rewards?.content ?? []) ?? data.rewards?.content?.concat(data.rewards?.items ?? []);
   // layout
+
+  let selectables = [];
+
   const plane = createElement('div', ['popup-content']);
   {
     const header = createElement('div', ['popup-header'], null, plane);
@@ -125,10 +153,9 @@ function createLevelPreview(data) {
         backgroundImage: 'url(../../Sprites/Icons/Icon_Close.png)',
         backgroundSize: '100% 100%',
       }, header, () => {
-        popupParent.classList.remove('showed-popup');
-        popupParent.classList.add('hidden-popup');
+        navigation.pop();
       });
-      input.selectableElements.push({ element: closeButton });
+      selectables.push({ element: closeButton });
       closeButton.id = 'close-popup'
     }
     const rules = createElement('div', ['rules-container'], null, plane);
@@ -159,10 +186,10 @@ function createLevelPreview(data) {
       createTextH3(['level-info-header'], null, levelInfo, 'Бустеры на уровне', 'boost_in_lvl');
       const boostersContainer = createElement('div', ['boosters-container'], null, levelInfo);
       {
-        createBooster(Items.BoosterHint, 'Подсказка', 'hint_b', user, boostersContainer);
-        createBooster(Items.BoosterUndo, 'Отмена хода', 'undo_b', user, boostersContainer);
-        createBooster(Items.BoosterMage, 'Маг', 'mage_b', user, boostersContainer);
-        createBooster(Items.BoosterTime, 'Доп. время', 'timer_b', user, boostersContainer);
+        selectables = selectables.concat(createBooster(Items.BoosterHint, 'Подсказка', 'hint_b', user, boostersContainer));
+        selectables = selectables.concat(createBooster(Items.BoosterUndo, 'Отмена хода', 'undo_b', user, boostersContainer));
+        selectables = selectables.concat(createBooster(Items.BoosterMage, 'Маг', 'mage_b', user, boostersContainer));
+        selectables = selectables.concat(createBooster(Items.BoosterTime, 'Доп. время', 'timer_b', user, boostersContainer));
       }
 
       if (rewards == null || rewards.length == 0) {
@@ -196,7 +223,7 @@ function createLevelPreview(data) {
         const adsButton = createButton(['start-level-btn'], null, levelStartContainer, () => {
           user.addItem(Items.Energy, 5, { isTrue: true });
         });
-        input.selectableElements.push({ element: adsButton });
+        selectables.push({ element: adsButton });
         adsButton.id = 'ads-btn';
         {
           createImage(['watch-add-icon'], null, adsButton, '../../Sprites/Icons/Icon_Ads.png');
@@ -212,9 +239,9 @@ function createLevelPreview(data) {
           if (user.getItemCount(Items.Energy) >= requiredPass) {
             user.removeItem(Items.Energy, requiredPass);
           }
-          window.location.href = `../playground/playground.html?levelID=level_story_${currentLevelIndex}`;
+          window.location.href = `../src/playground/playground.html?levelID=level_story_${currentLevelIndex}`;
         });
-        input.selectableElements.push({ element: startButton });
+        selectables.push({ element: startButton });
         startButton.id = 'play-btn';
         {
           createTextSpan(['start-level-btn-title'], null, startButton, 'Играть', 'play');
@@ -244,6 +271,8 @@ function createLevelPreview(data) {
     }
   }
 
+  input?.updateQueryCustom(selectables, selectables[0]);
+
   return plane;
 }
 
@@ -256,14 +285,12 @@ levelButtonsContainer.addEventListener('click', (event) => {
     popupParent.appendChild(lastCreatedLevelPreview);
 
     updateInContainer(lastCreatedLevelPreview, initialLocale);
-
-    popupParent.classList.remove('hidden-popup');
-    popupParent.classList.add('showed-popup');
+    navigation.push(levelPreviewPopup);
   }
 })
 
 function setupEnergyView() {
-  const element = document.getElementById('energy-text');
+  const element = root.querySelector('#energy-text');
 
   if (element != null) {
     element.innerText = user.getItemCount(Items.Energy);
@@ -278,4 +305,5 @@ setupEnergyView();
 
 languageChangeEvent.invoke(initialLocale);
 import('../localization/testingLangChanger.js');
-const dynamicFontChanger = new DynamicFontChanger();
+
+export { screenParameters }

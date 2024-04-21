@@ -5,7 +5,7 @@ export default class DirectionalInput {
         this.select(initialSelectedElement);
         this.selectableElements = [];
 
-        this.updateQuery();
+        // this.updateQuery();
         document.addEventListener('keydown', this.handleKeyDown);
 
         this.backup = null;

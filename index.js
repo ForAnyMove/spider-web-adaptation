@@ -11,14 +11,89 @@ import('./src/scripts/rewardReceiverView.js');
 import DirectionalInput from './src/scripts/directionInput.js';
 import DynamicFontChanger from './src/localization/dynamicFontChanger.js';
 import { getInputElements } from './src/scripts/helpers.js';
-import { BackActionHandler, Screen, StackNavigation } from './src/scripts/navigation/navigation.js';
+import { BackActionHandler, Screen, ScreenParameters } from './src/scripts/navigation/navigation.js';
 
-const defaultSelectedButton = document.getElementsByClassName('main-panel-btn-1')[0];
-input ??= new DirectionalInput({ element: defaultSelectedButton });
+input ??= new DirectionalInput();
+const styleSwitcher = document.getElementById('style-switcher');
 
-const navigation = new StackNavigation();
+const screenParameters = new ScreenParameters();
+screenParameters.defaultSelectedElement = { element: document.getElementsByClassName('main-panel-btn-1')[0] };
+screenParameters.selectableElements = getInputElements(document.getElementById('main-screen'), { tags: ['button'] })
+
+const mainScreen = new Screen({
+  element: document.getElementById('main-screen'),
+  onFocus: () => {
+    styleSwitcher.setAttribute('href', 'main.css');
+    input.updateQueryCustom(screenParameters.selectableElements, screenParameters.defaultSelectedElement);
+  },
+  onUnfocus: () => { }
+})
+const storyModeRoot = document.getElementById('story-mode-screen');
+const storyModeScreen = new Screen({
+  element: storyModeRoot,
+  openButtons: [mainScreen.element.querySelector('#story-mode-switch-btm')],
+  closeButtons: [storyModeRoot.getElementsByClassName('main-screen-switch-btn')[0]],
+  onFocus: () => {
+    styleSwitcher.setAttribute('href', './src/StoryMode/storyMode.css');
+    input.updateQueryCustom(storyModeScreen.screenParameters.selectableElements,
+      storyModeScreen.screenParameters.defaultSelectedElement);
+
+    storyModeScreen.screenParameters.openCallback?.()
+  },
+  onUnfocus: () => {
+    navigation.push(mainScreen);
+  },
+  screenParameters: storyMode.screenParameters
+})
+
+const challengesRoot = document.getElementById('challenge-screen');
+const challengesScreen = new Screen({
+  element: challengesRoot,
+  openButtons: [mainScreen.element.querySelector('#challenges-switch-btn')],
+  closeButtons: [challengesRoot.getElementsByClassName('main-screen-switch-btn')[0]],
+  onFocus: () => {
+    styleSwitcher.setAttribute('href', './src/challenges/challenge.css')
+    input.updateQueryCustom(challengesScreen.screenParameters.selectableElements,
+      challengesScreen.screenParameters.defaultSelectedElement);
+  },
+  onUnfocus: () => {
+    navigation.push(mainScreen);
+  }, screenParameters: challenges.screenParameters
+})
+
+const collectionRoot = document.getElementById('collection-screen');
+const collectionScreen = new Screen({
+  element: collectionRoot,
+  openButtons: [mainScreen.element.querySelector('#collection-switch-btn')],
+  closeButtons: [collectionRoot.getElementsByClassName('main-screen-switch-btn')[0]],
+  onFocus: () => {
+    styleSwitcher.setAttribute('href', './src/collection/collection.css')
+    input.updateQueryCustom(collectionScreen.screenParameters.selectableElements,
+      collectionScreen.screenParameters.defaultSelectedElement);
+  },
+  onUnfocus: () => {
+    navigation.push(mainScreen);
+  },
+  screenParameters: collection.screenParameters
+})
+
+const achievementsRoot = document.getElementById('achievements-screen');
+const achievementsScreen = new Screen({
+  element: achievementsRoot,
+  openButtons: [mainScreen.element.querySelector('#achievements-switch-btn')],
+  closeButtons: [achievementsRoot.getElementsByClassName('main-screen-switch-btn')[0]],
+  onFocus: () => {
+    styleSwitcher.setAttribute('href', './src/achievements/achievements.css')
+    input.updateQueryCustom(achievementsScreen.screenParameters.selectableElements,
+      achievementsScreen.screenParameters.defaultSelectedElement);
+  },
+  onUnfocus: () => {
+    navigation.push(mainScreen);
+  }, screenParameters: achievements.screenParameters
+})
 
 const dailyRewardsScreen = new Screen({
+  isPopup: true,
   element: document.getElementById('daily-bonuses'),
   openButtons: [document.getElementById('daily-btn')],
   closeButtons: [document.getElementById('close-popup-daily')],
@@ -27,6 +102,7 @@ const dailyRewardsScreen = new Screen({
 });
 
 const bonusesScreen = new Screen({
+  isPopup: true,
   element: document.getElementById('regular-bonuses'),
   openButtons: [document.getElementById('regular-btn')],
   closeButtons: [document.getElementById('close-popup-regular')],
@@ -35,6 +111,7 @@ const bonusesScreen = new Screen({
 });
 
 const settingsScreen = new Screen({
+  isPopup: true,
   element: document.getElementById('settings'),
   openButtons: [document.getElementById('settings-btn')],
   closeButtons: [document.getElementById('close-popup-settings')],
@@ -43,6 +120,7 @@ const settingsScreen = new Screen({
 });
 
 const languageScreen = new Screen({
+  isPopup: true,
   element: document.getElementById('languages'),
   openButtons: [document.getElementById('lang-btn')],
   closeButtons: [document.getElementById('close-popup-languages')],
@@ -51,6 +129,7 @@ const languageScreen = new Screen({
 });
 
 const exitScreen = new Screen({
+  isPopup: true,
   element: document.getElementById('exid-game'),
   closeButtons: [document.getElementById('exid-game').getElementsByClassName('exid-no')[0]],
   onFocus: () => {
@@ -64,18 +143,24 @@ if (exitButton != null) {
   exitButton.onclick = function () { SDK?.dispatchEvent(SDK.EVENTS.EXIT); }
 }
 
+navigation.registerScreen(achievementsScreen);
+navigation.registerScreen(challengesScreen);
+navigation.registerScreen(storyModeScreen);
+navigation.registerScreen(collectionScreen);
+
 navigation.registerScreen(dailyRewardsScreen);
 navigation.registerScreen(bonusesScreen);
 navigation.registerScreen(settingsScreen);
 navigation.registerScreen(languageScreen);
 navigation.registerScreen(exitScreen);
 
-new BackActionHandler(input, () => {
+navigation.push(mainScreen);
+
+backActionHandler = new BackActionHandler(input, () => {
   navigation.pop();
 }, () => {
   navigation.push(exitScreen);
 });
-
 
 function setupReqularBonusesButtons() {
   const itemCountPairs = [
@@ -195,49 +280,49 @@ function setupLanguageSelector(initialLocale) {
 }
 
 
-const screensManager = {
-  main: document.getElementById('main-screen'),
-  storyMode: document.getElementById('story-mode-screen'),
-  challenges: document.getElementById('challenge-screen'),
-  collection: document.getElementById('collection-screen'),
-  achievements: document.getElementById('achievements-screen'),
-}
+// const screensManager = {
+//   main: document.getElementById('main-screen'),
+//   storyMode: document.getElementById('story-mode-screen'),
+//   challenges: document.getElementById('challenge-screen'),
+//   collection: document.getElementById('collection-screen'),
+//   achievements: document.getElementById('achievements-screen'),
+// }
 
-const mainScreenSwitchBtns = Array.from(document.getElementsByClassName('main-screen-switch-btn'))
-mainScreenSwitchBtns.forEach(arrowBackBtn => arrowBackBtn.addEventListener('click', () => {
-  screensManager.storyMode.style.display = 'none'
-  screensManager.challenges.style.display = 'none'
-  screensManager.collection.style.display = 'none'
-  screensManager.achievements.style.display = 'none'
-  screensManager.main.style.display = 'flex'
-  styleSwitcher.setAttribute('href', 'main.css')
-}))
+// const mainScreenSwitchBtns = Array.from(document.getElementsByClassName('main-screen-switch-btn'))
+// mainScreenSwitchBtns.forEach(arrowBackBtn => arrowBackBtn.addEventListener('click', () => {
+//   screensManager.storyMode.style.display = 'none'
+//   screensManager.challenges.style.display = 'none'
+//   screensManager.collection.style.display = 'none'
+//   screensManager.achievements.style.display = 'none'
+//   screensManager.main.style.display = 'flex'
+//   styleSwitcher.setAttribute('href', 'main.css')
+// }))
 
-const styleSwitcher =  document.getElementById('style-switcher')
-const storyModeSwitchBtn = document.getElementById('story-mode-switch-btm')
-storyModeSwitchBtn.addEventListener('click', () => {
-  screensManager.main.style.display = 'none'
-  screensManager.storyMode.style.display = 'block'
-  styleSwitcher.setAttribute('href', './src/StoryMode/storyMode.css')
-})
-const challengesSwitchBtn = document.getElementById('challenges-switch-btn')
-challengesSwitchBtn.addEventListener('click', () => {
-  screensManager.main.style.display = 'none'
-  screensManager.challenges.style.display = 'flex'
-  styleSwitcher.setAttribute('href', './src/challenges/challenge.css')
-})
-const collectionSwitchBtn = document.getElementById('collection-switch-btn')
-collectionSwitchBtn.addEventListener('click', () => {
-  screensManager.main.style.display = 'none'
-  screensManager.collection.style.display = 'flex'
-  styleSwitcher.setAttribute('href', './src/collection/collection.css')
-})
-const achievementsSwitchBtn = document.getElementById('achievements-switch-btn')
-achievementsSwitchBtn.addEventListener('click', () => {
-  screensManager.main.style.display = 'none'
-  screensManager.achievements.style.display = 'flex'
-  styleSwitcher.setAttribute('href', './src/achievements/achievements.css')
-})
+// const storyModeSwitchBtn = document.getElementById('story-mode-switch-btm')
+// storyModeSwitchBtn.addEventListener('click', () => {
+//   screensManager.main.style.display = 'none'
+//   screensManager.storyMode.style.display = 'block'
+//   styleSwitcher.setAttribute('href', './src/StoryMode/storyMode.css')
+// })
+// const challengesSwitchBtn = document.getElementById('challenges-switch-btn')
+// challengesSwitchBtn.addEventListener('click', () => {
+//   screensManager.main.style.display = 'none'
+//   screensManager.challenges.style.display = 'flex'
+//   styleSwitcher.setAttribute('href', './src/challenges/challenge.css')
+// })
+// const collectionSwitchBtn = document.getElementById('collection-switch-btn')
+// collectionSwitchBtn.addEventListener('click', () => {
+//   screensManager.main.style.display = 'none'
+//   screensManager.collection.style.display = 'flex'
+//   styleSwitcher.setAttribute('href', './src/collection/collection.css')
+// })
+// const achievementsSwitchBtn = document.getElementById('achievements-switch-btn')
+// achievementsSwitchBtn.addEventListener('click', () => {
+//   screensManager.main.style.display = 'none'
+//   screensManager.achievements.style.display = 'flex'
+//   styleSwitcher.setAttribute('href', './src/achievements/achievements.css')
+// })
+
 setupDailyRewards();
 
 export { setupLanguageSelector }

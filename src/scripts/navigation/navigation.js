@@ -1,9 +1,18 @@
 import { DelayedCall } from '../dotween/dotween.js';
 
-const navagationDuration = 0.1;
+const navagationDuration = 0.2;
+
+class ScreenParameters {
+    constructor() {
+        this.defaultSelectedElement = null;
+        this.selectableElements = [];
+        this.openCallback = null;
+    }
+}
 
 class Screen {
-    constructor(options = { element, openButtons, closeButtons, onFocus, onUnfocus }) {
+    constructor(options = { isPopup, element, openButtons, closeButtons, onFocus, onUnfocus, screenParameters }) {
+        this.screenParameters = options.screenParameters;
         this.element = options.element;
         this.closeButtons = options.closeButtons;
         this.openButtons = options.openButtons;
@@ -11,26 +20,40 @@ class Screen {
         this.onFocus = options.onFocus;
         this.onUnfocus = options.onUnfocus;
 
+        this.isPopup = options.isPopup;
         this.isOpened = false;
         this.element.style.display = 'none';
         this.element.style.opacity = 0;
-        this.element.style.transition = 'opacity 0.2s ease';
+        this.element.style.transition = `opacity ${navagationDuration}s ease`;
     }
 
-    show = function () {
-        this.element.style.display = '';
-        DelayedCall(0.01, () => {
-            this.element.style.opacity = 1;
-        });
-
-        this.isOpened = true;
+    show = function (onShow) {
+        if (!this.isPopup) {
+            setTimeout(() => {
+                this.element.style.display = '';
+                setTimeout(() => {
+                    this.element.style.opacity = 1;
+                }, 10)
+                onShow?.();
+                this.isOpened = true;
+            }, navagationDuration * 1000)
+        } else {
+            this.element.style.display = '';
+            setTimeout(() => {
+                this.element.style.opacity = 1;
+            }, 10);
+            onShow?.();
+            this.isOpened = true;
+        }
     }
-    hide = function () {
+
+    hide = function (onHide) {
         this.element.style.opacity = 0;
         if (!this.element.classList.contains('hidden')) {
-            DelayedCall(navagationDuration, () => {
+            setTimeout(() => {
                 this.element.style.display = 'none';
-            });
+                onHide?.();
+            }, navagationDuration * 1000)
         }
 
         this.isOpened = false;
@@ -51,16 +74,18 @@ class Navigation {
     }
 
     open = function (screen) {
-        screen.show();
-        screen.onFocus?.();
+        screen.show(() => {
+            screen.onFocus?.()
+        });
     }
 
     close = function (screen) {
-        screen.hide();
-        screen.onUnfocus?.();
-        if (this.openedScreens.length > 0) {
-            this.openedScreens[this.openedScreens.length - 1].onFocus?.();
-        }
+        screen.hide(() => {
+            screen.onUnfocus?.();
+            if (this.openedScreens.length > 0) {
+                this.openedScreens[this.openedScreens.length - 1].onFocus?.();
+            }
+        });
     }
 }
 
@@ -91,6 +116,12 @@ class StackNavigation extends Navigation {
 
     push = function (screen) {
         if (this.openedScreens.includes(screen)) return;
+        if (!screen.isPopup) {
+            const last = this.openedScreens.pop();
+            if (last != null) {
+                last.hide();
+            }
+        }
         this.openedScreens.push(screen);
 
         this.open(screen);
@@ -111,6 +142,7 @@ class BackActionHandler {
 
         this.timeout = null;
         this.backPressCount = 0;
+        this.isFunctional = true;
 
         input.addGlobalKeyHandle('Escape', () => {
             this.handleBackAction();
@@ -136,6 +168,7 @@ class BackActionHandler {
     }
 
     handleBackAction = function () {
+        if (!this.isFunctional) return;
         this.backPressCount++;
 
         if (this.backPressCount >= 2) {
@@ -147,6 +180,14 @@ class BackActionHandler {
             this.handleSinglePress();
         }, 200);
     }
+
+    stop = function () {
+        this.isFunctional = false;
+    }
+
+    start = function () {
+        this.isFunctional = true;
+    }
 }
 
-export { StackNavigation, Screen, BackActionHandler }
+export { StackNavigation, Screen, BackActionHandler, ScreenParameters }

@@ -1,4 +1,10 @@
 
+let mask = document.querySelector('.mask');
+let isLoaded = false;
+let isPreloading = false;
+mask.style.opacity = 1;
+mask.style.transition = 'opacity 0.5s ease';
+
 async function preload(middleLoader, callback) {
 
     //     const body = document.getElementsByTagName('body')[0];
@@ -16,7 +22,11 @@ async function preload(middleLoader, callback) {
     //     </div>
     //   </div>`)
 
-    let isLoaded = false;
+    if (isPreloading) return;
+    isPreloading = true;
+
+    mask.style.opacity = 1;
+    mask.style.display = 'flex';
 
     window.addEventListener('load', () => {
         isLoaded = true;
@@ -24,18 +34,18 @@ async function preload(middleLoader, callback) {
 
     await middleLoader?.();
 
-    let mask = document.querySelector('.mask');
-
     if (isLoaded) {
-        mask.classList.add('hide');
+        mask.style.opacity = 0;
         setTimeout(() => {
-            mask.remove();
+            isPreloading = false;
+            mask.style.display = 'none';
         }, 600);
     } else {
         window.addEventListener('load', () => {
-            mask.classList.add('hide');
+            mask.style.opacity = 0;
             setTimeout(() => {
-                mask.remove();
+                isPreloading = false;
+                mask.style.display = 'none';
             }, 600);
         });
     }

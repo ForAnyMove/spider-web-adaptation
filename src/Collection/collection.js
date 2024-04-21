@@ -1,23 +1,26 @@
 import { backSkinDatabase, backgroundDatabase, skinDatabase } from "../scripts/data/card_skin_database.js"
 import { trophyDatabase } from "../scripts/data/trophy_database.js";
-import DirectionalInput from "../scripts/directionInput.js";
 import { createButton, createElement, createImage, createTextP, createTextSpan } from "../scripts/helpers.js";
 import { Statefull } from "../scripts/statics/enums.js"
 import { initialLocale } from '../localization/translator.js';
 import DynamicFontChanger from "../localization/dynamicFontChanger.js";
+import { ScreenParameters } from "../scripts/navigation/navigation.js";
 
 const checkIconPath = '../../Sprites/Icons/Icon_Check.png'
 const lockIconPath = '../../Sprites/Icons/Icon_Lock.png'
 
-const skinParent = document.getElementById('pick-area-1');
-const skinBackParent = document.getElementById('pick-area-2');
-const backgroundParent = document.getElementById('pick-area-3');
-const trophyParent = document.getElementById('pick-area-4');
+const root = document.getElementById('collection-screen');
+const screenParameters = new ScreenParameters();
+
+const skinParent = root.querySelector('#pick-area-1');
+const skinBackParent = root.querySelector('#pick-area-2');
+const backgroundParent = root.querySelector('#pick-area-3');
+const trophyParent = root.querySelector('#pick-area-4');
 
 const tabScreens = [skinParent, skinBackParent, backgroundParent, trophyParent];
 
-const returnButton = document.getElementById('close-button');
-input ??= new DirectionalInput({ element: returnButton });
+screenParameters.defaultSelectedElement = { element: root.querySelector('.main-screen-switch-btn') };
+screenParameters.selectableElements.push(screenParameters.defaultSelectedElement);
 
 function createCardSkins() {
   for (let i = 0; i < skinDatabase.skinList.length; i++) {
@@ -70,7 +73,7 @@ function createBackgroundInstance(data) {
       user.useContent(data.id);
     });
 
-    input.selectableElements.push({
+    screenParameters.selectableElements.push({
       element: useButton, onSubmit: () => {
         input.select(input.selectableElements[3]);
       }
@@ -123,7 +126,7 @@ function createSkinInstance(data) {
       user.useContent(data.id);
     });
 
-    input.selectableElements.push({
+    screenParameters.selectableElements.push({
       element: useButton, onSubmit: () => {
         input.select(input.selectableElements[1]);
       }
@@ -183,7 +186,7 @@ function createSkinBackInstance(data) {
       useButton.classList.add('hidden');
     }
 
-    input.selectableElements.push({
+    screenParameters.selectableElements.push({
       element: useButton, onSubmit: () => {
         input.select(input.selectableElements[2]);
       }
@@ -223,9 +226,8 @@ function createTrophyInstance(data) {
 }
 
 function setupTabSwitch() {
-
   function changeTabsVisibility(index) {
-    if (index > tabScreens.length - 1 || index < 0) return;
+    if (index > tabScreens.length - 1 || index < 0) return false;
 
     for (let i = 0; i < tabScreens.length; i++) {
       const screen = tabScreens[i];
@@ -241,10 +243,11 @@ function setupTabSwitch() {
     return true;
   }
   const tabClass = 'categories-btn';
-  const tabs = document.getElementsByClassName(tabClass);
+  const tabs = root.getElementsByClassName(tabClass);
 
   for (let i = 0; i < tabs.length; i++) {
     const element = tabs[i];
+    screenParameters.selectableElements.push({ element: element })
     element.onclick = function () {
       if (changeTabsVisibility(i)) {
         for (let j = 0; j < tabs.length; j++) {
@@ -267,12 +270,7 @@ createTrophies();
 
 setupTabSwitch();
 
-const text = document.getElementsByClassName('categories-btn-title')[0]
-console.log(text);
-console.dir(text);
-console.log(text.parentElement);
-
-
 languageChangeEvent.invoke(initialLocale);
 import('../localization/testingLangChanger.js');
-const dynamicFontChanger = new DynamicFontChanger();
+
+export { screenParameters }

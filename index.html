@@ -4,7 +4,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link rel="stylesheet" href="main.css" id="style-switcher"/>
+  <link rel="stylesheet" href="main.css" id="style-switcher" />
+  <!-- <link rel="stylesheet" href="./src/loader/loader.css"> -->
   <!-- <link rel="stylesheet" href="./src/StoryMode/storyMode.css"> -->
   <!-- <link rel="stylesheet" href="./src/challenges/challenge.css"> -->
   <!-- <link rel="stylesheet" href="./src/Collection/collection.css"> -->
@@ -36,11 +37,11 @@
         <ul class="header-navigation-list">
           <li class="nav-btn">
             <!-- <a href="./src/achievements/achievements.html"> -->
-              <button class="header-navigation-btn" id="achievements-switch-btn">
-                <div class="header-navigation-icon-container">
-                  <img src="./Sprites/Icons/Icon_Profile.png" alt="Profile" class="header-navigation-list-icon" />
-                </div>
-              </button>
+            <button class="header-navigation-btn" id="achievements-switch-btn">
+              <div class="header-navigation-icon-container">
+                <img src="./Sprites/Icons/Icon_Profile.png" alt="Profile" class="header-navigation-list-icon" />
+              </div>
+            </button>
             <!-- </a> -->
             <button class="header-navigation-btn" id="daily-btn">
               <div class="header-navigation-icon-container">
@@ -61,7 +62,7 @@
     <section class="logo">
       <img src="./Sprites/Logos/Logo_RU.png" alt="Logo" class="logo-icon" lang="[img]logo_img" />
     </section>
-    <div class="popup daily-bonuses fade-hidden" id="daily-bonuses">
+    <div class="popup daily-bonuses" id="daily-bonuses">
       <div class="popup-content">
         <div class="popup-header">
           <h3 lang="daily_bonus">Ежедневные бонусы</h3>
@@ -122,7 +123,7 @@
         </div>
       </div>
     </div>
-    <div class="popup regular-bonuses fade-hidden" id="regular-bonuses">
+    <div class="popup regular-bonuses" id="regular-bonuses">
       <div class="popup-content">
         <div class="web-mask"></div>
         <div class="popup-header">
@@ -191,7 +192,7 @@
         </div>
       </div>
     </div>
-    <div class="popup settings fade-hidden" id="settings">
+    <div class="popup settings" id="settings">
       <div class="popup-content">
         <div class="popup-header">
           <h3 lang="setttings">Настройки</h3>
@@ -231,7 +232,7 @@
         </div>
       </div>
     </div>
-    <div class="popup languages fade-hidden" id="languages">
+    <div class="popup languages" id="languages">
       <div class="popup-content">
         <div class="popup-header">
           <h3 lang="lang">Язык</h3>
@@ -313,22 +314,7 @@
         </div>
       </div>
     </div>
-    <!-- rewards popup begin -->
-    <div class="popup-b fade-hidden" id="bounty-popup">
-      <div class="bounty-popup-content bounty-tab" id="bounty-container">
-      </div>
-      <div class="double-bounty-by-ads-container">
-        <button class="get-double-bounty-btn fade-hidden" id="play-btn">
-          <span class="get-double-bounty-btn-title" lang="claim">Получить</span>
-          <div class="interactive-btn-info">
-            <img class="get-double-bounty-icon" src="./Sprites/Icons/Icon_Ads.png" />
-            <span class="get-double-bounty-value">x2</span>
-          </div>
-        </button>
-        <span class="cancel-bounty-btn fade-hidden" lang="no_thanks">Нет, спасибо</span>
-      </div>
-    </div>
-    <div class="popup exid-game fade-hidden" id="exid-game">
+    <div class="popup exid-game" id="exid-game">
       <div class="popup-content">
         <div class="popup-header">
           <h3 class="exid-tab-title">Вы уверены, что хотите выйти из игры?</h3>
@@ -401,31 +387,31 @@
           <ul style="text-wrap: nowrap;">
             <li>
               <!-- <a href="./src/StoryMode/storyMode.html"> -->
-                <button class="control-btn" id="story-mode-switch-btm">
-                  <div class="header-navigation-icon-container">
-                    <img src="./Sprites/Icons/Icon_Story.png" alt="StoryMode" class="control-button-list-icon" />
-                  </div>
-                </button>
+              <button class="control-btn" id="story-mode-switch-btm">
+                <div class="header-navigation-icon-container">
+                  <img src="./Sprites/Icons/Icon_Story.png" alt="StoryMode" class="control-button-list-icon" />
+                </div>
+              </button>
               <!-- </a> -->
               <span class="control-button-title" lang="story_mode">Режим История</span>
             </li>
             <li>
               <!-- <a href="./src/challenges/challenge.html"> -->
-                <button class="control-btn" id="challenges-switch-btn">
-                  <div class="header-navigation-icon-container">
-                    <img src="./Sprites/Icons/Icon_Trial.png" alt="Icon_Trial" class="control-button-list-icon" />
-                  </div>
-                </button>
+              <button class="control-btn" id="challenges-switch-btn">
+                <div class="header-navigation-icon-container">
+                  <img src="./Sprites/Icons/Icon_Trial.png" alt="Icon_Trial" class="control-button-list-icon" />
+                </div>
+              </button>
               <!-- </a> -->
               <span class="control-button-title" lang="trial_mode">Испытания</span>
             </li>
             <li>
               <!-- <a href="./src/Collection/collection.html"> -->
-                <button class="control-btn" id="collection-switch-btn">
-                  <div class="header-navigation-icon-container">
-                    <img src="./Sprites/Icons/Icon_Skins.png" alt="Icon_Skins" class="control-button-list-icon" />
-                  </div>
-                </button>
+              <button class="control-btn" id="collection-switch-btn">
+                <div class="header-navigation-icon-container">
+                  <img src="./Sprites/Icons/Icon_Skins.png" alt="Icon_Skins" class="control-button-list-icon" />
+                </div>
+              </button>
               <!-- </a> -->
               <span class="control-button-title" lang="collection">Коллекция</span>
             </li>
@@ -442,28 +428,13 @@
       </section>
     </footer>
   </div>
-  <div id="story-mode-screen" style="display: none;">
-    <!-- rewards popup-b begin -->
-    <div class="popup-b fade-hidden" id="bounty-popup">
-      <div class="bounty-popup-content bounty-tab" id="bounty-container">
-      </div>
-      <div class="double-bounty-by-ads-container">
-        <button class="get-double-bounty-btn fade-hidden" id="play-btn">
-          <span class="get-double-bounty-btn-title">Получить</span>
-          <div class="interactive-btn-info">
-            <img class="get-double-bounty-icon" src="./Sprites/Icons/Icon_Ads.png" />
-            <span class="get-double-bounty-value">x2</span>
-          </div>
-        </button>
-        <span class="cancel-bounty-btn fade-hidden">Нет, спасибо</span>
-      </div>
-    </div>
+  <div id="story-mode-screen" style="display: none; position: absolute;">
     <header>
       <ul class="header-interface-list">
         <li class="header-ui-container">
-            <button class="header-navigation-btn main-screen-switch-btn">
-              <img src="./Sprites/Icons/Icon_Arrow_Back.png" alt="Profile" class="header-navigation-list-icon" />
-            </button>
+          <button class="header-navigation-btn main-screen-switch-btn">
+            <img src="./Sprites/Icons/Icon_Arrow_Back.png" alt="Profile" class="header-navigation-list-icon" />
+          </button>
         </li>
         <li class="header-ui-container">
           <div class="energy-counter">
@@ -473,7 +444,7 @@
         </li>
       </ul>
     </header>
-    <div class="popup hidden-popup" id="popup">
+    <div class="popup" id="popup">
     </div>
     <main>
       <div class="story-map-container">
@@ -523,14 +494,14 @@
       </div>
     </main>
   </div>
-  <div id="challenge-screen" style="display: none;">
+  <div id="challenge-screen" style="display: none; position: absolute;">
     <header>
       <ul class="header-interface-list">
         <li class="header-ui-container">
           <!-- <a href="./index.html" class="back-to" id="close-button"> -->
-            <button class="header-navigation-btn main-screen-switch-btn">
-              <img src="./Sprites/Icons/Icon_Arrow_Back.png" alt="Profile" class="header-navigation-list-icon" />
-            </button>
+          <button class="header-navigation-btn main-screen-switch-btn">
+            <img src="./Sprites/Icons/Icon_Arrow_Back.png" alt="Profile" class="header-navigation-list-icon" />
+          </button>
           <!-- </a> -->
         </li>
         <li class="header-ui-container">
@@ -543,29 +514,13 @@
     </header>
     <div class="challenges">
     </div>
-    <!-- rewards popup-b begin -->
-    <div class="popup-b fade-hidden" id="bounty-popup">
-      <div class="bounty-popup-content bounty-tab" id="bounty-container">
-      </div>
-      <div class="double-bounty-by-ads-container">
-        <button class="get-double-bounty-btn fade-hidden" id="play-btn">
-          <span class="get-double-bounty-btn-title">Получить</span>
-          <div class="interactive-btn-info">
-            <img class="get-double-bounty-icon" src="./Sprites/Icons/Icon_Ads.png" />
-            <span class="get-double-bounty-value">x2</span>
-          </div>
-        </button>
-        <span class="cancel-bounty-btn fade-hidden">Нет, спасибо</span>
-      </div>
-    </div>
-    <!-- rewards popup end -->
   </div>
-  <div id="collection-screen" style="display: none;">
+  <div id="collection-screen" style="display: none; position: absolute;">
     <header>
       <!-- <a href="./index.html" class="back-to" id="close-button"> -->
-        <button class="header-navigation-btn main-screen-switch-btn">
-          <img src="./Sprites/Icons/Icon_Arrow_Back.png" alt="Profile" class="header-navigation-list-icon" />
-        </button>
+      <button class="header-navigation-btn main-screen-switch-btn">
+        <img src="./Sprites/Icons/Icon_Arrow_Back.png" alt="Profile" class="header-navigation-list-icon" />
+      </button>
       <!-- </a> -->
     </header>
     <main>
@@ -599,30 +554,14 @@
       <div class="collection-pick-area hidden" id="pick-area-4"></div>
     </main>
   </div>
-  <div id="achievements-screen" style="display: none;">
-    <!-- rewards popup-b begin -->
-    <div class="popup-b fade-hidden" id="bounty-popup">
-      <div class="bounty-popup-content bounty-tab" id="bounty-container">
-      </div>
-      <div class="double-bounty-by-ads-container">
-        <button class="get-double-bounty-btn fade-hidden" id="play-btn">
-          <span class="get-double-bounty-btn-title" lang="claim">Получить</span>
-          <div class="interactive-btn-info">
-            <img class="get-double-bounty-icon" src="./Sprites/Icons/Icon_Ads.png" />
-            <span class="get-double-bounty-value">x2</span>
-          </div>
-        </button>
-        <span class="cancel-bounty-btn fade-hidden" lang="no_thanks">Нет, спасибо</span>
-      </div>
-    </div>
-    <!-- rewards popup end -->
+  <div id="achievements-screen" style="display: none; position: absolute;">
     <header>
       <ul class="header-interface-list">
         <li class="header-ui-container">
           <!-- <a href="./index.html" class="back-to" id="close-button"> -->
-            <button class="header-navigation-btn main-screen-switch-btn">
-              <img src="./Sprites/Icons/Icon_Arrow_Back.png" alt="Profile" class="header-navigation-list-icon" />
-            </button>
+          <button class="header-navigation-btn main-screen-switch-btn">
+            <img src="./Sprites/Icons/Icon_Arrow_Back.png" alt="Profile" class="header-navigation-list-icon" />
+          </button>
           <!-- </a> -->
         </li>
         <li class="header-ui-container">
@@ -633,14 +572,6 @@
         </li>
       </ul>
     </header>
-    <div class="popup hidden-popup" style="display: none;" id="bounty-popup">
-      <div class="popup-content bounty-tab">
-        <div class="bounty">
-          <img src="./Sprites/Icons/Icon_Energy.png" alt="Energy" class="bounty-icon" /><span
-            class="bounty-title">x2</span>
-        </div>
-      </div>
-    </div>
     <main>
       <nav class="collection-navigation">
         <ul class="collection-nav-list">
@@ -711,6 +642,21 @@
       </div>
     </main>
   </div>
+  <!-- rewards popup begin -->
+  <div class="popup-b" id="bounty-popup">
+    <div class="bounty-popup-content bounty-tab" id="bounty-container">
+    </div>
+    <div class="double-bounty-by-ads-container">
+      <button class="get-double-bounty-btn fade-hidden" id="play-btn">
+        <span class="get-double-bounty-btn-title" lang="claim">Получить</span>
+        <div class="interactive-btn-info">
+          <img class="get-double-bounty-icon" src="./Sprites/Icons/Icon_Ads.png" />
+          <span class="get-double-bounty-value">x2</span>
+        </div>
+      </button>
+      <span class="cancel-bounty-btn fade-hidden" lang="no_thanks">Нет, спасибо</span>
+    </div>
+  </div>
   <script>
     let savesList = [];
     let SDK = null;
@@ -719,6 +665,13 @@
     let input = null;
     let languageChangeEvent;
     let platform;
+    let navigation;
+    let quickPreload;
+    let storyMode;
+    let challenges;
+    let collection;
+    let achievements;
+    let backActionHandler;
   </script>
   <script type="module">
     import { preload } from './src/loader/loader.js';
@@ -726,9 +679,17 @@
     import { initialize } from './src/scripts/save_system/SaveSystem.js';
     import User from './src/scripts/userData.js';
     import { Action } from './src/scripts/globalEvents.js';
+    import { StackNavigation } from './src/scripts/navigation/navigation.js';
 
     user = new User();
     languageChangeEvent = new Action();
+    navigation = new StackNavigation();
+    quickPreload = () => {
+      return;
+      preload(async () => {
+        await new Promise(p => setTimeout(p, 100));
+      })
+    }
 
     preload(async () => {
       await initializeSDK();
@@ -736,13 +697,14 @@
       await initialize();
       user.loadData();
       await import('./src/localization/translator.js').then(async (translatorItem) => {
+        storyMode = await import('./src/StoryMode/storyMode.js')
+        challenges = await import('./src/challenges/challenge.js')
+        collection = await import('./src/Collection/collection.js');
+        achievements = await import('./src/achievements/achievements.js');
+
         await import('./index.js').then((indexItem) => {
           indexItem.setupLanguageSelector(translatorItem.initialLocale);
         });
-      await import('./src/StoryMode/storyMode.js')
-      await import('./src/challenges/challenge.js')
-      await import('./src/Collection/collection.js');
-      await import('./src/achievements/achievements.js');
       });
     });
 

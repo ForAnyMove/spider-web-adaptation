@@ -26,6 +26,7 @@ input = new DirectionalInput({ element: null });
 const navigation = new StackNavigation();
 
 const settingsScreen = new Screen({
+  isPopup: true,
   element: document.getElementById('settings'),
   openButtons: getElements(document, { classNames: ['settings-button'] }),
   closeButtons: [document.getElementById('close-popup-settings')],
@@ -38,6 +39,7 @@ const settingsScreen = new Screen({
 });
 
 const languageScreen = new Screen({
+  isPopup: true,
   element: document.getElementById('languages'),
   openButtons: [document.getElementById('lang-btn')],
   closeButtons: [document.getElementById('close-popup-languages')],
@@ -49,6 +51,7 @@ const languageScreen = new Screen({
 });
 
 const menuScreen = new Screen({
+  isPopup: true,
   element: document.getElementById('menu'),
   onFocus: () => {
     const elements = getInputElements(menuScreen.element, { tags: ['button'] });
@@ -57,6 +60,7 @@ const menuScreen = new Screen({
 });
 
 const exitScreen = new Screen({
+  isPopup: true,
   element: document.getElementById('exid-game'),
   closeButtons: [document.getElementById('exid-game').getElementsByClassName('exid-no')[0]],
   onFocus: () => {
@@ -840,6 +844,7 @@ const backgroundSelectButton = document.getElementById('background-change-btn');
 const backSelectorButton = document.getElementById('skins-collection-back-btn');
 
 const skinSelectionScreen = new Screen({
+  isPopup: true,
   element: document.getElementById('skins-collection-slider-tab'),
   openButtons: [skinSelectButton, skinBackSelectButton, backgroundSelectButton],
   closeButtons: [backSelectorButton],

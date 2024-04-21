@@ -1,19 +1,21 @@
-import DynamicFontChanger from "../localization/dynamicFontChanger.js";
 import { initialLocale } from "../localization/translator.js";
 import { trialLevelDatabase } from "../scripts/data/level_databases.js";
-import DirectionalInput from "../scripts/directionInput.js";
 import { createButton, createElement, createHSpace, createImage, createTextH3, createTextP, createTextSpan, createVSpace, getIconByContent, getIconByItem, getIconByPattern, getIconBySuit, getPatternLang, getPatternName, getSuitLang, getSuitName } from "../scripts/helpers.js";
+import { ScreenParameters } from "../scripts/navigation/navigation.js";
 import { showRewarded } from "../scripts/sdk/sdk.js";
 import { Items } from "../scripts/statics/staticValues.js";
 import('../scripts/rewardReceiverView.js');
 
+const root = document.getElementById('challenge-screen');
+const screenParameters = new ScreenParameters();
+
 const vh = window.innerHeight / 100;
 const vw = window.innerWidth / 100;
 
-const returnButton = document.getElementById('close-button');
-input ??= new DirectionalInput({ element: returnButton });
+screenParameters.defaultSelectedElement = { element: root.querySelector('.main-screen-switch-btn') };
+screenParameters.selectableElements.push(screenParameters.defaultSelectedElement);
 
-const parent = document.getElementsByClassName('challenges')[0];
+const parent = root.getElementsByClassName('challenges')[0];
 
 const currentLevel = trialLevelDatabase.currentLevel;
 let viewWidth = 0;
@@ -31,7 +33,7 @@ function createBooster(itemType, title, langID, user, parent) {
                 showRewarded(null, null, () => user.addItem(itemType, 1, { isTrue: true, isMonetized: false }), null);
             });
 
-            input.selectableElements.push({ element: button });
+            screenParameters.selectableElements.push({ element: button });
 
             createImage(['booster-icon'], null, div, getIconByItem(itemType));
             const count = createTextSpan(['booster-counter'], null, div, user.getItemCount(itemType));
@@ -143,10 +145,10 @@ function createUnlockedLevelInstance(data) {
             {
                 const startButton = createButton(['start-level-btn'], null, levelStartContainer, () => {
 
-                    window.location.href = `../playground/playground.html?levelID=level_trial_${currentLevel}`;
+                    window.location.href = `../src/playground/playground.html?levelID=level_trial_${currentLevel}`;
                     // TODO: level scene starting with ID parameter
                 });
-                input.selectableElements.push({ element: startButton });
+                screenParameters.selectableElements.push({ element: startButton });
                 startButton.id = 'play-btn';
                 {
                     createTextSpan(['start-level-btn-title'], null, startButton, 'Играть', 'play');
@@ -199,4 +201,5 @@ parent.scrollTo(xPos, 0);
 
 languageChangeEvent.invoke(initialLocale);
 import('../localization/testingLangChanger.js');
-const dynamicFontChanger = new DynamicFontChanger();
+
+export { screenParameters }

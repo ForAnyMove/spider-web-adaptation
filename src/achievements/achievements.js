@@ -10,9 +10,11 @@ import { LevelType } from '../scripts/statics/enums.js';
 import { IconsByItem } from '../scripts/statics/staticValues.js';
 import('../scripts/rewardReceiverView.js');
 
-import DirectionalInput from '../scripts/directionInput.js';
 import { initialLocale, updateInContainer } from '../localization/translator.js';
-import DynamicFontChanger from '../localization/dynamicFontChanger.js';
+import { ScreenParameters } from '../scripts/navigation/navigation.js';
+
+const root = document.getElementById('achievements-screen');
+const screenParameters = new ScreenParameters();
 
 function getIconByItem(itemType) {
   for (let i = 0; i < IconsByItem.length; i++) {
@@ -21,28 +23,26 @@ function getIconByItem(itemType) {
   }
 }
 
-const returnButton = document.getElementById('close-button');
-input ??= new DirectionalInput({ element: returnButton });
-
-
-const achievementsParent = document.getElementById('achievements');
-const statisticsParent = document.getElementById('statistics');
+screenParameters.defaultSelectedElement = { element: root.querySelector('.main-screen-switch-btn') };
+screenParameters.selectableElements.push(screenParameters.defaultSelectedElement);
+console.log(screenParameters.defaultSelectedElement);
+const achievementsParent = root.querySelector('#achievements');
+const statisticsParent = root.querySelector('#statistics');
 
 const tabScreens = [achievementsParent, statisticsParent];
 let tabs = [];
-let startSelectables;
 
 statistics.winCount.overall = 5;
 updateStatistics();
 
 function setupStatistics() {
-  const gameCountText = document.getElementById('st-game-count');
-  const winCountText = document.getElementById('st-win-count');
-  const wiPercentText = document.getElementById('st-win-percent');
-  const fastestWinText = document.getElementById('st-fastest-win');
-  const leastStepsText = document.getElementById('st-least-steps');
-  const completedTrialsText = document.getElementById('st-completed-trials');
-  const playedTrialsText = document.getElementById('st-played-trials');
+  const gameCountText = root.querySelector('#st-game-count');
+  const winCountText = root.querySelector('#st-win-count');
+  const wiPercentText = root.querySelector('#st-win-percent');
+  const fastestWinText = root.querySelector('#st-fastest-win');
+  const leastStepsText = root.querySelector('#st-least-steps');
+  const completedTrialsText = root.querySelector('#st-completed-trials');
+  const playedTrialsText = root.querySelector('#st-played-trials');
 
   gameCountText.innerText = statistics.gameCount.overall;
   winCountText.innerText = statistics.winCount.overall;
@@ -119,7 +119,7 @@ function createAchievementInstance(data, onInserted) {
   );
   createTextSpan(['energy-btn-title'], null, rewardContainer, '1');
 
-  const bountyPopup = document.getElementById('bounty-popup');
+  const bountyPopup = root.querySelector('#bounty-popup');
   rewardContainer.addEventListener('click', () => {
     bountyPopup.style.display = 'flex';
 
@@ -182,19 +182,19 @@ function createAchievementInstances() {
           }, onSubmit: () => {
             if (achievement.completed) {
               input.updateQueryCustom([], {
-                element: newElement.getElementsByClassName('get-btn')[0], onBack: () => input.updateQueryCustom(startSelectables, newSelectable)
+                element: newElement.getElementsByClassName('get-btn')[0], onBack: () => input.updateQueryCustom(screenParameters.selectableElements, newSelectable)
               });
             }
           }
         }
-        startSelectables.push(newSelectable);
-        for (let i = startSelectables.length - 1; i >= 0; i--) {
-          if (startSelectables[i].element == element) {
-            startSelectables.splice(i, 1);
+        screenParameters.selectableElements.push(newSelectable);
+        for (let i = screenParameters.selectableElements.length - 1; i >= 0; i--) {
+          if (screenParameters.selectableElements[i].element == element) {
+            screenParameters.selectableElements.splice(i, 1);
           }
         }
 
-        input.updateQueryCustom(startSelectables, newSelectable);
+        input.updateQueryCustom(screenParameters.selectableElements, newSelectable);
       }, 10)
     });
     activementsViews.push(element);
@@ -212,7 +212,7 @@ function createAchievementInstances() {
         }
       }, onSubmit: () => {
         if (achievement.completed) {
-          input.updateQueryCustom([], { element: element.getElementsByClassName('get-btn')[0], onBack: () => input.updateQueryCustom(startSelectables, selectable) });
+          input.updateQueryCustom([], { element: element.getElementsByClassName('get-btn')[0], onBack: () => input.updateQueryCustom(screenParameters.selectableElements, selectable) });
         }
       }
     }
@@ -243,7 +243,7 @@ function setupTabSwitch() {
     return true;
   }
   const tabClass = 'categories-btn';
-  tabs = document.getElementsByClassName(tabClass);
+  tabs = root.getElementsByClassName(tabClass);
 
   for (let i = 0; i < tabs.length; i++) {
     const element = tabs[i];
@@ -265,16 +265,11 @@ function setupTabSwitch() {
 setupTabSwitch();
 setupStatistics();
 
-function timeout(ms) {
-  return new Promise(resolve => setTimeout(resolve, ms));
-}
-
 const selectables = createAchievementInstances();
 
-startSelectables = [{ element: tabs[0] }, { element: tabs[1] }, { element: returnButton }].concat(selectables);
-
-input.updateQueryCustom(startSelectables, startSelectables[2]);
+screenParameters.selectableElements = [{ element: tabs[0] }, { element: tabs[1] }, screenParameters.defaultSelectedElement].concat(selectables);
 
 languageChangeEvent.invoke(initialLocale);
 import('../localization/testingLangChanger.js');
-const dynamicFontChanger = new DynamicFontChanger();
+
+export { screenParameters }
