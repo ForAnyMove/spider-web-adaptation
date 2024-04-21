@@ -212,7 +212,7 @@ function createLevelPreview(data) {
           if (user.getItemCount(Items.Energy) >= requiredPass) {
             user.removeItem(Items.Energy, requiredPass);
           }
-          window.location.href = `../playground/playground.html?levelID=level_story_${currentLevelIndex}`;
+          window.location.href = `../src/playground/playground.html?levelID=level_story_${currentLevelIndex}`;
         });
         input.selectableElements.push({ element: startButton });
         startButton.id = 'play-btn';
