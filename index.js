@@ -56,6 +56,10 @@ const challengesScreen = new Screen({
     styleSwitcher.setAttribute('href', 'src/challenges/challenge.css')
     input.updateQueryCustom(challengesScreen.screenParameters.selectableElements,
       challengesScreen.screenParameters.defaultSelectedElement);
+
+    setTimeout(() => {
+      dynamicFontChanger.updateTextFont();
+    }, 100);
   },
   onUnfocus: () => {
     navigation.push(mainScreen);
@@ -71,6 +75,10 @@ const collectionScreen = new Screen({
     styleSwitcher.setAttribute('href', 'src/collection/collection.css')
     input.updateQueryCustom(collectionScreen.screenParameters.selectableElements,
       collectionScreen.screenParameters.defaultSelectedElement);
+
+    setTimeout(() => {
+      dynamicFontChanger.updateTextFont();
+    }, 100);
   },
   onUnfocus: () => {
     navigation.push(mainScreen);
@@ -87,6 +95,10 @@ const achievementsScreen = new Screen({
     styleSwitcher.setAttribute('href', 'src/achievements/achievements.css')
     input.updateQueryCustom(achievementsScreen.screenParameters.selectableElements,
       achievementsScreen.screenParameters.defaultSelectedElement);
+
+    setTimeout(() => {
+      dynamicFontChanger.updateTextFont();
+    }, 100);
   },
   onUnfocus: () => {
     navigation.push(mainScreen);

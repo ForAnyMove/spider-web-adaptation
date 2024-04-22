@@ -150,7 +150,7 @@ function createLevelPreview(data) {
       const closeButton = createButton(null, {
         // border: 'none',
         background: 'no-repeat',
-        backgroundImage: 'url(../../Sprites/Icons/Icon_Close.png)',
+        backgroundImage: 'url(Sprites/Icons/Icon_Close.png)',
         backgroundSize: '100% 100%',
       }, header, () => {
         navigation.pop();
@@ -226,12 +226,12 @@ function createLevelPreview(data) {
         selectables.push({ element: adsButton });
         adsButton.id = 'ads-btn';
         {
-          createImage(['watch-add-icon'], null, adsButton, '../../Sprites/Icons/Icon_Ads.png');
+          createImage(['watch-add-icon'], null, adsButton, 'Sprites/Icons/Icon_Ads.png');
           createTextSpan(['start-level-btn-title'], null, adsButton, 'Бесплатно', 'free');
           const priceContainer = createElement('div', ['interactive-btn-info'], null, adsButton);
           {
             createTextSpan(['btn-info-value'], null, priceContainer, '5');
-            createImage(['btn-info-icon'], null, priceContainer, '../../Sprites/Icons/Icon_Energy.png');
+            createImage(['btn-info-icon'], null, priceContainer, 'Sprites/Icons/Icon_Energy.png');
           }
         }
 
@@ -239,7 +239,7 @@ function createLevelPreview(data) {
           if (user.getItemCount(Items.Energy) >= requiredPass) {
             user.removeItem(Items.Energy, requiredPass);
           }
-          window.location.href = `../src/playground/playground.html?levelID=level_story_${currentLevelIndex}`;
+          window.location.href = `src/playground/playground.html?levelID=level_story_${currentLevelIndex}`;
         });
         selectables.push({ element: startButton });
         startButton.id = 'play-btn';
@@ -248,7 +248,7 @@ function createLevelPreview(data) {
           const priceContainer = createElement('div', ['interactive-btn-info'], null, startButton);
           {
             createTextSpan(['btn-info-value'], null, priceContainer, requiredPass);
-            createImage(['btn-info-icon'], null, priceContainer, '../../Sprites/Icons/Icon_Energy.png');
+            createImage(['btn-info-icon'], null, priceContainer, 'Sprites/Icons/Icon_Energy.png');
           }
         }
 
