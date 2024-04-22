@@ -35,7 +35,7 @@ const storyModeScreen = new Screen({
   openButtons: [mainScreen.element.querySelector('#story-mode-switch-btm')],
   closeButtons: [storyModeRoot.getElementsByClassName('main-screen-switch-btn')[0]],
   onFocus: () => {
-    styleSwitcher.setAttribute('href', './src/StoryMode/storyMode.css');
+    styleSwitcher.setAttribute('href', 'src/StoryMode/storyMode.css');
     input.updateQueryCustom(storyModeScreen.screenParameters.selectableElements,
       storyModeScreen.screenParameters.defaultSelectedElement);
 
@@ -53,7 +53,7 @@ const challengesScreen = new Screen({
   openButtons: [mainScreen.element.querySelector('#challenges-switch-btn')],
   closeButtons: [challengesRoot.getElementsByClassName('main-screen-switch-btn')[0]],
   onFocus: () => {
-    styleSwitcher.setAttribute('href', './src/challenges/challenge.css')
+    styleSwitcher.setAttribute('href', 'src/challenges/challenge.css')
     input.updateQueryCustom(challengesScreen.screenParameters.selectableElements,
       challengesScreen.screenParameters.defaultSelectedElement);
   },
@@ -68,7 +68,7 @@ const collectionScreen = new Screen({
   openButtons: [mainScreen.element.querySelector('#collection-switch-btn')],
   closeButtons: [collectionRoot.getElementsByClassName('main-screen-switch-btn')[0]],
   onFocus: () => {
-    styleSwitcher.setAttribute('href', './src/collection/collection.css')
+    styleSwitcher.setAttribute('href', 'src/collection/collection.css')
     input.updateQueryCustom(collectionScreen.screenParameters.selectableElements,
       collectionScreen.screenParameters.defaultSelectedElement);
   },
@@ -84,7 +84,7 @@ const achievementsScreen = new Screen({
   openButtons: [mainScreen.element.querySelector('#achievements-switch-btn')],
   closeButtons: [achievementsRoot.getElementsByClassName('main-screen-switch-btn')[0]],
   onFocus: () => {
-    styleSwitcher.setAttribute('href', './src/achievements/achievements.css')
+    styleSwitcher.setAttribute('href', 'src/achievements/achievements.css')
     input.updateQueryCustom(achievementsScreen.screenParameters.selectableElements,
       achievementsScreen.screenParameters.defaultSelectedElement);
   },

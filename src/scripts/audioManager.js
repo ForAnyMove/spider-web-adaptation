@@ -43,6 +43,17 @@ class AudioManager {
         });
 
         this.updateSwitchButtonIcons();
+
+        document.addEventListener("visibilitychange", () => {
+            if (document.visibilityState === "hidden") {
+                console.log('mute');
+                this.musicAudioElement.muted = true;
+                this.butonAudionElement.muted = true;
+            } else {
+                this.musicAudioElement.muted = !this.isMusicEnabled;
+                this.butonAudionElement.muted = !this.isSoundEnabled;
+            }
+        });
     }
 
     addClickableToPull = function (clickable) {

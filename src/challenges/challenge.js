@@ -27,7 +27,7 @@ function createBooster(itemType, title, langID, user, parent) {
         {
             const button = createButton(['add-booster-icon'], {
                 background: 'no-repeat',
-                backgroundImage: 'url(../../Sprites/Buttons/Used_plus.png)',
+                backgroundImage: 'url(Sprites/Buttons/Used_plus.png)',
                 backgroundSize: '100% 100%',
             }, div, () => {
                 showRewarded(null, null, () => user.addItem(itemType, 1, { isTrue: true, isMonetized: false }), null);
@@ -50,7 +50,7 @@ function createBooster(itemType, title, langID, user, parent) {
 
 function createCompletedLevelInstance() {
     const plane = createElement('div', ['challenge-card', 'completed-card']);
-    createImage(['check-icon'], null, plane, '../../Sprites/Icons/Icon_Check.png');
+    createImage(['check-icon'], null, plane, 'Sprites/Icons/Icon_Check.png');
     createTextH3(['check-info'], null, plane, 'Уровень завершен', 'lvl_completed');
 
     viewWidth += 42.15 * vh + 4 * vh;
@@ -60,7 +60,7 @@ function createCompletedLevelInstance() {
 
 function createLockedLevelInstance() {
     const plane = createElement('div', ['challenge-card', 'closed-card']);
-    createImage(['lock-icon'], null, plane, '../../Sprites/Icons/Icon_Lock.png');
+    createImage(['lock-icon'], null, plane, 'Sprites/Icons/Icon_Lock.png');
     createTextH3(['lock-screen-info'], null, plane, 'Завершите предыдущее испытание', 'com_prev_trial');
 
     return plane;

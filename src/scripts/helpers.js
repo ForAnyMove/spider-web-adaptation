@@ -121,9 +121,9 @@ function getSuitLang(suit) {
 
 function getIconBySuit(suit) {
     switch (suit) {
-        case SuitMode.OneSuit: return '../../Sprites/Icons/Icon_OneSuit.png'
-        case SuitMode.TwoSuits: return '../../Sprites/Icons/Icon_TwoSuits.png'
-        case SuitMode.FourSuits: return '../../Sprites/Icons/Icon_FourSuits.png'
+        case SuitMode.OneSuit: return 'Sprites/Icons/Icon_OneSuit.png'
+        case SuitMode.TwoSuits: return 'Sprites/Icons/Icon_TwoSuits.png'
+        case SuitMode.FourSuits: return 'Sprites/Icons/Icon_FourSuits.png'
     }
 }
 
@@ -143,8 +143,8 @@ function getPatternLang(pattern) {
 
 function getIconByPattern(pattern) {
     switch (pattern) {
-        case Pattern.Spider: return '../../Sprites/Icons/Icon_Spider.png'
-        case Pattern.SpiderLady: return '../../Sprites/Icons/Icon_Spider_L.png'
+        case Pattern.Spider: return 'Sprites/Icons/Icon_Spider.png'
+        case Pattern.SpiderLady: return 'Sprites/Icons/Icon_Spider_L.png'
     }
 }
 

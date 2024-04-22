@@ -3,11 +3,10 @@ import { trophyDatabase } from "../scripts/data/trophy_database.js";
 import { createButton, createElement, createImage, createTextP, createTextSpan } from "../scripts/helpers.js";
 import { Statefull } from "../scripts/statics/enums.js"
 import { initialLocale } from '../localization/translator.js';
-import DynamicFontChanger from "../localization/dynamicFontChanger.js";
 import { ScreenParameters } from "../scripts/navigation/navigation.js";
 
-const checkIconPath = '../../Sprites/Icons/Icon_Check.png'
-const lockIconPath = '../../Sprites/Icons/Icon_Lock.png'
+const checkIconPath = 'Sprites/Icons/Icon_Check.png'
+const lockIconPath = 'Sprites/Icons/Icon_Lock.png'
 
 const root = document.getElementById('collection-screen');
 const screenParameters = new ScreenParameters();

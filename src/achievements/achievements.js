@@ -25,7 +25,6 @@ function getIconByItem(itemType) {
 
 screenParameters.defaultSelectedElement = { element: root.querySelector('.main-screen-switch-btn') };
 screenParameters.selectableElements.push(screenParameters.defaultSelectedElement);
-console.log(screenParameters.defaultSelectedElement);
 const achievementsParent = root.querySelector('#achievements');
 const statisticsParent = root.querySelector('#statistics');
 
