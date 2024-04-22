@@ -23,7 +23,6 @@ const mainScreen = new Screen({
   style: 'main.css',
   element: document.getElementById('main-screen'),
   onFocus: () => {
-    // styleSwitcher.setAttribute('href', 'main.css');
     input.updateQueryCustom(screenParameters.selectableElements, screenParameters.defaultSelectedElement);
   },
   onUnfocus: () => { }
