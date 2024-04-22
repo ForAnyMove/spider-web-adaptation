@@ -2,11 +2,11 @@ import { getElements } from "./helpers.js";
 import { load, save } from "./save_system/SaveSystem.js";
 
 class AudioManager {
-    constructor() {
-        this.enabledMusicIcon = './Sprites/Icons/Icon_Music_On.png';
-        this.disabledMusicIcon = './Sprites/Icons/Icon_Music_Off.png';
-        this.enabledSoundIcon = './Sprites/Icons/Icon_Sound_On.png';
-        this.disabledSoundIcon = './Sprites/Icons/Icon_Sound_Off.png';
+    constructor(musicIcons, soundIcons) {
+        this.enabledMusicIcon = musicIcons[0];
+        this.disabledMusicIcon = musicIcons[1];
+        this.enabledSoundIcon = soundIcons[0];
+        this.disabledSoundIcon = soundIcons[1];
 
         this.soundSwitchButton = document.getElementById('sound-switch');
         this.musicSwitchButton = document.getElementById('music-switch');

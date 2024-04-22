@@ -19,7 +19,7 @@ function createBackgroundInstance(data) {
         state = Statefull.Equipped;
     }
     const plane = createElement('div', ['background-card'], {
-        backgroundImage: `url(${data.itemPreviewPath})`
+        backgroundImage: `url(../../${data.itemPreviewPath})`
     });
 
     if (state == Statefull.Locked) {
@@ -71,7 +71,7 @@ function createSkinInstance(data) {
         state = Statefull.Equipped;
     }
     const plane = createElement('div', ['skin-card']);
-    const preview = createImage(['card-skin'], null, plane, data.previewPath);
+    const preview = createImage(['card-skin'], null, plane, '../../' + data.previewPath);
 
     if (state == Statefull.Locked) {
         preview.classList.add('tonned');
@@ -125,7 +125,7 @@ function createSkinBackInstance(data) {
         state = Statefull.Equipped;
     }
     const plane = createElement('div', ['skin-card-back'], {
-        backgroundImage: `url(${data.previewPath})`,
+        backgroundImage: `url(../../${data.previewPath})`,
         backgroundSize: '100% 100%'
     });
 

@@ -26,6 +26,13 @@
       <div class="banter-loader__box"></div>
     </div>
   </div>
+  <audio id="backgroundMusic" loop>
+    <source src="../../assets/audio/music/Card game track_2.wav" type="audio/wav">
+    Your browser does not support the audio element.
+  </audio>
+  <audio id="buttonClick">
+    <source src="../../assets/audio/sounds/Button_01.mp3" type="audio/wav">
+  </audio>
   <header>
     <ul class="header-interface-list">
       <li class="header-ui-container">
@@ -160,14 +167,14 @@
       </div>
       <div class="settings-panel">
         <div class="setting-btn-container">
-          <button class="settings-navigation-btn">
+          <button class="settings-navigation-btn" id="music-switch">
             <img src="../../Sprites/Icons/Icon_Music_Off.png" alt="Icon_Music_Off"
               class="settings-navigation-list-icon" />
           </button>
           <span class="settings-btn-title" lang="music">Музыка</span>
         </div>
         <div class="setting-btn-container">
-          <button class="settings-navigation-btn">
+          <button class="settings-navigation-btn" id="sound-switch">
             <img src="../../Sprites/Icons/Icon_Sound_Off.png" alt="Icon_Sound_Off"
               class="settings-navigation-list-icon" />
           </button>
@@ -176,7 +183,7 @@
         <div class="setting-btn-container">
           <button class="special-language-btn settings-navigation-btn" id="lang-btn">
             <img src="../../Sprites/Lang/ru.png " alt="Lang" class="settings-navigation-list-icon" id="languages-btn"
-              lang="[img]flag_img" />
+              lang="[img]{../../}flag_img" />
           </button>
           <span class="settings-btn-title" lang="lang">Язык</span>
         </div>
@@ -1251,6 +1258,7 @@
     let platform;
     let input;
     let languageChangeEvent;
+    let audioManager;
   </script>
   <script type="module">
     import { preload } from '../loader/loader.js';
@@ -1258,7 +1266,12 @@
     import { initialize } from '../scripts/save_system/SaveSystem.js'
     import User from '../scripts/userData.js'
     import { Action } from '../scripts/globalEvents.js';
+    import { AudioManager } from '../scripts/audioManager.js'
 
+    audioManager = new AudioManager(
+      ['../../Sprites/Icons/Icon_Music_On.png', '../../Sprites/Icons/Icon_Music_Off.png'],
+      ['../../Sprites/Icons/Icon_Sound_On.png', '../../Sprites/Icons/Icon_Sound_Off.png'],
+    );
     user = new User();
     languageChangeEvent = new Action();
 

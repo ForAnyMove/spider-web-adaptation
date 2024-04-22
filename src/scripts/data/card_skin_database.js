@@ -65,7 +65,7 @@ function getSkinImage(content, suit, rank) {
         const index = i + 1;
 
         if (element.id.id == content.id) {
-            return `url('Sprites/Card Skins/Release/Skin_${(index > 9 ? index : `0${index}`)}/${rank}_${suit}_${(index > 9 ? index : `0${index}`)}.png')`
+            return `url('../../Sprites/Card Skins/Release/Skin_${(index > 9 ? index : `0${index}`)}/${rank}_${suit}_${(index > 9 ? index : `0${index}`)}.png')`
         }
     }
 }
@@ -133,7 +133,7 @@ function getSkinBackImage(content) {
     for (let i = 0; i < backSkinDatabase.skinList.length; i++) {
         const element = backSkinDatabase.skinList[i];
         if (element.id.id == content.id) {
-            return `url(${element.previewPath})`;
+            return `url(../../${element.previewPath})`;
         }
     }
 }
@@ -202,7 +202,7 @@ function getBackgroundImage(content) {
     for (let i = 0; i < backgroundDatabase.skinList.length; i++) {
         const element = backgroundDatabase.skinList[i];
         if (element.id.id == content.id) {
-            return `url(${element.previewPath})`;
+            return `url(../../${element.previewPath})`;
         }
     }
 }
