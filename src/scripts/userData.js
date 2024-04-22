@@ -24,21 +24,21 @@ export default class User {
             count: 0
         }]
 
-        // this.availableContent = [
-        //     Content.CardSkin01, Content.CardBackSkin01, Content.Background01,
-        //     Content.CardSkin02, Content.CardBackSkin02, Content.Background02];
-
-        //test data
         this.availableContent = [
             Content.CardSkin01, Content.CardBackSkin01, Content.Background01,
-            Content.CardSkin02, Content.CardBackSkin02, Content.Background02,
-            Content.CardSkin03, Content.CardBackSkin03, Content.Background03,
-            Content.CardSkin04, Content.CardBackSkin04, Content.Background04,
-            Content.CardSkin05, Content.CardBackSkin05, Content.Background05,
-            Content.CardSkin06, Content.CardBackSkin06, Content.Background06,
-            Content.CardSkin07, Content.CardBackSkin07, Content.Background07,
-            Content.CardSkin08, Content.CardBackSkin08, Content.Background08,
-            Content.CardSkin09, Content.CardBackSkin09, Content.Background09];
+            Content.CardSkin02, Content.CardBackSkin02, Content.Background02];
+
+        //test data
+        // this.availableContent = [
+        //     Content.CardSkin01, Content.CardBackSkin01, Content.Background01,
+        //     Content.CardSkin02, Content.CardBackSkin02, Content.Background02,
+        //     Content.CardSkin03, Content.CardBackSkin03, Content.Background03,
+        //     Content.CardSkin04, Content.CardBackSkin04, Content.Background04,
+        //     Content.CardSkin05, Content.CardBackSkin05, Content.Background05,
+        //     Content.CardSkin06, Content.CardBackSkin06, Content.Background06,
+        //     Content.CardSkin07, Content.CardBackSkin07, Content.Background07,
+        //     Content.CardSkin08, Content.CardBackSkin08, Content.Background08,
+        //     Content.CardSkin09, Content.CardBackSkin09, Content.Background09];
 
         this.usedContent = [Content.CardSkin01, Content.CardBackSkin01, Content.Background01];
 

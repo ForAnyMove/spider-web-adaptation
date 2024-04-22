@@ -4,14 +4,16 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link rel="stylesheet" href="main.css" id="style-switcher" />
+  <!-- <link rel="stylesheet" href="main.css" id="style-switcher" /> -->
+  <!-- <link rel="stylesheet" href="default.css"> -->
+  <link rel="stylesheet" href="src/loader/loader.css">
+  <link rel="stylesheet" href="./src/Rewards Receiver/rewardsReceiver.css">
   <!-- <link rel="stylesheet" href="./src/loader/loader.css"> -->
   <!-- <link rel="stylesheet" href="./src/StoryMode/storyMode.css"> -->
   <!-- <link rel="stylesheet" href="./src/challenges/challenge.css"> -->
   <!-- <link rel="stylesheet" href="./src/Collection/collection.css"> -->
   <!-- <link rel="stylesheet" href="./src/achievements/achievements.css"> -->
 
-  <link rel="stylesheet" href="./src/Rewards Receiver/rewardsReceiver.css">
   <title>Spider Web</title>
 
   <script src="https://yandex.ru/games/sdk/v2"></script>
@@ -673,7 +675,7 @@
     let languageChangeEvent;
     let platform;
     let navigation;
-    let quickPreload;
+    let preloadStyle;
     let storyMode;
     let challenges;
     let collection;
@@ -698,9 +700,11 @@
     user = new User();
     languageChangeEvent = new Action();
     navigation = new StackNavigation();
-    quickPreload = () => {
-      return;
+    preloadStyle = (root, href) => {
       preload(async () => {
+        root.onload = function () {
+
+        }
         await new Promise(p => setTimeout(p, 100));
       })
     }

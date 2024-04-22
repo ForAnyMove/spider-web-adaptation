@@ -20,6 +20,7 @@ import { StackNavigation, Screen, BackActionHandler } from "../scripts/navigatio
 import DynamicFontChanger from "../localization/dynamicFontChanger.js";
 import { initialLocale } from "../localization/translator.js";
 import { closePopup, openPopup } from "../scripts/screen addons/ingameSkinSelector.js";
+import { solitaireHTMLevels } from "../scripts/data/solitaireLevels.js";
 
 input = new DirectionalInput({ element: null });
 
@@ -625,7 +626,18 @@ function setupSolitaireLevel() {
     }
   }
 
-  const solitaireSlots = document.getElementsByClassName('sol-slot');
+  const storyModeContainer = document.getElementsByClassName('story-mode-card-zone')[0];
+
+  const childCount = storyModeContainer.children.length;
+  for (let i = 0; i < childCount; i++) {
+    console.log(storyModeContainer.children[i]);
+    storyModeContainer.children[i].remove();
+  }
+
+  const levelHTML = solitaireHTMLevels[1];
+  storyModeContainer.insertAdjacentHTML('beforeend', levelHTML);
+
+  const solitaireSlots = storyModeContainer.getElementsByClassName('sol-slot');
 
   const cardColumns = [];
 
@@ -657,11 +669,13 @@ function setupSolitaireLevel() {
         if (unlockedCount == result.playableCardColumns.length) {
           setupDefaultLevel();
 
-          for (let j = 0; j < result.playableCardColumns.length; j++) {
-            const element = result.playableCardColumns[j];
-            element.setCanRemove();
-            element.setCanPlace();
-          }
+          DelayedCall(0.2, () => {
+            for (let j = 0; j < result.playableCardColumns.length; j++) {
+              const element = result.playableCardColumns[j];
+              element.setCanRemove();
+              element.setCanPlace();
+            }
+          })
         }
       });
       element.lock();
@@ -882,6 +896,7 @@ function invokeTutorial() {
   }
 
   const tutorialScreens = Array.from(document.getElementsByClassName('tutorial-screen'));
+  const finger = tutorialTab.querySelector('#finger');
 
   const tutorial_01 = {
     customData: {}, screen: tutorialScreens[0],
@@ -950,7 +965,6 @@ function invokeTutorial() {
     open: () => {
       tutorial_03.screen.style.display = 'flex';
 
-      const finger = tutorial_03.screen.getElementsByClassName('finger')[0];
       finger.style.zIndex = 1001;
       document.body.appendChild(finger);
 
@@ -1053,7 +1067,6 @@ function invokeTutorial() {
     open: () => {
       tutorial_04.screen.style.display = 'flex';
 
-      const finger = document.getElementsByClassName('finger')[0];
       finger.style.zIndex = 1001;
       document.body.appendChild(finger);
 
@@ -1098,7 +1111,6 @@ function invokeTutorial() {
 
       function startAnimation() {
         sequence.kill();
-
 
         finger.style.left = startPosition.x + offset + 'px';
         finger.style.top = startPosition.y + 'px';
@@ -1157,8 +1169,6 @@ function invokeTutorial() {
     screen: tutorialScreens[3],
     open: () => {
       tutorial_05.screen.style.display = 'flex';
-
-      const finger = document.getElementsByClassName('finger')[0];
 
       const deck = tutorial_05.screen.getElementsByClassName('cards-deck')[0];
       const deckCards = deck.children;

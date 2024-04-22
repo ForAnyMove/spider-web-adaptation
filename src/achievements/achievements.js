@@ -31,9 +31,6 @@ const statisticsParent = root.querySelector('#statistics');
 const tabScreens = [achievementsParent, statisticsParent];
 let tabs = [];
 
-statistics.winCount.overall = 5;
-updateStatistics();
-
 function setupStatistics() {
   const gameCountText = root.querySelector('#st-game-count');
   const winCountText = root.querySelector('#st-win-count');

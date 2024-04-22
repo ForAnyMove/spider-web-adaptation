@@ -1,3 +1,4 @@
+import { initialLocale } from "../../localization/translator.js";
 import { backSkinDatabase, backgroundDatabase, skinDatabase } from "../data/card_skin_database.js"
 import { createButton, createElement, createImage, createTextP, createTextSpan, getInputElements } from "../helpers.js";
 import { ContentType, Statefull } from "../statics/enums.js"
@@ -235,6 +236,7 @@ function openPopup(contentType) {
     }
 
     input.updateQueryCustom(getInputElements(skinParent, { tags: ['button'] }).concat({ element: backButton }), { element: backButton });
+    languageChangeEvent?.invoke(initialLocale)
 }
 
 export { openPopup, closePopup }

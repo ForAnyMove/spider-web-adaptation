@@ -622,6 +622,8 @@ class SolitaireCardColumn extends CardColumn {
         this.topLevelColumns = [];
 
         this.cardAddedEvent.addListener(this.cardAdded);
+
+        console.log(overlapArray);
     }
 
     makeColumnFree = function () {
@@ -660,7 +662,9 @@ class SolitaireCardColumn extends CardColumn {
             if (card.cardColumn == column) return;
 
             this.checkIfCanOpen();
-            lastCard.dropFinishedEvent.removeAllListeners();
+            setTimeout(() => {
+                lastCard.dropFinishedEvent.removeAllListeners();
+            }, 50)
         });
     }
 

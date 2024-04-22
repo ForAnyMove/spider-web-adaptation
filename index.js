@@ -14,16 +14,16 @@ import { getInputElements } from './src/scripts/helpers.js';
 import { BackActionHandler, Screen, ScreenParameters } from './src/scripts/navigation/navigation.js';
 
 input ??= new DirectionalInput();
-const styleSwitcher = document.getElementById('style-switcher');
 
 const screenParameters = new ScreenParameters();
 screenParameters.defaultSelectedElement = { element: document.getElementsByClassName('main-panel-btn-1')[0] };
 screenParameters.selectableElements = getInputElements(document.getElementById('main-screen'), { tags: ['button'] })
 
 const mainScreen = new Screen({
+  style: 'main.css',
   element: document.getElementById('main-screen'),
   onFocus: () => {
-    styleSwitcher.setAttribute('href', 'main.css');
+    // styleSwitcher.setAttribute('href', 'main.css');
     input.updateQueryCustom(screenParameters.selectableElements, screenParameters.defaultSelectedElement);
   },
   onUnfocus: () => { }
@@ -31,11 +31,11 @@ const mainScreen = new Screen({
 
 const storyModeRoot = document.getElementById('story-mode-screen');
 const storyModeScreen = new Screen({
+  style: 'src/StoryMode/storyMode.css',
   element: storyModeRoot,
   openButtons: [mainScreen.element.querySelector('#story-mode-switch-btm')],
   closeButtons: [storyModeRoot.getElementsByClassName('main-screen-switch-btn')[0]],
   onFocus: () => {
-    styleSwitcher.setAttribute('href', 'src/StoryMode/storyMode.css');
     input.updateQueryCustom(storyModeScreen.screenParameters.selectableElements,
       storyModeScreen.screenParameters.defaultSelectedElement);
 
@@ -49,11 +49,11 @@ const storyModeScreen = new Screen({
 
 const challengesRoot = document.getElementById('challenge-screen');
 const challengesScreen = new Screen({
+  style: 'src/challenges/challenge.css',
   element: challengesRoot,
   openButtons: [mainScreen.element.querySelector('#challenges-switch-btn')],
   closeButtons: [challengesRoot.getElementsByClassName('main-screen-switch-btn')[0]],
   onFocus: () => {
-    styleSwitcher.setAttribute('href', 'src/challenges/challenge.css')
     input.updateQueryCustom(challengesScreen.screenParameters.selectableElements,
       challengesScreen.screenParameters.defaultSelectedElement);
 
@@ -68,11 +68,11 @@ const challengesScreen = new Screen({
 
 const collectionRoot = document.getElementById('collection-screen');
 const collectionScreen = new Screen({
+  style: 'src/Collection/collection.css',
   element: collectionRoot,
   openButtons: [mainScreen.element.querySelector('#collection-switch-btn')],
   closeButtons: [collectionRoot.getElementsByClassName('main-screen-switch-btn')[0]],
   onFocus: () => {
-    styleSwitcher.setAttribute('href', 'src/Collection/collection.css')
     input.updateQueryCustom(collectionScreen.screenParameters.selectableElements,
       collectionScreen.screenParameters.defaultSelectedElement);
 
@@ -88,11 +88,11 @@ const collectionScreen = new Screen({
 
 const achievementsRoot = document.getElementById('achievements-screen');
 const achievementsScreen = new Screen({
+  style: 'src/achievements/achievements.css',
   element: achievementsRoot,
   openButtons: [mainScreen.element.querySelector('#achievements-switch-btn')],
   closeButtons: [achievementsRoot.getElementsByClassName('main-screen-switch-btn')[0]],
   onFocus: () => {
-    styleSwitcher.setAttribute('href', 'src/achievements/achievements.css')
     input.updateQueryCustom(achievementsScreen.screenParameters.selectableElements,
       achievementsScreen.screenParameters.defaultSelectedElement);
 

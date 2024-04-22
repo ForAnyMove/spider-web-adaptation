@@ -1,4 +1,4 @@
-import { DelayedCall } from '../dotween/dotween.js';
+import { disablePreloader, enablePreloader } from '../../loader/loader.js';
 
 const navagationDuration = 0.2;
 
@@ -11,7 +11,8 @@ class ScreenParameters {
 }
 
 class Screen {
-    constructor(options = { isPopup, element, openButtons, closeButtons, onFocus, onUnfocus, screenParameters }) {
+    constructor(options = { style, isPopup, element, openButtons, closeButtons, onFocus, onUnfocus, screenParameters }) {
+        this.style = options.style;
         this.screenParameters = options.screenParameters;
         this.element = options.element;
         this.closeButtons = options.closeButtons;
@@ -25,25 +26,59 @@ class Screen {
         this.element.style.display = 'none';
         this.element.style.opacity = 0;
         this.element.style.transition = `opacity ${navagationDuration}s ease`;
+
+        this.styleLink = null;
     }
 
     show = function (onShow) {
-        if (!this.isPopup) {
-            setTimeout(() => {
+
+        const mainFlow = () => {
+            if (!this.isPopup) {
+                setTimeout(() => {
+                    this.element.style.display = '';
+                    setTimeout(() => {
+                        this.element.style.opacity = 1;
+                    }, 10)
+                    onShow?.();
+                    this.isOpened = true;
+                }, navagationDuration * 1000)
+            } else {
                 this.element.style.display = '';
                 setTimeout(() => {
                     this.element.style.opacity = 1;
-                }, 10)
+                }, 10);
                 onShow?.();
                 this.isOpened = true;
-            }, navagationDuration * 1000)
-        } else {
-            this.element.style.display = '';
+            }
+        }
+
+        if (this.style != null) {
+            enablePreloader();
+
             setTimeout(() => {
-                this.element.style.opacity = 1;
-            }, 10);
-            onShow?.();
-            this.isOpened = true;
+                if (this.styleLink == null) {
+                    this.styleLink = document.createElement('link');
+                    this.styleLink.type = 'text/css';
+                    this.styleLink.rel = 'stylesheet';
+                    this.styleLink.href = this.style;
+
+                    this.styleLink.setAttribute('media', 'print');
+                    this.styleLink.onload = () => {
+                        this.styleLink.removeAttribute('media');
+                        mainFlow();
+                        disablePreloader();
+                    }
+                } else {
+                    mainFlow();
+                    disablePreloader();
+                }
+
+                document.head.appendChild(this.styleLink);
+            }, 50);
+
+
+        } else {
+            mainFlow();
         }
     }
 
@@ -53,6 +88,10 @@ class Screen {
             setTimeout(() => {
                 this.element.style.display = 'none';
                 onHide?.();
+
+                if (this.styleLink != null) {
+                    this.styleLink.remove();
+                }
             }, navagationDuration * 1000)
         }
 
@@ -119,11 +158,14 @@ class StackNavigation extends Navigation {
         if (!screen.isPopup) {
             const last = this.openedScreens.pop();
             if (last != null) {
-                last.hide();
+                last.hide(() => {
+                    this.openedScreens.push(screen);
+                    this.open(screen);
+                });
+                return;
             }
         }
         this.openedScreens.push(screen);
-
         this.open(screen);
     }
 

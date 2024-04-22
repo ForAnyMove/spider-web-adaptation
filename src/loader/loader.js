@@ -5,6 +5,20 @@ let isPreloading = false;
 mask.style.opacity = 1;
 mask.style.transition = 'opacity 0.5s ease';
 
+function enablePreloader() {
+    mask.style.opacity = 1;
+    mask.style.display = 'flex';
+}
+
+function disablePreloader() {
+    isPreloading = false;
+    mask.style.opacity = 0;
+    setTimeout(() => {
+        isPreloading = false;
+        mask.style.display = 'none';
+    }, 600);
+}
+
 async function preload(middleLoader, callback) {
 
     //     const body = document.getElementsByTagName('body')[0];
@@ -52,4 +66,4 @@ async function preload(middleLoader, callback) {
 
 }
 
-export { preload }
+export { preload, enablePreloader, disablePreloader }

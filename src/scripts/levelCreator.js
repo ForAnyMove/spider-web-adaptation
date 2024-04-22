@@ -129,6 +129,8 @@ function createLevel(options = { rules }) {
 function createSolitaireLevel(options = { ruled, solitaireColumns }) {
     console.log('Start [Solitaire] level');
     changeRules(options.rules);
+
+    createCollectableCardColumns();
     const result = generateCards(null, false);
     const comparedCards = [];
 
