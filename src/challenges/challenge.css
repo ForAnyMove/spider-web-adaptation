@@ -160,7 +160,7 @@ header {
 }
 
 .closed-card {
-  height: 65vh;
+  height: 68vh;
   background-image: url('../../Sprites/Frames/Used_Frame_11_3.png');
   border: 1px solid #000;
   display: flex;
@@ -221,6 +221,7 @@ header {
   --target-font-size: 1.5vh;
   margin-bottom: 1.5vh;
   height: 2vh;
+  text-wrap: nowrap;
 }
 
 .rules-container {
@@ -348,6 +349,7 @@ header {
 .booster-title {
   text-align: center;
   height: 2vh;
+  text-wrap: nowrap;
 }
 
 .booster-icon {
@@ -438,8 +440,8 @@ header {
   }
 
   .energy-counter {
-    width: 5vh;
-    height: 2vh;
+    width: 6vh;
+    height: 3vh;
     margin: 2vh;
   }
 
@@ -455,9 +457,12 @@ header {
   }
 
   .booster-container {
-    width: 20vw;
-    height: 24vw;
+    width: 9vh;
+    height: 10.1vh;
     text-wrap: nowrap;
+  }
+  .booster-title{
+    margin-top: 0.5vh;
   }
 }
 

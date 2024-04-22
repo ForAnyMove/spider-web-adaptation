@@ -559,6 +559,10 @@ main::-webkit-scrollbar {
   display: flex;
   align-items: center;
 }
+.booster-title {
+  margin-top: 0.5vw;
+  text-wrap: nowrap;
+}
 
 .booster-icon {
   width: 4vw;
@@ -699,16 +703,19 @@ main::-webkit-scrollbar {
     scale: calc(1 - 0.1 + 12 / 10);
     transform: translate(-20%, 0);
     margin-right: 5vw;
-    border-radius: 0.5vh;
+    border-radius: 1vh;
   }
+  
 
   .popup-header {
     height: 2vh;
+    border-top-left-radius: 1vh;
+    border-top-right-radius: 1vh;
   }
 
   .rules-container>span {
     height: 1vh;
-    margin-bottom: 0;
+    margin-bottom: 0.5vh;
   }
 
   .rules-container {

@@ -1241,25 +1241,25 @@ footer {
   }
 
   .active-cards-container>.card-element.closed:not(:first-child, .locked) {
-    margin-top: -4.5vh;
+    margin-top: -10.5vh;
     transition: margin-top 0.25s ease, width 0.25s ease, height 0.25s ease,
       margin-left 0.25s ease;
   }
 
   .active-cards-container>.card-element.first:not(:first-child, .locked) {
-    margin-top: -4.5vh;
+    margin-top: -10.5vw;
     transition: margin-top 0.25s ease, width 0.25s ease, height 0.25s ease,
       margin-left 0.25s ease;
   }
 
   .active-cards-container>.card-element.opened:not(:first-child, .first, .locked) {
-    margin-top: -4vh;
+    margin-top: -8vw;
     transition: margin-top 0.25s ease, width 0.25s ease, height 0.25s ease,
       margin-left 0.25s ease;
   }
 
   .active-cards-container>.card-element.locked:not(:first-child) {
-    margin-top: -5.4vh;
+    margin-top: -11.7vw;
     transition: margin-top 0.25s ease, width 0.25s ease, height 0.25s ease,
       margin-left 0.25s ease;
   }
@@ -1277,8 +1277,8 @@ footer {
     margin-top: 2vw;
   }
 
-  .main-container {
-    max-height: 125vw;
+  .main-container { 
+    margin-bottom: 20vh;
     width: 95vw;
   }
 
@@ -1306,6 +1306,7 @@ footer {
 
   .bottom-cards-zone {
     justify-content: flex-start;
+    margin-bottom: 20vh;
   }
 
   .bottom-cards-zone>.cards-container {
