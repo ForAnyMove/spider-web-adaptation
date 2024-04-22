@@ -2,9 +2,10 @@ import { animator } from "./animator.js";
 import { boundsChecker } from "./cardBoundsChecker.js";
 import { cardSelector } from "./cardSelector.js";
 import { cardCollector } from "./cardsCollector.js";
-import { getSkinBackImage, getSkinImage } from "./data/card_skin_database.js";
+import { getSkinBackImage, getSkinImage, getSkinImageCleanPath } from "./data/card_skin_database.js";
 import { DOChangeValue, DOChangeXY, DelayedCall, Ease } from "./dotween/dotween.js";
 import { Action, CanInteract, disableInteractions, enableInteractions } from "./globalEvents.js";
+import { preloadImagesAsync } from "./helpers.js";
 import { selectedRules } from "./rules/gameRules.js";
 import { CardSide, RanksStringList } from "./statics/enums.js";
 import { Platform } from "./statics/staticValues.js";
@@ -86,6 +87,7 @@ export default class Card {
         if (this.lastBackContent == backContent) return;
 
         this.backImage = getSkinBackImage(backContent);
+
         this.lastBackContent = backContent;
 
         if (this.side == CardSide.Back) {
@@ -97,13 +99,15 @@ export default class Card {
         if (this.lastFaceContent == faceContent) return;
 
         this.faceImage = getSkinImage(faceContent, this.suit, RanksStringList[this.rank - 1]);
+        // preloadImagesAsync([`../../../${getSkinImageCleanPath(faceContent, this.suit, RanksStringList[this.rank - 1])}`]);
+
         this.lastFaceContent = faceContent;
         if (this.side == CardSide.Face) {
             this.domElement.style.backgroundImage = this.faceImage;
         }
     }
 
-    applyTVInput = function () {
+    applyTVInput = () => {
         const domElement = this.domElement;
 
         domElement.onclick = () => {
@@ -498,6 +502,12 @@ class CardColumn {
     addCard = function (card) {
         if (this.cards.includes(card)) return;
 
+        if (platform == Platform.TV) {
+            if (this.cards.length == 0) {
+                this.domElement.onclick = null
+            }
+        }
+
         this.cards.push(card);
         this.cardAddedEvent.invoke(card);
 
@@ -505,6 +515,7 @@ class CardColumn {
         this.domElement.appendChild(card.domElement);
         this.recalculateFirstOpened();
         this.checkIfColumnHasCollectedCardsSet();
+
     }
 
     addCards = function (cards) {
@@ -521,6 +532,14 @@ class CardColumn {
             this.cardRemovedEvent.invoke(card);
 
             card.leaveFromColumn();
+        }
+
+        if (platform == Platform.TV) {
+            if (this.cards.length == 0) {
+                this.domElement.onclick = () => {
+                    cardSelector.select(this, []);
+                }
+            }
         }
     }
 

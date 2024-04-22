@@ -273,6 +273,5 @@ createTrophies();
 setupTabSwitch();
 
 languageChangeEvent.invoke(initialLocale);
-import('../localization/testingLangChanger.js');
 
 export { screenParameters }

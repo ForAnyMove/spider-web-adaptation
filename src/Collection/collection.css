@@ -43,6 +43,7 @@ body {
 body::-webkit-scrollbar {
   width: 0;
 }
+
 #collection-screen {
   background-image: url('../../Sprites/Backgrounds/Background_MainMenu.png');
   background-size: cover;
@@ -147,7 +148,8 @@ main {
   position: relative;
   height: 5vh;
 }
-.categories-btn-title{
+
+.categories-btn-title {
   font-size: 1.5vw;
   --target-font-size: 1.5vw;
 }
@@ -349,10 +351,12 @@ main {
     margin-bottom: 2vh;
     height: 7vh;
   }
+
   .start-level-btn {
     height: 6vh;
     width: 18vh;
   }
+
   .mask-title {
     height: 2vh;
   }
@@ -364,9 +368,11 @@ main {
     height: 17vw;
     margin: 2vw;
   }
-  .collection-pick-area{
+
+  .collection-pick-area {
     max-height: 72vh;
   }
+
   .header-navigation-list-icon {
     width: 9vw;
     margin-top: 20%;
@@ -384,10 +390,12 @@ main {
     width: 16vw;
     padding: 0;
   }
-  .categories-btn-title{
+
+  .categories-btn-title {
     font-size: 4.5vw;
     --target-font-size: 4.5vw;
   }
+
   .active-btn::after {
     font-size: 4vh;
     --target-font-size: 4vh;

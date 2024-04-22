@@ -239,7 +239,7 @@ function createLevelPreview(data) {
           if (user.getItemCount(Items.Energy) >= requiredPass) {
             user.removeItem(Items.Energy, requiredPass);
           }
-          window.location.href = `src/playground/playground.html?levelID=level_story_${currentLevelIndex}`;
+          window.location.href = `./src/playground/playground.html?levelID=level_story_${currentLevelIndex}`;
         });
         selectables.push({ element: startButton });
         startButton.id = 'play-btn';
@@ -306,6 +306,5 @@ function setupEnergyView() {
 setupEnergyView();
 
 languageChangeEvent.invoke(initialLocale);
-import('../localization/testingLangChanger.js');
 
 export { screenParameters }

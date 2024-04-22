@@ -267,6 +267,5 @@ const selectables = createAchievementInstances();
 screenParameters.selectableElements = [{ element: tabs[0] }, { element: tabs[1] }, screenParameters.defaultSelectedElement].concat(selectables);
 
 languageChangeEvent.invoke(initialLocale);
-import('../localization/testingLangChanger.js');
 
 export { screenParameters }

@@ -70,6 +70,17 @@ function getSkinImage(content, suit, rank) {
     }
 }
 
+function getSkinImageCleanPath(content, suit, rank) {
+    for (let i = 0; i < skinDatabase.skinList.length; i++) {
+        const element = skinDatabase.skinList[i];
+        const index = i + 1;
+
+        if (element.id.id == content.id) {
+            return `Sprites/Card Skins/Release/Skin_${(index > 9 ? index : `0${index}`)}/${rank}_${suit}_${(index > 9 ? index : `0${index}`)}.png`
+        }
+    }
+}
+
 const backSkinDatabase = {
     skinList: [
         {
@@ -207,4 +218,4 @@ function getBackgroundImage(content) {
     }
 }
 
-export { skinDatabase, backSkinDatabase, backgroundDatabase, getSkinImage, getSkinBackImage, getBackgroundImage }
+export { skinDatabase, backSkinDatabase, backgroundDatabase, getSkinImage, getSkinBackImage, getBackgroundImage, getSkinImageCleanPath }

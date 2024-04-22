@@ -341,5 +341,4 @@ function setupLanguageSelector(initialLocale) {
 setupDailyRewards();
 
 export { setupLanguageSelector }
-import('./src/localization/testingLangChanger.js');
 dynamicFontChanger = new DynamicFontChanger();

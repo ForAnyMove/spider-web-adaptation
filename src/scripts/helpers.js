@@ -177,6 +177,7 @@ function createElement(id, classList, styleList, parent) {
 
 function createImage(classList, styleList, parent, src) {
     const element = createElement('img', classList, styleList, parent);
+    element.draggable = false;
     element.src = src;
 
     return element;
@@ -498,6 +499,22 @@ function setDynamicFontSize(text, recursive = false) {
     }
 }
 
+async function preloadImagesAsync(urls) {
+    const promises = [];
+
+    urls.forEach(url => {
+        const promise = new Promise((resolve, reject) => {
+            const img = new Image();
+            img.onload = () => resolve(url);
+            img.onerror = () => reject(new Error(`Failed to preload image: ${url}`));
+            img.src = url;
+        });
+        promises.push(promise);
+    });
+
+    return Promise.all(promises);
+}
+
 
 export {
     createElement,
@@ -533,5 +550,6 @@ export {
     getSuitLang,
     getPatternLang,
     setDynamicFontSize,
-    setDynamicContainerText
+    setDynamicContainerText,
+    preloadImagesAsync
 }

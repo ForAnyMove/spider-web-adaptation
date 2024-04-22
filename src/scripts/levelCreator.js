@@ -258,6 +258,18 @@ function createSolitaireLevel(options = { ruled, solitaireColumns }) {
 
     croupier.initialDistribution();
 
+    user.contentUsageChanged.addListener(() => {
+        const skin = user.getContentOfType(ContentType.CardSkin);
+        const back = user.getContentOfType(ContentType.CardBack);
+
+        for (let i = 0; i < allCards.length; i++) {
+            const card = allCards[i];
+
+            card.setupCardFaceImage(skin);
+            card.setupCardBackImage(back);
+        }
+    })
+
     return { croupier: croupier, playableCardColumns: result.playableCardColumns, mainCardColumn: result.mainCardColumn, solitaireCards: comparedCards }
 }
 

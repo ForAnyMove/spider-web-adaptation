@@ -1,3 +1,4 @@
+import { Action } from "./globalEvents.js";
 import { Platform } from "./statics/staticValues.js";
 
 export default class DirectionalInput {
@@ -21,6 +22,8 @@ export default class DirectionalInput {
                 this.handleKey('Escape');
             });
         }
+
+        this.keyWasTriggered = new Action();
     }
 
     saveSelectableState = function (key, selectables, selected) {
@@ -199,6 +202,7 @@ export default class DirectionalInput {
 
         this.tryInvokeGlobalHandle(key);
 
+        this.keyWasTriggered.invoke();
         switch (key) {
             case "ArrowLeft":
                 if (this.ignoredAxis.includes('ArrowLeft')) return;
