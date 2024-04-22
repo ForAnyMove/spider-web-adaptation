@@ -24,6 +24,8 @@ import { solitaireHTMLevels } from "../scripts/data/solitaireLevels.js";
 
 input = new DirectionalInput({ element: null });
 
+let isKeyboardWasDown = false;
+
 const navigation = new StackNavigation();
 
 const settingsScreen = new Screen({
@@ -57,7 +59,11 @@ const menuScreen = new Screen({
   onFocus: () => {
     const elements = getInputElements(menuScreen.element, { tags: ['button'] });
     input.updateQueryCustom(elements, elements[0]);
-  }, onUnfocus: () => { input.loadFromSavedPull('ingame'); }
+  }, onUnfocus: () => {
+    if (isKeyboardWasDown) {
+      input.loadFromSavedPull('ingame');
+    }
+  }
 });
 
 const exitScreen = new Screen({
@@ -69,7 +75,9 @@ const exitScreen = new Screen({
     input.updateQueryCustom(elements, elements[1]);
 
   }, onUnfocus: () => {
-    input.loadFromSavedPull('ingame');
+    if (isKeyboardWasDown) {
+      input.loadFromSavedPull('ingame');
+    }
   }
 });
 
@@ -419,6 +427,11 @@ startCurrentLevel();
 function setupDistribution() {
   function distributeDefault() {
     if (result.croupier != null) {
+      for (let i = 0; i < result.playableCardColumns.length; i++) {
+        const column = result.playableCardColumns[i];
+        if (column.cards.length == 0) return;
+      }
+
       result.croupier.ingameDistribution();
     }
   }
@@ -805,7 +818,7 @@ if (platform == Platform.TV) {
     })
 
     input.saveSelectableState('ingame', selectables, selectables[0]);
-    input.updateQueryCustom(selectables, selectables[0])
+    // input.updateQueryCustom(selectables, selectables[0])
   });
 }
 
@@ -1373,6 +1386,11 @@ function invokeTutorial() {
 
 invokeTutorial();
 
-export { setupLanguageSelector }
-import('../localization/testingLangChanger.js');
 const dynamicFontChanger = new DynamicFontChanger();
+
+input.keyWasTriggered.addListener(() => {
+  input.loadFromSavedPull('ingame');
+  input.keyWasTriggered.removeAllListeners();
+})
+
+export { setupLanguageSelector }

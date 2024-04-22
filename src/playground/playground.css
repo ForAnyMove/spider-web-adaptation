@@ -825,6 +825,7 @@ header {
   justify-content: flex-end;
   background-image: url('../../Sprites/Card Backs/Card_Backs.png');
 }
+
 .skins-collection-slider>.background-card {
   height: 20vh;
   min-width: 36vh;
@@ -985,12 +986,26 @@ main {
   transition: scale 0.25s ease;
 }
 
+.active-cards-container>.card-element.opened {
+  transition: width 0.25s ease, height 0.25s ease, margin-left 0.25s ease, margin-top 0.25s ease;
+}
+
+.extra-cards-container.selected,
+.active-cards-container>.card-element.opened.selected,
+.active-cards-container.selected {
+  filter: none
+}
+
 .active-cards-container>.card-element.opened.selected {
-  margin-top: -6.5vw;
   width: 6.6vw;
   height: 8.8vw;
   margin-left: -0.3vw;
-  transition: all 0.25s ease;
+  transition: width 0.25s ease, height 0.25s ease, margin-left 0.25s ease, margin-top 0.25s ease;
+}
+
+.active-cards-container>.card-element.opened.selected:not(:first) {
+  margin-top: -6.5vw;
+  transition: width 0.25s ease, height 0.25s ease, margin-left 0.25s ease, margin-top 0.25s ease;
 }
 
 .active-cards-container>.card-element.opened.selected:not(.first) {
@@ -998,7 +1013,7 @@ main {
   width: 6.6vw;
   height: 8.8vw;
   margin-left: -0.3vw;
-  transition: all 0.25s ease;
+  transition: width 0.25s ease, height 0.25s ease, margin-left 0.25s ease, margin-top 0.25s ease;
 }
 
 .story-mode-card-zone {
@@ -1109,6 +1124,7 @@ footer {
     right: 1vw;
     top: 1vw;
   }
+
   .skins-collection-back-btn {
     width: 7.5vw;
     height: 7.5vw;

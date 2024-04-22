@@ -7,6 +7,19 @@ html {
   height: 100%;
 }
 
+img {
+  -webkit-touch-callout: none;
+  /* Отключение меню вызова на iOS */
+  -webkit-user-select: none;
+  /* Отключение выделения на iOS */
+  -moz-user-select: none;
+  /* Отключение выделения на Firefox */
+  -ms-user-select: none;
+  /* Отключение выделения на Internet Explorer */
+  user-select: none;
+  /* Отключение выделения на других платформах */
+}
+
 body {
   background-color: #009e00;
   background-image: url('./Sprites/Backgrounds/Background_MainMenu.png');
@@ -1057,9 +1070,11 @@ button.selected {
   margin-top: 1vw;
   text-align: center;
 }
-.regular-boosters-container>.booster>.booster-type>.booster-counter{
+
+.regular-boosters-container>.booster>.booster-type>.booster-counter {
   transform: translateY(-2vh);
 }
+
 .booster-icon {
   width: 4.5vw;
   margin: -0.3vw 0;
@@ -1199,6 +1214,7 @@ button.selected {
     height: 11vh;
     width: 9vh;
   }
+
   .header-navigation-list-icon {
     width: 5vh;
   }
@@ -1300,10 +1316,11 @@ button.selected {
     font-size: 3vw;
     --target-font-size: 3vw;
   }
-  
-  .regular-boosters-container>.booster>.booster-type>.booster-counter{
+
+  .regular-boosters-container>.booster>.booster-type>.booster-counter {
     transform: translateY(-1vh);
   }
+
   .booster-icon {
     width: 10vw;
   }

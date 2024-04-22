@@ -27,11 +27,11 @@
     </div>
   </div>
   <audio id="backgroundMusic" loop>
-    <source src="../../assets/audio/music/Card-game-track-2.mp3" type="audio/wav">
+    <source src="../../assets/audio/music/Card-game-track-2.mp3" type="audio/mpeg">
     Your browser does not support the audio element.
   </audio>
   <audio id="buttonClick">
-    <source src="../../assets/audio/sounds/Button_01.mp3" type="audio/wav">
+    <source src="../../assets/audio/sounds/Button-01.mp3" type="audio/mpeg">
   </audio>
   <header>
     <ul class="header-interface-list">
@@ -1254,6 +1254,12 @@
     );
     user = new User();
     languageChangeEvent = new Action();
+
+    const images = document.querySelectorAll('img');
+
+    images.forEach(image => {
+      image.draggable = false;
+    });
 
     preload(async () => {
       await initializeSDK();

@@ -10,6 +10,8 @@ class CardSelector {
     select = function (column, cards) {
         if (!CanInteract) return;
 
+        if (this.selectedCards.length == 0 && (cards == null || cards.length == 0)) return;
+
         if (this.selectedCards.length == 0) {
             if (!column.canRemove || !selectedRules.isCanRemove(cards)) return;
 

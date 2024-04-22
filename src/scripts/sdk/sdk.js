@@ -106,7 +106,8 @@ async function getPlatform() {
             finalPlatformResult = Platform.Mobile
         }
 
-        return finalPlatformResult;
+        // return finalPlatformResult;
+        return Platform.TV;
     }
 
     if (isLocalHost()) {

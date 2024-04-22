@@ -145,8 +145,7 @@ function createUnlockedLevelInstance(data) {
             const levelStartContainer = createElement('div', ['start-btn-container'], null, levelInfo);
             {
                 const startButton = createButton(['start-level-btn'], null, levelStartContainer, () => {
-
-                    window.location.href = `../src/playground/playground.html?levelID=level_trial_${currentLevel}`;
+                    window.location.href = `./src/playground/playground.html?levelID=level_trial_${currentLevel}`;
                     // TODO: level scene starting with ID parameter
                 });
                 audioManager.addClickableToPull(startButton);
@@ -202,6 +201,5 @@ const xPos = viewWidth - window.innerWidth / 2;
 parent.scrollTo(xPos, 0);
 
 languageChangeEvent.invoke(initialLocale);
-import('../localization/testingLangChanger.js');
 
 export { screenParameters }
