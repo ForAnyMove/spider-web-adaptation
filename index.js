@@ -72,7 +72,7 @@ const collectionScreen = new Screen({
   openButtons: [mainScreen.element.querySelector('#collection-switch-btn')],
   closeButtons: [collectionRoot.getElementsByClassName('main-screen-switch-btn')[0]],
   onFocus: () => {
-    styleSwitcher.setAttribute('href', 'src/Сollection/collection.css')
+    styleSwitcher.setAttribute('href', 'src/collection/collection.css')
     input.updateQueryCustom(collectionScreen.screenParameters.selectableElements,
       collectionScreen.screenParameters.defaultSelectedElement);
 
