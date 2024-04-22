@@ -985,6 +985,9 @@ button.selected {
 }
 
 .completed-flag {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   width: 4vw;
   height: 3vh;
   visibility: hidden;
@@ -1424,6 +1427,25 @@ button.selected {
   .control-button-title {
     font-size: 1.5vh;
     --target-font-size: 1.5vh;
+  }
+}
+
+@media (min-aspect-ratio: 11/6) {
+  
+  .header-navigation-btn {
+    scale: 0.8;
+  }
+  .close-popup{
+    width: 6vh;
+  }
+  .btn-panel {
+    scale: 0.7;
+  }
+  .footer-container{
+    width: 70vh;
+  }
+  .regular-bonuses>.popup-content{
+    scale: 0.7;
   }
 }
 

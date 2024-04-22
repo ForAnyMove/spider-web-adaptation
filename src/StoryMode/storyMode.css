@@ -738,3 +738,13 @@ main::-webkit-scrollbar {
     position: fixed;
   }
 }
+@media (min-aspect-ratio: 11/6) {
+  .popup-content {
+    scale: 0.7;
+    transform: translateX(25%);
+  }
+  
+  .header-navigation-btn {
+    scale: 0.6;
+  }
+}
