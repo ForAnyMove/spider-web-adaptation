@@ -286,6 +286,8 @@ levelButtonsContainer.addEventListener('click', (event) => {
 
     updateInContainer(lastCreatedLevelPreview, initialLocale);
     navigation.push(levelPreviewPopup);
+
+    dynamicFontChanger.updateElementsPull();
   }
 })
 

@@ -520,6 +520,7 @@ main::-webkit-scrollbar {
   justify-content: center;
   margin: 0.5vw;
   width: 5vw;
+  text-wrap: nowrap;
 }
 
 .booster {
@@ -555,6 +556,8 @@ main::-webkit-scrollbar {
   --target-font-size: 1vw;
   height: 2vh;
   text-align: center;
+  display: flex;
+  align-items: center;
 }
 
 .booster-icon {
@@ -698,26 +701,33 @@ main::-webkit-scrollbar {
     margin-right: 5vw;
     border-radius: 0.5vh;
   }
+
   .popup-header {
     height: 2vh;
   }
-  .rules-container>span{
+
+  .rules-container>span {
     height: 1vh;
     margin-bottom: 0;
   }
-  .rules-container{
+
+  .rules-container {
     padding-bottom: 1vh;
   }
+
   .level-info-header {
     height: 1vh;
     padding-bottom: 0;
   }
+
   .booster-title {
     height: 1vh;
   }
+
   .rewards-title {
     margin-bottom: 0.5vh;
   }
+
   .start-btn-container {
     margin: 0 0.5vh 0.5vh;
   }

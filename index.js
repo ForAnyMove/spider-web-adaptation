@@ -28,6 +28,7 @@ const mainScreen = new Screen({
   },
   onUnfocus: () => { }
 })
+
 const storyModeRoot = document.getElementById('story-mode-screen');
 const storyModeScreen = new Screen({
   element: storyModeRoot,
@@ -327,4 +328,4 @@ setupDailyRewards();
 
 export { setupLanguageSelector }
 import('./src/localization/testingLangChanger.js');
-const dynamicFontChanger = new DynamicFontChanger();
+dynamicFontChanger = new DynamicFontChanger();

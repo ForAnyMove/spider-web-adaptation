@@ -47,6 +47,7 @@ body {
 body::-webkit-scrollbar {
   width: 0;
 }
+
 #challenge-screen {
   background-image: url('../../Sprites/Story Mode/Used_Frame 5.png');
   background-size: cover;
@@ -303,6 +304,7 @@ header {
   margin: 0.5vh;
   width: 9vh;
   height: 11vh;
+  text-wrap: nowrap;
 }
 
 .booster {
@@ -338,6 +340,8 @@ header {
   font-weight: 600;
   font-size: 1.6vh;
   --target-font-size: 1.6vh;
+  display: flex;
+  align-items: center;
 }
 
 .booster-title {
@@ -448,9 +452,10 @@ header {
     right: -3vw;
     top: -1vw;
   }
-  
-.booster-container {
-  width: 20vw;
-  height: 24vw;
-}
+
+  .booster-container {
+    width: 20vw;
+    height: 24vw;
+    text-wrap: nowrap;
+  }
 }
