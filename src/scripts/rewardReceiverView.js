@@ -10,6 +10,7 @@ if (popupElement != null) {
 
     const adsButton = document.getElementsByClassName('get-double-bounty-btn')[0];
     const closeButton = document.getElementsByClassName('cancel-bounty-btn')[0];
+    audioManager.addClickableToPull(closeButton);
 
     const rewardsReceiverScreen = new Screen({
         isPopup: true,

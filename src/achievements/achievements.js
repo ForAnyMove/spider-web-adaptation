@@ -149,6 +149,7 @@ function createAchievementInstance(data, onInserted) {
         setTimeout(() => user.addItem(reward.type, reward.count, { isTrue: true, isMonetized: false }), 15)
       }
     });
+    audioManager.addClickableToPull(claimButton);
     const buttonTitle = createTextSpan(['get-btn-title'], null, claimButton, 'Получить');
     buttonTitle.lang = 'claim';
   }

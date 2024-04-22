@@ -32,6 +32,7 @@ function createBooster(itemType, title, langID, user, parent) {
             }, div, () => {
                 showRewarded(null, null, () => user.addItem(itemType, 1, { isTrue: true, isMonetized: false }), null);
             });
+            audioManager.addClickableToPull(button);
 
             screenParameters.selectableElements.push({ element: button });
 
@@ -148,6 +149,7 @@ function createUnlockedLevelInstance(data) {
                     window.location.href = `../src/playground/playground.html?levelID=level_trial_${currentLevel}`;
                     // TODO: level scene starting with ID parameter
                 });
+                audioManager.addClickableToPull(startButton);
                 screenParameters.selectableElements.push({ element: startButton });
                 startButton.id = 'play-btn';
                 {

@@ -233,6 +233,8 @@ function setupDailyRewards() {
           }
         }
       };
+
+      audioManager.addClickableToPull(element);
     }
   }
 }
@@ -267,6 +269,7 @@ function setupLanguageSelector(initialLocale) {
     selector.onclick = () => {
       selectorStruct.select();
     };
+    audioManager.addClickableToPull(selector);
 
     languageSelectorStructs.push(selectorStruct)
   }

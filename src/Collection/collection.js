@@ -72,6 +72,7 @@ function createBackgroundInstance(data) {
     const useButton = createButton(['start-level-btn'], null, plane, () => {
       user.useContent(data.id);
     });
+    audioManager.addClickableToPull(useButton);
 
     screenParameters.selectableElements.push({
       element: useButton, onSubmit: () => {
@@ -125,6 +126,7 @@ function createSkinInstance(data) {
     const useButton = createButton(['start-level-btn'], null, plane, () => {
       user.useContent(data.id);
     });
+    audioManager.addClickableToPull(useButton);
 
     screenParameters.selectableElements.push({
       element: useButton, onSubmit: () => {
@@ -179,6 +181,7 @@ function createSkinBackInstance(data) {
     const useButton = createButton(['start-level-btn'], null, plane, () => {
       user.useContent(data.id);
     });
+    audioManager.addClickableToPull(useButton);
     useButton.id = 'play-btn';
     const useText = createTextSpan(['start-level-btn-title'], null, useButton, 'Использовать');
     useText.lang = 'use';
