@@ -135,6 +135,7 @@ header {
   align-items: center;
   /* scroll-snap-type: x proximity; */
   overflow-x: scroll;
+  overflow-y: hidden;
   scrollbar-width: none;
   -ms-overflow-style: none;
   margin-bottom: 10vh;
@@ -457,5 +458,11 @@ header {
     width: 20vw;
     height: 24vw;
     text-wrap: nowrap;
+  }
+}
+
+@media (min-aspect-ratio: 11/6) {
+  .header-navigation-btn {
+    scale: 0.6;
   }
 }
