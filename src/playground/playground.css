@@ -1489,10 +1489,10 @@ footer {
     transform: translateY(-20%);
   }
   .story-mode-card-zone{
-    transform: translateY(70%);
+    transform: translateY(55%);
   }
   .bottom-cards-zone{
-    transform: translateY(100%);
+    transform: translateY(80%);
   }
   .settings>.popup-content{
     scale: 0.8;
@@ -1506,13 +1506,13 @@ footer {
   .active-cards-zone,
   .story-mode-card-zone,
   .bottom-cards-zone{
-    scale: 0.7;
+    scale: 0.9;
   }
   .active-cards-zone{
-    transform: translateY(-30%);
+    transform: translateY(-15%);
   }
   .story-mode-card-zone{
-    transform: translateY(100%);
+    transform: translateY(75%);
   }
   .bottom-cards-zone{
     transform: translateY(110%);

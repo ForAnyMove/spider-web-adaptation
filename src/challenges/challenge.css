@@ -470,4 +470,7 @@ header {
   .header-navigation-btn {
     scale: 0.6;
   }
+  .booster-title{
+    margin-top: 0.5vh;
+  }
 }
