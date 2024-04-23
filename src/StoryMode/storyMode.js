@@ -220,8 +220,8 @@ function createLevelPreview(data) {
 
       const levelStartContainer = createElement('div', ['start-btn-container'], null, levelInfo);
       {
-        const adsButton = createButton(['start-level-btn'], null, levelStartContainer, () => {
-          user.addItem(Items.Energy, 5, { isTrue: true });
+        const adsButton = createButton(['start-level-btn'], { textWrap: 'nowrap' }, levelStartContainer, () => {
+          showRewarded(null, null, () => user.addItem(Items.Energy, 5, { isTrue: true }), null);
         });
         selectables.push({ element: adsButton });
         adsButton.id = 'ads-btn';
@@ -244,7 +244,8 @@ function createLevelPreview(data) {
         selectables.push({ element: startButton });
         startButton.id = 'play-btn';
         {
-          createTextSpan(['start-level-btn-title'], null, startButton, 'Играть', 'play');
+          const textContainer = createElement('div', null, { textWrap: 'nowrap', width: '50%', display: 'flex', justifyContent: 'center' }, startButton);
+          createTextSpan(['start-level-btn-title'], null, textContainer, 'Играть', 'play');
           const priceContainer = createElement('div', ['interactive-btn-info'], null, startButton);
           {
             createTextSpan(['btn-info-value'], null, priceContainer, requiredPass);
@@ -287,7 +288,7 @@ levelButtonsContainer.addEventListener('click', (event) => {
     updateInContainer(lastCreatedLevelPreview, initialLocale);
     navigation.push(levelPreviewPopup);
 
-    dynamicFontChanger.updateElementsPull();
+    dynamicFontChanger.update();
   }
 })
 

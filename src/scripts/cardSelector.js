@@ -36,7 +36,9 @@ class CardSelector {
         }
 
         if (column.canPlace && selectedRules.isCanPlace(this.selectedCards, cards)) {
-            column.translateCardsToColumn(this.selectedCards, () => {
+            const array = [].concat(this.selectedCards);
+            column.translateCardsToColumn(array, () => {
+                array[0].dropFinishedEvent.invoke(array[0]);
                 this.selectedColumn.checkIfLastCardClosedAndOpen();
 
                 this.selectedCards = [];

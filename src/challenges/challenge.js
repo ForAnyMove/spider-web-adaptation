@@ -170,9 +170,9 @@ function createLevelsList() {
         if (i == currentLevel) {
             element = createUnlockedLevelInstance(trialLevelDatabase.levels[i]);
         } else if (i < currentLevel) {
-            element = createCompletedLevelInstance();
+            // element = createCompletedLevelInstance();
         } else if (i > currentLevel) {
-            element = createLockedLevelInstance()
+            // element = createLockedLevelInstance()
         }
 
         if (element != null) {

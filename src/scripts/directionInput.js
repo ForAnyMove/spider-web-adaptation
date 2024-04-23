@@ -108,6 +108,12 @@ export default class DirectionalInput {
         this.selectableElements = elements;
     }
 
+    deselect = function () {
+        if (this.selected == null || this.selected.element == null) return;
+
+        this.selected.element.classList.remove('selected');
+    }
+
     select = function (element) {
         if (element == null || element.element == null) return;
 
@@ -120,7 +126,7 @@ export default class DirectionalInput {
         this.selected.onSelect?.();
     }
 
-    findClosestToDirection = function (direction) {
+    findClosestToDirection = (direction) => {
         const visibleCheck = this.isVisible;
 
         function isObjectInDirection(object, startPosition, direction) {
@@ -203,6 +209,7 @@ export default class DirectionalInput {
         this.tryInvokeGlobalHandle(key);
 
         this.keyWasTriggered.invoke();
+
         switch (key) {
             case "ArrowLeft":
                 if (this.ignoredAxis.includes('ArrowLeft')) return;

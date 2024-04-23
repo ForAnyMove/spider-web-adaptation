@@ -5,7 +5,7 @@ import { DOChangeValue, DOChangeXY, DelayedCall, Ease, Sequence, createTweener }
 import { CanInteract, disableInteractions, enableInteractions } from "../scripts/globalEvents.js";
 import { createElement, createImage, createTextSpan, getElements, getIconByItem, getInputElements, secondsToTime } from "../scripts/helpers.js";
 import { createLevel, createSolitaireLevel } from "../scripts/levelCreator.js";
-import { ContentType, Pattern, SuitMode } from "../scripts/statics/enums.js";
+import { CardSide, ContentType, Pattern, SuitMode } from "../scripts/statics/enums.js";
 import { Content, Items, Platform, locales } from "../scripts/statics/staticValues.js";
 import { stepRecorder } from "../scripts/stepRecorder.js";
 
@@ -21,6 +21,7 @@ import DynamicFontChanger from "../localization/dynamicFontChanger.js";
 import { initialLocale } from "../localization/translator.js";
 import { closePopup, openPopup } from "../scripts/screen addons/ingameSkinSelector.js";
 import { solitaireHTMLevels } from "../scripts/data/solitaireLevels.js";
+import { cardSelector } from "../scripts/cardSelector.js";
 
 input = new DirectionalInput({ element: null });
 
@@ -145,7 +146,6 @@ function trySelectLevel() {
 
   switch (type) {
     case levelTypesList[0]:
-      console.log("Selected [Spider]");
       switch (number) {
         case 1:
           screenParameters.rules = oneSuitSpider;
@@ -167,7 +167,6 @@ function trySelectLevel() {
       removeBoosters();
       break
     case levelTypesList[1]:
-      console.log("Selected [Spider Lady]");
       switch (number) {
         case 1:
           screenParameters.rules = oneSuitSpiderLady;
@@ -189,7 +188,6 @@ function trySelectLevel() {
       removeBoosters();
       break
     case levelTypesList[2]:
-      console.log("Selected [Story]");
       const storyLevel = storyLevelDatabase.levels[number];
 
       switch (storyLevel.gameRule.Pattern) {
@@ -233,7 +231,6 @@ function trySelectLevel() {
       startLevel(storyLevelDatabase);
       break
     case levelTypesList[3]:
-      console.log("Selected [Trial]");
 
       const trialLevel = trialLevelDatabase.levels[number];
       switch (trialLevel.gameRule.Pattern) {
@@ -409,6 +406,27 @@ function setSpiderLadyStyles() {
 
 checkAndMakeSpiderLadyPatternView();
 
+
+let solitaireColumns;
+
+const updateSolitaireInput = () => {
+  const openedCards = [];
+  for (let i = 0; i < solitaireColumns.length; i++) {
+    const element = solitaireColumns[i];
+    if (element.cards != null && element.cards.length > 0 && element.cards[0].side == CardSide.Face) {
+      const selectable = {
+        element: element.domElement,
+        onSubmit: () => {
+          cardSelector.select(element, element.cards)
+          input.loadFromSavedPull('ingame_s');
+        }
+      };
+      openedCards.push(selectable);
+    }
+  }
+
+  input.updateQueryCustom(openedCards, openedCards[0]);
+}
 let result = null;
 
 function startCurrentLevel() {
@@ -634,6 +652,106 @@ function updateStepText(stepCount) {
   document.getElementById('step-counter').innerText = stepCount;
 }
 
+function defineDefaultSelectables() {
+  const selectables = [];
+
+  for (let i = 0; i < result.playableCardColumns.length; i++) {
+    const element = result.playableCardColumns[i];
+    const selectable = {
+      customData: {
+        selectedLevel: 1, clearAllSelection: () => {
+          const cards = element.getRangeFromEnd(selectable.customData.selectedLevel, false).reverse();
+          for (let i = 0; i < cards.length - 1; i++) {
+            const element = cards[i];
+            element.domElement.classList.remove('selected-card');
+
+          }
+          selectable.customData.selectedLevel = 1;
+        }
+      },
+      element: element.domElement,
+      onLeft: () => {
+        selectable.customData.clearAllSelection();
+      },
+      onRight: () => {
+        selectable.customData.clearAllSelection();
+      },
+      onSubmit: () => {
+        const cards = element.getRangeFromEnd(selectable.customData.selectedLevel, false).reverse();
+        if (cards != null && cards.length > 0) {
+          cards[0].domElement.click();
+        }
+      },
+      onUp: () => {
+        const cards = element.getRangeFromEnd(selectable.customData.selectedLevel + 1, false).reverse();
+        if (selectedRules.isCanRemove(cards)) {
+          cards[0].domElement.classList.add('selected-card');
+          selectable.customData.selectedLevel++;
+
+          return { preventDefault: true }
+        }
+      },
+      onDown: () => {
+        if (selectable.customData.selectedLevel > 1) {
+          const cards = element.getRangeFromEnd(selectable.customData.selectedLevel, false).reverse();
+          cards[0].domElement.classList.remove('selected-card');
+          selectable.customData.selectedLevel--;
+
+          return { preventDefault: true }
+        }
+      },
+    };
+
+    selectables.push(selectable);
+  }
+
+  selectables.push({
+    element: result.mainCardColumn.domElement, onSubmit: () => {
+      for (let i = 0; i < input.selectableElements.length; i++) {
+        const element = input.selectableElements[i];
+        if (element.customData != null) {
+          element.customData.clearAllSelection();
+        }
+      }
+    }
+  })
+
+  input.saveSelectableState('ingame', selectables, selectables[0]);
+}
+
+function defineSolitaireSelectables() {
+  const selectables = [];
+
+  for (let i = 0; i < result.playableCardColumns.length; i++) {
+    const element = result.playableCardColumns[i];
+    const selectable = {
+      element: element.domElement,
+      onSubmit: () => {
+        const cards = element.getRangeFromEnd(1, false).reverse();
+        if (cards != null && cards.length > 0) {
+          cards[0].domElement.click();
+        }
+
+        input.deselect();
+        DelayedCall(0.2, () => {
+          updateSolitaireInput?.();
+        })
+      },
+    };
+
+    selectables.push(selectable);
+  }
+
+  input.saveSelectableState('ingame_s', selectables, selectables[0]);
+}
+
+if (platform == Platform.TV) {
+  result.croupier.onDistributionFinished.addListener(() => {
+    defineDefaultSelectables();
+  });
+}
+
+
 function setupDefaultLevel() {
   setupDistribution();
   setupButtons();
@@ -644,9 +762,21 @@ function setupDefaultLevel() {
     const element = buttonContainers[i];
     element.classList.remove('hidden');
   }
+
+  result.croupier.onDistributionFinished.addListener(() => {
+    if (platform == Platform.TV) {
+      input.keyWasTriggered.addListener(() => {
+        input.loadFromSavedPull('ingame');
+        input.keyWasTriggered.removeAllListeners();
+      })
+    }
+  })
 }
 
 function setupSolitaireLevel() {
+
+  defineSolitaireSelectables();
+
   const buttonContainers = document.getElementsByClassName('footer-control-panel');
   for (let i = 0; i < buttonContainers.length; i++) {
     const element = buttonContainers[i];
@@ -659,7 +789,6 @@ function setupSolitaireLevel() {
 
   const childCount = storyModeContainer.children.length;
   for (let i = 0; i < childCount; i++) {
-    console.log(storyModeContainer.children[i]);
     storyModeContainer.children[i].remove();
   }
 
@@ -685,9 +814,20 @@ function setupSolitaireLevel() {
       const cardColumn = new SolitaireCardColumn(element, elementNumer, overlapArray, element.classList.contains('closed'));
       cardColumns.push(cardColumn);
     }
+
   }
+  solitaireColumns = cardColumns;
 
   result.croupier.onDistributionFinished.addListener(() => {
+    if (platform == Platform.TV) {
+      DelayedCall(0.2, () => {
+        input.keyWasTriggered.addListener(() => {
+          updateSolitaireInput();
+          input.keyWasTriggered.removeAllListeners();
+        })
+      })
+    }
+
     result.croupier.onDistributionFinished.removeAllListeners();
     let unlockedCount = 0;
 
@@ -697,6 +837,7 @@ function setupSolitaireLevel() {
         unlockedCount++;
         if (unlockedCount == result.playableCardColumns.length) {
           setupDefaultLevel();
+          input.loadFromSavedPull('ingame');
 
           DelayedCall(0.2, () => {
             for (let j = 0; j < result.playableCardColumns.length; j++) {
@@ -741,6 +882,7 @@ function setupSolitaireLevel() {
         }
       })
     }
+
   })
 }
 
@@ -768,75 +910,6 @@ updateStepText(0);
 setupBackgroundChange();
 cardCollector.onCollected.addListener(checkIfLevelWon);
 
-if (platform == Platform.TV) {
-  result.croupier.onDistributionFinished.addListener(() => {
-    const selectables = [];
-
-    for (let i = 0; i < result.playableCardColumns.length; i++) {
-      const element = result.playableCardColumns[i];
-      const selectable = {
-        customData: {
-          selectedLevel: 1, clearAllSelection: () => {
-            const cards = element.getRangeFromEnd(selectable.customData.selectedLevel, false).reverse();
-            for (let i = 0; i < cards.length - 1; i++) {
-              const element = cards[i];
-              element.domElement.classList.remove('selected-card');
-
-            }
-            selectable.customData.selectedLevel = 1;
-          }
-        },
-        element: element.domElement,
-        onLeft: () => {
-          selectable.customData.clearAllSelection();
-        },
-        onRight: () => {
-          selectable.customData.clearAllSelection();
-        },
-        onSubmit: () => {
-          const cards = element.getRangeFromEnd(selectable.customData.selectedLevel, false).reverse();
-          if (cards != null && cards.length > 0) {
-            cards[0].domElement.click();
-          }
-        },
-        onUp: () => {
-          const cards = element.getRangeFromEnd(selectable.customData.selectedLevel + 1, false).reverse();
-          if (selectedRules.isCanRemove(cards)) {
-            cards[0].domElement.classList.add('selected-card');
-            selectable.customData.selectedLevel++;
-
-            return { preventDefault: true }
-          }
-        },
-        onDown: () => {
-          if (selectable.customData.selectedLevel > 1) {
-            const cards = element.getRangeFromEnd(selectable.customData.selectedLevel, false).reverse();
-            cards[0].domElement.classList.remove('selected-card');
-            selectable.customData.selectedLevel--;
-
-            return { preventDefault: true }
-          }
-        },
-      };
-
-      selectables.push(selectable);
-    }
-
-    selectables.push({
-      element: result.mainCardColumn.domElement, onSubmit: () => {
-        for (let i = 0; i < input.selectableElements.length; i++) {
-          const element = input.selectableElements[i];
-          if (element.customData != null) {
-            element.customData.clearAllSelection();
-          }
-        }
-      }
-    })
-
-    input.saveSelectableState('ingame', selectables, selectables[0]);
-    // input.updateQueryCustom(selectables, selectables[0])
-  });
-}
 
 function setupLanguageSelector(initialLocale) {
   const selectors = document.getElementsByClassName('language-container');
@@ -1403,10 +1476,5 @@ function invokeTutorial() {
 invokeTutorial();
 
 dynamicFontChanger = new DynamicFontChanger();
-
-input.keyWasTriggered.addListener(() => {
-  input.loadFromSavedPull('ingame');
-  input.keyWasTriggered.removeAllListeners();
-})
 
 export { setupLanguageSelector }
