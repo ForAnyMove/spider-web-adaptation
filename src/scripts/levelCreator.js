@@ -127,7 +127,6 @@ function createLevel(options = { rules }) {
 }
 
 function createSolitaireLevel(options = { ruled, solitaireColumns }) {
-    console.log('Start [Solitaire] level');
     changeRules(options.rules);
 
     createCollectableCardColumns();
@@ -225,9 +224,6 @@ function createSolitaireLevel(options = { ruled, solitaireColumns }) {
         fillComparedCards(cards, comparedCards, randomCards);
 
         setupCardsToDeckEnd(comparedCards);
-
-        console.log(randomCards.map(i => i.rank));
-        console.log(comparedCards.map(i => i.rank));
 
         let counter = 0;
         for (let i = 0; i < distributions.length; i++) {

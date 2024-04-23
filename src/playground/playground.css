@@ -975,6 +975,7 @@ main {
 .card-locker-hidden {
   scale: 0 0;
   margin-top: -8vw;
+  pointer-events: none;
 }
 
 .card-locked-showed {
@@ -987,6 +988,7 @@ main {
   background-repeat: no-repeat;
 
   transition: scale 0.25s ease;
+  pointer-events: none;
 }
 
 .active-cards-container>.card-element.opened {
@@ -995,7 +997,9 @@ main {
 
 .extra-cards-container.selected,
 .active-cards-container>.card-element.opened.selected,
-.active-cards-container.selected {
+.active-cards-container.selected,
+.sol-slot.selected,
+.sol-slot>.selected {
   filter: none
 }
 
@@ -1093,10 +1097,18 @@ footer {
   margin-top: 15%;
 }
 
+.playable-card-column.selected>.card-element.locked,
 .playable-card-column.selected>.card-element.selected-card,
 .extra-cards-container.selected>.card-element:last-child,
-.playable-card-column.selected>.card-element.opened:last-child {
+.playable-card-column.selected>.card-element.opened:last-child,
+.sol-slot.selected>.card-element,
+.sol-slot.selected {
   box-shadow: inset 0 0 2vw 0.2vw rgb(0, 157, 255);
+  border-radius: 0.5vw;
+}
+
+.sol-slot>.selected {
+  box-shadow: inset 0 0 2vw 0.2vw rgb(255, 251, 0);
   border-radius: 0.5vw;
 }
 
@@ -1240,6 +1252,7 @@ footer {
   .card-locked-showed {
     width: 8.8vw;
     height: 11.75vw;
+    user-select: none;
   }
 
   .header-navigation-btn {

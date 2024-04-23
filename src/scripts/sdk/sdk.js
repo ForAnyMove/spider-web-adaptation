@@ -107,6 +107,7 @@ async function getPlatform() {
         }
 
         return finalPlatformResult;
+        // return Platform.TV;
     }
 
     if (isLocalHost()) {

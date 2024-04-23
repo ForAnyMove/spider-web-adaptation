@@ -403,7 +403,6 @@ class CardColumn {
         }
 
         const firstCard = cards[0];
-
         const targetPosition = { x: this.domElement.getBoundingClientRect().left, y: this.domElement.getBoundingClientRect().top };
         const vwOffset = window.innerWidth / 100;
 
@@ -641,8 +640,6 @@ class SolitaireCardColumn extends CardColumn {
         this.topLevelColumns = [];
 
         this.cardAddedEvent.addListener(this.cardAdded);
-
-        console.log(overlapArray);
     }
 
     makeColumnFree = function () {

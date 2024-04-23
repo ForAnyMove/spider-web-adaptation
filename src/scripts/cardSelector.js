@@ -10,6 +10,8 @@ class CardSelector {
     select = function (column, cards) {
         if (!CanInteract) return;
 
+        console.log({ column: column, cards: cards });
+
         if (this.selectedCards.length == 0 && (cards == null || cards.length == 0)) return;
 
         if (this.selectedCards.length == 0) {
@@ -36,7 +38,9 @@ class CardSelector {
         }
 
         if (column.canPlace && selectedRules.isCanPlace(this.selectedCards, cards)) {
-            column.translateCardsToColumn(this.selectedCards, () => {
+            const array = [].concat(this.selectedCards);
+            column.translateCardsToColumn(array, () => {
+                array[0].dropFinishedEvent.invoke(array[0]);
                 this.selectedColumn.checkIfLastCardClosedAndOpen();
 
                 this.selectedCards = [];
