@@ -1101,7 +1101,8 @@ button.selected {
   font-size: 1.8vh;
   --target-font-size: 1.8vh;
   text-align: center;
-  width: 22vh;
+  width: 12vw;
+  height: 5vw;
   padding: 1vh 1vh 2vh;
   border-radius: 2vh;
   top: -15vh;
@@ -1336,8 +1337,11 @@ button.selected {
   }
 
   .booster-type:hover::before {
-    top: -11vh;
+    top: -17vw;
+    width: 27vw;
+    height: 10vw;
   }
+
 
   .booster-type>.booster-icon {
     width: 14vw;
