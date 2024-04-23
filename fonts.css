@@ -1,0 +1,21 @@
+
+/* Подключение шрифтов TTF к сайту */
+@font-face {
+  font-family: LoadedFont_Default;
+  src: url('./src/fonts/remissis-sb.ttf') format('truetype');
+}
+@font-face {
+  font-family: LoadedFont_JA;
+  src: url('./src/fonts/mplus-1c-medium.ttf') format('truetype');
+}
+@font-face {
+  font-family: LoadedFont_TR;
+  src: url('./src/fonts/Outfit-SemiBold.ttf') format('truetype');
+}
+@font-face {
+  font-family: LoadedFont_HI;
+  src: url('./src/fonts/TiroDevanagariHindi-Regular.ttf') format('truetype');
+}
+body, button{
+  font-family: LoadedFont_Default, Arial, sans-serif;
+}
