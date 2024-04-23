@@ -421,6 +421,11 @@ async function setDynamicContainerText(struct, recursive = true) {
     }
 
     let needToRecursive = false;
+    let log = false;
+
+    // if (struct.elements[0].lang == 'use') {
+    //     log = true;
+    // }
 
     for (let i = 0; i < struct.elements.length; i++) {
         const element = struct.elements[i];
@@ -433,6 +438,12 @@ async function setDynamicContainerText(struct, recursive = true) {
         const textHeight = element.offsetHeight / fontRatioCoefficient;
 
         const fontSize = fs;
+
+        // if (log) {
+        //     console.log(element);
+        //     console.log(`TW: ${textWidth} TH: ${textHeight} // CW: ${containerSize.width} CH: ${containerSize.height}`);
+        // }
+
         if (textHeight > containerSize.height || textWidth > containerSize.width) {
             const newFontSize = fontSize * Math.min((containerSize.height / textHeight), 1) * Math.min((containerSize.width / textWidth), 1);
             element.style.fontSize = newFontSize + 'px';

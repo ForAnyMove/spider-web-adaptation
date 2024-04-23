@@ -23,6 +23,7 @@ const mainScreen = new Screen({
   style: 'main.css',
   element: document.getElementById('main-screen'),
   onFocus: () => {
+    dynamicFontChanger.update();
     input.updateQueryCustom(screenParameters.selectableElements, screenParameters.defaultSelectedElement);
   },
   onUnfocus: () => { }
@@ -35,6 +36,7 @@ const storyModeScreen = new Screen({
   openButtons: [mainScreen.element.querySelector('#story-mode-switch-btm')],
   closeButtons: [storyModeRoot.getElementsByClassName('main-screen-switch-btn')[0]],
   onFocus: () => {
+    dynamicFontChanger.update();
     input.updateQueryCustom(storyModeScreen.screenParameters.selectableElements,
       storyModeScreen.screenParameters.defaultSelectedElement);
 
@@ -53,6 +55,7 @@ const challengesScreen = new Screen({
   openButtons: [mainScreen.element.querySelector('#challenges-switch-btn')],
   closeButtons: [challengesRoot.getElementsByClassName('main-screen-switch-btn')[0]],
   onFocus: () => {
+    dynamicFontChanger.update();
     input.updateQueryCustom(challengesScreen.screenParameters.selectableElements,
       challengesScreen.screenParameters.defaultSelectedElement);
 
@@ -72,6 +75,7 @@ const collectionScreen = new Screen({
   openButtons: [mainScreen.element.querySelector('#collection-switch-btn')],
   closeButtons: [collectionRoot.getElementsByClassName('main-screen-switch-btn')[0]],
   onFocus: () => {
+    dynamicFontChanger.update();
     input.updateQueryCustom(collectionScreen.screenParameters.selectableElements,
       collectionScreen.screenParameters.defaultSelectedElement);
 
@@ -92,6 +96,7 @@ const achievementsScreen = new Screen({
   openButtons: [mainScreen.element.querySelector('#achievements-switch-btn')],
   closeButtons: [achievementsRoot.getElementsByClassName('main-screen-switch-btn')[0]],
   onFocus: () => {
+    dynamicFontChanger.update();
     input.updateQueryCustom(achievementsScreen.screenParameters.selectableElements,
       achievementsScreen.screenParameters.defaultSelectedElement);
 

@@ -65,7 +65,12 @@ function createBackgroundInstance(data) {
   if (state == Statefull.Locked) {
     createImage(['lock-icon'], null, plane, lockIconPath);
     const requirementTextContainer = createElement('div', ['lock-mask'], null, plane);
-    const unlockDescription = createTextP(['mask-title'], null, requirementTextContainer, '');
+    const textContainer = createElement('div', null, {
+      height: '40%',
+      paddingLeft: '10%',
+      paddingRight: '10%',
+    }, requirementTextContainer);
+    const unlockDescription = createTextP(['mask-title'], null, textContainer, '');
     unlockDescription.lang = data.unlockDescription;
   } else {
     const useButton = createButton(['start-level-btn'], null, plane, () => {
@@ -119,7 +124,11 @@ function createSkinInstance(data) {
 
     createImage(['lock-icon'], null, plane, lockIconPath);
     const requirementTextContainer = createElement('div', ['lock-mask'], null, plane);
-    const unlockDescription = createTextP(['mask-title'], null, requirementTextContainer, '');
+    const textContainer = createElement('div', null, {
+      height: '40%'
+    }, requirementTextContainer);
+
+    const unlockDescription = createTextP(['mask-title'], null, textContainer, '');
     unlockDescription.lang = data.unlockDescription;
   } else {
     const useButton = createButton(['start-level-btn'], null, plane, () => {
@@ -174,7 +183,10 @@ function createSkinBackInstance(data) {
   if (state == Statefull.Locked) {
     createImage(['lock-icon'], null, plane, lockIconPath);
     const requirementTextContainer = createElement('div', ['lock-mask'], null, plane);
-    const unlockDescription = createTextP(['mask-title'], null, requirementTextContainer, '');
+    const textContainer = createElement('div', null, {
+      height: '40%'
+    }, requirementTextContainer);
+    const unlockDescription = createTextP(['mask-title'], null, textContainer, '');
     unlockDescription.lang = data.unlockDescription;
   } else {
     const useButton = createButton(['start-level-btn'], null, plane, () => {

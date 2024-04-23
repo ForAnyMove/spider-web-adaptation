@@ -366,25 +366,41 @@ function setSpiderLadyStyles() {
     .bottom-cards-zone:last-child {
       transform: translate(-3%);
     }
-    .active-cards-container > .card-element.closed:not(:first-child),
-    .active-cards-container > .card-element.first:not(:first-child),
-    .active-cards-container > .card-element.opened:not(:first-child),
-    .active-cards-container > .card-element.locked:not(:first-child) {
-      margin-top: -11.5vw;
+
+    .active-cards-container>.card-element.closed:not(:first-child, .locked) {
+      margin-top: -16vw;
+      transition: margin-top 0.25s ease, width 0.25s ease, height 0.25s ease,
+        margin-left 0.25s ease;
     }
-    .active-cards-container > .card-element.opened:not(:first-child),
-    .active-cards-container > .card-element.first:not(:first-child),
-    .active-cards-container > .card-element.locked:not(:first-child) {
-      margin-top: -10vw;
+
+    .active-cards-container>.card-element.first:not(:first-child, .locked) {
+      margin-top: -16vw;
+      transition: margin-top 0.25s ease, width 0.25s ease, height 0.25s ease,
+        margin-left 0.25s ease;
     }
-    .active-cards-container > .card-element.locked:not(:first-child) {
-      margin-top: -12.6vw;
+
+    .active-cards-container>.card-element.opened:not(:first-child, .first, .locked) {
+      margin-top: -13vw;
+      transition: margin-top 0.25s ease, width 0.25s ease, height 0.25s ease,
+        margin-left 0.25s ease;
     }
+
+    .active-cards-container>.card-element.locked:not(:first-child) {
+      margin-top: -16.5vw;
+      transition: margin-top 0.25s ease, width 0.25s ease, height 0.25s ease,
+        margin-left 0.25s ease;
+    }
+
     .bottom-cards-zone>.cards-container {
       transform: translate(15%);
     }
     .bottom-cards-zone>.extra-cards-container {
       transform: translate(200%);
+    }
+    :root {
+      --closed-card-offset: -16vw;
+      --opened-card-offset: -13vw;
+      --card-height: 18vw;
     }
   }
 `;
@@ -1386,7 +1402,7 @@ function invokeTutorial() {
 
 invokeTutorial();
 
-const dynamicFontChanger = new DynamicFontChanger();
+dynamicFontChanger = new DynamicFontChanger();
 
 input.keyWasTriggered.addListener(() => {
   input.loadFromSavedPull('ingame');

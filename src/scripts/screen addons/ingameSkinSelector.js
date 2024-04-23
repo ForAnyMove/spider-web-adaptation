@@ -236,7 +236,11 @@ function openPopup(contentType) {
     }
 
     input.updateQueryCustom(getInputElements(skinParent, { tags: ['button'] }).concat({ element: backButton }), { element: backButton });
-    languageChangeEvent?.invoke(initialLocale)
+
+    setTimeout(() => {
+        dynamicFontChanger.updateElementsPull();
+        languageChangeEvent?.invoke(initialLocale);
+    }, 100)
 }
 
 export { openPopup, closePopup }

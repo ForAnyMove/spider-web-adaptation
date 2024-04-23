@@ -106,8 +106,7 @@ async function getPlatform() {
             finalPlatformResult = Platform.Mobile
         }
 
-        // return finalPlatformResult;
-        return Platform.TV;
+        return finalPlatformResult;
     }
 
     if (isLocalHost()) {
@@ -198,7 +197,7 @@ async function loadUserData(key) {
 async function getDefaultLanguage() {
     if (isLocalHost()) {
         error("[getDefaultLanguage] local host usage", "sdk", "sdk");
-        return 'en';
+        return 'ru';
     }
 
     SDK = await getSDK();
