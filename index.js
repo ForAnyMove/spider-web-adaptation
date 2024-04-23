@@ -114,7 +114,10 @@ const dailyRewardsScreen = new Screen({
   element: document.getElementById('daily-bonuses'),
   openButtons: [document.getElementById('daily-btn')],
   closeButtons: [document.getElementById('close-popup-daily')],
-  onFocus: () => { input.updateQueryCustom(getInputElements(dailyRewardsScreen.element, { classNames: ['booster', 'close-popup', 'special-booster'], tags: ['button'] }), { element: dailyRewardsScreen.closeButtons[0] }); },
+  onFocus: () => {
+    dynamicFontChanger.update();
+    input.updateQueryCustom(getInputElements(dailyRewardsScreen.element, { classNames: ['booster', 'close-popup', 'special-booster'], tags: ['button'] }), { element: dailyRewardsScreen.closeButtons[0] });
+  },
   onUnfocus: () => { input.updateQuery(); input.select({ element: dailyRewardsScreen.openButtons[0] }); }
 });
 
@@ -123,8 +126,14 @@ const bonusesScreen = new Screen({
   element: document.getElementById('regular-bonuses'),
   openButtons: [document.getElementById('regular-btn')],
   closeButtons: [document.getElementById('close-popup-regular')],
-  onFocus: () => { input.updateQueryCustom(getInputElements(bonusesScreen.element, { classNames: ['close-popup'], tags: ['button'] }), { element: bonusesScreen.closeButtons[0] }); },
-  onUnfocus: () => { input.updateQuery(); input.select({ element: bonusesScreen.openButtons[0] }); }
+  onFocus: () => {
+    dynamicFontChanger.update();
+    input.updateQueryCustom(getInputElements(bonusesScreen.element, { classNames: ['close-popup'], tags: ['button'] }), { element: bonusesScreen.closeButtons[0] });
+  },
+  onUnfocus: () => {
+    input.updateQuery();
+    input.select({ element: bonusesScreen.openButtons[0] });
+  }
 });
 
 const settingsScreen = new Screen({
@@ -132,8 +141,14 @@ const settingsScreen = new Screen({
   element: document.getElementById('settings'),
   openButtons: [document.getElementById('settings-btn')],
   closeButtons: [document.getElementById('close-popup-settings')],
-  onFocus: () => { input.updateQueryCustom(getInputElements(settingsScreen.element, { classNames: ['close-popup'], tags: ['button'] }), { element: settingsScreen.closeButtons[0] }) },
-  onUnfocus: () => { input.updateQuery(); input.select({ element: settingsScreen.openButtons[0] }); }
+  onFocus: () => {
+    dynamicFontChanger.update();
+    input.updateQueryCustom(getInputElements(settingsScreen.element, { classNames: ['close-popup'], tags: ['button'] }), { element: settingsScreen.closeButtons[0] })
+  },
+  onUnfocus: () => {
+    input.updateQuery();
+    input.select({ element: settingsScreen.openButtons[0] });
+  }
 });
 
 const languageScreen = new Screen({
@@ -141,7 +156,10 @@ const languageScreen = new Screen({
   element: document.getElementById('languages'),
   openButtons: [document.getElementById('lang-btn')],
   closeButtons: [document.getElementById('close-popup-languages')],
-  onFocus: () => { input.updateQueryCustom(getInputElements(languageScreen.element, { classNames: ['close-popup', 'language-container'] }), { element: languageScreen.closeButtons[0] }) },
+  onFocus: () => {
+    dynamicFontChanger.update();
+    input.updateQueryCustom(getInputElements(languageScreen.element, { classNames: ['close-popup', 'language-container'] }), { element: languageScreen.closeButtons[0] })
+  },
   onUnfocus: () => { }
 });
 
@@ -150,6 +168,7 @@ const exitScreen = new Screen({
   element: document.getElementById('exid-game'),
   closeButtons: [document.getElementById('exid-game').getElementsByClassName('exid-no')[0]],
   onFocus: () => {
+    dynamicFontChanger.update();
     const elements = getInputElements(exitScreen.element, { tags: ['button'] });
     input.updateQueryCustom(elements, elements[1]);
   }, onUnfocus: () => { input.updateQuery(); input.select({ element: defaultSelectedButton }); }
