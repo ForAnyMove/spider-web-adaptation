@@ -2144,7 +2144,7 @@
             }
           </style>
         </div> -->
-        <div class="story-mode-level-container" id="story-mode-level-20">
+        <!-- <div class="story-mode-level-container" id="story-mode-level-20">
           <div class="story-mode-cards-container first-column">
             <div id="sol-slot-01<[06]" class="sol-slot card-element closed removed"></div>
             <div id="sol-slot-01<[06]" class="sol-slot card-element closed removed"></div>
@@ -2205,6 +2205,94 @@
               .third-column{
                 row-gap: 8vw;
                 margin: 0 -3.5vw;
+              }
+            }
+          </style>
+        </div> -->
+        <div class="story-mode-level-container" id="story-mode-level-21">
+          <div class="story-mode-cards-container first-column">
+            <div id="sol-slot-01<[06]" class="sol-slot card-element closed removed"></div>
+            <div id="sol-slot-01<[06]" class="sol-slot card-element closed removed"></div>
+            <div id="sol-slot-01<[06]" class="sol-slot card-element closed removed"></div>
+          </div>
+          <div class="story-mode-cards-container second-column">
+            <div id="sol-slot-01<[06]" class="sol-slot card-element closed removed"></div>
+            <div id="sol-slot-01<[06]" class="sol-slot card-element closed removed"></div>
+            <div id="sol-slot-01<[06]" class="sol-slot card-element closed removed"></div>
+          </div>
+          <div class="story-mode-cards-container third-column">
+            <div id="sol-slot-01<[06]" class="sol-slot card-element closed removed"></div>
+            <div id="sol-slot-01<[06]" class="sol-slot card-element closed removed"></div>
+            <div id="sol-slot-01<[06]" class="sol-slot card-element closed removed"></div>
+            <div id="sol-slot-01<[06]" class="sol-slot card-element opened removed"></div>
+          </div>
+          <style>
+            .story-mode-level-container {
+              display: flex;
+              justify-content: center;
+              align-items: flex-start;
+              width: 31%;
+              max-height: 100%;
+              position: relative;
+              flex-direction: column;
+            }
+            .story-mode-cards-container {
+              display: flex;
+              justify-content: center;
+              align-items: center;
+              position: relative;
+            }
+            .second-column{
+              flex-direction: row-reverse;
+              align-self: flex-end;
+              transform: translate(30%, 0%);
+            }
+            .story-mode-cards-container>.card-element{
+              margin-right: -3vw;
+            }
+            .second-column>.card-element{
+              margin-right: -2vw;
+            }
+            .first-column>.card-element:nth-child(1){
+              transform: translate(0%, 0%);
+            }
+            .first-column>.card-element:nth-child(2){
+              transform: translate(0%, 25%);
+            }
+            .first-column>.card-element:nth-child(3){
+              transform: translate(0%, 50%);
+            }
+            .second-column>.card-element:nth-child(1){
+              transform: translate(0%, -50%);
+            }
+            .second-column>.card-element:nth-child(2){
+              transform: translate(0%, -40%);
+            }
+            .second-column>.card-element:nth-child(3){
+              transform: translate(0%, -30%);
+            }
+            .third-column>.card-element:nth-child(1){
+              transform: translate(0%, 0%);
+            }
+            .third-column>.card-element:nth-child(2){
+              transform: translate(0%, -15%);
+            }
+            .third-column>.card-element:nth-child(3){
+              transform: translate(20%, -45%);
+            }
+            .third-column>.card-element:nth-child(4){
+              transform: translate(0%, -100%);
+            }
+            
+            @media screen and (orientation: portrait) {
+              .second-column{
+                transform: translate(20%, 0%);
+              }
+              .story-mode-cards-container>.card-element{
+                margin-right: -5vw;
+              }
+              .second-column>.card-element{
+                margin-right: -4vw;
               }
             }
           </style>
