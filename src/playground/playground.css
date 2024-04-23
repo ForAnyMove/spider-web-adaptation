@@ -666,6 +666,16 @@ header {
   outline: 0.5vh solid #85ff6f;
 }
 
+.ads-icon {
+  position: absolute;
+  right: -5%;
+  bottom: 5%;
+  width: 40%;
+  height: 40%;
+  pointer-events: none;
+  display: none;
+}
+
 .cards-deck {
   width: 10vh;
   height: 14vh;

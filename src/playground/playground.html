@@ -5,6 +5,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <link rel="stylesheet" href="playground.css" />
+  <link rel="stylesheet" href="../Rewards Receiver/rewardsReceiver.css">
   <link rel="stylesheet" href="../loader/loader.css" />
   <!-- <link rel="stylesheet" href="../scripts/screen addons/skinPreview.css"> -->
   <title>Playground</title>
@@ -33,6 +34,22 @@
   <audio id="buttonClick">
     <source src="../../assets/audio/sounds/Button-01.mp3" type="audio/mpeg">
   </audio>
+  <!-- rewards popup begin -->
+  <div class="popup-b fade-hidden" id="bounty-popup">
+    <div class="bounty-popup-content bounty-tab" id="bounty-container">
+    </div>
+    <div class="double-bounty-by-ads-container">
+      <button class="get-double-bounty-btn fade-hidden" id="play-btn">
+        <span class="get-double-bounty-btn-title">Получить</span>
+        <div class="interactive-btn-info">
+          <img class="get-double-bounty-icon" src="../../Sprites/Icons/Icon_Ads.png" />
+          <span class="get-double-bounty-value">x2</span>
+        </div>
+      </button>
+      <span class="cancel-bounty-btn fade-hidden">Нет, спасибо</span>
+    </div>
+  </div>
+  <!-- rewards popup end -->
   <header>
     <ul class="header-interface-list">
       <li class="header-ui-container">
@@ -136,24 +153,28 @@
           <button class="control-btn hint-button">
             <img src="../../Sprites/Icons/Icon_Hint.png" alt="Icon_Skins" class="control-button-list-icon" />
             <span style="color:antiquewhite; font-size: 2vh; position: absolute; right:0; bottom:0">x5</span>
+            <img class="ads-icon" src="../../Sprites/Icons/Icon_Ads.png" />
           </button>
         </li>
         <li>
           <button class="control-btn undo-button">
             <img src="../../Sprites/Icons/Icon_Undo.png" alt="Icon_Skins" class="control-button-list-icon" />
             <span style="color:antiquewhite; font-size: 2vh; position: absolute; right:0; bottom:0">x5</span>
+            <img class="ads-icon" src="../../Sprites/Icons/Icon_Ads.png" />
           </button>
         </li>
         <li>
           <button class="control-btn mage-button">
             <img src="../../Sprites/Icons/Icon_Mage.png" alt="Icon_Skins" class="control-button-list-icon" />
             <span style="color:antiquewhite; font-size: 2vh; position: absolute; right:0; bottom:0">x5</span>
+            <img class="ads-icon" src="../../Sprites/Icons/Icon_Ads.png" />
           </button>
         </li>
         <li>
           <button class="control-btn time-button">
             <img src="../../Sprites/Icons/Icon_Time.png" alt="Icon_Skins" class="control-button-list-icon" />
             <span style="color:antiquewhite; font-size: 2vh; position: absolute; right:0; bottom:0">x5</span>
+            <img class="ads-icon" src="../../Sprites/Icons/Icon_Ads.png" />
           </button>
         </li>
       </ul>
@@ -1206,24 +1227,28 @@
           <button class="control-btn hint-button">
             <img src="../../Sprites/Icons/Icon_Hint.png" alt="Icon_Skins" class="control-button-list-icon" />
             <span style="color:antiquewhite; font-size: 2vh; position: absolute; right:0; bottom:0">x5</span>
+            <img class="ads-icon" src="../../Sprites/Icons/Icon_Ads.png" />
           </button>
         </li>
         <li>
           <button class="control-btn undo-button">
             <img src="../../Sprites/Icons/Icon_Undo.png" alt="Icon_Skins" class="control-button-list-icon" />
             <span style="color:antiquewhite; font-size: 2vh; position: absolute; right:0; bottom:0">x5</span>
+            <img class="ads-icon" src="../../Sprites/Icons/Icon_Ads.png" />
           </button>
         </li>
         <li>
           <button class="control-btn mage-button">
             <img src="../../Sprites/Icons/Icon_Mage.png" alt="Icon_Skins" class="control-button-list-icon" />
             <span style="color:antiquewhite; font-size: 2vh; position: absolute; right:0; bottom:0">x5</span>
+            <img class="ads-icon" src="../../Sprites/Icons/Icon_Ads.png" />
           </button>
         </li>
         <li>
           <button class="control-btn time-button">
             <img src="../../Sprites/Icons/Icon_Time.png" alt="Icon_Skins" class="control-button-list-icon" />
             <span style="color:antiquewhite; font-size: 2vh; position: absolute; right:0; bottom:0">x5</span>
+            <img class="ads-icon" src="../../Sprites/Icons/Icon_Ads.png" />
           </button>
         </li>
       </ul>
@@ -1240,6 +1265,8 @@
     let languageChangeEvent;
     let audioManager;
     let dynamicFontChanger;
+    let navigation;
+    let rewardsReceiver;
   </script>
   <script type="module">
     import { preload } from '../loader/loader.js';
@@ -1267,6 +1294,8 @@
       platform = await getPlatform();
       await initialize();
       user.loadData();
+      rewardsReceiver = await import('../scripts/rewardReceiverView.js');
+      rewardsReceiver.changeIconPathPrefix('../../');
       await import('../localization/translator.js').then(async (translatorItem) => {
         await import('./playground.js').then((playgroundItem) => {
           playgroundItem.setupLanguageSelector(translatorItem.initialLocale);

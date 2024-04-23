@@ -27,7 +27,7 @@ input = new DirectionalInput({ element: null });
 
 let isKeyboardWasDown = false;
 
-const navigation = new StackNavigation();
+navigation = new StackNavigation();
 
 const settingsScreen = new Screen({
   isPopup: true,
@@ -223,6 +223,7 @@ function trySelectLevel() {
       screenParameters.isSolitaire = true;
 
       screenParameters.onWinCallback = () => {
+        subscribeFinishScreenRewardsObtain();
         completeLevel();
       };
       screenParameters.onLoseCallback = () => {
@@ -268,6 +269,7 @@ function trySelectLevel() {
       startTimer(trialLevel.time);
 
       screenParameters.onWinCallback = () => {
+        subscribeFinishScreenRewardsObtain();
         completeLevel();
       };
       screenParameters.onLoseCallback = () => {
@@ -495,6 +497,23 @@ function setupBackgroundChange() {
 }
 
 function setupButtons() {
+  const hb = hintButtons;
+  const mb = mageButtons;
+  const tb = timeButtons;
+  const ub = undoButtons;
+
+  function updateCounter(element, itemType) {
+    const itemCount = user.getItemCount(itemType);
+
+    if (itemCount > 0) {
+      element.getElementsByTagName('span')[0].innerText = `x${itemCount}`
+      element.getElementsByClassName('ads-icon')[0].style.display = 'none';
+    } else {
+      element.getElementsByTagName('span')[0].innerText = '';
+      element.getElementsByClassName('ads-icon')[0].style.display = 'block';
+    }
+  }
+
   const hintCounters = [];
   for (let i = 0; i < hintButtons.length; i++) {
     const element = hintButtons[i];
@@ -505,13 +524,13 @@ function setupButtons() {
           if (useHintBooster(result.playableCardColumns, screenParameters.rules).isTrue) {
             user.removeItem(Items.BoosterHint, 1);
           }
+        } else {
+          showRewarded(null, null, () => user.addItem(Items.BoosterHint, 1, { isTrue: true, isMonetized: false }))
         }
       }
+      updateCounter(element, Items.BoosterHint);
     }
   }
-  hintCounters.forEach(element => {
-    element.innerText = `x${user.getItemCount(Items.BoosterHint)}`
-  });
 
   const mageCounters = [];
   for (let i = 0; i < mageButtons.length; i++) {
@@ -523,13 +542,14 @@ function setupButtons() {
           if (useMageBooster(result.mainCardColumn, result.playableCardColumns, screenParameters.rules).isTrue) {
             user.removeItem(Items.BoosterMage, 1);
           }
+        } else {
+          showRewarded(null, null, () => user.addItem(Items.BoosterMage, 1, { isTrue: true, isMonetized: false }))
         }
       }
+
+      updateCounter(element, Items.BoosterMage);
     }
   }
-  mageCounters.forEach(element => {
-    element.innerText = `x${user.getItemCount(Items.BoosterMage)}`
-  });
 
   const timeCounters = [];
   for (let i = 0; i < timeButtons.length; i++) {
@@ -541,13 +561,14 @@ function setupButtons() {
           timer += 60;
 
           user.removeItem(Items.BoosterTime, 1);
+        } else {
+          showRewarded(null, null, () => user.addItem(Items.BoosterTime, 1, { isTrue: true, isMonetized: false }))
         }
       }
+
+      updateCounter(element, Items.BoosterTime);
     }
   }
-  timeCounters.forEach(element => {
-    element.innerText = `x${user.getItemCount(Items.BoosterTime)}`
-  });
 
   const undoCounters = [];
   for (let i = 0; i < undoButtons.length; i++) {
@@ -559,34 +580,39 @@ function setupButtons() {
           if (useUndoBooster()) {
             user.removeItem(Items.BoosterUndo, 1);
           }
+        } else {
+          showRewarded(null, null, () => user.addItem(Items.BoosterUndo, 1, { isTrue: true, isMonetized: false }))
         }
       }
+
+      updateCounter(element, Items.BoosterUndo);
     }
   }
-  undoCounters.forEach(element => {
-    element.innerText = `x${user.getItemCount(Items.BoosterTime)}`
-  });
 
   user.itemListUpdateEvent.addListener(() => {
-    if (hintCounters.length > 0) {
-      hintCounters.forEach(element => {
-        element.innerText = `x${user.getItemCount(Items.BoosterHint)}`
-      });
+    for (let i = 0; i < hb.length; i++) {
+      const element = hb[i];
+      if (element != null) {
+        updateCounter(element, Items.BoosterHint);
+      }
     }
-    if (mageCounters.length > 0) {
-      mageCounters.forEach(element => {
-        element.innerText = `x${user.getItemCount(Items.BoosterMage)}`
-      });
+    for (let i = 0; i < mb.length; i++) {
+      const element = mb[i];
+      if (element != null) {
+        updateCounter(element, Items.BoosterMage);
+      }
     }
-    if (timeCounters.length > 0) {
-      timeCounters.forEach(element => {
-        element.innerText = `x${user.getItemCount(Items.BoosterTime)}`
-      });
+    for (let i = 0; i < tb.length; i++) {
+      const element = tb[i];
+      if (element != null) {
+        updateCounter(element, Items.BoosterTime);
+      }
     }
-    if (undoCounters.length > 0) {
-      undoCounters.forEach(element => {
-        element.innerText = `x${user.getItemCount(Items.BoosterTime)}`
-      });
+    for (let i = 0; i < ub.length; i++) {
+      const element = ub[i];
+      if (element != null) {
+        updateCounter(element, Items.BoosterUndo);
+      }
     }
   })
 
@@ -614,6 +640,19 @@ function setupButtons() {
       }, null);
     }
   }
+}
+
+function subscribeFinishScreenRewardsObtain() {
+  rewardsReceiver?.disable();
+  user.onItemsPublicReceive.addListener((data) => {
+    const { items } = data;
+    const parent = document.getElementById('win-screen-rewards');
+
+    for (let i = 0; i < items.length; i++) {
+      const element = items[i];
+      parent.appendChild(createRewardView(element));
+    }
+  });
 }
 
 function checkIfLevelWon(options) {
@@ -889,22 +928,12 @@ function setupSolitaireLevel() {
 function createRewardView(data) {
   const container = createElement('div', ['bounty'], { scale: 1, marginLeft: '1vh', marginRight: '1vh' });
   {
-    createImage(['bounty-icon'], null, container, getIconByItem(data.type));
+    createImage(['bounty-icon'], null, container, '../../' + getIconByItem(data.type));
     if (data.count > 1) createTextSpan(['bounty-title'], null, container, `x${data.count}`);
   }
 
   return container;
 }
-
-user.onItemsPublicReceive.addListener((data) => {
-  const { items } = data;
-  const parent = document.getElementById('win-screen-rewards');
-
-  for (let i = 0; i < items.length; i++) {
-    const element = items[i];
-    parent.appendChild(createRewardView(element));
-  }
-});
 
 updateStepText(0);
 setupBackgroundChange();
