@@ -147,6 +147,9 @@ main {
   box-sizing: border-box;
   position: relative;
   height: 5vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .categories-btn-title {
