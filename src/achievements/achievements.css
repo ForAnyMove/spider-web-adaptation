@@ -225,6 +225,7 @@ main {
   --target-font-size: 6vw;
   transform: translate(-50%);
   color: #FFF6C6;
+  font-family: Arial, Helvetica, sans-serif;
 }
 
 .achievements {
