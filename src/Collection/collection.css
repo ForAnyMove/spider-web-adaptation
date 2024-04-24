@@ -210,7 +210,7 @@ main {
   color: #fff6c6;
   font-size: 1.6vh;
   --target-font-size: 1.6vh;
-  font-weight: bold;
+
   text-align: center;
 }
 
@@ -328,7 +328,7 @@ main {
 }
 
 .start-level-btn-title {
-  font-weight: bold;
+
   color: #ab6531;
   padding: 1.6vh 0;
 }

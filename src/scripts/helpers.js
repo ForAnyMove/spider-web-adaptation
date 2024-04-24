@@ -384,8 +384,12 @@ function timeout(ms) {
     return new Promise(resolve => setTimeout(resolve, ms));
 }
 
-async function setDynamicContainerText(struct, recursive = true) {
+async function setDynamicContainerText(locale, struct, recursive = true) {
     // await timeout(400);
+    let customWidthMultiplier = 1;
+    if (locale == 'ru') {
+        customWidthMultiplier = 0.9;
+    }
 
     struct.maxFontSizes = [];
     struct.fontSizes = [];
@@ -400,15 +404,17 @@ async function setDynamicContainerText(struct, recursive = true) {
         height: struct.container.offsetHeight - containerPadding.height
     }
 
+    containerSize.width *= customWidthMultiplier;
+
     const textSize = { width: struct.elements[0].offsetWidth, height: 0 }
     let overalFontSize = 0;
 
-    let log = false;
+    // let log = false;
 
-    if (
-        struct.elements[0].lang.includes('trial_prefix_01') || struct.elements[0].lang.includes('undo')) {
-        log = true;
-    }
+    // if (
+    //     struct.elements[0].lang.includes('trial_prefix_01') || struct.elements[0].lang.includes('undo')) {
+    //     log = true;
+    // }
 
     for (let i = 0; i < struct.elements.length; i++) {
         const element = struct.elements[i];
@@ -421,7 +427,7 @@ async function setDynamicContainerText(struct, recursive = true) {
         const targetFontSize = parseFloat(maxFontSize) * (maxFontSize.toString().includes('vh') ? (window.innerHeight / 100) : (window.innerWidth / 100));
 
         if (maxFontSize == '') {
-            if (recursive) { setDynamicContainerText(struct, false) }
+            if (recursive) { setDynamicContainerText(locale, struct, false) }
             return;
         }
 
@@ -448,36 +454,36 @@ async function setDynamicContainerText(struct, recursive = true) {
 
         const fontSize = fs;
 
-        if (log) {
-            const logEl = document.getElementsByClassName('ignore-DFC')[0];
-            if (logEl) {
-                logEl.innerHTML += `<span>TW: ${textWidth} TH: ${textHeight} // CW: ${containerSize.width} CH: ${containerSize.height} -> ${element.innerText}</span>`
-            }
-        }
+        // if (log) {
+        //     const logEl = document.getElementsByClassName('ignore-DFC')[0];
+        //     if (logEl) {
+        //         logEl.innerHTML += `<span>TW: ${textWidth} TH: ${textHeight} // CW: ${containerSize.width} CH: ${containerSize.height} -> ${element.innerText}</span>`
+        //     }
+        // }
 
         if (textHeight > containerSize.height || textWidth > containerSize.width) {
             const newFontSize = fontSize * Math.min((containerSize.height / textHeight), 1) * Math.min((containerSize.width / textWidth), 1);
-            if (log) {
-                const logEl = document.getElementsByClassName('ignore-DFC')[0];
-                if (logEl) {
-                    logEl.innerHTML += `<span><> CRRENT FONT SIZE: ${element.style.fontSize} = ${parseFloat(element.style.fontSize) * (element.style.fontSize.toString().includes('vh') ? (window.innerHeight / 100) : (window.innerWidth / 100))}px</span>`
-                }
-            }
+            // if (log) {
+            //     const logEl = document.getElementsByClassName('ignore-DFC')[0];
+            //     if (logEl) {
+            //         logEl.innerHTML += `<span><> CRRENT FONT SIZE: ${element.style.fontSize} = ${parseFloat(element.style.fontSize) * (element.style.fontSize.toString().includes('vh') ? (window.innerHeight / 100) : (window.innerWidth / 100))}px</span>`
+            //     }
+            // }
             element.style.fontSize = newFontSize + 'px';
-            if (log) {
-                const logEl = document.getElementsByClassName('ignore-DFC')[0];
-                if (logEl) {
-                    logEl.innerHTML += `<span><> RECALCULATE: ${newFontSize}px</span>`
-                    logEl.innerHTML += `<span><> NEW FONT SIZE: ${element.style.fontSize}</span>`
-                }
-            }
+            // if (log) {
+            //     const logEl = document.getElementsByClassName('ignore-DFC')[0];
+            //     if (logEl) {
+            //         logEl.innerHTML += `<span><> RECALCULATE: ${newFontSize}px</span>`
+            //         logEl.innerHTML += `<span><> NEW FONT SIZE: ${element.style.fontSize}</span>`
+            //     }
+            // }
         } else {
-            if (log) {
-                const logEl = document.getElementsByClassName('ignore-DFC')[0];
-                if (logEl) {
-                    logEl.innerHTML += `<span><> DEFAULT FONT SIZE: ${element.style.fontSize} = ${parseFloat(element.style.fontSize) * (element.style.fontSize.toString().includes('vh') ? (window.innerHeight / 100) : (window.innerWidth / 100))}px</span>`
-                }
-            }
+            // if (log) {
+            //     const logEl = document.getElementsByClassName('ignore-DFC')[0];
+            //     if (logEl) {
+            //         logEl.innerHTML += `<span><> DEFAULT FONT SIZE: ${element.style.fontSize} = ${parseFloat(element.style.fontSize) * (element.style.fontSize.toString().includes('vh') ? (window.innerHeight / 100) : (window.innerWidth / 100))}px</span>`
+            //     }
+            // }
         }
         // else {
         //     needToRecursive = true;

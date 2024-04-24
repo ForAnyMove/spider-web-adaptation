@@ -25,10 +25,12 @@ async function showRewarded(openCallback, closeCallback, rewardCallback, errorCa
     SDK.adv.showRewardedVideo({
         callbacks: {
             onOpen: () => {
+                audioManager.pause();
                 openCallback?.();
             }, onRewarded: () => {
                 rewardCallback?.();
             }, onClose: () => {
+                audioManager.unpause();
                 closeCallback?.();
             }, onError: (e) => {
                 errorCallback?.();

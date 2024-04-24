@@ -1,7 +1,6 @@
 import { DelayedCall } from "./dotween/dotween.js";
 import { CanInteract, disableInteractions } from "./globalEvents.js";
 import { isSameSuitAtAllStuck, isSuitableRankStuck } from "./rules/gameRules.js";
-import { CardSide } from "./statics/enums.js";
 import { stepRecorder } from "./stepRecorder.js";
 
 function useHintBooster(playableColumns, gameRule) {
@@ -148,7 +147,9 @@ function useMageBooster(mainColumn, playableColumns, gameRule) {
     for (let i = 0; i < Math.min(2, suitablePairs.length); i++) {
         const pair = suitablePairs[i];
         finalCards.push(pair.card);
-        pair.column.translateCardsToColumn([pair.card], null, { affectInteraction: true, addCards: true, openOnFinish: true });
+        pair.column.translateCardsToColumn([pair.card], () => {
+            DelayedCall(0.1, () => { pair.column.checkIfColumnHasCollectedCardsSet(); });
+        }, { affectInteraction: true, addCards: true, openOnFinish: true });
     }
 
     stepRecorder.record(() => {

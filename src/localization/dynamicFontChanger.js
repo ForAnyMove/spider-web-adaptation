@@ -1,4 +1,5 @@
 import { getElements, setDynamicContainerText, setDynamicFontSize } from "../scripts/helpers.js";
+import { initialLocale } from "./translator.js";
 
 export default class DynamicFontChanger {
     constructor() {
@@ -74,7 +75,7 @@ export default class DynamicFontChanger {
     updateTextFont = () => {
         for (let i = 0; i < this.containers.length; i++) {
             const container = this.containers[i];
-            setDynamicContainerText(container, true);
+            setDynamicContainerText(initialLocale, container, true);
         }
     }
 }

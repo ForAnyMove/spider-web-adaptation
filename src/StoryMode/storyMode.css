@@ -117,7 +117,7 @@ header {
 
 .energy-text {
   color: #FFF6C6;
-  font-weight: bold;
+
   font-size: 1.5vw;
   --target-font-size: 1.5vw;
   padding-right: 1vw;
@@ -211,7 +211,7 @@ main::-webkit-scrollbar {
   width: 5vw;
   height: 5vw;
   color: #A65200;
-  font-weight: bold;
+
   display: flex;
   justify-content: center;
   align-items: center;
@@ -455,7 +455,7 @@ main::-webkit-scrollbar {
 
 .rules-container>span {
   color: #FFF6C6;
-  font-weight: bold;
+
   font-size: 1.4vw;
   --target-font-size: 1.4vw;
   height: 2vh;
@@ -484,7 +484,7 @@ main::-webkit-scrollbar {
 
 .rules-card>span {
   color: #FFF6C6;
-  font-weight: bold;
+
   font-size: 1.1vw;
   --target-font-size: 1.1vw;
   padding: 0.8vw;
@@ -504,7 +504,7 @@ main::-webkit-scrollbar {
 
 .level-info-header {
   color: #FFF6C6;
-  font-weight: bold;
+
   font-size: 1.4vw;
   --target-font-size: 1.4vw;
   padding-top: 1.5vw;
@@ -555,7 +555,7 @@ main::-webkit-scrollbar {
 .booster-title,
 .booster-counter {
   color: #FFF6C6;
-  font-weight: bold;
+
   font-size: 1vw;
   --target-font-size: 1vw;
   height: 2vh;
@@ -575,7 +575,7 @@ main::-webkit-scrollbar {
 
 .rewards-title {
   color: #FFF6C6;
-  font-weight: bold;
+
   font-size: 1.3vw;
   --target-font-size: 1.3vw;
   margin-bottom: 2.5vw;
@@ -622,12 +622,12 @@ main::-webkit-scrollbar {
 }
 
 .start-level-btn-title {
-  font-weight: bold;
+
   color: #ab6531;
 }
 
 .btn-info-value {
-  font-weight: bold;
+
   font-size: 1.6vw;
   --target-font-size: 1.6vw;
   color: #ab6531;

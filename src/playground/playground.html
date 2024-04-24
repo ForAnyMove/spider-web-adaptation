@@ -11,7 +11,7 @@
   <link rel="stylesheet" href="../../fonts.css">
   <title>Playground</title>
 
-  <!-- <script src="https://yandex.ru/games/sdk/v2"></script> -->
+  <script src="https://yandex.ru/games/sdk/v2"></script>
 </head>
 
 <body id="background">
@@ -1280,12 +1280,13 @@
     import { Action } from '../scripts/globalEvents.js';
     import { AudioManager } from '../scripts/audioManager.js'
 
+    languageChangeEvent = new Action();
+
     audioManager = new AudioManager(
       ['../../Sprites/Icons/Icon_Music_On.png', '../../Sprites/Icons/Icon_Music_Off.png'],
       ['../../Sprites/Icons/Icon_Sound_On.png', '../../Sprites/Icons/Icon_Sound_Off.png'],
     );
     user = new User();
-    languageChangeEvent = new Action();
 
     const images = document.querySelectorAll('img');
 

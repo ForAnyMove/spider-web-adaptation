@@ -27,7 +27,7 @@
     text-decoration: underline;
     font-size: 2.5vh;
     --target-font-size: 2.5vh;
-    font-weight: bold;
+
     text-align: center;
 }
 
@@ -76,7 +76,7 @@
 }
 
 .get-double-bounty-btn-title {
-    font-weight: bold;
+
     color: #ab6531;
     font-size: 2.1vh;
     --target-font-size: 2.1vh;
@@ -87,7 +87,7 @@
 }
 
 .get-double-bounty-value {
-    font-weight: bold;
+
     color: #ab6531;
     font-size: 2.1vh;
     --target-font-size: 2.1vh;

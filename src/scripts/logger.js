@@ -2,10 +2,10 @@ let logEnabled = true;
 
 let logModules = [
     {
-        sdk: {
-            player: false,
-            sdk: false
-        }
+        sdk: [
+            { player: false },
+            { sdk: false }
+        ]
     },
     { saveSystem: false },
     { achievements: false },

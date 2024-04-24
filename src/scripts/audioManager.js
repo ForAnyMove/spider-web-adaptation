@@ -56,6 +56,16 @@ class AudioManager {
         });
     }
 
+    pause = function () {
+        this.musicAudioElement.muted = true;
+        this.butonAudionElement.muted = true;
+    }
+
+    unpause = function () {
+        this.musicAudioElement.muted = !this.isMusicEnabled;
+        this.butonAudionElement.muted = !this.isSoundEnabled;
+    }
+
     addClickableToPull = function (clickable) {
         this.clickables.push(clickable);
         clickable.addEventListener('click', () => {

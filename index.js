@@ -102,27 +102,13 @@ const challengesScreen = new Screen({
 
     //   const fonts = [];
 
-    //   logger.innerHTML += `<span>-------FINAL RESULT-------</span>`
-    //   for (let i = 0; i < dynamicFontChanger.containers.length; i++) {
-    //     const element = dynamicFontChanger.containers[i];
-    //     if (isVisible(element.container) && element.elements[0].lang.includes('trial_prefix_01') || element.elements[0].lang.includes('undo')) {
-    //       logger.innerHTML += `<span>Container: w${element.container.offsetWidth}, h${element.container.offsetHeight}</span>`
-    //       for (let j = 0; j < element.elements.length; j++) {
-    //         const el = element.elements[j];
-    //         fonts.push(el);
-    //         logger.innerHTML += `<span>  - Text: w${el.offsetWidth}, h${el.offsetHeight}, fs: ${el.style.fontSize}, tf: ${window.getComputedStyle(el).getPropertyValue('--target-font-size')}, calc: ${(el.offsetWidth / element.container.offsetWidth) * (parseFloat(window.getComputedStyle(el).getPropertyValue('--target-font-size')) * (window.getComputedStyle(el).getPropertyValue('--target-font-size').toString().includes('vh') ? window.innerHeight / 100 : window.innerWidth))} -> ${el.innerText}</span>`
-    //       }
-    //     }
-    //   }
-
-    //   setTimeout(() => {
-    //     for (let i = 0; i < fonts.length; i++) {
-    //       const element = fonts[i];
-    //       element.style.fontSize = 7.015 + 'px';
-    //       logger.innerHTML += `<span>  - ${element.style.fontSize}</span>`
-    //     }
-    //   }, 1000);
+    //   logger.innerHTML = null;
+    //   logger.innerHTML += `<span>Window: w${window.innerWidth}</span>`
+    //   logger.innerHTML += `<span>One: w${challengesScreen.element.querySelector('.challenge-card').offsetWidth}</span>`
+    //   logger.innerHTML += `<span>All: w${challengesScreen.element.querySelector('.challenge-card').offsetWidth * 15}</span>`
+    //   logger.innerHTML += `<span>Container: w${challengesScreen.element.querySelector('.challenges').scrollWidth}</span>`
     // }
+    // log();
 
     setTimeout(() => {
       // dynamicFontChanger.update();
@@ -130,7 +116,6 @@ const challengesScreen = new Screen({
         setTimeout(() => {
           dynamicFontChanger.update();
           if (i == 1) {
-            log();
           }
         }, i * 500)
       }
