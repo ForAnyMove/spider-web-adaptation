@@ -1060,7 +1060,7 @@ button.selected {
 }
 
 .booster-counter {
-  transform: translateY(-2vh);
+  transform: translateY(-0.5vh);
   height: 2vh;
   color: #fff6c6;
   font-weight: 700;
@@ -1068,6 +1068,10 @@ button.selected {
   --target-font-size: 1.3vw;
   margin-top: 1vw;
   text-align: center;
+}
+
+.special-booster>.booster-counter {
+  transform: translateY(-1.7vh);
 }
 
 .regular-boosters-container>.booster>.booster-type>.booster-counter {

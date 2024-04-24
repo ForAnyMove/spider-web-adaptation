@@ -57,72 +57,72 @@ const challengesScreen = new Screen({
   openButtons: [mainScreen.element.querySelector('#challenges-switch-btn')],
   closeButtons: [challengesRoot.getElementsByClassName('main-screen-switch-btn')[0]],
   onFocus: () => {
-    const isVisible = (element) => {
-      function isElementHidden(element) {
-        var computedStyle = window.getComputedStyle(element);
+    // const isVisible = (element) => {
+    //   function isElementHidden(element) {
+    //     var computedStyle = window.getComputedStyle(element);
 
-        if (computedStyle.display === 'none') {
-          return true;
-        }
+    //     if (computedStyle.display === 'none') {
+    //       return true;
+    //     }
 
-        var parent = element.parentElement;
-        while (parent) {
-          if (window.getComputedStyle(parent).display === 'none') {
-            return true;
-          }
-          parent = parent.parentElement;
-        }
-        return false;
-      }
-      const computedStyle = window.getComputedStyle(element);
-      return computedStyle.visibility !== 'hidden' && !isElementHidden(element) && computedStyle.pointerEvents != 'none';
-    }
+    //     var parent = element.parentElement;
+    //     while (parent) {
+    //       if (window.getComputedStyle(parent).display === 'none') {
+    //         return true;
+    //       }
+    //       parent = parent.parentElement;
+    //     }
+    //     return false;
+    //   }
+    //   const computedStyle = window.getComputedStyle(element);
+    //   return computedStyle.visibility !== 'hidden' && !isElementHidden(element) && computedStyle.pointerEvents != 'none';
+    // }
 
-    const logger = createElement('div', ['ignore-DFC'], {
-      position: 'absolute',
-      width: '100%',
-      height: '100%',
-      paddingRight: '10%',
-      paddingTop: '1%',
-      zIndex: 5000,
-      backgroundColor: '#00000099',
-      color: '#fff',
-      display: 'flex',
-      flexDirection: 'column',
-      alignItems: 'end',
-      fontSize: '0.8vh',
-      pointerEvents: 'none'
-    }, document.body);
+    // const logger = createElement('div', ['ignore-DFC'], {
+    //   position: 'absolute',
+    //   width: '100%',
+    //   height: '100%',
+    //   paddingRight: '10%',
+    //   paddingTop: '1%',
+    //   zIndex: 5000,
+    //   backgroundColor: '#00000099',
+    //   color: '#fff',
+    //   display: 'flex',
+    //   flexDirection: 'column',
+    //   alignItems: 'end',
+    //   fontSize: '0.8vh',
+    //   pointerEvents: 'none'
+    // }, document.body);
 
 
-    input.updateQueryCustom(challengesScreen.screenParameters.selectableElements,
-      challengesScreen.screenParameters.defaultSelectedElement);
+    // input.updateQueryCustom(challengesScreen.screenParameters.selectableElements,
+    //   challengesScreen.screenParameters.defaultSelectedElement);
 
-    const log = function () {
+    // const log = function () {
 
-      const fonts = [];
+    //   const fonts = [];
 
-      logger.innerHTML += `<span>-------FINAL RESULT-------</span>`
-      for (let i = 0; i < dynamicFontChanger.containers.length; i++) {
-        const element = dynamicFontChanger.containers[i];
-        if (isVisible(element.container) && element.elements[0].lang.includes('trial_prefix_01') || element.elements[0].lang.includes('undo')) {
-          logger.innerHTML += `<span>Container: w${element.container.offsetWidth}, h${element.container.offsetHeight}</span>`
-          for (let j = 0; j < element.elements.length; j++) {
-            const el = element.elements[j];
-            fonts.push(el);
-            logger.innerHTML += `<span>  - Text: w${el.offsetWidth}, h${el.offsetHeight}, fs: ${el.style.fontSize}, tf: ${window.getComputedStyle(el).getPropertyValue('--target-font-size')}, calc: ${(el.offsetWidth / element.container.offsetWidth) * (parseFloat(window.getComputedStyle(el).getPropertyValue('--target-font-size')) * (window.getComputedStyle(el).getPropertyValue('--target-font-size').toString().includes('vh') ? window.innerHeight / 100 : window.innerWidth))} -> ${el.innerText}</span>`
-          }
-        }
-      }
+    //   logger.innerHTML += `<span>-------FINAL RESULT-------</span>`
+    //   for (let i = 0; i < dynamicFontChanger.containers.length; i++) {
+    //     const element = dynamicFontChanger.containers[i];
+    //     if (isVisible(element.container) && element.elements[0].lang.includes('trial_prefix_01') || element.elements[0].lang.includes('undo')) {
+    //       logger.innerHTML += `<span>Container: w${element.container.offsetWidth}, h${element.container.offsetHeight}</span>`
+    //       for (let j = 0; j < element.elements.length; j++) {
+    //         const el = element.elements[j];
+    //         fonts.push(el);
+    //         logger.innerHTML += `<span>  - Text: w${el.offsetWidth}, h${el.offsetHeight}, fs: ${el.style.fontSize}, tf: ${window.getComputedStyle(el).getPropertyValue('--target-font-size')}, calc: ${(el.offsetWidth / element.container.offsetWidth) * (parseFloat(window.getComputedStyle(el).getPropertyValue('--target-font-size')) * (window.getComputedStyle(el).getPropertyValue('--target-font-size').toString().includes('vh') ? window.innerHeight / 100 : window.innerWidth))} -> ${el.innerText}</span>`
+    //       }
+    //     }
+    //   }
 
-      setTimeout(() => {
-        for (let i = 0; i < fonts.length; i++) {
-          const element = fonts[i];
-          element.style.fontSize = 7.015 + 'px';
-          logger.innerHTML += `<span>  - ${element.style.fontSize}</span>`
-        }
-      }, 1000);
-    }
+    //   setTimeout(() => {
+    //     for (let i = 0; i < fonts.length; i++) {
+    //       const element = fonts[i];
+    //       element.style.fontSize = 7.015 + 'px';
+    //       logger.innerHTML += `<span>  - ${element.style.fontSize}</span>`
+    //     }
+    //   }, 1000);
+    // }
 
     setTimeout(() => {
       // dynamicFontChanger.update();

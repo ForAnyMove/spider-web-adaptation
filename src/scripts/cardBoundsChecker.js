@@ -1,6 +1,6 @@
 
-const closedCardOffset = 0.5;
-const openedCardOffset = 1.5;
+// const closedCardOffset = 0.5;
+// const openedCardOffset = 1.5;
 
 class BoundsChecker {
     registerColumns = function (columns) {
@@ -14,26 +14,36 @@ class BoundsChecker {
         const suitableColumns = [];
         const vwOffset = window.innerWidth / 100;
 
-        function getColumnHeight(column) {
-            let height = 0;
+        const rootStyles = getComputedStyle(document.documentElement);
+        const openedCardOffset = parseFloat(rootStyles.getPropertyValue('--opened-card-offset')) * vwOffset;
+        const closedCardOffset = parseFloat(rootStyles.getPropertyValue('--closed-card-offset')) * vwOffset;
+        const height = parseFloat(rootStyles.getPropertyValue('--card-height')) * vwOffset;
+        cardSize.y = height;
+
+        const getColumnHeight = (column) => {
+            let h = height;
+
             for (let i = 0; i < column.cards.length; i++) {
-                const card = column.cards[i];
-                if (card.domElement.classList.contains('opened')) {
-                    height += vwOffset * openedCardOffset;
-                } else {
-                    height += vwOffset * closedCardOffset;
+                const element = column.cards[i];
+                if (element.domElement.classList.contains('opened')) {
+                    const offsetV = height + openedCardOffset;
+
+                    h += offsetV;
+                } else if (!element.domElement.classList.contains('locked')) {
+                    const offsetV = height + closedCardOffset;
+
+                    h += offsetV;
                 }
             }
 
-            height -= vwOffset * openedCardOffset;
-            return height;
+            return h;
         }
 
         for (let i = 0; i < this.columns.length; i++) {
             const column = this.columns[i];
 
             const columnPosition = { x: column.domElement.getBoundingClientRect().left, y: column.domElement.getBoundingClientRect().top }
-            const columnSize = { x: cardSize.x, y: cardSize.y + getColumnHeight(column) }
+            const columnSize = { x: cardSize.x, y: getColumnHeight(column) }
 
             if ((cardPosition.x < columnPosition.x + columnSize.x) && (cardPosition.x + cardSize.x > columnPosition.x) &&
                 (cardPosition.y < columnPosition.y + columnSize.y) && (cardPosition.y + cardSize.y > columnPosition.y)) {
