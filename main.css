@@ -1378,6 +1378,15 @@ button.selected {
     --target-font-size: 2.1vw;
     font-weight: 800;
   }
+  .regular-boosters-container>
+  .booster>
+  .booster-type>
+  .start-level-btn>
+  .start-level-btn-title {
+    font-size: 1.9vw;
+    --target-font-size: 1.9vw;
+    font-weight: 800;
+  }
 
   .btn-info-icon {
     width: 4vw;
