@@ -623,14 +623,14 @@ main::-webkit-scrollbar {
 
 .start-level-btn-title {
   font-weight: bold;
-  color: #0000005c;
+  color: #ab6531;
 }
 
 .btn-info-value {
   font-weight: bold;
   font-size: 1.6vw;
   --target-font-size: 1.6vw;
-  color: #0000005c;
+  color: #ab6531;
 }
 
 #ads-btn {
