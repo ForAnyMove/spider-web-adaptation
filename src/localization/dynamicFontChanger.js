@@ -13,6 +13,27 @@ export default class DynamicFontChanger {
     }
 
     updateElementsPull = function () {
+        const isVisible = (element) => {
+            function isElementHidden(element) {
+                var computedStyle = window.getComputedStyle(element);
+
+                if (computedStyle.display === 'none') {
+                    return true;
+                }
+
+                var parent = element.parentElement;
+                while (parent) {
+                    if (window.getComputedStyle(parent).display === 'none') {
+                        return true;
+                    }
+                    parent = parent.parentElement;
+                }
+                return false;
+            }
+            const computedStyle = window.getComputedStyle(element);
+            return computedStyle.visibility !== 'hidden' && !isElementHidden(element) && computedStyle.pointerEvents != 'none';
+        }
+
         this.containers = [];
         this.texts = getElements(document, { tags: ['span', 'p', 'h1', 'h2', 'h3'] });
 
@@ -29,7 +50,9 @@ export default class DynamicFontChanger {
 
         for (let i = 0; i < this.texts.length; i++) {
             const text = this.texts[i];
+            // if (!isVisible(text)) continue;
             const parent = text.parentElement;
+            if (parent.classList.contains('ignore-DFC')) continue;
 
             const sameContainer = getContainer(parent);
             if (sameContainer != null) {
@@ -51,7 +74,7 @@ export default class DynamicFontChanger {
     updateTextFont = () => {
         for (let i = 0; i < this.containers.length; i++) {
             const container = this.containers[i];
-            setDynamicContainerText(container);
+            setDynamicContainerText(container, true);
         }
     }
 }

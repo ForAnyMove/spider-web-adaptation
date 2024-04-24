@@ -29,12 +29,14 @@ let isKeyboardWasDown = false;
 
 navigation = new StackNavigation();
 
+const settingsRoot = document.getElementById('settings');
 const settingsScreen = new Screen({
   isPopup: true,
-  element: document.getElementById('settings'),
+  element: settingsRoot,
   openButtons: getElements(document, { classNames: ['settings-button'] }),
-  closeButtons: [document.getElementById('close-popup-settings')],
+  closeButtons: [settingsRoot.querySelector('#close-popup-settings'), settingsRoot.querySelector('#popup-fade-close')],
   onFocus: () => {
+    dynamicFontChanger.update();
     input.updateQueryCustom(getInputElements(settingsScreen.element, { tags: ['button'] }).concat({ element: settingsScreen.closeButtons[0] }), { element: settingsScreen.closeButtons[0] });
   }, onUnfocus: () => {
     const elements = getInputElements(menuScreen.element, { tags: ['button'] });
@@ -42,22 +44,26 @@ const settingsScreen = new Screen({
   }
 });
 
+const languageRoot = document.getElementById('languages');
 const languageScreen = new Screen({
   isPopup: true,
-  element: document.getElementById('languages'),
+  element: languageRoot,
   openButtons: [document.getElementById('lang-btn')],
-  closeButtons: [document.getElementById('close-popup-languages')],
+  closeButtons: [languageRoot.querySelector('#close-popup-languages'), languageRoot.querySelector('#popup-fade-close')],
   onFocus: () => {
+    dynamicFontChanger.update();
     input.updateQueryCustom(getInputElements(languageScreen.element, { classNames: ['language'] }).concat({ element: languageScreen.closeButtons[0] }), { element: languageScreen.closeButtons[0] });
   }, onUnfocus: () => {
     input.updateQueryCustom(getInputElements(settingsScreen.element, { tags: ['button'] }).concat({ element: settingsScreen.closeButtons[0] }), { element: settingsScreen.closeButtons[0] });
   }
 });
 
+const menuRoot = document.getElementById('menu');
 const menuScreen = new Screen({
   isPopup: true,
-  element: document.getElementById('menu'),
+  element: menuRoot,
   onFocus: () => {
+    dynamicFontChanger.update();
     const elements = getInputElements(menuScreen.element, { tags: ['button'] });
     input.updateQueryCustom(elements, elements[0]);
   }, onUnfocus: () => {
@@ -72,6 +78,7 @@ const exitScreen = new Screen({
   element: document.getElementById('exid-game'),
   closeButtons: [document.getElementById('exid-game').getElementsByClassName('exid-no')[0]],
   onFocus: () => {
+    dynamicFontChanger.update();
     const elements = getInputElements(exitScreen.element, { tags: ['button'] });
     input.updateQueryCustom(elements, elements[1]);
 
@@ -1026,6 +1033,7 @@ function invokeTutorial() {
     return;
   }
 
+
   const tutorialScreens = Array.from(document.getElementsByClassName('tutorial-screen'));
   const finger = tutorialTab.querySelector('#finger');
 
@@ -1480,6 +1488,7 @@ function invokeTutorial() {
   const tutorials = [tutorial_01, tutorial_02, tutorial_03, tutorial_04, tutorial_05, tutorial_06, tutorial_07, tutorial_08];
 
   const nextTutorialScreenBtn = document.getElementById('next-tutorial-screen-btn')
+  input.updateQueryCustom([{ element: nextTutorialScreenBtn }], { element: nextTutorialScreenBtn });
 
   let tutorialStep = 0;
 

@@ -11,7 +11,7 @@ class ScreenParameters {
 }
 
 class Screen {
-    constructor(options = { style, isPopup, element, openButtons, closeButtons, onFocus, onUnfocus, screenParameters }) {
+    constructor(options = { style, isPopup, isMain, element, openButtons, closeButtons, onFocus, onUnfocus, screenParameters }) {
         this.style = options.style;
         this.screenParameters = options.screenParameters;
         this.element = options.element;
@@ -21,6 +21,7 @@ class Screen {
         this.onFocus = options.onFocus;
         this.onUnfocus = options.onUnfocus;
 
+        this.isMain = options.isMain;
         this.isPopup = options.isPopup;
         this.isOpened = false;
         this.element.style.display = 'none';
@@ -172,7 +173,11 @@ class StackNavigation extends Navigation {
     pop = function () {
         if (this.openedScreens.length <= 0) return;
 
-        const lastScreen = this.openedScreens.pop();
+        const lastScreen = this.openedScreens[this.openedScreens.length - 1];
+        if (lastScreen.isMain) return;
+
+        this.openedScreens.pop();
+
         this.close(lastScreen);
     }
 }

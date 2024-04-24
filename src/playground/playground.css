@@ -636,6 +636,13 @@ header {
   transform: translate(-50%);
 }
 
+#popup-fade-close {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-color: #00000044;
+}
+
 .next-tutorial-screen-btn-title {
   font-weight: bold;
   color: #00000049;
@@ -1199,9 +1206,11 @@ footer {
     width: 9.6vw;
     height: 12.8vw;
   }
-  .active-cards-zone{
+
+  .active-cards-zone {
     column-gap: 0;
   }
+
   .settings>.popup-content {
     width: 37vh;
   }
@@ -1275,7 +1284,7 @@ footer {
   .card-locked-showed {
     width: 8.8vw;
     height: 11.75vw;
-    
+
     /* width: 9.6vw;
     height: 12.8vw; */
     user-select: none;

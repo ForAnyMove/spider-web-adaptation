@@ -385,6 +385,8 @@ function timeout(ms) {
 }
 
 async function setDynamicContainerText(struct, recursive = true) {
+    // await timeout(400);
+
     struct.maxFontSizes = [];
     struct.fontSizes = [];
 
@@ -401,6 +403,13 @@ async function setDynamicContainerText(struct, recursive = true) {
     const textSize = { width: struct.elements[0].offsetWidth, height: 0 }
     let overalFontSize = 0;
 
+    let log = false;
+
+    if (
+        struct.elements[0].lang.includes('trial_prefix_01') || struct.elements[0].lang.includes('undo')) {
+        log = true;
+    }
+
     for (let i = 0; i < struct.elements.length; i++) {
         const element = struct.elements[i];
 
@@ -411,7 +420,12 @@ async function setDynamicContainerText(struct, recursive = true) {
         const maxFontSize = style.getPropertyValue('--target-font-size');
         const targetFontSize = parseFloat(maxFontSize) * (maxFontSize.toString().includes('vh') ? (window.innerHeight / 100) : (window.innerWidth / 100));
 
-        element.style.fontSize = targetFontSize + 'px';
+        if (maxFontSize == '') {
+            if (recursive) { setDynamicContainerText(struct, false) }
+            return;
+        }
+
+        element.style.fontSize = maxFontSize;
 
         struct.fontSizes.push(targetFontSize);
 
@@ -421,11 +435,6 @@ async function setDynamicContainerText(struct, recursive = true) {
     }
 
     let needToRecursive = false;
-    let log = false;
-
-    // if (struct.elements[0].lang == 'use') {
-    //     log = true;
-    // }
 
     for (let i = 0; i < struct.elements.length; i++) {
         const element = struct.elements[i];
@@ -439,23 +448,67 @@ async function setDynamicContainerText(struct, recursive = true) {
 
         const fontSize = fs;
 
-        // if (log) {
-        //     console.log(element);
-        //     console.log(`TW: ${textWidth} TH: ${textHeight} // CW: ${containerSize.width} CH: ${containerSize.height}`);
-        // }
+        if (log) {
+            const logEl = document.getElementsByClassName('ignore-DFC')[0];
+            if (logEl) {
+                logEl.innerHTML += `<span>TW: ${textWidth} TH: ${textHeight} // CW: ${containerSize.width} CH: ${containerSize.height} -> ${element.innerText}</span>`
+            }
+        }
 
         if (textHeight > containerSize.height || textWidth > containerSize.width) {
             const newFontSize = fontSize * Math.min((containerSize.height / textHeight), 1) * Math.min((containerSize.width / textWidth), 1);
+            if (log) {
+                const logEl = document.getElementsByClassName('ignore-DFC')[0];
+                if (logEl) {
+                    logEl.innerHTML += `<span><> CRRENT FONT SIZE: ${element.style.fontSize} = ${parseFloat(element.style.fontSize) * (element.style.fontSize.toString().includes('vh') ? (window.innerHeight / 100) : (window.innerWidth / 100))}px</span>`
+                }
+            }
             element.style.fontSize = newFontSize + 'px';
+            if (log) {
+                const logEl = document.getElementsByClassName('ignore-DFC')[0];
+                if (logEl) {
+                    logEl.innerHTML += `<span><> RECALCULATE: ${newFontSize}px</span>`
+                    logEl.innerHTML += `<span><> NEW FONT SIZE: ${element.style.fontSize}</span>`
+                }
+            }
         } else {
-            needToRecursive = true;
+            if (log) {
+                const logEl = document.getElementsByClassName('ignore-DFC')[0];
+                if (logEl) {
+                    logEl.innerHTML += `<span><> DEFAULT FONT SIZE: ${element.style.fontSize} = ${parseFloat(element.style.fontSize) * (element.style.fontSize.toString().includes('vh') ? (window.innerHeight / 100) : (window.innerWidth / 100))}px</span>`
+                }
+            }
+        }
+        // else {
+        //     needToRecursive = true;
 
-            element.style.fontSize = struct.maxFontSizes[i];
-        };
+        //     element.style.fontSize = struct.maxFontSizes[i];
+        //     if (log) {
+        //         const logEl = document.getElementsByClassName('ignore-DFC')[0];
+        //         if (logEl) {
+        //             logEl.innerHTML += `<span><> DEFAULT FONT SIZE: ${struct.maxFontSizes[i]}</span>`
+        //         }
+
+        //         console.log(struct.maxFontSizes[i]);
+        //     }
+        // };
     }
 
     if (needToRecursive && recursive) {
+        if (log) {
+            const logEl = document.getElementsByClassName('ignore-DFC')[0];
+            if (logEl) {
+                logEl.innerHTML += `<span><RECURS></span>`
+            }
+        }
         setDynamicContainerText(struct, false);
+    }
+
+    if (log) {
+        const logEl = document.getElementsByClassName('ignore-DFC')[0];
+        if (logEl) {
+            logEl.innerHTML += `<span>-</span>`
+        }
     }
 
 }

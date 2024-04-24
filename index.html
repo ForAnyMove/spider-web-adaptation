@@ -76,6 +76,7 @@
       <img src="./Sprites/Logos/Logo_RU.png" alt="Logo" class="logo-icon" lang="[img]logo_img" />
     </section>
     <div class="popup daily-bonuses" id="daily-bonuses">
+      <div id="popup-fade-close"></div>
       <div class="popup-content">
         <div class="popup-header">
           <h3 lang="daily_bonus">Ежедневные бонусы</h3>
@@ -137,6 +138,7 @@
       </div>
     </div>
     <div class="popup regular-bonuses" id="regular-bonuses">
+      <div id="popup-fade-close"></div>
       <div class="popup-content">
         <div class="web-mask"></div>
         <div class="popup-header">
@@ -206,6 +208,7 @@
       </div>
     </div>
     <div class="popup settings" id="settings">
+      <div id="popup-fade-close"></div>
       <div class="popup-content">
         <div class="popup-header">
           <h3 lang="setttings">Настройки</h3>
@@ -246,6 +249,7 @@
       </div>
     </div>
     <div class="popup languages" id="languages">
+      <div id="popup-fade-close"></div>
       <div class="popup-content">
         <div class="popup-header">
           <h3 lang="lang">Язык</h3>
@@ -330,14 +334,29 @@
     <div class="popup exid-game" id="exid-game">
       <div class="popup-content">
         <div class="popup-header">
-          <h3 class="exid-tab-title">Вы уверены, что хотите выйти из игры?</h3>
+          <h3 class="exid-tab-title" lang="exit_question">Вы уверены, что хотите выйти из игры?</h3>
         </div>
         <div class="exid-btns-container">
           <button class="start-level-btn exid-yes" id="play-btn">
-            <span class="start-level-btn-title">Да</span>
+            <span class="start-level-btn-title" lang="yes">Да</span>
           </button>
           <button class="start-level-btn exid-no" id="play-btn">
-            <span class="start-level-btn-title">Нет</span>
+            <span class="start-level-btn-title" lang="no">Нет</span>
+          </button>
+        </div>
+      </div>
+    </div>
+    <div class="popup exid-game" id="tutorial-offer">
+      <div class="popup-content">
+        <div class="popup-header">
+          <h3 class="exid-tab-title" lang="tutorial_offer">Вы хотите пройти обучение?</h3>
+        </div>
+        <div class="exid-btns-container">
+          <button class="start-level-btn exid-yes" id="play-btn">
+            <span class="start-level-btn-title" lang="yes">Да</span>
+          </button>
+          <button class="start-level-btn exid-no" id="play-btn">
+            <span class="start-level-btn-title" lang="no">Нет</span>
           </button>
         </div>
       </div>

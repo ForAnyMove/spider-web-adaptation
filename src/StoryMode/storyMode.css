@@ -210,9 +210,15 @@ main::-webkit-scrollbar {
 .level-btn {
   width: 5vw;
   height: 5vw;
-  padding: 1.3vw;
   color: #A65200;
   font-weight: bold;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  padding-bottom: 0.3vw;
+  padding-right: 0.18vw;
+
   font-size: 2vw;
   --target-font-size: 2vw;
 }
@@ -557,6 +563,7 @@ main::-webkit-scrollbar {
   display: flex;
   align-items: center;
 }
+
 .booster-title {
   margin-top: 0.5vw;
   text-wrap: nowrap;
@@ -703,7 +710,7 @@ main::-webkit-scrollbar {
     margin-right: 5vw;
     border-radius: 1vh;
   }
-  
+
 
   .popup-header {
     height: 2vh;
@@ -743,12 +750,13 @@ main::-webkit-scrollbar {
     position: fixed;
   }
 }
+
 @media (min-aspect-ratio: 11/6) {
   .popup-content {
     scale: 0.7;
     transform: translateX(25%);
   }
-  
+
   .header-navigation-btn {
     scale: 0.6;
   }

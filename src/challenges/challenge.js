@@ -193,12 +193,11 @@ function setupEnergyView() {
     }
 }
 
-
 createLevelsList();
 setupEnergyView();
 
 const xPos = viewWidth - window.innerWidth / 2;
-parent.scrollTo(xPos, 0);
+// parent.scrollTo(xPos, 0);
 
 languageChangeEvent.invoke(initialLocale);
 

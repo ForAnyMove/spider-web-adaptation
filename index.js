@@ -10,8 +10,9 @@ import('./src/scripts/rewardReceiverView.js');
 
 import DirectionalInput from './src/scripts/directionInput.js';
 import DynamicFontChanger from './src/localization/dynamicFontChanger.js';
-import { getInputElements } from './src/scripts/helpers.js';
+import { createElement, getInputElements } from './src/scripts/helpers.js';
 import { BackActionHandler, Screen, ScreenParameters } from './src/scripts/navigation/navigation.js';
+import { load, save } from './src/scripts/save_system/SaveSystem.js';
 
 input ??= new DirectionalInput();
 
@@ -20,6 +21,7 @@ screenParameters.defaultSelectedElement = { element: document.getElementsByClass
 screenParameters.selectableElements = getInputElements(document.getElementById('main-screen'), { tags: ['button'] })
 
 const mainScreen = new Screen({
+  isMain: true,
   style: 'main.css',
   element: document.getElementById('main-screen'),
   onFocus: () => {
@@ -55,12 +57,83 @@ const challengesScreen = new Screen({
   openButtons: [mainScreen.element.querySelector('#challenges-switch-btn')],
   closeButtons: [challengesRoot.getElementsByClassName('main-screen-switch-btn')[0]],
   onFocus: () => {
-    dynamicFontChanger.update();
+    const isVisible = (element) => {
+      function isElementHidden(element) {
+        var computedStyle = window.getComputedStyle(element);
+
+        if (computedStyle.display === 'none') {
+          return true;
+        }
+
+        var parent = element.parentElement;
+        while (parent) {
+          if (window.getComputedStyle(parent).display === 'none') {
+            return true;
+          }
+          parent = parent.parentElement;
+        }
+        return false;
+      }
+      const computedStyle = window.getComputedStyle(element);
+      return computedStyle.visibility !== 'hidden' && !isElementHidden(element) && computedStyle.pointerEvents != 'none';
+    }
+
+    const logger = createElement('div', ['ignore-DFC'], {
+      position: 'absolute',
+      width: '100%',
+      height: '100%',
+      paddingRight: '10%',
+      paddingTop: '1%',
+      zIndex: 5000,
+      backgroundColor: '#00000099',
+      color: '#fff',
+      display: 'flex',
+      flexDirection: 'column',
+      alignItems: 'end',
+      fontSize: '0.8vh',
+      pointerEvents: 'none'
+    }, document.body);
+
+
     input.updateQueryCustom(challengesScreen.screenParameters.selectableElements,
       challengesScreen.screenParameters.defaultSelectedElement);
 
+    const log = function () {
+
+      const fonts = [];
+
+      logger.innerHTML += `<span>-------FINAL RESULT-------</span>`
+      for (let i = 0; i < dynamicFontChanger.containers.length; i++) {
+        const element = dynamicFontChanger.containers[i];
+        if (isVisible(element.container) && element.elements[0].lang.includes('trial_prefix_01') || element.elements[0].lang.includes('undo')) {
+          logger.innerHTML += `<span>Container: w${element.container.offsetWidth}, h${element.container.offsetHeight}</span>`
+          for (let j = 0; j < element.elements.length; j++) {
+            const el = element.elements[j];
+            fonts.push(el);
+            logger.innerHTML += `<span>  - Text: w${el.offsetWidth}, h${el.offsetHeight}, fs: ${el.style.fontSize}, tf: ${window.getComputedStyle(el).getPropertyValue('--target-font-size')}, calc: ${(el.offsetWidth / element.container.offsetWidth) * (parseFloat(window.getComputedStyle(el).getPropertyValue('--target-font-size')) * (window.getComputedStyle(el).getPropertyValue('--target-font-size').toString().includes('vh') ? window.innerHeight / 100 : window.innerWidth))} -> ${el.innerText}</span>`
+          }
+        }
+      }
+
+      setTimeout(() => {
+        for (let i = 0; i < fonts.length; i++) {
+          const element = fonts[i];
+          element.style.fontSize = 7.015 + 'px';
+          logger.innerHTML += `<span>  - ${element.style.fontSize}</span>`
+        }
+      }, 1000);
+    }
+
     setTimeout(() => {
-      dynamicFontChanger.updateTextFont();
+      // dynamicFontChanger.update();
+      for (let i = 0; i < 2; i++) {
+        setTimeout(() => {
+          dynamicFontChanger.update();
+          if (i == 1) {
+            log();
+          }
+        }, i * 500)
+      }
     }, 100);
   },
   onUnfocus: () => {
@@ -109,11 +182,12 @@ const achievementsScreen = new Screen({
   }, screenParameters: achievements.screenParameters
 })
 
+const dailyRewardsRoot = document.getElementById('daily-bonuses');
 const dailyRewardsScreen = new Screen({
   isPopup: true,
-  element: document.getElementById('daily-bonuses'),
+  element: dailyRewardsRoot,
   openButtons: [document.getElementById('daily-btn')],
-  closeButtons: [document.getElementById('close-popup-daily')],
+  closeButtons: [dailyRewardsRoot.querySelector('#close-popup-daily'), dailyRewardsRoot.querySelector('#popup-fade-close')],
   onFocus: () => {
     dynamicFontChanger.update();
     input.updateQueryCustom(getInputElements(dailyRewardsScreen.element, { classNames: ['booster', 'close-popup', 'special-booster'], tags: ['button'] }), { element: dailyRewardsScreen.closeButtons[0] });
@@ -121,11 +195,12 @@ const dailyRewardsScreen = new Screen({
   onUnfocus: () => { input.updateQuery(); input.select({ element: dailyRewardsScreen.openButtons[0] }); }
 });
 
+const bonusesRoot = document.getElementById('regular-bonuses');
 const bonusesScreen = new Screen({
   isPopup: true,
-  element: document.getElementById('regular-bonuses'),
+  element: bonusesRoot,
   openButtons: [document.getElementById('regular-btn')],
-  closeButtons: [document.getElementById('close-popup-regular')],
+  closeButtons: [bonusesRoot.querySelector('#close-popup-regular'), bonusesRoot.querySelector('#popup-fade-close')],
   onFocus: () => {
     dynamicFontChanger.update();
     input.updateQueryCustom(getInputElements(bonusesScreen.element, { classNames: ['close-popup'], tags: ['button'] }), { element: bonusesScreen.closeButtons[0] });
@@ -136,11 +211,12 @@ const bonusesScreen = new Screen({
   }
 });
 
+const settingsRoot = document.getElementById('settings');
 const settingsScreen = new Screen({
   isPopup: true,
-  element: document.getElementById('settings'),
+  element: settingsRoot,
   openButtons: [document.getElementById('settings-btn')],
-  closeButtons: [document.getElementById('close-popup-settings')],
+  closeButtons: [settingsRoot.querySelector('#close-popup-settings'), settingsRoot.querySelector('#popup-fade-close')],
   onFocus: () => {
     dynamicFontChanger.update();
     input.updateQueryCustom(getInputElements(settingsScreen.element, { classNames: ['close-popup'], tags: ['button'] }), { element: settingsScreen.closeButtons[0] })
@@ -151,11 +227,12 @@ const settingsScreen = new Screen({
   }
 });
 
+const languageRoot = document.getElementById('languages');
 const languageScreen = new Screen({
   isPopup: true,
-  element: document.getElementById('languages'),
+  element: languageRoot,
   openButtons: [document.getElementById('lang-btn')],
-  closeButtons: [document.getElementById('close-popup-languages')],
+  closeButtons: [languageRoot.querySelector('#close-popup-languages'), languageRoot.querySelector('#popup-fade-close')],
   onFocus: () => {
     dynamicFontChanger.update();
     input.updateQueryCustom(getInputElements(languageScreen.element, { classNames: ['close-popup', 'language-container'] }), { element: languageScreen.closeButtons[0] })
@@ -171,7 +248,18 @@ const exitScreen = new Screen({
     dynamicFontChanger.update();
     const elements = getInputElements(exitScreen.element, { tags: ['button'] });
     input.updateQueryCustom(elements, elements[1]);
-  }, onUnfocus: () => { input.updateQuery(); input.select({ element: defaultSelectedButton }); }
+  }, onUnfocus: () => { }
+});
+
+const tutorialOffsetScreen = new Screen({
+  isPopup: true,
+  element: document.getElementById('tutorial-offer'),
+  closeButtons: [document.getElementById('tutorial-offer').getElementsByClassName('exid-no')[0]],
+  onFocus: () => {
+    dynamicFontChanger.update();
+    const elements = getInputElements(tutorialOffsetScreen.element, { tags: ['button'] });
+    input.updateQueryCustom(elements, elements[0]);
+  }, onUnfocus: () => { }
 });
 
 const exitButton = exitScreen.element.getElementsByClassName('exid-yes')[0];
@@ -189,6 +277,16 @@ navigation.registerScreen(bonusesScreen);
 navigation.registerScreen(settingsScreen);
 navigation.registerScreen(languageScreen);
 navigation.registerScreen(exitScreen);
+navigation.registerScreen(tutorialOffsetScreen);
+
+if (load('tutorial-offer', false) == false) {
+  tutorialOffsetScreen.element.getElementsByTagName('button')[0].onclick = function () {
+    window.location.href = './src/playground/playground.html?levelID=level_def_s_1&isTutorial=true';
+  }
+
+  setTimeout(() => { navigation.push(tutorialOffsetScreen) }, 400)
+  save('tutorial-offer', true);
+}
 
 navigation.push(mainScreen);
 
