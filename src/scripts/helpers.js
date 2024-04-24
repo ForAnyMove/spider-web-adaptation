@@ -501,21 +501,21 @@ async function setDynamicContainerText(locale, struct, recursive = true) {
     }
 
     if (needToRecursive && recursive) {
-        if (log) {
-            const logEl = document.getElementsByClassName('ignore-DFC')[0];
-            if (logEl) {
-                logEl.innerHTML += `<span><RECURS></span>`
-            }
-        }
+        // if (log) {
+        //     const logEl = document.getElementsByClassName('ignore-DFC')[0];
+        //     if (logEl) {
+        //         logEl.innerHTML += `<span><RECURS></span>`
+        //     }
+        // }
         setDynamicContainerText(struct, false);
     }
 
-    if (log) {
-        const logEl = document.getElementsByClassName('ignore-DFC')[0];
-        if (logEl) {
-            logEl.innerHTML += `<span>-</span>`
-        }
-    }
+    // if (log) {
+    //     const logEl = document.getElementsByClassName('ignore-DFC')[0];
+    //     if (logEl) {
+    //         logEl.innerHTML += `<span>-</span>`
+    //     }
+    // }
 
 }
 
