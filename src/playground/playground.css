@@ -1543,7 +1543,8 @@ footer {
   transition: visibility 0.2s ease, opacity 0.2s ease;
 }
 
-@media (min-aspect-ratio: 11/6) {
+
+@media (min-aspect-ratio: 11/5) {
 
   .active-cards-zone,
   .story-mode-card-zone,

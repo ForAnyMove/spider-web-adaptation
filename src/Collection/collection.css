@@ -173,6 +173,7 @@ main {
   --target-font-size: 6vh;
   transform: translate(-50%);
   color: #fff6c6;
+  font-family: Arial, Helvetica, sans-serif;
 }
 
 .collection-pick-area {
