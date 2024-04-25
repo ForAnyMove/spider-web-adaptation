@@ -842,6 +842,14 @@ header {
   display: none;
 }
 
+.story-mode-cards-container {
+  pointer-events: none
+}
+
+.story-mode-cards-container>.sol-slot>.card-element {
+  pointer-events: all
+}
+
 #play-btn {
   background-image: url('../../Sprites/Buttons/Used_Button_03.png');
   font-size: 1.8vh;
