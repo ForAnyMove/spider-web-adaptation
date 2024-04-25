@@ -1085,9 +1085,10 @@ button.selected {
   background-color: #00000044;
 }
 
-.booster-type:hover::before {
-  content: attr(data-text);
-  display: block;
+.booster-prompt-container{
+  display: none;
+  align-items: center;
+  justify-content: center;
   position: absolute;
   background-image: url('./Sprites/Frames/Dialog_Left.png');
   background-size: 100% 100%;
@@ -1105,6 +1106,9 @@ button.selected {
   z-index: 1100;
 }
 
+.booster-type:hover .booster-prompt-container{
+  display: flex;
+}
 .booster-type>.booster-icon {
   width: 6vw;
   margin-top: -2vw;
