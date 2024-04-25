@@ -21,31 +21,45 @@ function getTranslation(language, key) {
 }
 
 function updateLanguage(elements, locale) {
-    if (locale) {
-        let fontName = 'LoadedFont_Default';
-        switch (locale) {
-            case 'ja':
-                fontName = 'LoadedFont_JA';
-                break;
-            case 'tr':
-                fontName = 'LoadedFont_TR';
-                break;
-            case 'hi':
-                fontName = 'LoadedFont_HI';
-                break;
-            default:
-                fontName = 'LoadedFont_Default';
-                break;
-        }
-        setTimeout(() => {
-            document.getElementsByTagName('body')[0].style.fontFamily = fontName + ', Arial, sans-serif'
-            let buttons = document.getElementsByTagName("button");
-            for (let i = 0; i < buttons.length; i++) {
-                buttons[i].style.fontFamily = fontName + ', Arial, sans-serif';
-            }
-            console.log('Fonts was changed.');
-        }, 0);
-    }
+    // if (locale) {
+    //     let fontName = '';
+    //     switch (locale) {
+    //         case 'ja':
+    //             fontName = 'LoadedFont_JA, ';
+    //             break;
+    //         case 'tr':
+    //             fontName = 'LoadedFont_TR, ';
+    //             break;
+    //         case 'hi':
+    //             fontName = 'LoadedFont_HI, ';
+    //             break;
+    //         case 'ru':
+    //             fontName = '';
+    //             break;
+    //         default:
+    //             fontName = 'LoadedFont_Default, ';
+    //             break;
+    //     }
+    //     console.log(fontName);
+    //     setTimeout(() => {
+    //         document.getElementsByTagName('body')[0].style.fontFamily = `${fontName}Arial, sans-serif`
+    //         if (fontName == '') {
+    //             document.getElementsByTagName('body')[0].style.fontWeight = 'bold';
+    //         } else {
+    //             document.getElementsByTagName('body')[0].style.fontWeight = '';
+    //         }
+    //         let buttons = document.getElementsByTagName("button");
+    //         for (let i = 0; i < buttons.length; i++) {
+    //             buttons[i].style.fontFamily = `${fontName}Arial, sans-serif`;
+    //             if (fontName == '') {
+    //                 buttons[i].style.fontWeight = 'bold';
+    //             } else {
+    //                 buttons[i].style.fontWeight = '';
+    //             }
+    //         }
+    //         console.log('Fonts was changed.');
+    //     }, 0);
+    // }
 
     function updateElement(element, type, value) {
         switch (type) {

@@ -1,23 +1,38 @@
-
 /* Подключение шрифтов TTF к сайту */
 @font-face {
   font-family: LoadedFont_Default;
   src: url('./src/fonts/remissis-sb.ttf') format('truetype');
 }
+
 @font-face {
   font-family: LoadedFont_JA;
   src: url('./src/fonts/mplus-1c-medium.ttf') format('truetype');
 }
+
 @font-face {
   font-family: LoadedFont_TR;
   src: url('./src/fonts/Outfit-SemiBold.ttf') format('truetype');
 }
+
 @font-face {
   font-family: LoadedFont_HI;
   src: url('./src/fonts/TiroDevanagariHindi-Regular.ttf') format('truetype');
 }
-body, button{
-  font-family: LoadedFont_Default, Arial, sans-serif;
+
+body,
+button {
+  font-family: Arial, sans-serif;
+  font-weight: bold;
+  /*LoadedFont_Default, */
+}
+
+@media screen and (-apple-system: BlinkMacSystemFont) {
+
+  body,
+  button {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+    font-weight: bold;
+  }
 }
 
 img {

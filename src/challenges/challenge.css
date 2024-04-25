@@ -347,7 +347,6 @@ header {
 .booster-title {
   text-align: center;
   height: 2vh;
-  text-wrap: nowrap;
 }
 
 .booster-icon {
