@@ -532,7 +532,7 @@ function setupButtons() {
             user.removeItem(Items.BoosterHint, 1);
           }
         } else {
-          showRewarded(null, null, () => user.addItem(Items.BoosterHint, 1, { isTrue: true, isMonetized: false }))
+          showRewarded(null, null, () => user.addItem(Items.BoosterHint, 4, { isTrue: true, isMonetized: false }))
         }
       }
       updateCounter(element, Items.BoosterHint);
@@ -550,7 +550,7 @@ function setupButtons() {
             user.removeItem(Items.BoosterMage, 1);
           }
         } else {
-          showRewarded(null, null, () => user.addItem(Items.BoosterMage, 1, { isTrue: true, isMonetized: false }))
+          showRewarded(null, null, () => user.addItem(Items.BoosterMage, 2, { isTrue: true, isMonetized: false }))
         }
       }
 
@@ -588,7 +588,7 @@ function setupButtons() {
             user.removeItem(Items.BoosterUndo, 1);
           }
         } else {
-          showRewarded(null, null, () => user.addItem(Items.BoosterUndo, 1, { isTrue: true, isMonetized: false }))
+          showRewarded(null, null, () => user.addItem(Items.BoosterUndo, 5, { isTrue: true, isMonetized: false }))
         }
       }
 

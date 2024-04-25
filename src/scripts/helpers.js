@@ -394,7 +394,9 @@ async function setDynamicContainerText(locale, struct, recursive = true) {
     struct.maxFontSizes = [];
     struct.fontSizes = [];
 
+
     const containerStyle = window.getComputedStyle(struct.container);
+
     const containerPadding = {
         width: parseFloat(containerStyle.paddingLeft) + parseFloat(containerStyle.paddingRight),
         height: parseFloat(containerStyle.paddingTop) + parseFloat(containerStyle.paddingBottom)
@@ -411,8 +413,10 @@ async function setDynamicContainerText(locale, struct, recursive = true) {
 
     // let log = false;
 
-    // if (
-    //     struct.elements[0].lang.includes('trial_prefix_01') || struct.elements[0].lang.includes('undo')) {
+    // if (struct.container.classList.contains('booster-prompt-container')
+    //     // struct.elements[0].lang.includes('trial_prefix_01') || struct.elements[0].lang.includes('undo')
+    // ) {
+    //     console.log(containerSize);
     //     log = true;
     // }
 
@@ -516,7 +520,6 @@ async function setDynamicContainerText(locale, struct, recursive = true) {
     //         logEl.innerHTML += `<span>-</span>`
     //     }
     // }
-
 }
 
 function setDynamicFontSize(text, recursive = false) {

@@ -418,6 +418,25 @@ function setupEnergyView() {
 
 setupEnergyView();
 
+function setupBoostersHint() {
+  const boostersType = bonusesRoot.querySelectorAll('.booster-type>img');
+  const boosterHints = bonusesRoot.querySelectorAll('.booster-type>.booster-prompt-container');
+
+  for (let i = 0; i < boostersType.length; i++) {
+    const element = boostersType[i];
+    element.onmouseover = () => {
+      boosterHints[i].style.display = 'flex';
+      dynamicFontChanger.updateContainer(boosterHints[i]);
+    };
+
+    element.onmouseout = () => {
+      boosterHints[i].style.display = 'none';
+    };
+  }
+}
+
+setupBoostersHint();
+
 // const screensManager = {
 //   main: document.getElementById('main-screen'),
 //   storyMode: document.getElementById('story-mode-screen'),

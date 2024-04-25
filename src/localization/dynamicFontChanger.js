@@ -78,4 +78,13 @@ export default class DynamicFontChanger {
             setDynamicContainerText(initialLocale, container, true);
         }
     }
+
+    updateContainer = function (container) {
+        for (let i = 0; i < this.containers.length; i++) {
+            const element = this.containers[i];
+            if (element.container == container) {
+                setDynamicContainerText(initialLocale, element, true);
+            }
+        }
+    }
 }
