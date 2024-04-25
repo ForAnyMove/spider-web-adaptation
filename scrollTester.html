@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="container" style="
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    min-width: 100%;
+    overflow-x: scroll;
+    overflow-y: hidden;">
+    </div>
+</body>
+<script type="module">
+    import { createElement, createTextSpan } from './src/scripts/helpers.js'
+    const container = document.getElementById('container');
+    for (let i = 0; i < 15; i++) {
+        const element = createElement('div', null, {
+            minWidth: '42vh',
+            margin: '0 2vh',
+            height: '68vh',
+            backgroundColor: '#000',
+            color: '#fff',
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center'
+        }, container);
+        createTextSpan(null, null, element, i)
+    }
+</script>
+
+</html>
