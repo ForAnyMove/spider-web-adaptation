@@ -181,20 +181,7 @@ function createLevelsList() {
     }
 }
 
-function setupEnergyView() {
-    const element = document.getElementById('energy-text');
-
-    if (element != null) {
-        element.innerText = user.getItemCount(Items.Energy);
-
-        user.itemListUpdateEvent.addListener(() => {
-            element.innerText = user.getItemCount(Items.Energy);
-        })
-    }
-}
-
 createLevelsList();
-setupEnergyView();
 
 const xPos = viewWidth - window.innerWidth / 2;
 // parent.scrollTo(xPos, 0);

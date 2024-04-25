@@ -292,20 +292,6 @@ levelButtonsContainer.addEventListener('click', (event) => {
   }
 })
 
-function setupEnergyView() {
-  const element = root.querySelector('#energy-text');
-
-  if (element != null) {
-    element.innerText = user.getItemCount(Items.Energy);
-
-    user.itemListUpdateEvent.addListener(() => {
-      element.innerText = user.getItemCount(Items.Energy);
-    })
-  }
-}
-
-setupEnergyView();
-
 languageChangeEvent.invoke(initialLocale);
 
 export { screenParameters }
