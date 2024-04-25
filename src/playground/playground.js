@@ -838,7 +838,7 @@ function setupSolitaireLevel() {
     storyModeContainer.children[i].remove();
   }
 
-  const levelHTML = solitaireHTMLevels[0];
+  const levelHTML = solitaireHTMLevels[storyLevelDatabase.currentLevel];
   storyModeContainer.insertAdjacentHTML('beforeend', levelHTML);
 
   const solitaireSlots = storyModeContainer.getElementsByClassName('sol-slot');

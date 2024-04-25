@@ -401,6 +401,22 @@ function setupLanguageSelector(initialLocale) {
   }
 }
 
+function setupEnergyView() {
+  const elements = document.getElementsByClassName('energy-text');
+
+  for (let i = 0; i < elements.length; i++) {
+    const element = elements[i];
+    if (element != null) {
+      element.innerText = user.getItemCount(Items.Energy);
+
+      user.itemListUpdateEvent.addListener(() => {
+        element.innerText = user.getItemCount(Items.Energy);
+      })
+    }
+  }
+}
+
+setupEnergyView();
 
 // const screensManager = {
 //   main: document.getElementById('main-screen'),
