@@ -342,7 +342,7 @@ function checkAndMakeSpiderLadyPatternView() {
         document.getElementsByClassName('bottom-cards-zone')[0].removeChild(element);
         continue;
       }
-      element.classList.add('hidden');
+      element.classList.add('fade-hidden');
     }
 
     const main = document.getElementsByTagName('main')[0];
@@ -401,7 +401,7 @@ function setSpiderLadyStyles() {
       transform: translate(15%);
     }
     .bottom-cards-zone>.extra-cards-container {
-      transform: translate(200%);
+      transform: translate(35%);
     }
     :root {
       --closed-card-offset: -16vw;
