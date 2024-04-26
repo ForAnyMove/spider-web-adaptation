@@ -127,7 +127,6 @@ header {
 /* pop-up */
 
 .challenges {
-  min-width: 100%;
   display: flex;
   justify-content: space-evenly;
   align-items: center;
