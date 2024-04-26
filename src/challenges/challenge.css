@@ -154,6 +154,8 @@ header {
   box-shadow: 5px 5px 15px -5px #000000;
   margin: 0 2vh;
   scroll-snap-align: center;
+  flex: 0 0 auto; /* Фиксированный размер блока, не увеличивается и не уменьшается */
+
 }
 
 .closed-card {

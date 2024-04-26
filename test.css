@@ -1,0 +1,34 @@
+*{
+  margin: 0;
+  padding: 0;
+}
+body, html {
+  width: 100%;
+  height: 100%;
+}
+
+.challenges-test{
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-color: aqua;
+  display: flex;
+  align-items: center;
+}
+
+.challenges-test-container {
+  /* overflow-y: hidden; */
+  overflow-x:  scroll;
+  display: flex;
+  column-gap: 2vw;
+  background-color: brown;
+  /* width: 200px; */
+}
+
+.challenge-test-container {
+  width: 42vh;
+  height: 40vh;
+  background-color: blueviolet;
+  border-radius: 2vh;
+  flex: 0 0 auto;
+}
