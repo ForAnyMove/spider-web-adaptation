@@ -6,15 +6,94 @@ body, html {
   width: 100%;
   height: 100%;
 }
-
-#challenges-test-screen{
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  background-color: aqua;
+body {
+  background-image: url('../../Sprites/Story Mode/Used_Frame 5.png');
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
   display: flex;
-  align-items: center;
+  flex-direction: column;
+  overflow: hidden;
+  justify-content: space-between;
+  min-height: 100%;
+  min-width: 100%;
+  -ms-overflow-style: none;
+  scrollbar-width: 0;
 }
+
+#challenges-test-screen {
+  background-image: url('../../Sprites/Story Mode/Used_Frame 5.png');
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  row-gap: 10vw;
+  height: 100%;
+  width: 100%;
+  -ms-overflow-style: none;
+  scrollbar-width: 0;
+  position: absolute;
+}
+
+header {
+  width: 100%;
+  z-index: 100;
+}
+
+.challenge-header-list {
+  display: flex;
+  justify-content: space-between;
+  list-style-type: none;
+}
+
+.header-ui-container-challenges {
+  display: flex;
+  flex-direction: column;
+}
+
+.challenge-header-navigation-btn {
+  width: 5vw;
+  height: 5vw;
+  margin: .5vw;
+  background: url('../../Sprites/Buttons/Used_Button_01.png');
+  background-size: cover;
+  border-radius: 50%;
+  border: none;
+  display: flex;
+  justify-content: center;
+  align-items: start;
+}
+
+.challenge-header-navigation-list-icon {
+  width: 3vw;
+  margin-top: 15%;
+}
+
+.challenge-energy-counter {
+  display: flex;
+  justify-content: center;
+  background-image: url('../../Sprites/Frames/Used_Frame_12.png');
+  background-size: 100% 100%;
+  position: relative;
+  margin: 1.5vw;
+  width: 3vw;
+}
+.challenge-energy-text {
+  color: #FFF6C6;
+
+  font-size: 1.5vw;
+  --target-font-size: 1.5vw;
+  padding-right: 1vw;
+}
+.challenge-energy-counter>img {
+  width: 2.5vw;
+  position: absolute;
+  right: -1vw;
+}
+
+
 
 .challenges-test-container {
   /* overflow-y: hidden; */
@@ -25,10 +104,43 @@ body, html {
   /* width: 200px; */
 }
 
+.challenges-test-container::-webkit-scrollbar {
+  width: 0;
+}
 .challenge-test-container {
   width: 42vh;
-  height: 40vh;
+  height: 68vh;
   background-color: blueviolet;
   border-radius: 2vh;
   flex: 0 0 auto;
+}
+
+@media screen and (orientation: portrait) {
+  .challenge-header-navigation-btn {
+      width: 17vw;
+      height: 17vw;
+      margin: 2vw;
+  }
+  .challenge-header-navigation-list-icon {
+    width: 10vw;
+  }
+  .challenge-energy-counter {
+    width: 6vh;
+    height: 3vh;
+    margin: 2vh;
+  }
+  .challenge-energy-text {
+    font-size: 4vw;
+    --target-font-size: 4vw;
+  }
+  .challenge-energy-counter>img {
+    width: 8vw;
+    right: -3vw;
+    top: -1vw;
+  }
+  
+  #challenges-test-screen {
+    row-gap: 25vw;
+  }
+
 }
