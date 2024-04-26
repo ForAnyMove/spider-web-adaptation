@@ -16,6 +16,7 @@
   <!-- <link rel="stylesheet" href="./src/Collection/collection.css"> -->
   <!-- <link rel="stylesheet" href="./src/achievements/achievements.css"> -->
   <link rel="stylesheet" href="fonts.css">
+  <link rel="stylesheet" href="test.css">
 
   <title>Spider Web</title>
 
@@ -23,7 +24,7 @@
 </head>
 
 <body style="max-width: 100%; max-height: 100%; overflow: hidden;">
-  <a href="test.html" class="test">test</a>
+
   <audio id="backgroundMusic" loop>
     <source src="./assets/audio/music/Card-game-track-2.mp3" type="audio/mpeg">
     Your browser does not support the audio element.
@@ -682,6 +683,11 @@
       </div>
     </main>
   </div>
+  <button id="challenge-test" style="position: absolute; left: 50%; top: 50%;">Test</button>
+  <div id="challenges-test-screen" style="display: none; position: absolute;">
+    <div class="challenges-test-container">
+    </div>
+  </div>
   <!-- rewards popup begin -->
   <div class="popup-b" id="bounty-popup">
     <div class="bounty-popup-content bounty-tab" id="bounty-container">
@@ -708,6 +714,7 @@
     let navigation;
     let storyMode;
     let challenges;
+    let challengesTest;
     let collection;
     let achievements;
     let backActionHandler;
@@ -892,6 +899,7 @@
       await import('./src/localization/translator.js').then(async (translatorItem) => {
         storyMode = await import('./src/StoryMode/storyMode.js')
         challenges = await import('./src/challenges/challenge.js')
+        challengesTest = await import('./test.js')
         collection = await import('./src/Collection/collection.js');
         achievements = await import('./src/achievements/achievements.js');
 
