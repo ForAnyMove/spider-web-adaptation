@@ -96,12 +96,9 @@ header {
 
 
 .challenges-test-container {
-  /* overflow-y: hidden; */
   overflow-x:  scroll;
   display: flex;
   column-gap: 2vw;
-  background-color: brown;
-  /* width: 200px; */
 }
 
 .challenges-test-container::-webkit-scrollbar {
@@ -110,7 +107,11 @@ header {
 .challenge-test-container {
   width: 42vh;
   height: 68vh;
-  background-color: blueviolet;
+  background: #1BCE00;
+  background: -moz-linear-gradient(-45deg, #1BCE00 0%, #04A400 50%, #068300 100%);
+  background: -webkit-linear-gradient(-45deg, #1BCE00 0%, #04A400 50%, #068300 100%);
+  background: linear-gradient(135deg, #1BCE00 0%, #04A400 50%, #068300 100%);
+  border: 1px solid #000;
   border-radius: 2vh;
   flex: 0 0 auto;
 }

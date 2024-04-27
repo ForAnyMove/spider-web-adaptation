@@ -6,7 +6,7 @@ import { showRewarded } from "../scripts/sdk/sdk.js";
 import { Items } from "../scripts/statics/staticValues.js";
 import('../scripts/rewardReceiverView.js');
 
-const root = document.getElementById('challenge-screen');
+const root = document.getElementById('challenges-test-screen');
 const screenParameters = new ScreenParameters();
 
 const vh = window.innerHeight / 100;
@@ -15,10 +15,21 @@ const vw = window.innerWidth / 100;
 screenParameters.defaultSelectedElement = { element: root.querySelector('.main-screen-switch-btn') };
 screenParameters.selectableElements.push(screenParameters.defaultSelectedElement);
 
-const parent = root.getElementsByClassName('challenges')[0];
-
+const parent = root.getElementsByClassName('challenges-test-container')[0];
+console.log(parent);
 const currentLevel = trialLevelDatabase.currentLevel;
 let viewWidth = 0;
+
+const openTestBtn = document.getElementById('challenge-test');
+const testChallengeScreen = document.getElementById('challenges-test-screen');
+const mainTab = document.getElementById('main-screen');
+openTestBtn.addEventListener('click', () => {
+  console.log(testChallengeScreen);
+  testChallengeScreen.style.display = 'flex';
+  mainTab.style.display = 'none';
+});
+
+const arrowBackBtn = document.getElementById('');
 
 function createBooster(itemType, title, langID, user, parent) {
     const plane = createElement('div', ['booster-container'], null, parent);
@@ -174,7 +185,7 @@ function createLevelsList() {
         } else if (i > currentLevel) {
             element = createLockedLevelInstance();
         }
-
+        console.log(element);
         if (element != null) {
             parent.appendChild(element);
         }
