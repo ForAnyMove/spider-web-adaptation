@@ -20,7 +20,7 @@ console.log(parent);
 const currentLevel = trialLevelDatabase.currentLevel;
 let viewWidth = 0;
 
-const openTestBtn = document.getElementById('challenge-test');
+const openTestBtn = document.getElementById('challenges-switch-btn');
 const testChallengeScreen = document.getElementById('challenges-test-screen');
 const mainTab = document.getElementById('main-screen');
 openTestBtn.addEventListener('click', () => {

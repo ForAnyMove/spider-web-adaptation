@@ -7,7 +7,7 @@ body, html {
   height: 100%;
 }
 body {
-  background-image: url('../../Sprites/Story Mode/Used_Frame 5.png');
+  background-image: url('./Sprites/Story Mode/Used_Frame 5.png');
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
@@ -22,7 +22,7 @@ body {
 }
 
 #challenges-test-screen {
-  background-image: url('../../Sprites/Story Mode/Used_Frame 5.png');
+  background-image: url('./Sprites/Story Mode/Used_Frame 5.png');
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
@@ -57,7 +57,7 @@ header {
   width: 5vw;
   height: 5vw;
   margin: .5vw;
-  background: url('../../Sprites/Buttons/Used_Button_01.png');
+  background: url('./Sprites/Buttons/Used_Button_01.png');
   background-size: cover;
   border-radius: 50%;
   border: none;
@@ -74,7 +74,7 @@ header {
 .challenge-energy-counter {
   display: flex;
   justify-content: center;
-  background-image: url('../../Sprites/Frames/Used_Frame_12.png');
+  background-image: url('./Sprites/Frames/Used_Frame_12.png');
   background-size: 100% 100%;
   position: relative;
   margin: 1.5vw;
@@ -126,6 +126,7 @@ header {
   border: 1px solid #000;
   border-radius: 2vh;
   flex: 0 0 auto;
+  margin: 0 2vh;
 }
 
 .closed-card {
@@ -210,7 +211,7 @@ header {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  background-image: url(../../Sprites/Frames/Used_Frame_18.png);
+  background-image: url(./Sprites/Frames/Used_Frame_18.png);
   background-size: 120% 120%;
   background-position: center;
 }
@@ -234,7 +235,7 @@ header {
   color: #FFF6C6;
   font-size: 2.2vh;
   --target-font-size: 2.2vh;
-  padding-top: 2.5vh;
+  padding-top: 1.5vh;
   height: 2vh;
   padding-bottom: 1vh;
 }
@@ -253,7 +254,7 @@ header {
   text-wrap: nowrap;
 }
 .booster {
-  background-image: url(../../Sprites/Frames/Used_Frame_17.png);
+  background-image: url(./Sprites/Frames/Used_Frame_17.png);
   background-size: 100% 100%;
   position: relative;
   width: 8vh;
@@ -307,7 +308,7 @@ header {
   flex-direction: column;
   justify-content: space-evenly;
   align-items: center;
-  background-image: url(../../Sprites/Frames/Used_Frame_03.png);
+  background-image: url(./Sprites/Frames/Used_Frame_03.png);
   background-size: 100% 100%;
   width: 8vh;
   height: 8vh;
@@ -323,7 +324,7 @@ header {
   align-items: center;
 }
 #play-btn {
-  background-image: url(../../Sprites/Buttons/Used_Button_03.png);
+  background-image: url(./Sprites/Buttons/Used_Button_03.png);
   font-size: 2.5vh;
   --target-font-size: 2.5vh;
 }

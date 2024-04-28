@@ -50,9 +50,9 @@ const storyModeScreen = new Screen({
   screenParameters: storyMode.screenParameters
 })
 
-const challengesRoot = document.getElementById('challenge-screen');
+const challengesRoot = document.getElementById('challenges-test-screen');
 const challengesScreen = new Screen({
-  style: 'src/challenges/challenge.css',
+  style: 'test.css',
   element: challengesRoot,
   openButtons: [mainScreen.element.querySelector('#challenges-switch-btn')],
   closeButtons: [challengesRoot.getElementsByClassName('main-screen-switch-btn')[0]],
