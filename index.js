@@ -404,7 +404,6 @@ function setupLanguageSelector(initialLocale) {
 function setupEnergyView() {
   const elements = document.getElementsByClassName('energy-text');
   const additionalElements = document.getElementsByClassName('challenge-energy-text')
-  console.log(additionalElements);
 
   for (let i = 0; i < elements.length; i++) {
     const element = elements[i];

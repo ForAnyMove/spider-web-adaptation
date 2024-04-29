@@ -917,7 +917,7 @@
         challenges = await import('./src/challenges/challenge.js')
         // challengesTest = await import('./test.js')
         collection = await import('./src/Collection/collection.js');
-        achievements = await import('./src/achievements/achievements.js');
+        achievements = import('./src/achievements/achievements.js');
 
         await import('./index.js').then((indexItem) => {
           indexItem.setupLanguageSelector(translatorItem.initialLocale);

@@ -153,7 +153,9 @@ function createAchievementInstance(data, onInserted) {
   return plane;
 }
 
-function createAchievementInstances() {
+async function createAchievementInstances() {
+  await new Promise(p => setTimeout(p, 100));
+
   const selectables = [];
   const activementsViews = [];
 
@@ -262,7 +264,7 @@ function setupTabSwitch() {
 setupTabSwitch();
 setupStatistics();
 
-const selectables = createAchievementInstances();
+const selectables = await createAchievementInstances();
 
 screenParameters.selectableElements = [{ element: tabs[0] }, { element: tabs[1] }, screenParameters.defaultSelectedElement].concat(selectables);
 

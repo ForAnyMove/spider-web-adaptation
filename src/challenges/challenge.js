@@ -16,7 +16,6 @@ screenParameters.defaultSelectedElement = { element: root.querySelector('.main-s
 screenParameters.selectableElements.push(screenParameters.defaultSelectedElement);
 
 const parent = root.getElementsByClassName('challenges-test-container')[0];
-console.log(parent);
 const currentLevel = trialLevelDatabase.currentLevel;
 let viewWidth = 0;
 
@@ -24,7 +23,6 @@ const openTestBtn = document.getElementById('challenges-switch-btn');
 const testChallengeScreen = document.getElementById('challenges-test-screen');
 const mainTab = document.getElementById('main-screen');
 openTestBtn.addEventListener('click', () => {
-    console.log(testChallengeScreen);
     testChallengeScreen.style.display = 'flex';
     mainTab.style.display = 'none';
 });
@@ -185,7 +183,6 @@ function createLevelsList() {
         } else if (i > currentLevel) {
             element = createLockedLevelInstance();
         }
-        console.log(element);
         if (element != null) {
             parent.appendChild(element);
         }

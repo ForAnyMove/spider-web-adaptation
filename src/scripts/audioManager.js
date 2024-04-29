@@ -8,6 +8,8 @@ class AudioManager {
         this.enabledSoundIcon = soundIcons[0];
         this.disabledSoundIcon = soundIcons[1];
 
+        this.muteAccumulation = 0;
+
         this.soundSwitchButton = document.getElementById('sound-switch');
         this.musicSwitchButton = document.getElementById('music-switch');
 
@@ -44,14 +46,23 @@ class AudioManager {
 
         document.addEventListener("visibilitychange", () => {
             if (document.visibilityState === "hidden") {
-                console.log('mute');
-                this.musicAudioElement.muted = true;
-                this.butonAudionElement.muted = true;
+                this.muteAccumulation++;
             } else {
-                this.musicAudioElement.muted = !this.isMusicEnabled;
-                this.butonAudionElement.muted = !this.isSoundEnabled;
+                this.muteAccumulation = Math.max(--this.muteAccumulation, 0);
             }
+
+            this.checkFocusState();
         });
+    }
+
+    checkFocusState = () => {
+        if (this.muteAccumulation > 0) {
+            this.musicAudioElement.muted = true;
+            this.butonAudionElement.muted = true;
+        } else {
+            this.musicAudioElement.muted = !this.isMusicEnabled;
+            this.butonAudionElement.muted = !this.isSoundEnabled;
+        }
     }
 
     unmuteOnLoad = () => {
