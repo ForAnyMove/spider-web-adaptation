@@ -109,7 +109,7 @@ function createLevelPreview(data) {
         const button = createButton(['add-booster-icon'], {
           border: 'none',
           background: 'no-repeat',
-          backgroundImage: 'url(../../Sprites/Buttons/Used_plus.png)',
+          backgroundImage: 'url(Sprites/Buttons/Used_plus.png)',
           backgroundSize: '100% 100%',
         }, div, () => {
           showRewarded(null, null, () => user.addItem(itemType, getBoosterRewardedCountByType(itemType), { isTrue: true, isMonetized: false }), null);
