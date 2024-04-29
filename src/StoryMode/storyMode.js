@@ -1,7 +1,7 @@
 import DynamicFontChanger from "../localization/dynamicFontChanger.js";
 import { initialLocale, updateInContainer } from "../localization/translator.js";
 import { storyLevelDatabase } from "../scripts/data/level_databases.js";
-import { createButton, createElement, createHSpace, createImage, createTextH3, createTextSpan, createVSpace, getIconByContent, getIconByItem, getIconByPattern, getIconBySuit, getPatternLang, getPatternName, getSuitLang, getSuitName } from "../scripts/helpers.js";
+import { createButton, createElement, createHSpace, createImage, createTextH3, createTextSpan, createVSpace, getBoosterRewardedCountByType, getIconByContent, getIconByItem, getIconByPattern, getIconBySuit, getPatternLang, getPatternName, getSuitLang, getSuitName } from "../scripts/helpers.js";
 import { Screen, ScreenParameters } from "../scripts/navigation/navigation.js";
 import { showRewarded } from "../scripts/sdk/sdk.js";
 import { Items } from "../scripts/statics/staticValues.js";
@@ -113,7 +113,7 @@ function createLevelPreview(data) {
           backgroundImage: 'url(../../Sprites/Buttons/Used_plus.png)',
           backgroundSize: '100% 100%',
         }, div, () => {
-          showRewarded(null, null, () => user.addItem(itemType, 1, { isTrue: true, isMonetized: false }), null);
+          showRewarded(null, null, () => user.addItem(itemType, getBoosterRewardedCountByType(itemType), { isTrue: true, isMonetized: false }), null);
         });
 
         selectables.push({ element: button });

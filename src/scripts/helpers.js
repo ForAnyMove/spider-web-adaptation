@@ -1,6 +1,6 @@
 import { backSkinDatabase, backgroundDatabase, skinDatabase } from "./data/card_skin_database.js"
 import { Pattern, SuitMode } from "./statics/enums.js"
-import { IconsByItem } from "./statics/staticValues.js"
+import { IconsByItem, Items } from "./statics/staticValues.js"
 
 function getRandomInt(max) {
     return Math.floor(Math.random() * max);
@@ -588,6 +588,15 @@ async function preloadImagesAsync(urls) {
     return Promise.all(promises);
 }
 
+function getBoosterRewardedCountByType(type) {
+    switch (type) {
+        case Items.BoosterHint: return 4;
+        case Items.BoosterMage: return 2;
+        case Items.BoosterUndo: return 5;
+        case Items.BoosterTime: return 1;
+    }
+}
+
 
 export {
     createElement,
@@ -624,5 +633,6 @@ export {
     getPatternLang,
     setDynamicFontSize,
     setDynamicContainerText,
-    preloadImagesAsync
+    preloadImagesAsync,
+    getBoosterRewardedCountByType
 }

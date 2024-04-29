@@ -403,9 +403,22 @@ function setupLanguageSelector(initialLocale) {
 
 function setupEnergyView() {
   const elements = document.getElementsByClassName('energy-text');
+  const additionalElements = document.getElementsByClassName('challenge-energy-text')
+  console.log(additionalElements);
 
   for (let i = 0; i < elements.length; i++) {
     const element = elements[i];
+    if (element != null) {
+      element.innerText = user.getItemCount(Items.Energy);
+
+      user.itemListUpdateEvent.addListener(() => {
+        element.innerText = user.getItemCount(Items.Energy);
+      })
+    }
+  }
+
+  for (let i = 0; i < additionalElements.length; i++) {
+    const element = additionalElements[i];
     if (element != null) {
       element.innerText = user.getItemCount(Items.Energy);
 
