@@ -24,6 +24,8 @@ import { solitaireHTMLevels } from "../scripts/data/solitaireLevels.js";
 import { cardSelector } from "../scripts/cardSelector.js";
 
 input = new DirectionalInput({ element: null });
+audioManager.fetchSource('cardSound_01');
+audioManager.fetchSource('cardSound_02');
 
 let isKeyboardWasDown = false;
 
@@ -796,7 +798,6 @@ if (platform == Platform.TV) {
     defineDefaultSelectables();
   });
 }
-
 
 function setupDefaultLevel() {
   setupDistribution();

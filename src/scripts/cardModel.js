@@ -164,6 +164,8 @@ export default class Card {
 
                 this.tryDrop(columnTemp, cards);
             }
+
+            audioManager.playSource('cardSound_02');
         }
     }
 
@@ -225,6 +227,8 @@ export default class Card {
 
             domElement.addEventListener('touchmove', handleDragMove);
             domElement.addEventListener('touchend', handleDrop);
+
+            audioManager.playSource('cardSound_02');
         }
 
         domElement.addEventListener('touchstart', handleDragStart);
@@ -437,6 +441,8 @@ class CardColumn {
                 card.domElement.style.top = `${value.y + (i * (height + openedCardOffset))}px`;
             }
         }, targetPosition, 0.08, Ease.SineOut).onComplete(() => {
+            audioManager.playSource('cardSound_01');
+
             for (let i = 0; i < cards.length; i++) {
                 const card = cards[i];
                 if (options.addCards) {

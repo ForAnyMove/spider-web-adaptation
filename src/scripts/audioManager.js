@@ -8,6 +8,8 @@ class AudioManager {
         this.enabledSoundIcon = soundIcons[0];
         this.disabledSoundIcon = soundIcons[1];
 
+        this.soundSources = [];
+
         this.muteAccumulation = 0;
 
         this.soundSwitchButton = document.getElementById('sound-switch');
@@ -53,6 +55,31 @@ class AudioManager {
 
             this.checkFocusState();
         });
+    }
+
+    fetchSource = function (id) {
+        const audioElement = document.getElementById(id);
+        for (let i = 0; i < this.soundSources.length; i++) {
+            const element = this.soundSources[i];
+            if (element.source == audioElement) return;
+        }
+
+        this.soundSources.push({
+            id: id,
+            source: audioElement
+        });
+    }
+
+    playSource = function (id) {
+        if (!this.isSoundEnabled) return;
+
+        for (let i = 0; i < this.soundSources.length; i++) {
+            const element = this.soundSources[i];
+            if (element.id == id) {
+                element.source.play();
+                return;
+            }
+        }
     }
 
     checkFocusState = () => {
