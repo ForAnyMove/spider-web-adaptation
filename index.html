@@ -25,11 +25,11 @@
 
 <body style="max-width: 100%; max-height: 100%; overflow: hidden;">
 
-  <audio id="backgroundMusic" loop>
+  <audio id="backgroundMusic" loop autoplay controlsList="nodownload">
     <source src="./assets/audio/music/Card-game-track-2.mp3" type="audio/mpeg">
     Your browser does not support the audio element.
   </audio>
-  <audio id="buttonClick">
+  <audio id="buttonClick" controlsList="nodownload">
     <source src="./assets/audio/sounds/Button-01.mp3" type="audio/mpeg">
   </audio>
   <div class="mask">
@@ -688,7 +688,8 @@
       <ul class="challenge-header-list">
         <li class="header-ui-container-challenges">
           <button class="challenge-header-navigation-btn main-screen-switch-btn">
-            <img src="./Sprites/Icons/Icon_Arrow_Back.png" alt="Profile" class="challenge-header-navigation-list-icon" />
+            <img src="./Sprites/Icons/Icon_Arrow_Back.png" alt="Profile"
+              class="challenge-header-navigation-list-icon" />
           </button>
         </li>
         <li class="header-ui-container-challenges">

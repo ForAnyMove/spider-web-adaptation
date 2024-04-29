@@ -18,9 +18,7 @@ class AudioManager {
         this.isSoundEnabled = load('sound', true);
 
         if (this.isMusicEnabled) {
-            document.addEventListener("click", () => {
-                this.musicAudioElement.play();
-            });
+            document.addEventListener("click", this.unmuteOnLoad);
         } else {
             this.musicAudioElement.muted = true;
         }
@@ -54,6 +52,15 @@ class AudioManager {
                 this.butonAudionElement.muted = !this.isSoundEnabled;
             }
         });
+    }
+
+    unmuteOnLoad = () => {
+        document.removeEventListener('click', this.unmuteOnLoad);
+        this.musicAudioElement.play();
+        if ('mediaSession' in navigator) {
+            navigator.mediaSession.metadata = null;
+            navigator.mediaSession.playbackState = "none";
+        }
     }
 
     pause = function () {
