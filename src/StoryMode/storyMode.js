@@ -1,4 +1,3 @@
-import DynamicFontChanger from "../localization/dynamicFontChanger.js";
 import { initialLocale, updateInContainer } from "../localization/translator.js";
 import { storyLevelDatabase } from "../scripts/data/level_databases.js";
 import { createButton, createElement, createHSpace, createImage, createTextH3, createTextSpan, createVSpace, getBoosterRewardedCountByType, getIconByContent, getIconByItem, getIconByPattern, getIconBySuit, getPatternLang, getPatternName, getSuitLang, getSuitName } from "../scripts/helpers.js";
