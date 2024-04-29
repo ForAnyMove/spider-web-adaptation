@@ -188,7 +188,7 @@ function createLevelPreview(data) {
         selectables = selectables.concat(createBooster(Items.BoosterHint, 'Подсказка', 'hint_b', user, boostersContainer));
         selectables = selectables.concat(createBooster(Items.BoosterUndo, 'Отмена хода', 'undo_b', user, boostersContainer));
         selectables = selectables.concat(createBooster(Items.BoosterMage, 'Маг', 'mage_b', user, boostersContainer));
-        selectables = selectables.concat(createBooster(Items.BoosterTime, 'Доп. время', 'timer_b', user, boostersContainer));
+        // selectables = selectables.concat(createBooster(Items.BoosterTime, 'Доп. время', 'timer_b', user, boostersContainer));
       }
 
       if (rewards == null || rewards.length == 0) {

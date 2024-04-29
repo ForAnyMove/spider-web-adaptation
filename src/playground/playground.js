@@ -821,7 +821,10 @@ function setupDefaultLevel() {
 }
 
 function setupSolitaireLevel() {
-
+  for (let i = timeButtons.length - 1; i >= 0; i--) {
+    const element = timeButtons[i];
+    if (element) { element.remove(); }
+  }
   defineSolitaireSelectables();
 
   const buttonContainers = document.getElementsByClassName('footer-control-panel');
@@ -884,6 +887,7 @@ function setupSolitaireLevel() {
         unlockedCount++;
         if (unlockedCount == result.playableCardColumns.length) {
           setupDefaultLevel();
+          stepRecorder.reset();
           input.loadFromSavedPull('ingame');
 
           DelayedCall(0.2, () => {
