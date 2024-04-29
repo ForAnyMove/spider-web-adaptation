@@ -2779,7 +2779,7 @@
             }
           </style>
         </div> -->
-        <div class="story-mode-level-container" id="story-mode-level-29">
+        <!-- <div class="story-mode-level-container" id="story-mode-level-29">
           <div class="story-mode-cards-container first-column">
             <div id="sol-slot-01<[06]" class="sol-slot card-element closed removed"></div>
           </div>
@@ -2818,33 +2818,125 @@
               align-items: center;
               position: relative;
             }
+            .second-column{
+              column-gap: 3.5vw;
+              margin-bottom: -6.5vw;
+            }
+            .third-column{
+              column-gap: 9vw;
+              margin-bottom: -4vw;
+            }
+            .fourth-column{
+              column-gap: 9vw;
+              margin-bottom: -3vw;
+            }
+            .fifth-column{
+              column-gap: 3.5vw;
+              margin-bottom: -4vw;
+            }
+            .sixth-column {
+              margin-bottom: -6.5vw;
+            }
             .second-column>.card-element:nth-child(1){
-              transform: rotate(-120deg);
+              transform: rotate(-140deg);
             }
             .second-column>.card-element:nth-child(2){
-              transform: rotate(120deg);
+              transform: rotate(140deg);
             }
             .third-column>.card-element:nth-child(1){
-              transform: rotate(-120deg);
+              transform: rotate(-110deg);
             }
             .third-column>.card-element:nth-child(2){
-              transform: rotate(120deg);
+              transform: rotate(110deg);
             }
             .fourth-column>.card-element:nth-child(1){
-              transform: rotate(-120deg);
+              transform: rotate(-70deg);
             }
             .fourth-column>.card-element:nth-child(2){
-              transform: rotate(120deg);
+              transform: rotate(70deg);
             }
             .fifth-column>.card-element:nth-child(1){
-              transform: rotate(-120deg);
+              transform: rotate(-35deg);
             }
             .fifth-column>.card-element:nth-child(2){
-              transform: rotate(120deg);
+              transform: rotate(35deg);
             }
 
             @media screen and (orientation: portrait) {
-
+              .second-column{
+                column-gap: 5.5vw;
+                margin-bottom: -9.5vw;
+              }
+              .third-column{
+                column-gap: 13vw;
+                margin-bottom: -6vw;
+              }
+              .fourth-column{
+                column-gap: 13vw;
+                margin-bottom: -5vw;
+              }
+              .fifth-column{
+                column-gap: 5.5vw;
+                margin-bottom: -6vw;
+              }
+              .sixth-column {
+                margin-bottom: -9.5vw;
+              }
+            }
+          </style>
+        </div> -->
+        <div class="story-mode-level-container" id="story-mode-level-30">
+          <div class="story-mode-cards-container first-column">
+            <div id="sol-slot-01<[06]" class="sol-slot card-element closed removed"></div>
+            <div id="sol-slot-01<[06]" class="sol-slot card-element closed removed"></div>
+            <div id="sol-slot-01<[06]" class="sol-slot card-element closed removed"></div>
+            <div id="sol-slot-01<[06]" class="sol-slot card-element closed removed"></div>
+            <div id="sol-slot-01<[06]" class="sol-slot card-element closed removed"></div>
+          </div>
+          <div class="story-mode-cards-container second-column">
+            <div id="sol-slot-01<[06]" class="sol-slot card-element closed removed"></div>
+            <div id="sol-slot-01<[06]" class="sol-slot card-element opened removed"></div>
+          </div>
+          <style>
+            .story-mode-level-container {
+              display: flex;
+              justify-content: center;
+              align-items: center;
+              max-height: 100%;
+              flex-direction: row-reverse;
+              position: relative;
+            }
+            .story-mode-cards-container {
+              display: flex;
+              justify-content: center;
+              align-items: center;
+              position: relative;
+            }
+            .story-mode-cards-container>.card-element{
+              margin: 0 -1.4vw;
+            }
+            .first-column{
+              flex-direction: row-reverse;
+            }
+            .first-column>.card-element:nth-child(1){
+              transform: translateY(-60%);
+            }
+            .first-column>.card-element:nth-child(2){
+              transform: translateY(-30%);
+            }
+            .first-column>.card-element:nth-child(4){
+              transform: translateY(-30%);
+            }
+            .first-column>.card-element:nth-child(5){
+              transform: translateY(-60%);
+            }
+            .second-column>.card-element:nth-child(2){
+              transform: translateY(-30%);
+            }
+            @media screen and (orientation: portrait) {
+              .story-mode-cards-container>.card-element{
+                margin: 0 -2.1vw;
+              }
             }
           </style>
         </div>
