@@ -1211,7 +1211,13 @@ button.selected {
 @media only screen and (max-width: 768px) and (orientation: portrait) {
 
   .booster-prompt-container {
-    top: -13vh;
+    top: -19vw;
+    width: 21vw;
+    height: 10vw;
+  }
+  .booster-prompt-title{
+    font-size: 0.9vh;
+    --target-font-size: 0.9vh;
   }
   .header-navigation-btn {
     width: 8vh;
