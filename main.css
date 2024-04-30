@@ -1031,6 +1031,18 @@ button.selected {
   color: #ecff98;
 }
 
+.complete-overlay-check {
+  position: absolute;
+  background-image: url('Sprites/Icons/Icon_Check.png');
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  left: 10%;
+  right: 10%;
+  bottom: 10%;
+  top: 10%;
+}
+
 .booster-title,
 .special-booster-title {
   font-size: 1.3vw;
@@ -1211,14 +1223,16 @@ button.selected {
 @media only screen and (max-width: 768px) and (orientation: portrait) {
 
   .booster-prompt-container {
-    top: -19vw;
-    width: 21vw;
-    height: 10vw;
+    top: -22vw;
+    width: 30vw;
+    height: 12vw;
   }
-  .booster-prompt-title{
-    font-size: 0.9vh;
-    --target-font-size: 0.9vh;
+
+  .booster-prompt-title {
+    font-size: 3vw;
+    --target-font-size: 3vw;
   }
+
   .header-navigation-btn {
     width: 8vh;
     height: 8vh;

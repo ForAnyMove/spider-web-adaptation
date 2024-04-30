@@ -141,16 +141,22 @@ async function getPlatform() {
     return finalPlatformResult;
 }
 
-async function saveUserData(data) {
+async function saveUserData(data, callback) {
+
     try {
         if (isLocalHost()) {
             error("[saveUserData] local host usage", "sdk", "sdk");
+            if (data['user_01'] != null) {
+                console.log(data['user_01'].items);
+            }
+            callback?.();
             return;
         }
 
         SDK = await getSDK();
         if (SDK == null) {
             error("[saveUserData] SKD is not defined", "sdk", "sdk");
+            callback?.();
             return;
         }
 
@@ -158,13 +164,25 @@ async function saveUserData(data) {
 
         if (player == null) {
             error("[saveUserData] PLAYER is not defined", "sdk", "player");
+            callback?.();
             return;
         }
 
-        console.log("[saveUserData] start saving", 'sdk', 'player');
-        player.setData(data);
+        log("[saveUserData] start saving", 'sdk', 'player');
+        player.setData(data).then(() => {
+            // data['saves_020017'].map(i => {
+            //     if (i['user_01'] != null) {
+            //         console.log(i['user_01'].items[0]);
+            //     }
+            // })
+            log("[saveUserData] save callback", 'sdk', 'player');
+            setTimeout(() => {
+                callback?.();
+            }, 100);
+        });
     } catch (err) {
         error(`[saveUserData] catched error ${err}`, 'sdk', 'player');
+        callback?.();
     }
 }
 

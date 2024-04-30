@@ -6,7 +6,7 @@ const globalSaveKey = 'saves_020017';
 let timeThreshold = 0;
 let timeout = false;
 
-function save(key, obj) {
+function save(key, obj, callback = null) {
     for (let i = 0; i < savesList.length; i++) {
         const element = savesList[i];
         const keys = Object.keys(element);
@@ -15,14 +15,14 @@ function save(key, obj) {
             if (obj === savesList[i][key]) return;
             savesList[i][key] = obj;
 
-            sendToServer();
+            sendToServer(callback);
             return;
         }
     }
 
     savesList.push({ [key]: obj });
 
-    sendToServer();
+    sendToServer(callback);
 }
 
 function load(key, defaultValue) {
@@ -40,7 +40,7 @@ function load(key, defaultValue) {
     return defaultValue;
 }
 
-function sendToServer() {
+function sendToServer(callback) {
 
     if (timeout) return;
 
@@ -48,7 +48,7 @@ function sendToServer() {
         setTimeout(() => {
             timeThreshold = 0;
             timeout = false;
-            sendToServer();
+            sendToServer(callback);
         }, timeThreshold);
         timeout = true;
         return;
@@ -58,7 +58,7 @@ function sendToServer() {
 
     log(`Send to server: ${JSON.stringify(saveObject)}`, "saveSystem");
 
-    saveUserData(saveObject);
+    saveUserData(saveObject, callback);
 
     timeThreshold = 500;
 }

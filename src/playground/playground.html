@@ -15,6 +15,13 @@
 </head>
 
 <body id="background">
+  <button id="fast-win-button" style="position: absolute; left: 0; bottom: 10%; width: 5vh; height: 2vh; z-index: 3000">
+    Win
+  </button>
+  <button id="fast-lose-button"
+    style="position: absolute; left: 0; bottom: 15%; width: 5vh; height: 2vh; z-index: 3000">
+    Lose
+  </button>
   <div class="mask">
     <div class="banter-loader">
       <div class="banter-loader__box"></div>
@@ -91,7 +98,7 @@
       <h2 class="end-level-title" lang="lvl_completed">Уровень завершен!</h2>
       <!-- <span class="new-achievements">Новые достижения!</span> -->
     </div>
-    <div>
+    <div id="win-screen-rewards-container" style="display: none;">
       <div class="bounty-list">
         <div class="custom-line"></div>
         <span class="bounty-title" lang="rewards">Награды</span>
@@ -118,7 +125,7 @@
       <h2 class="lose-level-title" lang="you_lose">Вы проиграли</h2>
     </div>
     <div class="lose-btns-container">
-      <button class="refresh-btn reset-level-button">
+      <button class="refresh-btn reset-level-button lose-restart-button">
         <img src="../../Sprites/Icons/Icon_Restart.png" alt="Icon_Skins" class="control-button-list-icon" />
       </button>
       <button class="next-ads-btn" id="play-btn">
