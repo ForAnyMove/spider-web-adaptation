@@ -1,6 +1,6 @@
 import { initialLocale } from "../localization/translator.js";
 import { trialLevelDatabase } from "../scripts/data/level_databases.js";
-import { createButton, createElement, createHSpace, createImage, createTextH3, createTextP, createTextSpan, createVSpace, getIconByContent, getIconByItem, getIconByPattern, getIconBySuit, getPatternLang, getPatternName, getSuitLang, getSuitName } from "../scripts/helpers.js";
+import { createButton, createElement, createHSpace, createImage, createTextH3, createTextP, createTextSpan, createVSpace, getBoosterRewardedCountByType, getIconByContent, getIconByItem, getIconByPattern, getIconBySuit, getPatternLang, getPatternName, getSuitLang, getSuitName } from "../scripts/helpers.js";
 import { ScreenParameters } from "../scripts/navigation/navigation.js";
 import { showRewarded } from "../scripts/sdk/sdk.js";
 import { Items } from "../scripts/statics/staticValues.js";
@@ -16,7 +16,6 @@ screenParameters.defaultSelectedElement = { element: root.querySelector('.main-s
 screenParameters.selectableElements.push(screenParameters.defaultSelectedElement);
 
 const parent = root.getElementsByClassName('challenges-test-container')[0];
-console.log(parent);
 const currentLevel = trialLevelDatabase.currentLevel;
 let viewWidth = 0;
 
@@ -24,9 +23,8 @@ const openTestBtn = document.getElementById('challenges-switch-btn');
 const testChallengeScreen = document.getElementById('challenges-test-screen');
 const mainTab = document.getElementById('main-screen');
 openTestBtn.addEventListener('click', () => {
-  console.log(testChallengeScreen);
-  testChallengeScreen.style.display = 'flex';
-  mainTab.style.display = 'none';
+    testChallengeScreen.style.display = 'flex';
+    mainTab.style.display = 'none';
 });
 
 const arrowBackBtn = document.getElementById('');
@@ -41,7 +39,7 @@ function createBooster(itemType, title, langID, user, parent) {
                 backgroundImage: 'url(Sprites/Buttons/Used_plus.png)',
                 backgroundSize: '100% 100%',
             }, div, () => {
-                showRewarded(null, null, () => user.addItem(itemType, 1, { isTrue: true, isMonetized: false }), null);
+                showRewarded(null, null, () => user.addItem(itemType, getBoosterRewardedCountByType(itemType), { isTrue: true, isMonetized: false }), null);
             });
             audioManager.addClickableToPull(button);
 
@@ -185,7 +183,6 @@ function createLevelsList() {
         } else if (i > currentLevel) {
             element = createLockedLevelInstance();
         }
-        console.log(element);
         if (element != null) {
             parent.appendChild(element);
         }

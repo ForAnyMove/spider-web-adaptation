@@ -260,12 +260,13 @@ function setupTabSwitch() {
 }
 
 setupTabSwitch();
-setupStatistics();
 
-const selectables = createAchievementInstances();
+function initialize() {
+  setupStatistics();
+  const selectables = createAchievementInstances();
 
-screenParameters.selectableElements = [{ element: tabs[0] }, { element: tabs[1] }, screenParameters.defaultSelectedElement].concat(selectables);
+  screenParameters.selectableElements = [{ element: tabs[0] }, { element: tabs[1] }, screenParameters.defaultSelectedElement].concat(selectables);
+  languageChangeEvent.invoke(initialLocale);
+}
 
-languageChangeEvent.invoke(initialLocale);
-
-export { screenParameters }
+export { screenParameters, initialize }

@@ -2,10 +2,9 @@ import { animator } from "./animator.js";
 import { boundsChecker } from "./cardBoundsChecker.js";
 import { cardSelector } from "./cardSelector.js";
 import { cardCollector } from "./cardsCollector.js";
-import { getSkinBackImage, getSkinImage, getSkinImageCleanPath } from "./data/card_skin_database.js";
+import { getSkinBackImage, getSkinImage } from "./data/card_skin_database.js";
 import { DOChangeValue, DOChangeXY, DelayedCall, Ease } from "./dotween/dotween.js";
 import { Action, CanInteract, disableInteractions, enableInteractions } from "./globalEvents.js";
-import { preloadImagesAsync } from "./helpers.js";
 import { selectedRules } from "./rules/gameRules.js";
 import { CardSide, RanksStringList } from "./statics/enums.js";
 import { Platform } from "./statics/staticValues.js";
@@ -165,6 +164,8 @@ export default class Card {
 
                 this.tryDrop(columnTemp, cards);
             }
+
+            audioManager.playSource('cardSound_02');
         }
     }
 
@@ -226,6 +227,8 @@ export default class Card {
 
             domElement.addEventListener('touchmove', handleDragMove);
             domElement.addEventListener('touchend', handleDrop);
+
+            audioManager.playSource('cardSound_02');
         }
 
         domElement.addEventListener('touchstart', handleDragStart);
@@ -250,7 +253,7 @@ export default class Card {
         const columns = boundsChecker.getColumnsByCard(this);
         for (let i = 0; i < columns.length; i++) {
             const cardColumn = columns[i];
-            if (cardColumn.canPlace && selectedRules.isCanPlace([this], cardColumn.cards)) {
+            if (cardColumn.canPlace && selectedRules.isCanPlace([this], cardColumn.cards) && cardColumn != previousColumn) {
                 cardColumn.translateCardsToColumn(cards, () => {
                     this.dropFinishedEvent.invoke(this);
                     previousColumn.checkIfLastCardClosedAndOpen()
@@ -438,6 +441,8 @@ class CardColumn {
                 card.domElement.style.top = `${value.y + (i * (height + openedCardOffset))}px`;
             }
         }, targetPosition, 0.08, Ease.SineOut).onComplete(() => {
+            audioManager.playSource('cardSound_01');
+
             for (let i = 0; i < cards.length; i++) {
                 const card = cards[i];
                 if (options.addCards) {

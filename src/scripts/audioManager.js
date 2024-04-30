@@ -8,6 +8,10 @@ class AudioManager {
         this.enabledSoundIcon = soundIcons[0];
         this.disabledSoundIcon = soundIcons[1];
 
+        this.soundSources = [];
+
+        this.muteAccumulation = 0;
+
         this.soundSwitchButton = document.getElementById('sound-switch');
         this.musicSwitchButton = document.getElementById('music-switch');
 
@@ -18,9 +22,7 @@ class AudioManager {
         this.isSoundEnabled = load('sound', true);
 
         if (this.isMusicEnabled) {
-            document.addEventListener("click", () => {
-                this.musicAudioElement.play();
-            });
+            document.addEventListener("click", this.unmuteOnLoad);
         } else {
             this.musicAudioElement.muted = true;
         }
@@ -46,14 +48,57 @@ class AudioManager {
 
         document.addEventListener("visibilitychange", () => {
             if (document.visibilityState === "hidden") {
-                console.log('mute');
-                this.musicAudioElement.muted = true;
-                this.butonAudionElement.muted = true;
+                this.muteAccumulation++;
             } else {
-                this.musicAudioElement.muted = !this.isMusicEnabled;
-                this.butonAudionElement.muted = !this.isSoundEnabled;
+                this.muteAccumulation = Math.max(--this.muteAccumulation, 0);
             }
+
+            this.checkFocusState();
         });
+    }
+
+    fetchSource = function (id) {
+        const audioElement = document.getElementById(id);
+        for (let i = 0; i < this.soundSources.length; i++) {
+            const element = this.soundSources[i];
+            if (element.source == audioElement) return;
+        }
+
+        this.soundSources.push({
+            id: id,
+            source: audioElement
+        });
+    }
+
+    playSource = function (id) {
+        if (!this.isSoundEnabled) return;
+
+        for (let i = 0; i < this.soundSources.length; i++) {
+            const element = this.soundSources[i];
+            if (element.id == id) {
+                element.source.play();
+                return;
+            }
+        }
+    }
+
+    checkFocusState = () => {
+        if (this.muteAccumulation > 0) {
+            this.musicAudioElement.muted = true;
+            this.butonAudionElement.muted = true;
+        } else {
+            this.musicAudioElement.muted = !this.isMusicEnabled;
+            this.butonAudionElement.muted = !this.isSoundEnabled;
+        }
+    }
+
+    unmuteOnLoad = () => {
+        document.removeEventListener('click', this.unmuteOnLoad);
+        this.musicAudioElement.play();
+        if ('mediaSession' in navigator) {
+            navigator.mediaSession.metadata = null;
+            navigator.mediaSession.playbackState = "none";
+        }
     }
 
     pause = function () {

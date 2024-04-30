@@ -14,6 +14,7 @@ class CardSelector {
 
         if (this.selectedCards.length == 0) {
             if (!column.canRemove || !selectedRules.isCanRemove(cards)) return;
+            audioManager.playSource('cardSound_02');
 
             this.selectedCards = cards;
             this.selectedColumn = column;

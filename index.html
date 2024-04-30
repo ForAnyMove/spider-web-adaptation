@@ -25,11 +25,11 @@
 
 <body style="max-width: 100%; max-height: 100%; overflow: hidden;">
 
-  <audio id="backgroundMusic" loop>
+  <audio id="backgroundMusic" loop autoplay controlsList="nodownload">
     <source src="./assets/audio/music/Card-game-track-2.mp3" type="audio/mpeg">
     Your browser does not support the audio element.
   </audio>
-  <audio id="buttonClick">
+  <audio id="buttonClick" controlsList="nodownload">
     <source src="./assets/audio/sounds/Button-01.mp3" type="audio/mpeg">
   </audio>
   <div class="mask">
@@ -91,42 +91,54 @@
               <span class="booster-title" lang="day {1}">День 1</span>
               <img src="./Sprites/Icons/Icon_Energy.png" alt="hint" class="booster-icon" />
               <span class="booster-counter">2</span>
-              <div class="complete-overlay">Выполнено</div>
+              <div class="complete-overlay">
+                <img src="Sprites/Icons/Icon_Check.png" />
+              </div>
             </div>
             <div class="booster">
               <span class="completed-flag" lang="ready">Готово</span>
               <span class="booster-title" lang="day {2}">День 2</span>
               <img src="./Sprites/Icons/Icon_Hint.png" alt="hint" class="booster-icon" />
               <span class="booster-counter">3</span>
-              <div class="complete-overlay">Выполнено</div>
+              <div class="complete-overlay">
+                <img src="Sprites/Icons/Icon_Check.png" />
+              </div>
             </div>
             <div class="booster">
               <span class="completed-flag" lang="ready">Готово</span>
               <span class="booster-title" lang="day {3}">День 3</span>
               <img src="./Sprites/Icons/Icon_Energy.png" alt="hint" class="booster-icon" />
               <span class="booster-counter">5</span>
-              <div class="complete-overlay">Выполнено</div>
+              <div class="complete-overlay">
+                <img src="Sprites/Icons/Icon_Check.png" />
+              </div>
             </div>
             <div class="booster">
               <span class="completed-flag" lang="ready">Готово</span>
               <span class="booster-title" lang="day {4}">День 4</span>
               <img src="./Sprites/Icons/Icon_Mage.png" alt="hint" class="booster-icon" />
               <span class="booster-counter">3</span>
-              <div class="complete-overlay">Выполнено</div>
+              <div class="complete-overlay">
+                <img src="Sprites/Icons/Icon_Check.png" />
+              </div>
             </div>
             <div class="booster">
               <span class="completed-flag" lang="ready">Готово</span>
               <span class="booster-title" lang="day {5}">День 5</span>
               <img src="./Sprites/Icons/Icon_Energy.png" alt="hint" class="booster-icon" />
               <span class="booster-counter">10</span>
-              <div class="complete-overlay">Выполнено</div>
+              <div class="complete-overlay">
+                <img src="Sprites/Icons/Icon_Check.png" />
+              </div>
             </div>
             <div class="booster">
               <span class="completed-flag" lang="ready">Готово</span>
               <span class="booster-title" lang="day {6}">День 3</span>
               <img src="./Sprites/Icons/Icon_Undo.png" alt="hint" class="booster-icon" />
               <span class="booster-counter">5</span>
-              <div class="complete-overlay">Выполнено</div>
+              <div class="complete-overlay">
+                <img src="Sprites/Icons/Icon_Check.png" />
+              </div>
             </div>
           </div>
           <div class="special-booster">
@@ -134,7 +146,9 @@
             <span class="special-booster-title" lang="day {7}">День 7</span>
             <img src="./Sprites/Icons/Icon_Chest.png" alt="hint" class="special-booster-icon" />
             <span class="booster-counter" lang="spec_reward">Специальная награда</span>
-            <div class="complete-overlay">Выполнено</div>
+            <div class="complete-overlay">
+              <img src="Sprites/Icons/Icon_Check.png" />
+            </div>
           </div>
         </div>
       </div>
@@ -688,7 +702,8 @@
       <ul class="challenge-header-list">
         <li class="header-ui-container-challenges">
           <button class="challenge-header-navigation-btn main-screen-switch-btn">
-            <img src="./Sprites/Icons/Icon_Arrow_Back.png" alt="Profile" class="challenge-header-navigation-list-icon" />
+            <img src="./Sprites/Icons/Icon_Arrow_Back.png" alt="Profile"
+              class="challenge-header-navigation-list-icon" />
           </button>
         </li>
         <li class="header-ui-container-challenges">
@@ -921,6 +936,8 @@
         await import('./index.js').then((indexItem) => {
           indexItem.setupLanguageSelector(translatorItem.initialLocale);
         });
+
+        achievements.initialize();
       });
     });
 

@@ -74,6 +74,8 @@ class Achievement {
             } else {
                 this.completed = false;
             }
+
+            this.sendEvent();
         }
     }
 }

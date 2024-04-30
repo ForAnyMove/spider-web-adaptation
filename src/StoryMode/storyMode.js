@@ -1,7 +1,6 @@
-import DynamicFontChanger from "../localization/dynamicFontChanger.js";
 import { initialLocale, updateInContainer } from "../localization/translator.js";
 import { storyLevelDatabase } from "../scripts/data/level_databases.js";
-import { createButton, createElement, createHSpace, createImage, createTextH3, createTextSpan, createVSpace, getIconByContent, getIconByItem, getIconByPattern, getIconBySuit, getPatternLang, getPatternName, getSuitLang, getSuitName } from "../scripts/helpers.js";
+import { createButton, createElement, createHSpace, createImage, createTextH3, createTextSpan, createVSpace, getBoosterRewardedCountByType, getIconByContent, getIconByItem, getIconByPattern, getIconBySuit, getPatternLang, getPatternName, getSuitLang, getSuitName } from "../scripts/helpers.js";
 import { Screen, ScreenParameters } from "../scripts/navigation/navigation.js";
 import { showRewarded } from "../scripts/sdk/sdk.js";
 import { Items } from "../scripts/statics/staticValues.js";
@@ -110,10 +109,10 @@ function createLevelPreview(data) {
         const button = createButton(['add-booster-icon'], {
           border: 'none',
           background: 'no-repeat',
-          backgroundImage: 'url(../../Sprites/Buttons/Used_plus.png)',
+          backgroundImage: 'url(Sprites/Buttons/Used_plus.png)',
           backgroundSize: '100% 100%',
         }, div, () => {
-          showRewarded(null, null, () => user.addItem(itemType, 1, { isTrue: true, isMonetized: false }), null);
+          showRewarded(null, null, () => user.addItem(itemType, getBoosterRewardedCountByType(itemType), { isTrue: true, isMonetized: false }), null);
         });
 
         selectables.push({ element: button });
@@ -189,7 +188,7 @@ function createLevelPreview(data) {
         selectables = selectables.concat(createBooster(Items.BoosterHint, 'Подсказка', 'hint_b', user, boostersContainer));
         selectables = selectables.concat(createBooster(Items.BoosterUndo, 'Отмена хода', 'undo_b', user, boostersContainer));
         selectables = selectables.concat(createBooster(Items.BoosterMage, 'Маг', 'mage_b', user, boostersContainer));
-        selectables = selectables.concat(createBooster(Items.BoosterTime, 'Доп. время', 'timer_b', user, boostersContainer));
+        // selectables = selectables.concat(createBooster(Items.BoosterTime, 'Доп. время', 'timer_b', user, boostersContainer));
       }
 
       if (rewards == null || rewards.length == 0) {
