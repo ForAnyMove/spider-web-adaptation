@@ -1109,7 +1109,7 @@ button.selected {
   height: 5vw;
   padding: 1vh 1vh 2vh;
   border-radius: 2vh;
-  top: -15vh;
+  top: -9vw;
   left: 50%;
   transform: translateX(-50%);
   z-index: 1100;
@@ -1221,6 +1221,10 @@ button.selected {
 
 
 @media only screen and (max-width: 768px) and (orientation: portrait) {
+
+  .booster-prompt-container {
+    top: -13vh;
+  }
   .header-navigation-btn {
     width: 8vh;
     height: 8vh;
