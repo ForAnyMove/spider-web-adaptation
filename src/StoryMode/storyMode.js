@@ -236,9 +236,22 @@ function createLevelPreview(data) {
 
         const startButton = createButton(['start-level-btn'], null, levelStartContainer, () => {
           if (user.getItemCount(Items.Energy) >= requiredPass) {
+            const block = createElement('div', null, {
+              position: 'absolute',
+              right: '0',
+              bottom: '0',
+              left: '0',
+              top: '0',
+              zIndex: 3000
+            })
+            document.body.appendChild(block);
+            user.setSaveTrigger(() => {
+              window.location.href = `./src/playground/playground.html?levelID=level_story_${currentLevelIndex}`;
+              block.remove();
+            })
             user.removeItem(Items.Energy, requiredPass);
           }
-          window.location.href = `./src/playground/playground.html?levelID=level_story_${currentLevelIndex}`;
+          // window.location.href = `./src/playground/playground.html?levelID=level_story_${currentLevelIndex}`;
         });
         selectables.push({ element: startButton });
         startButton.id = 'play-btn';

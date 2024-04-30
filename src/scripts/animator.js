@@ -36,6 +36,14 @@ class Animator {
     }
 
     removeRequest = function (callback) {
+        for (let i = 0; i < this.requests.length; i++) {
+            const element = this.requests[i];
+            if (element.name == callback.name) {
+                this.requests.splice(this.requests.indexOf(element), 1);
+                return;
+            }
+        }
+
         if (!this.requests.includes(callback)) {
             return;
         }

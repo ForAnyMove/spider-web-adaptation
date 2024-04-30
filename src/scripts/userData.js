@@ -262,6 +262,7 @@ export default class User {
 
         this.availableContent.push(content);
         this.contentListUpdateEvent.invoke(this.availableContent);
+        this.onItemsPublicReceive.invoke({ contents: [content], monetized: false });
 
         log(`Update user content [${content.type.id} (${content.count})]: ${this.availableContent.map(i => ` ${i.id}`)}`, "user", "details");
 
@@ -412,6 +413,10 @@ export default class User {
         }
     }
 
+    setSaveTrigger = function (callback) {
+        this.saveTrigger = callback;
+    }
+
     saveData = function () {
         const saveObject = {
             items: this.items,
@@ -420,7 +425,7 @@ export default class User {
             achievements: this.achievements.map(i => i.completedIndex)
         }
 
-        save("user_01", saveObject);
+        save("user_01", saveObject, this.saveTrigger);
     }
 
     loadTestData = function (data) {

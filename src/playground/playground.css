@@ -169,6 +169,7 @@ header {
   align-items: center;
   flex-direction: column;
   margin-top: 20vh;
+  width: 80%;
 }
 
 .end-level-title {
@@ -182,7 +183,10 @@ header {
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  margin-bottom: 25vh;
+  margin-bottom: 35vh;
+  margin-top: 10vh;
+  width: 80%;
+  height: 4vh;
 }
 
 .lose-level-title {
@@ -285,8 +289,11 @@ header {
   background-image: url('../../Sprites/Buttons/Used_Button_03.png');
 }
 
-.next-btn-title {
+.next-btn-container>a {
+  text-decoration: none;
+}
 
+.next-btn-title {
   color: #ab6531;
   font-size: 2.1vh;
   --target-font-size: 2.1vh;
@@ -850,6 +857,10 @@ header {
   pointer-events: all
 }
 
+.playable-card-column.tinted>.card-element {
+  filter: brightness(0.5);
+}
+
 #play-btn {
   background-image: url('../../Sprites/Buttons/Used_Button_03.png');
   font-size: 1.8vh;
@@ -1202,15 +1213,6 @@ footer {
 
   /* > */
 
-  /* Cards sizes */
-  .active-cards-container,
-  .cards-container,
-  .extra-cards-container,
-  .card-element,
-  .test-card {
-    width: 9.6vw;
-    height: 12.8vw;
-  }
 
   .active-cards-zone {
     column-gap: 0;
@@ -1314,26 +1316,36 @@ footer {
     margin-top: 10%;
   }
 
+  /* Cards sizes */
+  .active-cards-container,
+  .cards-container,
+  .extra-cards-container,
+  .card-element,
+  .test-card {
+    width: 9.6vw;
+    height: 12.8vw;
+  }
+
   :root {
-    --closed-card-offset: -10.5vw;
-    --opened-card-offset: -7.9vw;
+    --closed-card-offset: -11.8vw;
+    --opened-card-offset: -9.8vw;
     --card-height: 12.8vw;
   }
 
   .active-cards-container>.card-element.closed:not(:first-child, .locked) {
-    margin-top: -10.5vw;
+    margin-top: -11.8vw;
     transition: margin-top 0.25s ease, width 0.25s ease, height 0.25s ease,
       margin-left 0.25s ease;
   }
 
   .active-cards-container>.card-element.first:not(:first-child, .locked) {
-    margin-top: -10.5vw;
+    margin-top: -11.8vw;
     transition: margin-top 0.25s ease, width 0.25s ease, height 0.25s ease,
       margin-left 0.25s ease;
   }
 
   .active-cards-container>.card-element.opened:not(:first-child, .first, .locked) {
-    margin-top: -8vw;
+    margin-top: -9.8vw;
     transition: margin-top 0.25s ease, width 0.25s ease, height 0.25s ease,
       margin-left 0.25s ease;
   }

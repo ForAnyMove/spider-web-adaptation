@@ -42,8 +42,6 @@ class LevelManagement {
                 }
             }
 
-            this.selectedDatabase.currentLevel++;
-
             updateStatistics();
         }
     }
@@ -77,6 +75,45 @@ class LevelManagement {
             updateStatistics();
 
             return { rewards: level.rewards }
+        }
+    }
+
+    recover = function () {
+        if (this.selectedDatabase != null) {
+            let level = this.selectedDatabase.levels[this.selectedDatabase.currentLevel];
+            if (level == null) return null;
+            statistics.loseCount.overall--;
+
+            for (let i = 0; i < statistics.loseCount.byLevelType.length; i++) {
+                const element = statistics.loseCount.byLevelType[i];
+                if (element.type == level.type) {
+                    element.count--;
+                }
+            }
+
+            for (let i = 0; i < statistics.loseCount.byRules.length; i++) {
+                const element = statistics.loseCount.byRules[i];
+                if (element.rule == level.gameRule) {
+                    element.count--;
+                }
+            }
+            statistics.gameCount.overall--;
+
+            for (let i = 0; i < statistics.gameCount.byLevelType.length; i++) {
+                const element = statistics.gameCount.byLevelType[i];
+                if (element.type == level.type) {
+                    element.count--;
+                }
+            }
+
+            for (let i = 0; i < statistics.gameCount.byRules.length; i++) {
+                const element = statistics.gameCount.byRules[i];
+                if (element.rule == level.gameRule) {
+                    element.count--;
+                }
+            }
+
+            updateStatistics();
         }
     }
 

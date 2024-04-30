@@ -107,6 +107,10 @@ function failMode(rule) {
     return true;
 }
 
+function recoverLevel() {
+    levelManagement.recover();
+}
+
 function completeLevel() {
     let options = levelManagement.winLevel();
 
@@ -166,4 +170,4 @@ function leaveLevel() {
     failLevel();
 }
 
-export { startLevel, completeLevel, failLevel, leaveLevel, completeMode, failMode }
+export { startLevel, completeLevel, failLevel, leaveLevel, completeMode, failMode, recoverLevel }

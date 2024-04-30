@@ -3,17 +3,17 @@ import { useHintBooster, useMageBooster, useUndoBooster } from "../scripts/boost
 import { cardCollector } from "../scripts/cardsCollector.js";
 import { DOChangeValue, DOChangeXY, DelayedCall, Ease, Sequence, createTweener } from "../scripts/dotween/dotween.js";
 import { CanInteract, disableInteractions, enableInteractions } from "../scripts/globalEvents.js";
-import { createElement, createImage, createTextSpan, getElements, getIconByItem, getInputElements, secondsToTime } from "../scripts/helpers.js";
+import { createElement, createImage, createTextSpan, getElements, getIconByContent, getIconByItem, getInputElements, secondsToTime } from "../scripts/helpers.js";
 import { createLevel, createSolitaireLevel } from "../scripts/levelCreator.js";
-import { CardSide, ContentType, Pattern, SuitMode } from "../scripts/statics/enums.js";
+import { CardSide, ContentType, LevelType, Pattern, SuitMode } from "../scripts/statics/enums.js";
 import { Content, Items, Platform, locales } from "../scripts/statics/staticValues.js";
 import { stepRecorder } from "../scripts/stepRecorder.js";
 
 import { fourSuitSpider, fourSuitSpiderLady, oneSuitSpider, oneSuitSpiderLady, selectedRules, twoSuitSpider, twoSuitSpiderLady } from "../scripts/rules/gameRules.js";
 import { getBackgroundImage } from "../scripts/data/card_skin_database.js";
-import { trialLevelDatabase, storyLevelDatabase } from "../scripts/data/level_databases.js";
+import { trialLevelDatabase, storyLevelDatabase, saveStoryDatabase, saveTrialDatabase } from "../scripts/data/level_databases.js";
 import { SolitaireCardColumn } from "../scripts/cardModel.js";
-import { completeLevel, completeMode, failLevel, failMode, startLevel } from "../scripts/levelStarter.js";
+import { completeLevel, completeMode, failLevel, failMode, recoverLevel, startLevel } from "../scripts/levelStarter.js";
 import { showInterstitial, showRewarded } from "../scripts/sdk/sdk.js";
 import DirectionalInput from "../scripts/directionInput.js";
 import { StackNavigation, Screen, BackActionHandler } from "../scripts/navigation/navigation.js";
@@ -22,6 +22,7 @@ import { initialLocale } from "../localization/translator.js";
 import { closePopup, openPopup } from "../scripts/screen addons/ingameSkinSelector.js";
 import { solitaireHTMLevels } from "../scripts/data/solitaireLevels.js";
 import { cardSelector } from "../scripts/cardSelector.js";
+import { statistics, updateStatistics } from "../scripts/gameStatistics.js";
 
 input = new DirectionalInput({ element: null });
 audioManager.fetchSource('cardSound_01');
@@ -122,7 +123,7 @@ const mageButtons = document.getElementsByClassName('mage-button');
 const undoButtons = document.getElementsByClassName('undo-button');
 const timeButtons = document.getElementsByClassName('time-button');
 
-const screenParameters = { rules: oneSuitSpider, decksToWin: 8, onWinCallback: null, onLoseCallback: null, isSolitaire: false, onRestart: null, time: -1 };
+const screenParameters = { rules: oneSuitSpider, decksToWin: 8, onWinCallback: null, onLoseCallback: null, isSolitaire: false, onRestart: null, onRecover: null, time: -1 };
 
 function trySelectLevel() {
   const levelTypesList = [
@@ -234,6 +235,7 @@ function trySelectLevel() {
       screenParameters.onWinCallback = () => {
         subscribeFinishScreenRewardsObtain();
         completeLevel();
+        saveStoryDatabase();
       };
       screenParameters.onLoseCallback = () => {
         failLevel();
@@ -280,9 +282,13 @@ function trySelectLevel() {
       screenParameters.onWinCallback = () => {
         subscribeFinishScreenRewardsObtain();
         completeLevel();
+        saveTrialDatabase();
       };
       screenParameters.onLoseCallback = () => {
         failLevel();
+      }
+      screenParameters.onRecover = () => {
+        recoverLevel();
       }
       startLevel(trialLevelDatabase);
       screenParameters.onRestart = () => startTimer(trialLevel.time);
@@ -307,7 +313,7 @@ function startTimer(seconds) {
   timer = seconds;
 
   let lastSecond = 0;
-  function request(dt) {
+  const request = (dt) => {
     timer -= dt * 60 / 1000;
 
     const second = Math.floor(timer);
@@ -322,6 +328,7 @@ function startTimer(seconds) {
     }
   }
 
+  animator.removeRequest(request);
   animator.addRequest(request);
 }
 
@@ -416,7 +423,6 @@ function setSpiderLadyStyles() {
 }
 
 checkAndMakeSpiderLadyPatternView();
-
 
 let solitaireColumns;
 
@@ -630,8 +636,9 @@ function setupButtons() {
     const element = restartButtons[i];
 
     element.onclick = function () {
-      if (!CanInteract) return;
+      if (!CanInteract && !element.classList.contains('lose-restart-button')) return;
 
+      enableInteractions();
       startCurrentLevel();
       navigation.pop();
     }
@@ -643,7 +650,9 @@ function setupButtons() {
     continueButton.onclick = function () {
       showRewarded(null, null, () => {
         tryCloseLoseScreen();
-        startTimer(screenParameters.time);
+        startTimer(screenParameters.time / 2);
+
+        screenParameters.onRecover?.();
 
         enableInteractions();
       }, null);
@@ -654,23 +663,38 @@ function setupButtons() {
 function subscribeFinishScreenRewardsObtain() {
   rewardsReceiver?.disable();
   user.onItemsPublicReceive.addListener((data) => {
-    const { items } = data;
-    const parent = document.getElementById('win-screen-rewards');
+    const { items, contents } = data;
+    if (items != null && items.length > 0) {
+      const container = document.getElementById('win-screen-rewards-container');
+      container.style.display = 'block';
 
-    for (let i = 0; i < items.length; i++) {
-      const element = items[i];
-      parent.appendChild(createRewardView(element));
+      const parent = container.querySelector('#win-screen-rewards');
+      for (let i = 0; i < items.length; i++) {
+        const element = items[i];
+        parent.appendChild(createRewardView(element));
+      }
+    }
+    if (contents != null && contents.length > 0) {
+      const container = document.getElementById('win-screen-rewards-container');
+      container.style.display = 'block';
+      const parent = container.querySelector('#win-screen-rewards');
+      for (let i = 0; i < contents.length; i++) {
+        const element = contents[i];
+        parent.appendChild(createRewardContentView(element));
+      }
     }
   });
+
 }
 
 function checkIfLevelWon(options) {
-
   if (options.collectedCount >= screenParameters.decksToWin) {
     const winScreen = document.getElementById('win-screen-popup');
 
     winScreen.classList.add('visible');
     winScreen.classList.remove('hidden-popup');
+
+    screenParameters.onWinCallback?.();
   }
 }
 
@@ -694,6 +718,7 @@ function levelLostFlow() {
   disableInteractions();
 
   showLoseScreen();
+  screenParameters.onLoseCallback?.();
 }
 
 function updateStepText(stepCount) {
@@ -893,6 +918,7 @@ function setupSolitaireLevel() {
           DelayedCall(0.2, () => {
             for (let j = 0; j < result.playableCardColumns.length; j++) {
               const element = result.playableCardColumns[j];
+              element.domElement.classList.remove('tinted');
               element.setCanRemove();
               element.setCanPlace();
             }
@@ -947,10 +973,18 @@ function createRewardView(data) {
   return container;
 }
 
+function createRewardContentView(data) {
+  const container = createElement('div', ['bounty'], { scale: 1, marginLeft: '1vh', marginRight: '1vh' });
+  {
+    createImage(['bounty-icon'], null, container, '../../' + getIconByContent(data));
+  }
+
+  return container;
+}
+
 updateStepText(0);
 setupBackgroundChange();
 cardCollector.onCollected.addListener(checkIfLevelWon);
-
 
 function setupLanguageSelector(initialLocale) {
   const selectors = document.getElementsByClassName('language-container');
@@ -1521,3 +1555,16 @@ invokeTutorial();
 dynamicFontChanger = new DynamicFontChanger();
 
 export { setupLanguageSelector }
+
+const fastWinButton = document.getElementById('fast-win-button');
+if (fastWinButton != null) {
+  fastWinButton.onclick = function () {
+    checkIfLevelWon({ collectedCount: screenParameters.decksToWin });
+  }
+}
+const fastLoseButton = document.getElementById('fast-lose-button');
+if (fastLoseButton != null) {
+  fastLoseButton.onclick = function () {
+    levelLostFlow();
+  }
+}

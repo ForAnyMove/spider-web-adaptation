@@ -328,7 +328,7 @@ class CardColumn {
 
         this.lockElement = document.createElement('div');
         this.lockElement.classList.add('card-locker-hidden');
-        this.domElement.appendChild(this.lockElement)
+        this.domElement.appendChild(this.lockElement);
 
         DelayedCall(0.1, () => {
             this.lockElement.classList.replace('card-locker-hidden', 'card-locked-showed');
@@ -336,6 +336,7 @@ class CardColumn {
 
         this.cardAddedEvent.addListener(() => {
             this.unlock();
+            this.domElement.classList.add('tinted');
             this.cardAddedEvent.removeAllListeners();
             this.recalculateFirstOpened();
         })
