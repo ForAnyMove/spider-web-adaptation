@@ -227,6 +227,10 @@ main::-webkit-scrollbar {
   background-image: url('../../Sprites/Buttons/Used_Button_06.png');
 }
 
+.completed {
+  background-image: url('../../Sprites/Frames/Used_R_Frame_02.png');
+}
+
 /* Buttons positions fixing place */
 
 /* first line */

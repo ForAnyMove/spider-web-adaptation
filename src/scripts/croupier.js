@@ -50,7 +50,7 @@ class Croupier {
             time += dt * 60 / 1000;
             if (time >= 0.03) {
                 if (distributions.length == 0 || mc.cards.length == 0) {
-                    animator.removeRequest(update);
+                    animator.removeRequest('cr_upd');
                     enableInteractions();
 
                     DelayedCall(0.15, () => {
@@ -69,7 +69,7 @@ class Croupier {
         }
 
         disableInteractions();
-        animator.addRequest(update);
+        animator.addRequest('cr_upd', update);
     }
 }
 

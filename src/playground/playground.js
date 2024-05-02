@@ -323,13 +323,13 @@ function startTimer(seconds) {
 
       if (second <= 0) {
         levelLostFlow();
-        animator.removeRequest(request);
+        animator.removeRequest('timer_01');
       }
     }
   }
 
-  animator.removeRequest(request);
-  animator.addRequest(request);
+  animator.removeRequest('timer_01');
+  animator.addRequest('timer_01', request);
 }
 
 function checkAndMakeSpiderLadyPatternView() {
@@ -461,7 +461,7 @@ function startCurrentLevel() {
   result = screenParameters.isSolitaire ? createSolitaireLevel({ rules: screenParameters.rules }) : createLevel({ rules: screenParameters.rules });
   screenParameters.onRestart?.();
 
-  stepRecorder.stepRecordedEvent.addListener(updateStepText);
+  // stepRecorder.stepRecordedEvent.addListener(updateStepText);
   updateStepText(0);
 
   if (screenParameters.isSolitaire) {
@@ -530,14 +530,26 @@ function setupButtons() {
   }
 
   const hintCounters = [];
+  let hTimeout = null;
   for (let i = 0; i < hintButtons.length; i++) {
     const element = hintButtons[i];
     if (element != null) {
       hintCounters.push(element.getElementsByTagName('span')[0]);
       element.onclick = function () {
         if (user.hasItems(Items.BoosterHint)) {
-          if (useHintBooster(result.playableCardColumns, screenParameters.rules).isTrue) {
-            user.removeItem(Items.BoosterHint, 1);
+          const boosterResult = useHintBooster(result.playableCardColumns, screenParameters.rules);
+          if (boosterResult.isTrue != undefined) {
+            if (boosterResult.isTrue) {
+              user.removeItem(Items.BoosterHint, 1);
+            } else {
+              clearTimeout(hTimeout);
+              if (!result.mainCardColumn.domElement.classList.contains('hint')) {
+                result.mainCardColumn.domElement.classList.add('hint');
+              }
+              hTimeout = setTimeout(() => {
+                result.mainCardColumn.domElement.classList.remove('hint');
+              }, 400);
+            }
           }
         } else {
           showRewarded(null, null, () => user.addItem(Items.BoosterHint, 4, { isTrue: true, isMonetized: false }))
@@ -911,8 +923,8 @@ function setupSolitaireLevel() {
       element.cardAddedEvent.addListener(() => {
         unlockedCount++;
         if (unlockedCount == result.playableCardColumns.length) {
-          setupDefaultLevel();
           stepRecorder.reset();
+          setupDefaultLevel();
           input.loadFromSavedPull('ingame');
 
           DelayedCall(0.2, () => {
@@ -1556,15 +1568,15 @@ dynamicFontChanger = new DynamicFontChanger();
 
 export { setupLanguageSelector }
 
-const fastWinButton = document.getElementById('fast-win-button');
-if (fastWinButton != null) {
-  fastWinButton.onclick = function () {
-    checkIfLevelWon({ collectedCount: screenParameters.decksToWin });
-  }
-}
-const fastLoseButton = document.getElementById('fast-lose-button');
-if (fastLoseButton != null) {
-  fastLoseButton.onclick = function () {
-    levelLostFlow();
-  }
-}
+// const fastWinButton = document.getElementById('fast-win-button');
+// if (fastWinButton != null) {
+//   fastWinButton.onclick = function () {
+//     checkIfLevelWon({ collectedCount: screenParameters.decksToWin });
+//   }
+// }
+// const fastLoseButton = document.getElementById('fast-lose-button');
+// if (fastLoseButton != null) {
+//   fastLoseButton.onclick = function () {
+//     levelLostFlow();
+//   }
+// }

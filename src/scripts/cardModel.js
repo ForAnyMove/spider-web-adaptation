@@ -483,7 +483,7 @@ class CardColumn {
                 time += dt * 60 / 1000;
                 if (time >= options.delay) {
                     if (cards.length == 0) {
-                        animator.removeRequest(update);
+                        animator.removeRequest('cm_upd');
                         enableInteractions();
 
                         finishCallback?.();
@@ -498,7 +498,7 @@ class CardColumn {
                 }
             }
 
-            animator.addRequest(update)
+            animator.addRequest('cm_upd', update)
         }
 
         translate();

@@ -56,7 +56,10 @@ let offset = { x: 0, y: 0 };
 
 for (let i = 0; i < levelViews.length; i++) {
   const element = levelViews[i];
-  if (i == currentLevelIndex) {
+  if (i < currentLevelIndex) {
+    element.classList.remove('closed')
+    element.classList.add('completed')
+  } else if (i == currentLevelIndex) {
     element.classList.remove('closed')
     element.innerText = `${i + 1}`;
 

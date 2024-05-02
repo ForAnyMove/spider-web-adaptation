@@ -6,11 +6,13 @@ class Animator {
         this.lastTimeStamp = -1;
         this.paused = false;
 
+        this.isFramerActive = false;
+
         document.addEventListener("visibilitychange", () => {
             if (document.visibilityState === "hidden") {
                 this.paused = true;
                 this.clearFramer();
-            } else {
+            } else if (!this.isFramerActive) {
                 this.paused = false;
                 this.createFramer();
             }
@@ -23,40 +25,60 @@ class Animator {
         this.paused = false;
     }
 
-    addRequest = function (callback) {
-        if (this.requests.includes(callback)) return;
+    includes = function (request) {
+        for (let i = 0; i < this.requests.length; i++) {
+            const element = this.requests[i];
+            if (element.id == request.id) return true;
+        }
+
+        return false;
+    }
+
+    includesId = function (id) {
+        for (let i = 0; i < this.requests.length; i++) {
+            const element = this.requests[i];
+            if (element.id == id) return true;
+        }
+
+        return false;
+    }
+
+    addRequest = function (id, callback) {
+        if (this.includesId(id)) return;
 
         let lastRequestsLength = this.requests.length;
 
-        this.requests.push(callback)
+        this.requests.push({ id: id, callback: callback })
 
         if (lastRequestsLength <= 0) {
             this.createFramer();
         }
     }
 
-    removeRequest = function (callback) {
-        for (let i = 0; i < this.requests.length; i++) {
-            const element = this.requests[i];
-            if (element.name == callback.name) {
-                this.requests.splice(this.requests.indexOf(element), 1);
-                return;
-            }
-        }
-
-        if (!this.requests.includes(callback)) {
+    removeRequest = function (id) {
+        if (!this.includesId(id)) {
             return;
         }
 
-        this.requests.splice(this.requests.indexOf(callback), 1);
+        for (let i = 0; i < this.requests.length; i++) {
+            const element = this.requests[i];
+            if (element.id == id) {
+                this.requests.splice(i, 1);
+                return;
+            }
+        }
     }
 
     createFramer = function () {
-        window.requestAnimationFrame(this.update);
+        if (!this.isFramerActive) {
+            this.isFramerActive = true;
+            window.requestAnimationFrame(this.update);
+        }
     }
 
     clearFramer = function () {
         this.lastTimeStamp = -1;
+        this.isFramerActive = false;
     }
 
     update = (timeStamp) => {
@@ -67,7 +89,7 @@ class Animator {
 
         if (this.requests.length > 0 && !this.paused) {
             for (let i = 0; i < this.requests.length; i++) {
-                const callback = this.requests[i];
+                const callback = this.requests[i].callback;
                 if (callback == null) continue;
 
                 callback?.(dt);

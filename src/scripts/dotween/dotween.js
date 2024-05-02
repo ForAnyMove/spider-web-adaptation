@@ -46,7 +46,7 @@ class Tweener {
 
         this.tweens.push(tween);
 
-        animator.addRequest(this.update);
+        animator.addRequest('tw_upd', this.update);
     }
 
     removeTween = function (tween) {
@@ -57,7 +57,7 @@ class Tweener {
         this.tweens.splice(this.tweens.indexOf(tween), 1);
 
         if (this.tweens.length == 0) {
-            animator.removeRequest(this.update);
+            animator.removeRequest('tw_upd');
         }
     }
 
