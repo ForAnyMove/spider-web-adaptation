@@ -425,6 +425,7 @@ export default class User {
             achievements: this.achievements.map(i => i.completedIndex)
         }
 
+        console.log(`....>>.>>. try save data ${saveObject}`);
         save("user_01", saveObject, this.saveTrigger);
     }
 

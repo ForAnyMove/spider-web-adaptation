@@ -159,7 +159,7 @@ const backgroundDatabase = {
         },
         {
             id: Content.Background02,
-            previewPath: "Sprites/Backgrounds/Release/Background_02.png",
+            previewPath: "Sprites/Backgrounds/Release/Background_04.png",
             itemPreviewPath: "Sprites/BackgroundPreview/Used_Background_02.png",
             unlockDescription: ""
         },
@@ -171,7 +171,7 @@ const backgroundDatabase = {
         },
         {
             id: Content.Background04,
-            previewPath: "Sprites/Backgrounds/Release/Background_04.png",
+            previewPath: "Sprites/Backgrounds/Release/Background_02.png",
             itemPreviewPath: "Sprites/BackgroundPreview/Used_Background_04.png",
             unlockDescription: "content_unlock_descr{11}"
         },

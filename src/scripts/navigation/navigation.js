@@ -225,7 +225,7 @@ class BackActionHandler {
 
         this.timeout = setTimeout(() => {
             this.handleSinglePress();
-        }, 200);
+        }, 300);
     }
 
     stop = function () {

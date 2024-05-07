@@ -196,4 +196,17 @@ const xPos = viewWidth - window.innerWidth / 2;
 
 languageChangeEvent.invoke(initialLocale);
 
+const scrollPlane = document.getElementsByClassName('challenges-test-container')[0];
+
+scrollPlane.addEventListener("wheel", function (e) {
+    if (e.deltaY > 0) {
+        scrollPlane.scrollLeft += 100;
+        e.preventDefault();
+    }
+    else {
+        scrollPlane.scrollLeft -= 100;
+        e.preventDefault();
+    }
+});
+
 export { screenParameters }

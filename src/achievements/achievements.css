@@ -79,7 +79,7 @@ header {
 .level-btn {
   width: 5vw;
   height: 5vw;
-  margin: .5vw;
+  margin: 1vw;
   background: url('../../Sprites/Buttons/Used_Button_01.png');
   background-size: cover;
   border-radius: 50%;
@@ -487,6 +487,6 @@ main {
 
 @media (min-aspect-ratio: 11/6) {
   .header-navigation-btn {
-    scale: 0.6;
+    scale: 1;
   }
 }

@@ -41,6 +41,10 @@ body {
   min-width: 100%;
   -ms-overflow-style: none;
   scrollbar-width: 0;
+  user-select: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
 }
 
 body::-webkit-scrollbar {
@@ -85,7 +89,7 @@ header {
 .level-btn {
   width: 5vw;
   height: 5vw;
-  margin: .5vw;
+  margin: 1vw;
   background: url('../../Sprites/Buttons/Used_Button_01.png');
   background-size: cover;
   border-radius: 50%;
@@ -154,7 +158,8 @@ header {
   box-shadow: 5px 5px 15px -5px #000000;
   margin: 0 2vh;
   scroll-snap-align: center;
-  flex: 0 0 auto; /* Фиксированный размер блока, не увеличивается и не уменьшается */
+  flex: 0 0 auto;
+  /* Фиксированный размер блока, не увеличивается и не уменьшается */
 
 }
 

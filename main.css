@@ -1,6 +1,11 @@
 * {
   margin: 0;
   padding: 0;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
 }
 
 html {
@@ -187,7 +192,7 @@ a {
 }
 
 .main-panel-btn-title {
-  color: #9b6d00;
+  color: #AF6227;
 
   font-size: 1.2vw;
   --target-font-size: 1.2vw;
@@ -195,7 +200,7 @@ a {
 }
 
 .main-panel-btn-level {
-  color: #d3b927;
+  color: #D68329;
 
   font-size: 1.2vw;
   --target-font-size: 1.2vw;

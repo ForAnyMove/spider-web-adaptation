@@ -170,15 +170,16 @@ async function saveUserData(data, callback) {
 
         log("[saveUserData] start saving", 'sdk', 'player');
         player.setData(data).then(() => {
-            // data['saves_020017'].map(i => {
-            //     if (i['user_01'] != null) {
-            //         console.log(i['user_01'].items[0]);
-            //     }
-            // })
+            console.log(`....>>.>>. saved ${data}`);
+            data['saves_020017'].map(i => {
+                if (i['user_01'] != null) {
+                    console.log(i['user_01'].items[0]);
+                }
+            })
             log("[saveUserData] save callback", 'sdk', 'player');
             setTimeout(() => {
                 callback?.();
-            }, 100);
+            }, 500);
         });
     } catch (err) {
         error(`[saveUserData] catched error ${err}`, 'sdk', 'player');

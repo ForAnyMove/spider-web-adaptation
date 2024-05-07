@@ -7,13 +7,23 @@ export default class DynamicFontChanger {
         this.containers = [];
         this.updateElementsPull();
 
+
         if (languageChangeEvent) { languageChangeEvent.addListener(this.updateTextFont); }
         window.addEventListener('resize', this.updateTextFont)
 
         this.updateTextFont();
     }
 
+    removeTabIndex = function () {
+        const elements = getElements(document, { tags: ['button', 'a'] });
+        for (let i = 0; i < elements.length; i++) {
+            const element = elements[i];
+            element.tabIndex = "-1";
+        }
+    }
+
     updateElementsPull = function () {
+        this.removeTabIndex();
         const isVisible = (element) => {
             function isElementHidden(element) {
                 var computedStyle = window.getComputedStyle(element);

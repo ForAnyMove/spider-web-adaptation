@@ -85,7 +85,7 @@ header {
 .level-btn {
   width: 4.5vw;
   height: 4.5vw;
-  margin: 0.5vw;
+  margin: 1vw;
   background: url('../../Sprites/Buttons/Used_Button_01.png');
   background-size: cover;
   border-radius: 50%;
