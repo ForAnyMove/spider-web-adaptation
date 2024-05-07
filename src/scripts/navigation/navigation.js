@@ -11,7 +11,8 @@ class ScreenParameters {
 }
 
 class Screen {
-    constructor(options = { style, isPopup, isMain, element, openButtons, closeButtons, onFocus, onUnfocus, screenParameters }) {
+    constructor(options = { id, style, isPopup, isMain, element, openButtons, closeButtons, onFocus, onUnfocus, screenParameters }) {
+        this.id = options.id;
         this.style = options.style;
         this.screenParameters = options.screenParameters;
         this.element = options.element;
@@ -98,10 +99,25 @@ class Screen {
 
         this.isOpened = false;
     }
+
+    fastHide = function () {
+        this.isOpened = false;
+        this.element.style.opacity = 0;
+        this.element.style.display = 'none';
+
+        if (this.styleLink != null) {
+            this.styleLink.remove();
+        }
+    }
 }
 
 class Navigation {
     constructor() {
+        this.registredScreens = [];
+        this.openedScreens = [];
+    }
+
+    clear() {
         this.registredScreens = [];
         this.openedScreens = [];
     }
@@ -168,6 +184,40 @@ class StackNavigation extends Navigation {
         }
         this.openedScreens.push(screen);
         this.open(screen);
+    }
+
+    createNewRouteFromID = function (id) {
+
+        let screen = null;
+
+        for (let i = 0; i < this.registredScreens.length; i++) {
+            const element = this.registredScreens[i];
+            if (element.id == id) {
+                screen = element;
+                break;
+            }
+        }
+
+        if (screen == null) return;
+
+        enablePreloader();
+        setTimeout(() => {
+            for (let i = 0; i < this.registredScreens.length; i++) {
+                const element = this.registredScreens[i];
+                element?.fastHide();
+            }
+            this.push(screen);
+        }, 50)
+    }
+
+    pushID = function (id) {
+        for (let i = 0; i < this.registredScreens.length; i++) {
+            const element = this.registredScreens[i];
+            if (element.id == id) {
+                this.push(element);
+                return;
+            }
+        }
     }
 
     pop = function () {

@@ -16,6 +16,7 @@
   <!-- <link rel="stylesheet" href="./src/Collection/collection.css"> -->
   <!-- <link rel="stylesheet" href="./src/achievements/achievements.css"> -->
   <link rel="stylesheet" href="fonts.css">
+  <link rel="stylesheet" href="exitPopupStyle.css">
   <!-- <link rel="stylesheet" href="test.css"> -->
 
   <title>Spider Web</title>
@@ -23,13 +24,19 @@
   <script src="https://yandex.ru/games/sdk/v2"></script>
 </head>
 
-<body style="max-width: 100%; max-height: 100%; overflow: hidden;">
+<body style="max-width: 100%; max-height: 100%; overflow: hidden; background-color: #009e00;">
   <audio id="backgroundMusic" loop autoplay controlsList="nodownload">
     <source src="./assets/audio/music/Card-game-track-2.mp3" type="audio/mpeg">
     Your browser does not support the audio element.
   </audio>
   <audio id="buttonClick" controlsList="nodownload">
     <source src="./assets/audio/sounds/Button-01.mp3" type="audio/mpeg">
+  </audio>
+  <audio id="cardSound_01" controlsList="nodownload">
+    <source src="../../assets/audio/sounds/Card_02_Place.mp3" type="audio/mpeg">
+  </audio>
+  <audio id="cardSound_02" controlsList="nodownload">
+    <source src="../../assets/audio/sounds/Card_04_PIck.mp3" type="audio/mpeg">
   </audio>
   <div class="mask">
     <div class="banter-loader">
@@ -42,6 +49,89 @@
       <div class="banter-loader__box"></div>
       <div class="banter-loader__box"></div>
       <div class="banter-loader__box"></div>
+    </div>
+  </div>
+  <div class="popup languages popup-overlay" id="languages">
+    <div id="popup-fade-close"></div>
+    <div class="popup-content">
+      <div class="popup-header">
+        <h3 lang="lang">Язык</h3>
+        <img src="./Sprites/Icons/Icon_Close.png" alt="close" id="close-popup-languages" class="close-popup" />
+      </div>
+      <div class="languages-list">
+        <div class="language-container">
+          <div class="language">
+            <img src="./Sprites/Lang/ru.png" alt="RU" class="language-icon">
+            <span class="language-title">Русский</span>
+          </div>
+          <div class="custom-checkbox">
+            <img src="./Sprites/Icons/Icon_Check.png" alt="Check" class="accept-checkbox-icon">
+          </div>
+        </div>
+        <div class="language-container">
+          <div class="language">
+            <img src="./Sprites/Lang/en.png" alt="EN" class="language-icon">
+            <span class="language-title">English</span>
+          </div>
+          <div class="custom-checkbox">
+            <img src="./Sprites/Icons/Icon_Check.png" alt="Check" class="accept-checkbox-icon hidden">
+          </div>
+        </div>
+        <div class="language-container">
+          <div class="language">
+            <img src="./Sprites/Lang/de.png" alt="GER" class="language-icon">
+            <span class="language-title">German</span>
+          </div>
+          <div class="custom-checkbox">
+            <img src="./Sprites/Icons/Icon_Check.png" alt="Check" class="accept-checkbox-icon hidden">
+          </div>
+        </div>
+        <div class="language-container">
+          <div class="language">
+            <img src="./Sprites/Lang/ja.png" alt="JAP" class="language-icon">
+            <span class="language-title">Japanese</span>
+          </div>
+          <div class="custom-checkbox">
+            <img src="./Sprites/Icons/Icon_Check.png" alt="Check" class="accept-checkbox-icon hidden">
+          </div>
+        </div>
+        <div class="language-container">
+          <div class="language">
+            <img src="./Sprites/Lang/hi.png" alt="IND" class="language-icon">
+            <span class="language-title">Hindi</span>
+          </div>
+          <div class="custom-checkbox">
+            <img src="./Sprites/Icons/Icon_Check.png" alt="Check" class="accept-checkbox-icon hidden">
+          </div>
+        </div>
+        <div class="language-container">
+          <div class="language">
+            <img src="./Sprites/Lang/pt.png" alt="PORTU" class="language-icon">
+            <span class="language-title">Portuguese</span>
+          </div>
+          <div class="custom-checkbox">
+            <img src="./Sprites/Icons/Icon_Check.png" alt="Check" class="accept-checkbox-icon hidden">
+          </div>
+        </div>
+        <div class="language-container">
+          <div class="language">
+            <img src="./Sprites/Lang/es.png" alt="ESP" class="language-icon">
+            <span class="language-title">Spanish</span>
+          </div>
+          <div class="custom-checkbox">
+            <img src="./Sprites/Icons/Icon_Check.png" alt="Check" class="accept-checkbox-icon hidden">
+          </div>
+        </div>
+        <div class="language-container">
+          <div class="language">
+            <img src="./Sprites/Lang/tr.png" alt="TURK" class="language-icon">
+            <span class="language-title">Turkish</span>
+          </div>
+          <div class="custom-checkbox">
+            <img src="./Sprites/Icons/Icon_Check.png" alt="Check" class="accept-checkbox-icon hidden">
+          </div>
+        </div>
+      </div>
     </div>
   </div>
   <div id="main-screen">
@@ -250,11 +340,9 @@
             <span class="settings-btn-title" lang="sound">Звук</span>
           </div>
           <div class="setting-btn-container">
-            <a href="./src/playground/playground.html?levelID=level_def_s_1&isTutorial=true">
-              <button class="header-navigation-btn">
-                <img src="./Sprites/Icons/Icon_Tutorial.png " alt="Tutorial" class="header-navigation-list-icon" />
-              </button>
-            </a>
+            <button class="header-navigation-btn tutorial-btn">
+              <img src="./Sprites/Icons/Icon_Tutorial.png " alt="Tutorial" class="header-navigation-list-icon" />
+            </button>
             <span class="settings-btn-title" lang="tutorial">Обучение</span>
           </div>
           <div class="setting-btn-container">
@@ -266,105 +354,7 @@
           </div>
         </div>
         <div class="version">
-          <span class="version-title">v0.0.2.20</span>
-        </div>
-      </div>
-    </div>
-    <div class="popup languages" id="languages">
-      <div id="popup-fade-close"></div>
-      <div class="popup-content">
-        <div class="popup-header">
-          <h3 lang="lang">Язык</h3>
-          <img src="./Sprites/Icons/Icon_Close.png" alt="close" id="close-popup-languages" class="close-popup" />
-        </div>
-        <div class="languages-list">
-          <div class="language-container">
-            <div class="language">
-              <img src="./Sprites/Lang/ru.png" alt="RU" class="language-icon">
-              <span class="language-title">Русский</span>
-            </div>
-            <div class="custom-checkbox">
-              <img src="./Sprites/Icons/Icon_Check.png" alt="Check" class="accept-checkbox-icon">
-            </div>
-          </div>
-          <div class="language-container">
-            <div class="language">
-              <img src="./Sprites/Lang/en.png" alt="EN" class="language-icon">
-              <span class="language-title">English</span>
-            </div>
-            <div class="custom-checkbox">
-              <img src="./Sprites/Icons/Icon_Check.png" alt="Check" class="accept-checkbox-icon hidden">
-            </div>
-          </div>
-          <div class="language-container">
-            <div class="language">
-              <img src="./Sprites/Lang/de.png" alt="GER" class="language-icon">
-              <span class="language-title">German</span>
-            </div>
-            <div class="custom-checkbox">
-              <img src="./Sprites/Icons/Icon_Check.png" alt="Check" class="accept-checkbox-icon hidden">
-            </div>
-          </div>
-          <div class="language-container">
-            <div class="language">
-              <img src="./Sprites/Lang/ja.png" alt="JAP" class="language-icon">
-              <span class="language-title">Japanese</span>
-            </div>
-            <div class="custom-checkbox">
-              <img src="./Sprites/Icons/Icon_Check.png" alt="Check" class="accept-checkbox-icon hidden">
-            </div>
-          </div>
-          <div class="language-container">
-            <div class="language">
-              <img src="./Sprites/Lang/hi.png" alt="IND" class="language-icon">
-              <span class="language-title">Hindi</span>
-            </div>
-            <div class="custom-checkbox">
-              <img src="./Sprites/Icons/Icon_Check.png" alt="Check" class="accept-checkbox-icon hidden">
-            </div>
-          </div>
-          <div class="language-container">
-            <div class="language">
-              <img src="./Sprites/Lang/pt.png" alt="PORTU" class="language-icon">
-              <span class="language-title">Portuguese</span>
-            </div>
-            <div class="custom-checkbox">
-              <img src="./Sprites/Icons/Icon_Check.png" alt="Check" class="accept-checkbox-icon hidden">
-            </div>
-          </div>
-          <div class="language-container">
-            <div class="language">
-              <img src="./Sprites/Lang/es.png" alt="ESP" class="language-icon">
-              <span class="language-title">Spanish</span>
-            </div>
-            <div class="custom-checkbox">
-              <img src="./Sprites/Icons/Icon_Check.png" alt="Check" class="accept-checkbox-icon hidden">
-            </div>
-          </div>
-          <div class="language-container">
-            <div class="language">
-              <img src="./Sprites/Lang/tr.png" alt="TURK" class="language-icon">
-              <span class="language-title">Turkish</span>
-            </div>
-            <div class="custom-checkbox">
-              <img src="./Sprites/Icons/Icon_Check.png" alt="Check" class="accept-checkbox-icon hidden">
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="popup exid-game" id="exid-game">
-      <div class="popup-content">
-        <div class="popup-header">
-          <h3 class="exid-tab-title" lang="exit_question">Вы уверены, что хотите выйти из игры?</h3>
-        </div>
-        <div class="exid-btns-container">
-          <button class="start-level-btn exid-yes" id="play-btn">
-            <span class="start-level-btn-title" lang="yes">Да</span>
-          </button>
-          <button class="start-level-btn exid-no" id="play-btn">
-            <span class="start-level-btn-title" lang="no">Нет</span>
-          </button>
+          <span class="version-title">v0.0.2.21</span>
         </div>
       </div>
     </div>
@@ -386,52 +376,40 @@
     <main class="main-content">
       <section class="btn-panel">
         <div class="main-panel-btn-container-1">
-          <a href="./src/playground/playground.html?levelID=level_def_s_1">
-            <button class="main-panel-btn main-panel-btn-1">
-              <span class="main-panel-btn-title" lang="one_suit">Одна масть</span>
-              <span class="main-panel-btn-level" lang="spider">Паук</span>
-            </button>
-          </a>
+          <button class="main-panel-btn main-panel-btn-1">
+            <span class="main-panel-btn-title" lang="one_suit">Одна масть</span>
+            <span class="main-panel-btn-level" lang="spider">Паук</span>
+          </button>
         </div>
         <div class="main-panel-btn-container-2">
-          <a href="./src/playground/playground.html?levelID=level_def_s_2">
-            <button class="main-panel-btn main-panel-btn-2">
-              <span class="main-panel-btn-title" lang="two_suit">Две масти</span>
-              <span class="main-panel-btn-level" lang="spider">Паук</span>
-            </button>
-          </a>
+          <button class="main-panel-btn main-panel-btn-2">
+            <span class="main-panel-btn-title" lang="two_suit">Две масти</span>
+            <span class="main-panel-btn-level" lang="spider">Паук</span>
+          </button>
         </div>
         <div class="main-panel-btn-container-3">
-          <a href="./src/playground/playground.html?levelID=level_def_s_4">
-            <button class="main-panel-btn main-panel-btn-3">
-              <span class="main-panel-btn-title" lang="four_suit">Четыре масти</span>
-              <span class="main-panel-btn-level" lang="spider">Паук</span>
-            </button>
-          </a>
+          <button class="main-panel-btn main-panel-btn-3">
+            <span class="main-panel-btn-title" lang="four_suit">Четыре масти</span>
+            <span class="main-panel-btn-level" lang="spider">Паук</span>
+          </button>
         </div>
         <div class="main-panel-btn-container-4">
-          <a href="./src/playground/playground.html?levelID=level_def_sl_1">
-            <button class="main-panel-btn main-panel-btn-4">
-              <span class="main-panel-btn-title" lang="one_suit">Одна масть</span>
-              <span class="main-panel-btn-level" lang="spider_w">Паучиха</span>
-            </button>
-          </a>
+          <button class="main-panel-btn main-panel-btn-4">
+            <span class="main-panel-btn-title" lang="one_suit">Одна масть</span>
+            <span class="main-panel-btn-level" lang="spider_w">Паучиха</span>
+          </button>
         </div>
         <div class="main-panel-btn-container-5">
-          <a href="./src/playground/playground.html?levelID=level_def_sl_2">
-            <button class="main-panel-btn main-panel-btn-5">
-              <span class="main-panel-btn-title" lang="two_suit">Две масти</span>
-              <span class="main-panel-btn-level" lang="spider_w">Паучиха</span>
-            </button>
-          </a>
+          <button class="main-panel-btn main-panel-btn-5">
+            <span class="main-panel-btn-title" lang="two_suit">Две масти</span>
+            <span class="main-panel-btn-level" lang="spider_w">Паучиха</span>
+          </button>
         </div>
         <div class="main-panel-btn-container-6">
-          <a href="./src/playground/playground.html?levelID=level_def_sl_4">
-            <button class="main-panel-btn main-panel-btn-6">
-              <span class="main-panel-btn-title" lang="four_suit">Четыре масти</span>
-              <span class="main-panel-btn-level" lang="spider_w">Паучиха</span>
-            </button>
-          </a>
+          <button class="main-panel-btn main-panel-btn-6">
+            <span class="main-panel-btn-title" lang="four_suit">Четыре масти</span>
+            <span class="main-panel-btn-level" lang="spider_w">Паучиха</span>
+          </button>
         </div>
       </section>
     </main>
@@ -717,6 +695,483 @@
     </div>
     <div class="hidden-mock-container" style="opacity: 0;"></div>
   </div>
+  <div id="playground-screen" style="display: none; position: absolute;">
+    <header>
+      <ul class="header-interface-list">
+        <li class="header-ui-container">
+          <button class="header-navigation-btn home-btn">
+            <img src="../../Sprites/Icons/Icon_Home.png" alt="Profile" class="header-navigation-list-icon" />
+          </button>
+        </li>
+        <li class="header-ui-container">
+          <div class="steps-counter-container" style="margin-top: 1%">
+            <div class="header-timer hidden timer">
+              <img src="../../Sprites/Icons/Icon_Stopwatch.png" alt="step" class="step-icon"
+                style="margin-bottom: -3%" />
+            </div>
+            <div class="steps-counter">
+              <span class="counter-text" id="step-counter">1</span>
+              <img src="../../Sprites/Icons/Icon_Step.png" alt="step" class="step-icon" />
+            </div>
+          </div>
+        </li>
+        <li class="header-ui-container">
+          <button class="header-navigation-btn settings-button">
+            <img src="../../Sprites/Icons/Icon_Settings.png" alt="Profile" class="header-navigation-list-icon"
+              id="settings-btn-full" />
+          </button>
+        </li>
+      </ul>
+    </header>
+    <div class="popup hidden-popup" id="win-screen-popup">
+      <!-- <div class="popup" id="win-screen-popup"> -->
+      <div class="end-level">
+        <h2 class="end-level-title" lang="lvl_completed">Уровень завершен!</h2>
+        <!-- <span class="new-achievements">Новые достижения!</span> -->
+      </div>
+      <div id="win-screen-rewards-container" style="display: none;">
+        <div class="bounty-list">
+          <div class="custom-line"></div>
+          <span class="bounty-title" lang="rewards">Награды</span>
+          <div class="custom-line"></div>
+        </div>
+        <div id="win-screen-rewards"></div>
+      </div>
+      <div class="next-btn-container">
+        <a href="../../index.html">
+          <button class="next-btn" id="play-btn">
+            <span class="next-btn-title" lang="continue_q">Продолжить</span>
+          </button>
+        </a>
+      </div>
+    </div>
+    <div class="popup lose-screen-popup hidden-popup" id="lose-screen-popup">
+      <!-- <div class="popup lose-screen-popup" id="lose-screen-popup"> -->
+      <button class="home-page-btn home-btn">
+        <img src="../../Sprites/Icons/Icon_Home.png" alt="Home" class="control-button-list-icon" id="go-home-button" />
+      </button>
+      <div class="lose-level">
+        <h2 class="lose-level-title" lang="you_lose">Вы проиграли</h2>
+      </div>
+      <div class="lose-btns-container">
+        <button class="refresh-btn reset-level-button lose-restart-button">
+          <img src="../../Sprites/Icons/Icon_Restart.png" alt="Icon_Skins" class="control-button-list-icon" />
+        </button>
+        <button class="next-ads-btn" id="play-btn">
+          <span class="next-btn-title" lang="continue_q">Продолжить?</span>
+          <img class="lose-screen-ads-icon" src="../../Sprites/Icons/Icon_Ads.png" />
+        </button>
+      </div>
+    </div>
+    <div class="popup menu" id="menu">
+      <div id="popup-fade-close"></div>
+      <div class="popup-content">
+        <div class="popup-header">
+          <h3 lang="menu">Меню</h3>
+        </div>
+        <div class="menu-control-panel">
+          <div class="setting-btn-container">
+            <button class="settings-navigation-btn home-btn">
+              <img src="../../Sprites/Icons/Icon_Home.png" alt="Icon_Music_Off" class="settings-navigation-list-icon" />
+            </button>
+          </div>
+          <div class="menu-btns-group">
+            <div class="setting-btn-container">
+              <button class="settings-navigation-btn settings-button">
+                <img src="../../Sprites/Icons/Icon_Settings.png" alt="Icon_Sound_Off"
+                  class="settings-navigation-list-icon" />
+              </button>
+            </div>
+            <div class="setting-btn-container reset-level-button">
+              <button class="settings-navigation-btn">
+                <img src="../../Sprites/Icons/Icon_Restart.png" alt="Icon_Skins" class="settings-navigation-list-icon"
+                  id="restart-button" />
+              </button>
+            </div>
+          </div>
+        </div>
+        <ul class="footer-control-panel">
+          <li>
+            <button class="control-btn hint-button">
+              <img src="../../Sprites/Icons/Icon_Hint.png" alt="Icon_Skins" class="control-button-list-icon" />
+              <span style="color:antiquewhite; font-size: 2vh; position: absolute; right:0; bottom:0">x5</span>
+              <img class="ads-icon" src="../../Sprites/Icons/Icon_Ads.png" />
+            </button>
+          </li>
+          <li>
+            <button class="control-btn undo-button">
+              <img src="../../Sprites/Icons/Icon_Undo.png" alt="Icon_Skins" class="control-button-list-icon" />
+              <span style="color:antiquewhite; font-size: 2vh; position: absolute; right:0; bottom:0">x5</span>
+              <img class="ads-icon" src="../../Sprites/Icons/Icon_Ads.png" />
+            </button>
+          </li>
+          <li>
+            <button class="control-btn mage-button">
+              <img src="../../Sprites/Icons/Icon_Mage.png" alt="Icon_Skins" class="control-button-list-icon" />
+              <span style="color:antiquewhite; font-size: 2vh; position: absolute; right:0; bottom:0">x5</span>
+              <img class="ads-icon" src="../../Sprites/Icons/Icon_Ads.png" />
+            </button>
+          </li>
+          <li>
+            <button class="control-btn time-button">
+              <img src="../../Sprites/Icons/Icon_Time.png" alt="Icon_Skins" class="control-button-list-icon" />
+              <span style="color:antiquewhite; font-size: 2vh; position: absolute; right:0; bottom:0">x5</span>
+              <img class="ads-icon" src="../../Sprites/Icons/Icon_Ads.png" />
+            </button>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div class="popup settings" id="settings-game">
+      <div id="popup-fade-close"></div>
+      <div class="popup-content">
+        <div class="popup-header">
+          <h3 lang="setttings">Настройки</h3>
+          <img src="../../Sprites/Icons/Icon_Close.png" alt="close" id="close-popup-settings" class="close-popup" />
+        </div>
+        <div class="settings-panel">
+          <div class="setting-btn-container">
+            <button class="settings-navigation-btn" id="music-switch">
+              <img src="../../Sprites/Icons/Icon_Music_Off.png" alt="Icon_Music_Off"
+                class="settings-navigation-list-icon" />
+            </button>
+            <span class="settings-btn-title" lang="music">Музыка</span>
+          </div>
+          <div class="setting-btn-container">
+            <button class="settings-navigation-btn" id="sound-switch">
+              <img src="../../Sprites/Icons/Icon_Sound_Off.png" alt="Icon_Sound_Off"
+                class="settings-navigation-list-icon" />
+            </button>
+            <span class="settings-btn-title" lang="sound">Звук</span>
+          </div>
+          <div class="setting-btn-container">
+            <button class="special-language-btn settings-navigation-btn lang-btn" id="lang-btn">
+              <img src="../../Sprites/Lang/ru.png " alt="Lang" class="settings-navigation-list-icon" id="languages-btn"
+                lang="[img]{../../}flag_img" />
+            </button>
+            <span class="settings-btn-title" lang="lang">Язык</span>
+          </div>
+        </div>
+        <div class="visual-changing-panel">
+          <div class="first-skins-line">
+            <div class="front-side-skins-container">
+              <div class="skins-title">
+                <span class="skins-title-text" lang="skin">Скин</span>
+              </div>
+              <div class="skin-card">
+                <img class="card-skin" src="../../Sprites/Card Skins/Preview/Skin_01.png">
+                <button class="skin-change-btn" id="skin-change-btn">
+                  <span class="skin-change-btn-title" lang="select">Выбрать</span>
+                </button>
+              </div>
+            </div>
+            <div class="back-side-skins-container">
+              <div class="skins-title">
+                <span class="skins-title-text" lang="card_bac">Рубашка</span>
+              </div>
+              <div class="skin-card-back">
+                <img class="card-skin" src="../../Sprites/CardBacks/Card_Back_01.png">
+                <button class="skin-change-btn" id="skin-back-change-btn">
+                  <span class="skin-change-btn-title" lang="select">Выбрать</span>
+                </button>
+              </div>
+            </div>
+          </div>
+          <div class="second-skins-line">
+            <div class="background-card-skin-container">
+              <div class="skins-title">
+                <span class="skins-title-text" lang="background">Фон</span>
+              </div>
+              <div class="background-card">
+                <img class="card-skin" src="../../Sprites/BackgroundPreview/Used_Background_01.png">
+                <button class="skin-change-btn" id="background-change-btn">
+                  <span class="skin-change-btn-title" lang="select">Выбрать</span>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="version">
+          <span class="version-title">v0.0.2.21</span>
+        </div>
+      </div>
+      <div class="skins-collection-slider-tab" style="display: none" id="skins-collection-slider-tab">
+        <button class="skins-collection-back-btn" id="skins-collection-back-btn">
+          <img src="../../Sprites/Icons/Icon_Arrow_Back.png" alt="Profile" class="header-navigation-list-icon" />
+        </button>
+        <div class="skins-collection-slider" id="skins-collection-slider">
+        </div>
+      </div>
+    </div>
+    <div class="popup tutorial-tab" style="display: none" id="tutorial">
+      <div id="finger"
+        style="position: absolute; background-image: url(../../Sprites/Misc/Used_Tutorial_Hand.png); width: 7vh; height: 7vh; background-size: 100% 100%; scale:0">
+      </div>
+      <div class="tutorial-screen" id="first-tutorial-screen">
+        <div class="tutorial-cards-column">
+          <div class="tutorial-card-element"
+            style="background-size: 100% 100%; background-image: url('../../Sprites/Card Skins/Release/Skin_01/king_spades_01.png'); position: relative; left: 0px; top: 0px; scale: 1;">
+          </div>
+          <div class="tutorial-card-element"
+            style="background-size: 100% 100%; background-image: url('../../Sprites/Card Skins/Release/Skin_01/queen_spades_01.png'); position: relative; left: 0px; top: 0px; scale: 1;">
+          </div>
+          <div class="tutorial-card-element"
+            style="background-size: 100% 100%; background-image: url('../../Sprites/Card Skins/Release/Skin_01/jack_spades_01.png'); position: relative; left: 0px; top: 0px; scale: 1;">
+          </div>
+          <div class="tutorial-card-element"
+            style="background-size: 100% 100%; background-image: url('../../Sprites/Card Skins/Release/Skin_01/ten_spades_01.png'); position: relative; left: 0px; top: 0px; scale: 1;">
+          </div>
+          <div class="tutorial-card-element"
+            style="background-size: 100% 100%; background-image: url('../../Sprites/Card Skins/Release/Skin_01/nine_spades_01.png'); position: relative; left: 0px; top: 0px; scale: 1;">
+          </div>
+          <div class="tutorial-card-element"
+            style="background-size: 100% 100%; background-image: url('../../Sprites/Card Skins/Release/Skin_01/eight_spades_01.png'); position: relative; left: 0px; top: 0px; scale: 1;">
+          </div>
+          <div class="tutorial-card-element"
+            style="background-size: 100% 100%; background-image: url('../../Sprites/Card Skins/Release/Skin_01/seven_spades_01.png'); position: relative; left: 0px; top: 0px; scale: 1;">
+          </div>
+          <div class="tutorial-card-element"
+            style="background-size: 100% 100%; background-image: url('../../Sprites/Card Skins/Release/Skin_01/six_spades_01.png'); position: relative; left: 0px; top: 0px; scale: 1;">
+          </div>
+          <div class="tutorial-card-element"
+            style="background-size: 100% 100%; background-image: url('../../Sprites/Card Skins/Release/Skin_01/five_spades_01.png'); position: relative; left: 0px; top: 0px; scale: 1;">
+          </div>
+          <div class="tutorial-card-element"
+            style="background-size: 100% 100%; background-image: url('../../Sprites/Card Skins/Release/Skin_01/four_spades_01.png'); position: relative; left: 0px; top: 0px; scale: 1;">
+          </div>
+          <div class="tutorial-card-element"
+            style="background-size: 100% 100%; background-image: url('../../Sprites/Card Skins/Release/Skin_01/three_spades_01.png'); position: relative; left: 0px; top: 0px; scale: 1;">
+          </div>
+          <div class="tutorial-card-element"
+            style="background-size: 100% 100%; background-image: url('../../Sprites/Card Skins/Release/Skin_01/two_spades_01.png'); position: relative; left: 0px; top: 0px; scale: 1;">
+          </div>
+          <div class="tutorial-card-element"
+            style="background-size: 100% 100%; background-image: url('../../Sprites/Card Skins/Release/Skin_01/ace_spades_01.png'); position: relative; left: 0px; top: 0px; scale: 1;">
+          </div>
+        </div>
+        <div class="tutorial-cards-info" lang="tutorial_01"></div>
+      </div>
+      <div class="tutorial-screen" style="display: none" id="second-tutorial-screen">
+        <div class="tutorial-cards-column movable-cards-column">
+          <div class="tutorial-card-element"
+            style="background-size: 100% 100%; background-image: url('../../Sprites/Card Skins/Release/Skin_01/king_spades_01.png'); position: relative; left: 0px; top: 0px; scale: 1;">
+          </div>
+          <div class="tutorial-card-element"
+            style="background-size: 100% 100%; background-image: url('../../Sprites/Card Skins/Release/Skin_01/queen_spades_01.png'); position: relative; left: 0px; top: 0px; scale: 1;">
+          </div>
+          <div class="tutorial-card-element"
+            style="background-size: 100% 100%; background-image: url('../../Sprites/Card Skins/Release/Skin_01/jack_spades_01.png'); position: relative; left: 0px; top: 0px; scale: 1;">
+          </div>
+          <div class="tutorial-card-element"
+            style="background-size: 100% 100%; background-image: url('../../Sprites/Card Skins/Release/Skin_01/ten_spades_01.png'); position: relative; left: 0px; top: 0px; scale: 1;">
+          </div>
+          <div class="tutorial-card-element"
+            style="background-size: 100% 100%; background-image: url('../../Sprites/Card Skins/Release/Skin_01/nine_spades_01.png'); position: relative; left: 0px; top: 0px; scale: 1;">
+          </div>
+          <div class="tutorial-card-element"
+            style="background-size: 100% 100%; background-image: url('../../Sprites/Card Skins/Release/Skin_01/eight_spades_01.png'); position: relative; left: 0px; top: 0px; scale: 1;">
+          </div>
+          <div class="tutorial-card-element"
+            style="background-size: 100% 100%; background-image: url('../../Sprites/Card Skins/Release/Skin_01/seven_spades_01.png'); position: relative; left: 0px; top: 0px; scale: 1;">
+          </div>
+        </div>
+        <div class="tutorial-cards-column movable-cards-column">
+          <div class="tutorial-card-element"
+            style="background-size: 100% 100%; background-image: url('../../Sprites/Card Skins/Release/Skin_01/six_spades_01.png'); position: relative; left: 0px; top: 0px; scale: 1;">
+          </div>
+          <div class="tutorial-card-element"
+            style="background-size: 100% 100%; background-image: url('../../Sprites/Card Skins/Release/Skin_01/five_spades_01.png'); position: relative; left: 0px; top: 0px; scale: 1;">
+          </div>
+          <div class="tutorial-card-element"
+            style="background-size: 100% 100%; background-image: url('../../Sprites/Card Skins/Release/Skin_01/four_spades_01.png'); position: relative; left: 0px; top: 0px; scale: 1;">
+          </div>
+          <div class="tutorial-card-element"
+            style="background-size: 100% 100%; background-image: url('../../Sprites/Card Skins/Release/Skin_01/three_spades_01.png'); position: relative; left: 0px; top: 0px; scale: 1;">
+          </div>
+          <div class="tutorial-card-element"
+            style="background-size: 100% 100%; background-image: url('../../Sprites/Card Skins/Release/Skin_01/two_spades_01.png'); position: relative; left: 0px; top: 0px; scale: 1;">
+          </div>
+          <div class="tutorial-card-element"
+            style="background-size: 100% 100%; background-image: url('../../Sprites/Card Skins/Release/Skin_01/ace_spades_01.png'); position: relative; left: 0px; top: 0px; scale: 1;">
+          </div>
+        </div>
+        <div class="tutorial-cards-info" lang="tutorial_03"></div>
+      </div>
+      <div class="tutorial-screen" style="display: none" id="third-tutorial-screen">
+        <div class="tutorial-cards-column movable-cards-column">
+          <div class="tutorial-card-element"
+            style="background-size: 100% 100%; background-image: url('../../Sprites/Card Skins/Release/Skin_01/king_spades_01.png'); position: relative; left: 0px; top: 0px; scale: 1;">
+          </div>
+          <div class="tutorial-card-element"
+            style="background-size: 100% 100%; background-image: url('../../Sprites/Card Skins/Release/Skin_01/queen_spades_01.png'); position: relative; left: 0px; top: 0px; scale: 1;">
+          </div>
+          <div class="tutorial-card-element"
+            style="background-size: 100% 100%; background-image: url('../../Sprites/Card Skins/Release/Skin_01/jack_spades_01.png'); position: relative; left: 0px; top: 0px; scale: 1;">
+          </div>
+          <div class="tutorial-card-element"
+            style="background-size: 100% 100%; background-image: url('../../Sprites/Card Skins/Release/Skin_01/ten_spades_01.png'); position: relative; left: 0px; top: 0px; scale: 1;">
+          </div>
+          <div class="tutorial-card-element"
+            style="background-size: 100% 100%; background-image: url('../../Sprites/Card Skins/Release/Skin_01/nine_spades_01.png'); position: relative; left: 0px; top: 0px; scale: 1;">
+          </div>
+          <div class="tutorial-card-element"
+            style="background-size: 100% 100%; background-image: url('../../Sprites/Card Skins/Release/Skin_01/eight_spades_01.png'); position: relative; left: 0px; top: 0px; scale: 1;">
+          </div>
+          <div class="tutorial-card-element"
+            style="background-size: 100% 100%; background-image: url('../../Sprites/Card Skins/Release/Skin_01/seven_spades_01.png'); position: relative; left: 0px; top: 0px; scale: 1;">
+          </div>
+        </div>
+        <div class="tutorial-cards-column movable-cards-column">
+
+        </div>
+        <div class="tutorial-cards-info" lang="tutorial_04"></div>
+      </div>
+      <div class="tutorial-screen" style="display: none" id="fourth-tutorial-screen">
+        <div class="tutorial-cards-column">
+          <div class="tutorial-card-element"
+            style="background-size: 100% 100%; background-image: url('../../Sprites/Card Skins/Release/Skin_01/king_spades_01.png'); position: relative; left: 0px; top: 0px; scale: 1;">
+          </div>
+          <div class="tutorial-card-element"
+            style="background-size: 100% 100%; background-image: url('../../Sprites/Card Skins/Release/Skin_01/queen_spades_01.png'); position: relative; left: 0px; top: 0px; scale: 1;">
+          </div>
+          <div class="tutorial-card-element"
+            style="background-size: 100% 100%; background-image: url('../../Sprites/Card Skins/Release/Skin_01/jack_spades_01.png'); position: relative; left: 0px; top: 0px; scale: 1;">
+          </div>
+          <div class="tutorial-card-element"
+            style="background-size: 100% 100%; background-image: url('../../Sprites/Card Skins/Release/Skin_01/ten_spades_01.png'); position: relative; left: 0px; top: 0px; scale: 1;">
+          </div>
+          <div class="tutorial-card-element"
+            style="background-size: 100% 100%; background-image: url('../../Sprites/Card Skins/Release/Skin_01/nine_spades_01.png'); position: relative; left: 0px; top: 0px; scale: 1;">
+          </div>
+          <div class="tutorial-card-element"
+            style="background-size: 100% 100%; background-image: url('../../Sprites/Card Skins/Release/Skin_01/eight_spades_01.png'); position: relative; left: 0px; top: 0px; scale: 1;">
+          </div>
+        </div>
+        <div class="tutorial-cards-column">
+          <div class="tutorial-card-element"
+            style="background-size: 100% 100%; background-image: url('../../Sprites/Card Skins/Release/Skin_01/six_spades_01.png'); position: relative; left: 0px; top: 0px; scale: 1;">
+          </div>
+          <div class="tutorial-card-element"
+            style="background-size: 100% 100%; background-image: url('../../Sprites/Card Skins/Release/Skin_01/five_spades_01.png'); position: relative; left: 0px; top: 0px; scale: 1;">
+          </div>
+          <div class="tutorial-card-element"
+            style="background-size: 100% 100%; background-image: url('../../Sprites/Card Skins/Release/Skin_01/four_spades_01.png'); position: relative; left: 0px; top: 0px; scale: 1;">
+          </div>
+          <div class="tutorial-card-element"
+            style="background-size: 100% 100%; background-image: url('../../Sprites/Card Skins/Release/Skin_01/three_spades_01.png'); position: relative; left: 0px; top: 0px; scale: 1;">
+          </div>
+          <div class="tutorial-card-element"
+            style="background-size: 100% 100%; background-image: url('../../Sprites/Card Skins/Release/Skin_01/two_spades_01.png'); position: relative; left: 0px; top: 0px; scale: 1;">
+          </div>
+        </div>
+        <div class="cards-deck">
+
+          <div class="tutorial-card-element"
+            style="background-size: 100% 100%; background-image: url('../../Sprites/CardBacks/Card_Back_01.png'); position: relative; left: 0px; top: 0px; scale: 1;">
+          </div>
+          <div class="tutorial-card-element"
+            style="background-size: 100% 100%; background-image: url('../../Sprites/CardBacks/Card_Back_01.png'); position: relative; left: 0px; top: 0px; scale: 1;">
+          </div>
+          <div class="tutorial-card-element"
+            style="background-size: 100% 100%; background-image: url('../../Sprites/CardBacks/Card_Back_01.png'); position: relative; left: 0px; top: 0px; scale: 1;">
+          </div>
+          <div class="tutorial-card-element"
+            style="background-size: 100% 100%; background-image: url('../../Sprites/CardBacks/Card_Back_01.png'); position: relative; left: 0px; top: 0px; scale: 1;">
+          </div>
+        </div>
+        <div class="tutorial-cards-info" lang="tutorial_05"></div>
+      </div>
+      <div class="tutorial-screen" style="display: none" id="fifth-tutorial-screen">
+        <div class="tutorial-cards-column">
+          <div class="full-tutorial-cards-column decline-column"></div>
+        </div>
+        <div class="tutorial-cards-column">
+          <div class="full-tutorial-cards-column accept-column"></div>
+        </div>
+        <div class="tutorial-cards-info" lang="tutorial_06"></div>
+      </div>
+      <div class="tutorial-screen column-direction-screen" style="display: none" id="sixth-tutorial-screen">
+        <img src="../../Sprites/Tutorial/Used_Tutorial_6.png" alt="Example" class="tutorial-cards-example">
+        <div class="tutorial-cards-info" lang="tutorial_06"></div>
+      </div>
+      <div class="tutorial-screen column-direction-screen" style="display: none" id="seventh-tutorial-screen">
+        <img src="../../Sprites/Tutorial/Used_Tutorial_7.png" alt="Example" class="tutorial-boosters-example">
+        <div class="tutorial-cards-info" lang="tutorial_08"></div>
+      </div>
+      <button class="next-tutorial-screen-btn" id="next-tutorial-screen-btn">
+        <span class="next-tutorial-screen-btn-title" lang="continue_q">Продолжить</span>
+      </button>
+    </div>
+    <main id="main">
+      <div class="main-container">
+        <div class="active-cards-zone">
+          <div class="active-cards-container playable-card-column"></div>
+          <div class="active-cards-container playable-card-column"></div>
+          <div class="active-cards-container playable-card-column"></div>
+          <div class="active-cards-container playable-card-column"></div>
+          <div class="active-cards-container playable-card-column"></div>
+          <div class="active-cards-container playable-card-column"></div>
+          <div class="active-cards-container playable-card-column"></div>
+          <div class="active-cards-container playable-card-column"></div>
+          <div class="active-cards-container playable-card-column"></div>
+          <div class="active-cards-container playable-card-column"></div>
+        </div>
+        <div class="story-mode-card-zone">
+        </div>
+        <div class="bottom-cards-zone">
+          <div class="cards-container"></div>
+          <div class="cards-container"></div>
+          <div class="cards-container"></div>
+          <div class="cards-container"></div>
+          <div class="cards-container"></div>
+          <div class="cards-container"></div>
+          <div class="cards-container"></div>
+          <div class="cards-container"></div>
+          <div class="cards-container fade-hidden"></div>
+          <div class="extra-cards-container" id="extra-cards-container"></div>
+        </div>
+      </div>
+    </main>
+    <footer>
+      <nav>
+        <ul class="footer-control-panel">
+          <li>
+            <button class="control-btn reset-level-button">
+              <img src="../../Sprites/Icons/Icon_Restart.png" alt="Icon_Skins" class="control-button-list-icon" />
+            </button>
+          </li>
+          <li>
+            <button class="control-btn hint-button">
+              <img src="../../Sprites/Icons/Icon_Hint.png" alt="Icon_Skins" class="control-button-list-icon" />
+              <span style="color:antiquewhite; font-size: 2vh; position: absolute; right:0; bottom:0">x5</span>
+              <img class="ads-icon" src="../../Sprites/Icons/Icon_Ads.png" />
+            </button>
+          </li>
+          <li>
+            <button class="control-btn undo-button">
+              <img src="../../Sprites/Icons/Icon_Undo.png" alt="Icon_Skins" class="control-button-list-icon" />
+              <span style="color:antiquewhite; font-size: 2vh; position: absolute; right:0; bottom:0">x5</span>
+              <img class="ads-icon" src="../../Sprites/Icons/Icon_Ads.png" />
+            </button>
+          </li>
+          <li>
+            <button class="control-btn mage-button">
+              <img src="../../Sprites/Icons/Icon_Mage.png" alt="Icon_Skins" class="control-button-list-icon" />
+              <span style="color:antiquewhite; font-size: 2vh; position: absolute; right:0; bottom:0">x5</span>
+              <img class="ads-icon" src="../../Sprites/Icons/Icon_Ads.png" />
+            </button>
+          </li>
+          <li>
+            <button class="control-btn time-button">
+              <img src="../../Sprites/Icons/Icon_Time.png" alt="Icon_Skins" class="control-button-list-icon" />
+              <span style="color:antiquewhite; font-size: 2vh; position: absolute; right:0; bottom:0">x5</span>
+              <img class="ads-icon" src="../../Sprites/Icons/Icon_Ads.png" />
+            </button>
+          </li>
+        </ul>
+      </nav>
+    </footer>
+  </div>
   <!-- rewards popup begin -->
   <div class="popup-b" id="bounty-popup">
     <div class="bounty-popup-content bounty-tab" id="bounty-container">
@@ -732,6 +1187,21 @@
       <span class="cancel-bounty-btn fade-hidden" lang="no_thanks">Нет, спасибо</span>
     </div>
   </div>
+  <div class="sep-popup" id="exid-game" style="position: absolute;">
+    <div class="sep-popup-content">
+      <div class="sep-popup-header">
+        <h3 class="sep-popup-header-title" lang="exit_question">Вы уверены, что хотите выйти из игры?</h3>
+      </div>
+      <div class="sep-popup-btns-container">
+        <button class="sep-popup-btn exid-yes" id="play-btn">
+          <span class="sep-popup-btn-title" lang="yes">Да</span>
+        </button>
+        <button class="sep-popup-btn exid-no" id="play-btn">
+          <span class="sep-popup-btn-title" lang="no">Нет</span>
+        </button>
+      </div>
+    </div>
+  </div>
   <script>
     let savesList = [];
     let SDK = null;
@@ -743,12 +1213,15 @@
     let navigation;
     let storyMode;
     let challenges;
-    // let challengesTest;
     let collection;
     let achievements;
+    let playground;
     let backActionHandler;
     let dynamicFontChanger;
     let audioManager;
+    let rewardsReceiver;
+    let mainMenuNavigateFunction;
+    let levelParameter;
   </script>
   <script type="module">
     import { preload } from './src/loader/loader.js';
@@ -780,70 +1253,6 @@
       'Sprites/Misc/Used_Card_Shine.png',
       'Sprites/Misc/Used_Element_Selection.png',
       'Sprites/Misc/Used_Indicator.png',
-      // 'Sprites/Misc/Used_Tutorial_Hand.png',
-      // 'Sprites/Logos/Logo_DE.png',
-      // 'Sprites/Logos/Logo_EN.png',
-      // 'Sprites/Logos/Logo_ES.png',
-      // 'Sprites/Logos/Logo_HI.png',
-      // 'Sprites/Logos/Logo_JA.png',
-      // 'Sprites/Logos/Logo_PT.png',
-      // 'Sprites/Logos/Logo_RU.png',
-      // 'Sprites/Logos/Logo_TR.png',
-      // 'Sprites/Lang/de.png',
-      // 'Sprites/Lang/en.png',
-      // 'Sprites/Lang/es.png',
-      // 'Sprites/Lang/hi.png',
-      // 'Sprites/Lang/ja.png',
-      // 'Sprites/Lang/pt.png',
-      // 'Sprites/Lang/ru.png',
-      // 'Sprites/Lang/tr.png',
-      // 'Sprites/Icons/Icon_Ads.png',
-      // 'Sprites/Icons/Icon_Arrow_Back.png',
-      // 'Sprites/Icons/Icon_Booster.png',
-      // 'Sprites/Icons/Icon_Calendar.png',
-      // 'Sprites/Icons/Icon_Check.png',
-      // 'Sprites/Icons/Icon_Chest.png',
-      // 'Sprites/Icons/Icon_Close.png',
-      // 'Sprites/Icons/Icon_Clubs.png',
-      // 'Sprites/Icons/Icon_Diamond.png',
-      // 'Sprites/Icons/Icon_Energy.png',
-      // 'Sprites/Icons/Icon_FourSuits.png',
-      // 'Sprites/Icons/Icon_Hearts.png',
-      // 'Sprites/Icons/Icon_Hint.png',
-      // 'Sprites/Icons/Icon_Home.png',
-      // 'Sprites/Icons/Icon_Info.png',
-      // 'Sprites/Icons/Icon_Lock.png',
-      // 'Sprites/Icons/Icon_Mage.png',
-      // 'Sprites/Icons/Icon_Music_Off.png',
-      // 'Sprites/Icons/Icon_Music_On.png',
-      // 'Sprites/Icons/Icon_OneSuit.png',
-      // 'Sprites/Icons/Icon_Profile.png',
-      // 'Sprites/Icons/Icon_Restart.png',
-      // 'Sprites/Icons/Icon_Sandwatch.png',
-      // 'Sprites/Icons/Icon_Settings.png',
-      // 'Sprites/Icons/Icon_Skins.png',
-      // 'Sprites/Icons/Icon_Sound_Off.png',
-      // 'Sprites/Icons/Icon_Sound_On.png',
-      // 'Sprites/Icons/Icon_Spades.png',
-      // 'Sprites/Icons/Icon_Spider.png',
-      // 'Sprites/Icons/Icon_Spider_L.png',
-      // 'Sprites/Icons/Icon_Step.png',
-      // 'Sprites/Icons/Icon_Steps.png',
-      // 'Sprites/Icons/Icon_Stopwatch.png',
-      // 'Sprites/Icons/Icon_Stopwatch_x2.png',
-      // 'Sprites/Icons/Icon_Story.png',
-      // 'Sprites/Icons/Icon_Time.png',
-      // 'Sprites/Icons/Icon_Trial.png',
-      // 'Sprites/Icons/Icon_Trophy.png',
-      // 'Sprites/Icons/Icon_Tutorial.png',
-      // 'Sprites/Icons/Icon_TwoSuits.png',
-      // 'Sprites/Icons/Icon_Undo.png',
-      // 'Sprites/Icons/Icon_WS1.png',
-      // 'Sprites/Icons/Icon_WS2.png',
-      // 'Sprites/Icons/Icon_WS4.png',
-      // 'Sprites/Icons/Icon_WSL1.png',
-      // 'Sprites/Icons/Icon_WSL2.png',
-      // 'Sprites/Icons/Icon_WSL4.png',
       'Sprites/Frames/Dialog_Left.png',
       'Sprites/Frames/Used_Frame_01.png',
       'Sprites/Frames/Used_Frame_02.png',
@@ -897,6 +1306,7 @@
     user = new User();
     navigation = new StackNavigation();
 
+
     async function preloadImagesAsync(urls) {
       const promises = [];
 
@@ -913,12 +1323,6 @@
       return Promise.all(promises);
     }
 
-    const images = document.querySelectorAll('img');
-
-    images.forEach(image => {
-      image.draggable = false;
-    });
-
     preload(async () => {
       await initializeSDK();
       platform = await getPlatform();
@@ -928,15 +1332,23 @@
       await import('./src/localization/translator.js').then(async (translatorItem) => {
         storyMode = await import('./src/StoryMode/storyMode.js')
         challenges = await import('./src/challenges/challenge.js')
-        // challengesTest = await import('./test.js')
         collection = await import('./src/Collection/collection.js');
         achievements = await import('./src/achievements/achievements.js');
+
+        playground = await import('./src/playground/playground.js');
+        playground.setupLanguageSelector(translatorItem.initialLocale);
 
         await import('./index.js').then((indexItem) => {
           indexItem.setupLanguageSelector(translatorItem.initialLocale);
         });
 
         achievements.initialize();
+      });
+
+      const images = document.querySelectorAll('img');
+
+      images.forEach(image => {
+        image.draggable = false;
       });
     });
 

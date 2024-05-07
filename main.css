@@ -1150,7 +1150,6 @@ button.selected {
 }
 
 .start-level-btn-title {
-
   color: #ab6531;
   font-size: 1.1vw;
   --target-font-size: 1.1vw;
@@ -1224,6 +1223,9 @@ button.selected {
 
 }
 
+.popup-overlay {
+  z-index: 2000;
+}
 
 @media only screen and (max-width: 768px) and (orientation: portrait) {
   .booster-prompt-container {

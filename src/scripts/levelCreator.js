@@ -111,7 +111,7 @@ function createLevel(options = { rules }) {
     croupier = selectedRules.pattern == Pattern.Spider ? new SpiderCroupier({ mainCardColumn: result.mainCardColumn, playableCardColumns: result.playableCardColumns }) : new SpiderLadyCroupier({ mainCardColumn: result.mainCardColumn, playableCardColumns: result.playableCardColumns });
     croupier.initialDistribution();
 
-    user.contentUsageChanged.addListener(() => {
+    const updateSkin = () => {
         const skin = user.getContentOfType(ContentType.CardSkin);
         const back = user.getContentOfType(ContentType.CardBack);
 
@@ -121,7 +121,9 @@ function createLevel(options = { rules }) {
             card.setupCardFaceImage(skin);
             card.setupCardBackImage(back);
         }
-    })
+    }
+
+    user.contentUsageChanged.addListener(updateSkin);
 
     return { croupier: croupier, playableCardColumns: result.playableCardColumns, mainCardColumn: result.mainCardColumn }
 }
@@ -254,7 +256,7 @@ function createSolitaireLevel(options = { ruled, solitaireColumns }) {
 
     croupier.initialDistribution();
 
-    user.contentUsageChanged.addListener(() => {
+    const updateSkin = () => {
         const skin = user.getContentOfType(ContentType.CardSkin);
         const back = user.getContentOfType(ContentType.CardBack);
 
@@ -264,7 +266,9 @@ function createSolitaireLevel(options = { ruled, solitaireColumns }) {
             card.setupCardFaceImage(skin);
             card.setupCardBackImage(back);
         }
-    })
+    }
+
+    user.contentUsageChanged.addListener(updateSkin);
 
     return { croupier: croupier, playableCardColumns: result.playableCardColumns, mainCardColumn: result.mainCardColumn, solitaireCards: comparedCards }
 }

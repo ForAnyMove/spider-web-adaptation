@@ -1,0 +1,110 @@
+.sep-popup {
+  display: none;
+  position: absolute;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.84);
+  z-index: 1000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.sep-popup-content {
+  background: #1EB20D;
+  background: -moz-linear-gradient(-45deg, #1EB20D 0%, #007600 50%, #006000 100%);
+  background: -webkit-linear-gradient(-45deg, #1EB20D 0%, #007600 50%, #006000 100%);
+  background: linear-gradient(135deg, #1EB20D 0%, #007600 50%, #006000 100%);
+  width: 55vh;
+  border-radius: 2vh;
+  -webkit-box-shadow: 0px 3px 2px 0px #003605;
+  box-shadow: 0px 3px 2px 0px #003605;
+  position: relative;
+}
+
+.sep-popup-header {
+  height: 8vh;
+  background: #db4c9f;
+  background: -moz-linear-gradient(top, #db4c9f 0%, #c637a2 50%, #ad24a5 100%);
+  background: -webkit-linear-gradient(top,
+      #db4c9f 0%,
+      #c637a2 50%,
+      #ad24a5 100%);
+  background: linear-gradient(to bottom, #db4c9f 0%, #c637a2 50%, #ad24a5 100%);
+  display: flex;
+  border-radius: 2vh 2vh 0 0;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  -webkit-box-shadow: 0px 3px 2px 0px #690e6f;
+  box-shadow: 0px 3px 2px 0px #690e6f;
+  margin-bottom: 2vh;
+}
+
+.sep-popup-header>h3 {
+  color: #fff6c6;
+  font-size: 1.3vw;
+  --target-font-size: 1.3vw;
+  margin: 1vw auto;
+}
+
+.sep-popup-btns-container {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  margin: 3vh;
+}
+
+.sep-popup-btn {
+  border-radius: 2vw;
+  width: 10vw;
+  height: 4vw;
+  border: none;
+  background: no-repeat;
+  background-size: 100% 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-bottom: 0.5vw;
+  background-image: url('./Sprites/Buttons/Used_Button_03.png');
+}
+
+.sep-popup-btn-title {
+  color: #ab6531;
+  font-size: 1.1vw;
+  --target-font-size: 1.1vw;
+}
+
+@media only screen and (max-width: 768px) and (orientation: portrait) {
+  .sep-popup-btn {
+    margin-top: 1vw;
+    border-radius: 2vw;
+    width: 20vw;
+    height: 8vw;
+  }
+
+  .sep-popup-btn-title {
+    font-size: 2.1vw;
+    --target-font-size: 2.1vw;
+    font-weight: 800;
+  }
+
+  .sep-popup-header-title {
+    font-size: 1.8vh;
+    --target-font-size: 1.8vh;
+  }
+
+  .sep-popup-content {
+    width: 40vh;
+  }
+
+  .sep-popup-header {
+    border-radius: 1vh 1vh 0 0;
+    height: 5vh;
+  }
+
+  .sep-popup-btns-container {
+    margin: 2vh;
+  }
+}

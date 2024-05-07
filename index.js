@@ -10,13 +10,13 @@ import('./src/scripts/rewardReceiverView.js');
 
 import DirectionalInput from './src/scripts/directionInput.js';
 import DynamicFontChanger from './src/localization/dynamicFontChanger.js';
-import { createElement, getInputElements } from './src/scripts/helpers.js';
+import { getInputElements } from './src/scripts/helpers.js';
 import { BackActionHandler, Screen, ScreenParameters } from './src/scripts/navigation/navigation.js';
 import { load, save } from './src/scripts/save_system/SaveSystem.js';
 
 input ??= new DirectionalInput();
-
 const screenParameters = new ScreenParameters();
+
 screenParameters.defaultSelectedElement = { element: document.getElementsByClassName('main-panel-btn-1')[0] };
 screenParameters.selectableElements = getInputElements(document.getElementById('main-screen'), { tags: ['button'] })
 
@@ -27,6 +27,26 @@ const mainScreen = new Screen({
   onFocus: () => {
     dynamicFontChanger.update();
     input.updateQueryCustom(screenParameters.selectableElements, screenParameters.defaultSelectedElement);
+
+    navigation.registerScreen(achievementsScreen);
+    navigation.registerScreen(challengesScreen);
+    navigation.registerScreen(storyModeScreen);
+    navigation.registerScreen(collectionScreen);
+    navigation.registerScreen(playgroundScreen);
+
+    navigation.registerScreen(dailyRewardsScreen);
+    navigation.registerScreen(bonusesScreen);
+    navigation.registerScreen(settingsScreen);
+    navigation.registerScreen(languageScreen);
+    navigation.registerScreen(exitScreen);
+    navigation.registerScreen(tutorialOffsetScreen);
+
+    backActionHandler.onSigleBack = () => {
+      navigation.pop();
+    };
+    backActionHandler.onDoubleBack = () => {
+      navigation.push(exitScreen);
+    };
   },
   onUnfocus: () => { }
 })
@@ -57,61 +77,7 @@ const challengesScreen = new Screen({
   openButtons: [mainScreen.element.querySelector('#challenges-switch-btn')],
   closeButtons: [challengesRoot.getElementsByClassName('main-screen-switch-btn')[0]],
   onFocus: () => {
-    // const isVisible = (element) => {
-    //   function isElementHidden(element) {
-    //     var computedStyle = window.getComputedStyle(element);
-
-    //     if (computedStyle.display === 'none') {
-    //       return true;
-    //     }
-
-    //     var parent = element.parentElement;
-    //     while (parent) {
-    //       if (window.getComputedStyle(parent).display === 'none') {
-    //         return true;
-    //       }
-    //       parent = parent.parentElement;
-    //     }
-    //     return false;
-    //   }
-    //   const computedStyle = window.getComputedStyle(element);
-    //   return computedStyle.visibility !== 'hidden' && !isElementHidden(element) && computedStyle.pointerEvents != 'none';
-    // }
-
-    // const logger = createElement('div', ['ignore-DFC'], {
-    //   position: 'absolute',
-    //   width: '100%',
-    //   height: '100%',
-    //   paddingRight: '10%',
-    //   paddingTop: '1%',
-    //   zIndex: 5000,
-    //   backgroundColor: '#00000099',
-    //   color: '#fff',
-    //   display: 'flex',
-    //   flexDirection: 'column',
-    //   alignItems: 'end',
-    //   fontSize: '0.8vh',
-    //   pointerEvents: 'none'
-    // }, document.body);
-
-
-    // input.updateQueryCustom(challengesScreen.screenParameters.selectableElements,
-    //   challengesScreen.screenParameters.defaultSelectedElement);
-
-    // const log = function () {
-
-    //   const fonts = [];
-
-    //   logger.innerHTML = null;
-    //   logger.innerHTML += `<span>Window: w${window.innerWidth}</span>`
-    //   logger.innerHTML += `<span>One: w${challengesScreen.element.querySelector('.challenge-card').offsetWidth}</span>`
-    //   logger.innerHTML += `<span>All: w${challengesScreen.element.querySelector('.challenge-card').offsetWidth * 15}</span>`
-    //   logger.innerHTML += `<span>Container: w${challengesScreen.element.querySelector('.challenges').scrollWidth}</span>`
-    // }
-    // log();
-
     setTimeout(() => {
-      // dynamicFontChanger.update();
       for (let i = 0; i < 2; i++) {
         setTimeout(() => {
           dynamicFontChanger.update();
@@ -165,6 +131,25 @@ const achievementsScreen = new Screen({
   onUnfocus: () => {
     navigation.push(mainScreen);
   }, screenParameters: achievements.screenParameters
+})
+
+const playgroundRoot = document.getElementById('playground-screen');
+const playgroundScreen = new Screen({
+  id: 'playground',
+  style: 'src/playground/playground.css',
+  element: playgroundRoot,
+  onFocus: () => {
+    playgroundScreen.screenParameters.openCallback?.();
+
+    dynamicFontChanger.update();
+    input.updateQueryCustom([], null);
+
+    setTimeout(() => {
+      dynamicFontChanger.updateTextFont();
+    }, 100);
+  }, onUnfocus: () => {
+    navigation.push(mainScreen);
+  }, screenParameters: playground.screenParameters
 })
 
 const dailyRewardsRoot = document.getElementById('daily-bonuses');
@@ -252,21 +237,20 @@ if (exitButton != null) {
   exitButton.onclick = function () { SDK?.dispatchEvent(SDK.EVENTS.EXIT); }
 }
 
-navigation.registerScreen(achievementsScreen);
-navigation.registerScreen(challengesScreen);
-navigation.registerScreen(storyModeScreen);
-navigation.registerScreen(collectionScreen);
-
-navigation.registerScreen(dailyRewardsScreen);
-navigation.registerScreen(bonusesScreen);
-navigation.registerScreen(settingsScreen);
-navigation.registerScreen(languageScreen);
-navigation.registerScreen(exitScreen);
-navigation.registerScreen(tutorialOffsetScreen);
+const tutorialButton = settingsRoot.querySelector('.tutorial-btn');
+if (tutorialButton) {
+  tutorialButton.onclick = function () {
+    navigation.pop();
+    levelParameter = `level_def_s_1&isTutorial=true`;
+    navigation.createNewRouteFromID('playground');
+  }
+}
 
 if (load('tutorial-offer', false) == false) {
   tutorialOffsetScreen.element.getElementsByTagName('button')[0].onclick = function () {
-    window.location.href = './src/playground/playground.html?levelID=level_def_s_1&isTutorial=true';
+    navigation.pop();
+    levelParameter = `level_def_s_1&isTutorial=true`;
+    navigation.createNewRouteFromID('playground');
   }
 
   setTimeout(() => { navigation.push(tutorialOffsetScreen) }, 400)
@@ -275,11 +259,13 @@ if (load('tutorial-offer', false) == false) {
 
 navigation.push(mainScreen);
 
-backActionHandler = new BackActionHandler(input, () => {
+backActionHandler = new BackActionHandler(input);
+
+mainMenuNavigateFunction = () => {
+  navigation.clear();
+  navigation.openedScreens.push(playgroundScreen);
   navigation.pop();
-}, () => {
-  navigation.push(exitScreen);
-});
+}
 
 function setupReqularBonusesButtons() {
   const itemCountPairs = [
@@ -447,50 +433,40 @@ function setupBoostersHint() {
   }
 }
 
+function setupDefaultLevelTransitions() {
+  const structs = [
+    {
+      button: document.getElementsByClassName('main-panel-btn-1')[0],
+      parameter: 'level_def_s_1'
+    }, {
+      button: document.getElementsByClassName('main-panel-btn-2')[0],
+      parameter: 'level_def_s_2'
+    }, {
+      button: document.getElementsByClassName('main-panel-btn-3')[0],
+      parameter: 'level_def_s_4'
+    }, {
+      button: document.getElementsByClassName('main-panel-btn-4')[0],
+      parameter: 'level_def_sl_1'
+    }, {
+      button: document.getElementsByClassName('main-panel-btn-5')[0],
+      parameter: 'level_def_sl_2'
+    }, {
+      button: document.getElementsByClassName('main-panel-btn-6')[0],
+      parameter: 'level_def_sl_4'
+    }
+  ]
+
+  for (let i = 0; i < structs.length; i++) {
+    const struct = structs[i];
+    struct.button.onclick = function () {
+      levelParameter = struct.parameter;
+      navigation.createNewRouteFromID('playground');
+    }
+  }
+}
+
+setupDefaultLevelTransitions();
 setupBoostersHint();
-
-// const screensManager = {
-//   main: document.getElementById('main-screen'),
-//   storyMode: document.getElementById('story-mode-screen'),
-//   challenges: document.getElementById('challenge-screen'),
-//   collection: document.getElementById('collection-screen'),
-//   achievements: document.getElementById('achievements-screen'),
-// }
-
-// const mainScreenSwitchBtns = Array.from(document.getElementsByClassName('main-screen-switch-btn'))
-// mainScreenSwitchBtns.forEach(arrowBackBtn => arrowBackBtn.addEventListener('click', () => {
-//   screensManager.storyMode.style.display = 'none'
-//   screensManager.challenges.style.display = 'none'
-//   screensManager.collection.style.display = 'none'
-//   screensManager.achievements.style.display = 'none'
-//   screensManager.main.style.display = 'flex'
-//   styleSwitcher.setAttribute('href', 'main.css')
-// }))
-
-// const storyModeSwitchBtn = document.getElementById('story-mode-switch-btm')
-// storyModeSwitchBtn.addEventListener('click', () => {
-//   screensManager.main.style.display = 'none'
-//   screensManager.storyMode.style.display = 'block'
-//   styleSwitcher.setAttribute('href', './src/StoryMode/storyMode.css')
-// })
-// const challengesSwitchBtn = document.getElementById('challenges-switch-btn')
-// challengesSwitchBtn.addEventListener('click', () => {
-//   screensManager.main.style.display = 'none'
-//   screensManager.challenges.style.display = 'flex'
-//   styleSwitcher.setAttribute('href', './src/challenges/challenge.css')
-// })
-// const collectionSwitchBtn = document.getElementById('collection-switch-btn')
-// collectionSwitchBtn.addEventListener('click', () => {
-//   screensManager.main.style.display = 'none'
-//   screensManager.collection.style.display = 'flex'
-//   styleSwitcher.setAttribute('href', './src/collection/collection.css')
-// })
-// const achievementsSwitchBtn = document.getElementById('achievements-switch-btn')
-// achievementsSwitchBtn.addEventListener('click', () => {
-//   screensManager.main.style.display = 'none'
-//   screensManager.achievements.style.display = 'flex'
-//   styleSwitcher.setAttribute('href', './src/achievements/achievements.css')
-// })
 
 setupDailyRewards();
 

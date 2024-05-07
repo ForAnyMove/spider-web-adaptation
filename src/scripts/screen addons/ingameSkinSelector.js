@@ -48,7 +48,8 @@ function createBackgroundInstance(data) {
         if (state != Statefull.Equipped) {
             usedIcon.classList.add('hidden');
         }
-        user.contentUsageChanged.addListener(() => {
+
+        const updateSkin = () => {
             if (user.hasUsedContent(data.id) && !useButton.classList.contains('hidden')) {
                 useButton.classList.add('hidden');
                 usedIcon.classList.remove('hidden');
@@ -56,7 +57,9 @@ function createBackgroundInstance(data) {
                 useButton.classList.remove('hidden');
                 usedIcon.classList.add('hidden');
             }
-        });
+        }
+
+        user.contentUsageChanged.addListener(updateSkin);
     }
 
     return plane;
@@ -102,7 +105,8 @@ function createSkinInstance(data) {
         if (state != Statefull.Equipped) {
             usedIcon.classList.add('hidden');
         }
-        user.contentUsageChanged.addListener(() => {
+
+        const updateSkin = () => {
             if (user.hasUsedContent(data.id) && !useButton.classList.contains('hidden')) {
                 useButton.classList.add('hidden');
                 usedIcon.classList.remove('hidden');
@@ -110,7 +114,9 @@ function createSkinInstance(data) {
                 useButton.classList.remove('hidden');
                 usedIcon.classList.add('hidden');
             }
-        });
+        }
+
+        user.contentUsageChanged.addListener(updateSkin);
     }
 
     return plane;
@@ -156,7 +162,9 @@ function createSkinBackInstance(data) {
         if (state != Statefull.Equipped) {
             usedIcon.classList.add('hidden');
         }
-        user.contentUsageChanged.addListener(() => {
+
+
+        const updateBackground = () => {
             if (user.hasUsedContent(data.id) && !useButton.classList.contains('hidden')) {
                 useButton.classList.add('hidden');
                 usedIcon.classList.remove('hidden');
@@ -164,7 +172,9 @@ function createSkinBackInstance(data) {
                 useButton.classList.remove('hidden');
                 usedIcon.classList.add('hidden');
             }
-        });
+        }
+
+        user.contentUsageChanged.addListener(updateBackground);
     }
 
     return plane;

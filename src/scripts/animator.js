@@ -81,6 +81,11 @@ class Animator {
         this.isFramerActive = false;
     }
 
+    clearAll = function () {
+        this.clearFramer();
+        this.requests = [];
+    }
+
     update = (timeStamp) => {
         if (this.lastTimeStamp < 0) {
             this.lastTimeStamp = timeStamp;

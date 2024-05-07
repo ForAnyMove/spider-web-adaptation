@@ -249,7 +249,11 @@ function createLevelPreview(data) {
             })
             document.body.appendChild(block);
             user.setSaveTrigger(() => {
-              window.location.href = `./src/playground/playground.html?levelID=level_story_${currentLevelIndex}`;
+              navigation.pop();
+              user.removeSaveTrigger();
+
+              levelParameter = `level_story_${currentLevelIndex}`;
+              navigation.createNewRouteFromID('playground');
               block.remove();
             })
             user.removeItem(Items.Energy, requiredPass);

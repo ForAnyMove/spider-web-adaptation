@@ -26,6 +26,22 @@ class Action {
         this.actions.push(func);
     }
 
+    removeListenerByName = function (name) {
+        for (let i = this.actions.length - 1; i >= 0; i--) {
+            const element = this.actions[i];
+            if (element.name == name) {
+                this.actions.splice(this.actions.indexOf(element), 1);
+            }
+        }
+    }
+
+    removeAnonymousListeners = function () {
+        for (let i = this.actions.length - 1; i >= 0; i--) {
+            const element = this.actions[i];
+            console.log(element);
+        }
+    }
+
     addListenerToStart = function (func) {
         this.actions = [func].concat(this.actions);
     }

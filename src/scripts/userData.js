@@ -417,6 +417,10 @@ export default class User {
         this.saveTrigger = callback;
     }
 
+    removeSaveTrigger = function () {
+        this.saveTrigger = null;
+    }
+
     saveData = function () {
         const saveObject = {
             items: this.items,
@@ -425,7 +429,6 @@ export default class User {
             achievements: this.achievements.map(i => i.completedIndex)
         }
 
-        console.log(`....>>.>>. try save data ${saveObject}`);
         save("user_01", saveObject, this.saveTrigger);
     }
 

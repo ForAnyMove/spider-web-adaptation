@@ -154,8 +154,8 @@ function createUnlockedLevelInstance(data) {
             const levelStartContainer = createElement('div', ['start-btn-container'], null, levelInfo);
             {
                 const startButton = createButton(['start-level-btn'], null, levelStartContainer, () => {
-                    window.location.href = `./src/playground/playground.html?levelID=level_trial_${currentLevel}`;
-                    // TODO: level scene starting with ID parameter
+                    levelParameter = `level_trial_${currentLevel}`;
+                    navigation.createNewRouteFromID('playground');
                 });
                 audioManager.addClickableToPull(startButton);
                 screenParameters.selectableElements.push({ element: startButton });
