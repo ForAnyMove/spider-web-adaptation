@@ -48,7 +48,7 @@ body::-webkit-scrollbar {
   -webkit-user-select: none;
   -moz-user-select: none;
   -ms-user-select: none;
-  position: relative;
+  position: absolute;
 }
 
 #main-screen::-webkit-scrollbar {
