@@ -995,7 +995,7 @@ function launchPlaygroundScene() {
   function createRewardView(data) {
     const container = createElement('div', ['bounty'], { scale: 1, marginLeft: '1vh', marginRight: '1vh' });
     {
-      createImage(['bounty-icon'], null, container, '../../' + getIconByItem(data.type));
+      createImage(['bounty-icon'], null, container, '' + getIconByItem(data.type));
       if (data.count > 1) createTextSpan(['bounty-title'], null, container, `x${data.count}`);
     }
 
@@ -1005,7 +1005,7 @@ function launchPlaygroundScene() {
   function createRewardContentView(data) {
     const container = createElement('div', ['bounty'], { scale: 1, marginLeft: '1vh', marginRight: '1vh' });
     {
-      createImage(['bounty-icon'], null, container, '../../' + getIconByContent(data));
+      createImage(['bounty-icon'], null, container, '' + getIconByContent(data));
     }
 
     return container;
@@ -1402,8 +1402,8 @@ function launchPlaygroundScene() {
           }
 
           const cards = [
-            `url('../../Sprites/Card Skins/Release/Skin_01/seven_spades_01.png')`,
-            `url('../../Sprites/Card Skins/Release/Skin_01/ace_spades_01.png')`,
+            `url('Sprites/Card Skins/Release/Skin_01/seven_spades_01.png')`,
+            `url('Sprites/Card Skins/Release/Skin_01/ace_spades_01.png')`,
           ];
           for (let i = 0; i < elements.length; i++) {
             const tween = DOChangeValue(() => 1, (value) => {
@@ -1442,7 +1442,7 @@ function launchPlaygroundScene() {
               elements[i].style.scale = `${value} 1`;
             }, 0, 0.05, Ease.SineInOut);
             tween.onComplete(() => {
-              elements[i].style.backgroundImage = `url(../../Sprites/CardBacks/Card_Back_01.png)`
+              elements[i].style.backgroundImage = `url(Sprites/CardBacks/Card_Back_01.png)`
               DOChangeValue(() => 0, (value) => {
                 elements[i].style.scale = `${value} 1`;
               }, 1, 0.05, Ease.SineInOut).onComplete(() => {
