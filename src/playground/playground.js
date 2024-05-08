@@ -305,8 +305,15 @@ function launchPlaygroundScene() {
 
   trySelectLevel();
 
+  document.getElementById('spider_lady_style')?.remove();
+
+  let container = document.getElementsByClassName('header-timer')[0];
+  if (container != null && !container.classList.contains('hidden')) {
+    container.classList.add('hidden');
+  }
+
   function startTimer(seconds) {
-    let container = document.getElementsByClassName('header-timer hidden')[0];
+    let container = document.getElementsByClassName('header-timer')[0];
     if (container != null) {
       container.classList.remove('hidden');
     } else {
@@ -366,11 +373,31 @@ function launchPlaygroundScene() {
         // main.style.width = '48vw';
       }
       setSpiderLadyStyles()
+    } else {
+      const playableCardColumns = document.getElementsByClassName('playable-card-column');
+      const collectableCardColumns = document.getElementsByClassName('cards-container');
+
+      if (playableCardColumns.length == 7) {
+        const firstElement = Array.from(playableCardColumns)[0];
+        const parent = firstElement.parentElement;
+        for (let i = 0; i < 3; i++) {
+          parent.appendChild(firstElement.cloneNode(true));
+        }
+      }
+
+      if (collectableCardColumns.length == 6) {
+        const firstElement = Array.from(collectableCardColumns)[0];
+        const parent = firstElement.parentElement;
+        for (let i = 0; i < 4; i++) {
+          parent.insertAdjacentElement('afterbegin', firstElement.cloneNode(true))
+        }
+      }
     }
   }
 
   function setSpiderLadyStyles() {
     const styleElement = document.createElement('style');
+    styleElement.id = 'spider_lady_style';
     styleElement.textContent = `
   @media only screen and (orientation: portrait) {
     .active-cards-container,
